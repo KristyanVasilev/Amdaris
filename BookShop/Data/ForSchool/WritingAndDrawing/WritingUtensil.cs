@@ -8,12 +8,13 @@
         private string manufacturer;
 
 
-        public WritingUtensil(string name, decimal price, string color, string manufacturer)
+        public WritingUtensil(string name, decimal price, string color, string manufacturer, WritingUtensilsType writingUtensilsType)
         {
             this.Name = name;
             this.Price = price;
             this.Color = color;
             this.Manufacturer = manufacturer;
+            this.WritingUtensilsType = writingUtensilsType;
         }
 
         public string Name
@@ -68,5 +69,9 @@
             }
         }
 
+        /// <summary>
+        /// Pen, Pencil, Marker, etc...
+        /// </summary>
+        public WritingUtensilsType WritingUtensilsType { get; set; }
     }
 }
