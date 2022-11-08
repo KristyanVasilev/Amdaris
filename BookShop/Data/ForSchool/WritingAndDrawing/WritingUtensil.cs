@@ -1,6 +1,6 @@
 ﻿namespace Data.ForSchool.WritingAndDrawing
 {
-    public abstract class Writing
+    public abstract class WritingUtensil
     {
 		private string name;
         private decimal price;
@@ -8,7 +8,7 @@
         private string manufacturer;
 
 
-        public Writing(string name, decimal price, string color, string manufacturer)
+        public WritingUtensil(string name, decimal price, string color, string manufacturer)
         {
             this.Name = name;
             this.Price = price;
