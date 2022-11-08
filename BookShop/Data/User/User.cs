@@ -13,7 +13,7 @@
             this.firstName = firstName;
             this.LastName = lastName;
             this.Email = email;
-            this.Products = new List<Product>();
+            this.Orders = new List<Order>();
             this.WatchList = new HashSet<Product>();
         }
 
@@ -69,7 +69,7 @@
             }
         }
 
-        public ICollection<Product> Products { get; set; }
+        public ICollection<Order> Orders { get; set; }
 
         public ICollection<Product> WatchList { get; set; }
     }
