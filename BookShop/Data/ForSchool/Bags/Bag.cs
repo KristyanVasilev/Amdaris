@@ -1,33 +1,20 @@
-﻿namespace Data.ForSchool.Bags
+﻿using Data.ForSchool.Bags.Enums;
+
+namespace Data.ForSchool.Bags
 {
     public abstract class Bag : Product
     {
-        private string name;
         private string color;
         private string manufacturer;
         private int capacity;
 
-        protected Bag(int id, decimal price, string name, string color, string manufacturer, int capacity, Type type)
-            : base(id, price)
+        protected Bag(int id, decimal price, string name, string color, string manufacturer, int capacity, Gender gender)
+            : base(id, price, name)
         {
-            this.Name = name;
             this.Color = color;
             this.Manufacturer = manufacturer;
             this.Capacity = capacity;
-            this.Type = type;
-        }
-
-        public string Name
-        {
-            get { return name; }
-            private set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException("Name cannot be null or empty!");
-                }
-                name = value;
-            }
+            this.Gender = gender;
         }
 
         public string Color
@@ -69,6 +56,6 @@
             }
         }
 
-        public Type Type { get; private set; }
+        public Gender Gender { get; private set; }
     }
 }

@@ -2,30 +2,15 @@
 {
     public abstract class WritingUtensil : Product
     {
-        private string name;
         private string color;
         private string manufacturer;
 
-        protected WritingUtensil(int id, decimal price, string name, string color, string manufacturer, WritingUtensilsType writingUtensilsType)
-            : base(id, price)
+        protected WritingUtensil(int id, decimal price, string name, string color, string manufacturer, WritingUtensilsType writingUtensilsType) 
+            : base(id, price, name)
         {
-            this.Name = name;
             this.Color = color;
             this.Manufacturer = manufacturer;
             this.WritingUtensilsType = writingUtensilsType;
-        }
-
-        public string Name
-        {
-            get { return name; }
-            private set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException("Name cannot be null or empty!");
-                }
-                name = value;
-            }
         }
 
         public string Color

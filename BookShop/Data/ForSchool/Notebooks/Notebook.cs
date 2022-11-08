@@ -8,8 +8,8 @@ namespace Data.ForSchool.Notebooks
         private string manufacturer;
         private int pageCount;
 
-        public NoteBook(int id, decimal price, string color, string manufacturer, int pageCount, LineType lineType)
-            : base(id, price)
+        public NoteBook(int id, decimal price, string name, string color, string manufacturer, int pageCount, LineType lineType)
+            : base(id, price, name)
         {
             this.Color = color;
             this.Manufacturer = manufacturer;
