@@ -1,18 +1,16 @@
 ﻿namespace Data.ForSchool.Bags
 {
-    public abstract class Bag
+    public abstract class Bag : Product
     {
         private string name;
-        private decimal price;
         private string color;
         private string manufacturer;
         private int capacity;
 
-
-        public Bag(string name, decimal price, string color, string manufacturer, int capacity, Type type)
+        protected Bag(int id, decimal price, string name, string color, string manufacturer, int capacity, Type type)
+            : base(id, price)
         {
             this.Name = name;
-            this.Price = price;
             this.Color = color;
             this.Manufacturer = manufacturer;
             this.Capacity = capacity;
@@ -29,19 +27,6 @@
                     throw new ArgumentException("Name cannot be null or empty!");
                 }
                 name = value;
-            }
-        }
-
-        public decimal Price
-        {
-            get { return price; }
-            private set
-            {
-                if (value <= 0)
-                {
-                    throw new ArgumentException("Price cannot be negative or equal to zero!");
-                }
-                price = value;
             }
         }
 

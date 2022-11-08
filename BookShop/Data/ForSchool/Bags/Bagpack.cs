@@ -2,8 +2,8 @@
 {
     public class Bagpack : Bag
     {
-        public Bagpack(string name, decimal price, string color, string manufacturer, int capacity, Type type)
-            : base(name, price, color, manufacturer, capacity, type)
+        public Bagpack(int id, decimal price, string name, string color, string manufacturer, int capacity, Type type) 
+            : base(id, price, name, color, manufacturer, capacity, type)
         {
         }
     }
