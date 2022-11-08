@@ -2,29 +2,14 @@
 {
     public abstract class Publication : Product
     {
-        private string title;
         private string author;
         private int pageCount;
 
-        protected Publication(int id, decimal price, string titlee, string author, int pageCount)
-            : base(id, price)
+        protected Publication(int id, decimal price, string name, string author, int pageCount)
+            : base(id, price, name)
         {
-            this.Title = title;
             this.Author = author;
             this.PageCount = pageCount;
-        }
-
-        public string Title
-        {
-            get { return title; }
-            private set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException("Title cannot be null or empty!");
-                }
-                title = value;
-            }
         }
 
         public string Author

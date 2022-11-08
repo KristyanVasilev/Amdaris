@@ -13,6 +13,12 @@
             this.Name = name;
         }
 
+        protected Product(int id, decimal price)
+        {
+            this.id = id;
+            this.price = price;
+        }
+
         public int Id
         {
             get { return id; }
