@@ -2,13 +2,15 @@
 {
     public abstract class Product
     {
-        private decimal price;
         private int id;
+        private decimal price;
+        private string name;
 
-        public Product(int id, decimal price)
+        public Product(int id, decimal price, string name)
         {
             this.Id = id;
             this.Price = price;
+            this.Name = name;
         }
 
         public int Id
@@ -34,6 +36,19 @@
                     throw new ArgumentException("Price cannot be negative or equal to zero!");
                 }
                 price = value;
+            }
+        }
+
+        public string Name
+        {
+            get { return name; }
+            private set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Name cannot be null or empty!");
+                }
+                name = value;
             }
         }
     }

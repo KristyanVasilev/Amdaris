@@ -52,7 +52,7 @@ namespace Data.ForSchool.Notebooks
                 {
                     throw new ArgumentException("Page count cannot be negative or equal to zero!");
                 }
-                price = value;
+                pageCount = value;
             }
         }
 
