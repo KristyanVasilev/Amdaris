@@ -6,7 +6,6 @@
 
         public Genre(string name)
         {
-            Books = new List<Book>();
             Name = name;
         }
 
@@ -22,8 +21,6 @@
                 name = value;
             }
         }
-
-        public IEnumerable<Book> Books { get; set; }
 
         //TODO: Implement some methods?
     }

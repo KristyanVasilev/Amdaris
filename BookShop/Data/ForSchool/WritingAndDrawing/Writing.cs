@@ -8,6 +8,20 @@ namespace Data.ForSchool.WritingAndDrawing
 {
     public abstract class Writing
     {
-        //TODO: some logic here
-    }
+		private string name;
+
+		public string Name
+		{
+			get { return name; }
+			set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Name cannot be null or empty!");
+                }
+                name = value;
+            }
+        }
+
+	}
 }
