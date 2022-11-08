@@ -2,33 +2,19 @@
 
 namespace Data.ForSchool.Notebooks
 {
-    public class NoteBook
+    public class NoteBook : Product
     {
-        private decimal price;
         private string color;
         private string manufacturer;
         private int pageCount;
 
-        public NoteBook(decimal price, string color, string manufacturer, int pageCount, LineType lineType)
+        public NoteBook(int id, decimal price, string color, string manufacturer, int pageCount, LineType lineType)
+            : base(id, price)
         {
-            this.Price = price;
             this.Color = color;
             this.Manufacturer = manufacturer;
             this.PageCount = pageCount;
             this.LineType = lineType;
-        }
-
-        public decimal Price
-        {
-            get { return price; }
-            private set
-            {
-                if (value <= 0)
-                {
-                    throw new ArgumentException("Price cannot be negative or equal to zero!");
-                }
-                price = value;
-            }
         }
 
         public string Color
