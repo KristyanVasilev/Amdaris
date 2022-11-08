@@ -1,6 +1,6 @@
 ﻿namespace Data.ForSchool.Bags.Enums
 {
-    public enum Type
+    public enum Gender
     {
         Boy = 0,
         Girl = 1,

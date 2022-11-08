@@ -2,7 +2,7 @@
 {
     public abstract class WritingUtensil
     {
-		private string name;
+        private string name;
         private decimal price;
         private string color;
         private string manufacturer;
@@ -17,9 +17,9 @@
         }
 
         public string Name
-		{
-			get { return name; }
-			private set
+        {
+            get { return name; }
+            private set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
@@ -43,8 +43,8 @@
         }
 
         public string Color
-		{
-			get { return color; }
+        {
+            get { return color; }
             private set
             {
                 if (string.IsNullOrWhiteSpace(value))
@@ -55,9 +55,9 @@
             }
         }
 
-		public string Manufacturer
-		{
-			get { return manufacturer; }
+        public string Manufacturer
+        {
+            get { return manufacturer; }
             private set
             {
                 if (string.IsNullOrWhiteSpace(value))
@@ -68,5 +68,5 @@
             }
         }
 
-	}
+    }
 }
