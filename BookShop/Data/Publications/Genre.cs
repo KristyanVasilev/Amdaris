@@ -1,4 +1,4 @@
-﻿namespace Data.Books
+﻿namespace Data.Publications
 {
     public class Genre
     {

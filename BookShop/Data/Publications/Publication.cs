@@ -1,19 +1,18 @@
-﻿namespace Data.Books
+﻿namespace Data.Publications
 {
-    public class Publication
+    public abstract class Publication
     {
         private string title;
         private decimal price;
         private string author;
         private int pageCount;
 
-        public Publication(string title, decimal price, string author, int pageCount, Genre genre)
+        public Publication(string title, decimal price, string author, int pageCount)
         {
             Title = title;
             Price = price;
             Author = author;
             PageCount = pageCount;
-            Genre = genre;
         }
 
         public string Title
@@ -71,8 +70,6 @@
         public decimal Rating { get; private set; } = 0;
 
         public string Description { get; private set; }
-
-        public Genre Genre { get; private set; }
 
         //TODO: Implement some methods?
     }
