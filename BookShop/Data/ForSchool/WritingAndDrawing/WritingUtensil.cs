@@ -1,17 +1,15 @@
 ﻿namespace Data.ForSchool.WritingAndDrawing
 {
-    public abstract class WritingUtensil
+    public abstract class WritingUtensil : Product
     {
         private string name;
-        private decimal price;
         private string color;
         private string manufacturer;
 
-
-        public WritingUtensil(string name, decimal price, string color, string manufacturer, WritingUtensilsType writingUtensilsType)
+        protected WritingUtensil(int id, decimal price, string name, string color, string manufacturer, WritingUtensilsType writingUtensilsType)
+            : base(id, price)
         {
             this.Name = name;
-            this.Price = price;
             this.Color = color;
             this.Manufacturer = manufacturer;
             this.WritingUtensilsType = writingUtensilsType;
@@ -27,19 +25,6 @@
                     throw new ArgumentException("Name cannot be null or empty!");
                 }
                 name = value;
-            }
-        }
-
-        public decimal Price
-        {
-            get { return price; }
-            private set
-            {
-                if (value <= 0)
-                {
-                    throw new ArgumentException("Price cannot be negative or equal to zero!");
-                }
-                price = value;
             }
         }
 
