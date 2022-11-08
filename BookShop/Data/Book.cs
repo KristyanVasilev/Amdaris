@@ -4,14 +4,16 @@
     {
         private string title;
         private decimal price;
+        private string author;
         private int pageCount;
 
-        public Book(string title, decimal price, int pageCount, Genre genre)
+        public Book(string title, decimal price, string author, int pageCount, Genre genre)
         {
             this.Title = title;
             this.Price = price;
-            this.Genre = genre;
+            this.Author = author;
             this.PageCount = pageCount;
+            this.Genre = genre;
         }
 
         public string Title
@@ -39,6 +41,20 @@
                 price = value;
             }
         }
+
+        public string Author
+        {
+            get { return author; }
+            private set 
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Author cannot be null or empty!");
+                }
+                author = value;
+            }
+        }
+
 
         public int PageCount
         {
