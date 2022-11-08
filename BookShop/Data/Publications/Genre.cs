@@ -21,7 +21,5 @@
                 name = value;
             }
         }
-
-        //TODO: Implement some methods?
     }
 }

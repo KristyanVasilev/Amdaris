@@ -1,18 +1,17 @@
 ﻿namespace Data.Publications
 {
-    public abstract class Publication
+    public abstract class Publication : Product
     {
         private string title;
-        private decimal price;
         private string author;
         private int pageCount;
 
-        public Publication(string title, decimal price, string author, int pageCount)
+        protected Publication(int id, decimal price, string titlee, string author, int pageCount)
+            : base(id, price)
         {
-            Title = title;
-            Price = price;
-            Author = author;
-            PageCount = pageCount;
+            this.Title = title;
+            this.Author = author;
+            this.PageCount = pageCount;
         }
 
         public string Title
@@ -25,19 +24,6 @@
                     throw new ArgumentException("Title cannot be null or empty!");
                 }
                 title = value;
-            }
-        }
-
-        public decimal Price
-        {
-            get { return price; }
-            private set
-            {
-                if (value <= 0)
-                {
-                    throw new ArgumentException("Price cannot be negative or equal to zero!");
-                }
-                price = value;
             }
         }
 

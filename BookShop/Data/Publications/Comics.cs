@@ -2,8 +2,8 @@
 {
     public class Comics : Publication
     {
-        public Comics(string title, decimal price, string author, int pageCount, Genre genre)
-            : base(title, price, author, pageCount)
+        public Comics(int id, decimal price, string titlee, string author, int pageCount, Genre genre)
+            : base(id, price, titlee, author, pageCount)
         {
             this.Genre = genre;
         }

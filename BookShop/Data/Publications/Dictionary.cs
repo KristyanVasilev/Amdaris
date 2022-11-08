@@ -2,8 +2,8 @@
 {
     public class Dictionary : Publication
     {
-        public Dictionary(string title, decimal price, string author, int pageCount)
-            : base(title, price, author, pageCount)
+        public Dictionary(int id, decimal price, string titlee, string author, int pageCount)
+            : base(id, price, titlee, author, pageCount)
         {
         }
     }
