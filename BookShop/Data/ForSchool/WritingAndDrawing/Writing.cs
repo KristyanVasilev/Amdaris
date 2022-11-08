@@ -3,12 +3,15 @@
     public abstract class Writing
     {
 		private string name;
+        private decimal price;
         private string color;
         private string manufacturer;
 
-        public Writing(string name, string color, string manufacturer)
+
+        public Writing(string name, decimal price, string color, string manufacturer)
         {
             this.Name = name;
+            this.Price = price;
             this.Color = color;
             this.Manufacturer = manufacturer;
         }
@@ -26,7 +29,20 @@
             }
         }
 
-		public string Color
+        public decimal Price
+        {
+            get { return price; }
+            private set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("Price cannot be negative or equal to zero!");
+                }
+                price = value;
+            }
+        }
+
+        public string Color
 		{
 			get { return color; }
             private set
