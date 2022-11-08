@@ -1,4 +1,4 @@
-﻿namespace Data
+﻿namespace Data.Books
 {
     public class Genre
     {
@@ -6,23 +6,25 @@
 
         public Genre(string name)
         {
-            this.Books = new List<Book>();
-            this.Name = name;
+            Books = new List<Book>();
+            Name = name;
         }
 
         public string Name
         {
             get { return name; }
-            private set 
+            private set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
                     throw new ArgumentException("Name cannot be null or empty!");
                 }
-                name = value; 
+                name = value;
             }
         }
 
         public IEnumerable<Book> Books { get; set; }
+
+        //TODO: Implement some methods?
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Data
+﻿namespace Data.Books
 {
     public class Book
     {
@@ -9,30 +9,30 @@
 
         public Book(string title, decimal price, string author, int pageCount, Genre genre)
         {
-            this.Title = title;
-            this.Price = price;
-            this.Author = author;
-            this.PageCount = pageCount;
-            this.Genre = genre;
+            Title = title;
+            Price = price;
+            Author = author;
+            PageCount = pageCount;
+            Genre = genre;
         }
 
         public string Title
         {
             get { return title; }
-            private set 
+            private set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
                     throw new ArgumentException("Title cannot be null or empty!");
                 }
-                title = value; 
+                title = value;
             }
         }
 
         public decimal Price
         {
             get { return price; }
-            private set 
+            private set
             {
                 if (value <= 0)
                 {
@@ -45,7 +45,7 @@
         public string Author
         {
             get { return author; }
-            private set 
+            private set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
@@ -59,13 +59,13 @@
         public int PageCount
         {
             get { return pageCount; }
-            private set 
+            private set
             {
                 if (value <= 0)
                 {
                     throw new ArgumentException("Page count cannot be negative or equal to zero!");
                 }
-                pageCount = value; 
+                pageCount = value;
             }
         }
 
@@ -74,5 +74,7 @@
         public string Description { get; private set; }
 
         public Genre Genre { get; private set; }
+
+        //TODO: Implement some methods?
     }
 }
