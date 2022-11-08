@@ -2,17 +2,16 @@
 
 namespace Data.Hobbies
 {
-    public abstract class Game
+    public abstract class Game : Product
     {
         private string name;
-        private decimal price;
         private string manufacturer;
         private string description;
 
-        public Game(string name, decimal price, string manufacturer, string description, GameType gameType)
+        protected Game(int id, decimal price, string name, string manufacturer, string description, GameType gameType)
+            : base(id, price)
         {
             this.Name = name;
-            this.Price = price;
             this.Manufacturer = manufacturer;
             this.Description = description;
             this.GameType = gameType;
@@ -28,19 +27,6 @@ namespace Data.Hobbies
                     throw new ArgumentException("Name cannot be null or empty!");
                 }
                 name = value;
-            }
-        }
-
-        public decimal Price
-        {
-            get { return price; }
-            private set
-            {
-                if (value <= 0)
-                {
-                    throw new ArgumentException("Price cannot be negative or equal to zero!");
-                }
-                price = value;
             }
         }
 
