@@ -1,13 +1,13 @@
 ﻿namespace Data.Books
 {
-    public class Book
+    public class Publication
     {
         private string title;
         private decimal price;
         private string author;
         private int pageCount;
 
-        public Book(string title, decimal price, string author, int pageCount, Genre genre)
+        public Publication(string title, decimal price, string author, int pageCount, Genre genre)
         {
             Title = title;
             Price = price;
@@ -54,7 +54,6 @@
                 author = value;
             }
         }
-
 
         public int PageCount
         {
