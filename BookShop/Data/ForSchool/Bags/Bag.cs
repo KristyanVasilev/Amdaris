@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-
-namespace Data.ForSchool.Bags
+﻿namespace Data.ForSchool.Bags
 {
     public abstract class Bag
     {
@@ -15,13 +6,16 @@ namespace Data.ForSchool.Bags
         private decimal price;
         private string color;
         private string manufacturer;
+        private int capacity;
 
-        public Bag(string name, decimal price, string color, string manufacturer, Type type)
+
+        public Bag(string name, decimal price, string color, string manufacturer, int capacity, Type type)
         {
             this.Name = name;
             this.Price = price;
             this.Color = color;
             this.Manufacturer = manufacturer;
+            this.Capacity = capacity;
             this.Type = type;
         }
 
@@ -74,6 +68,19 @@ namespace Data.ForSchool.Bags
                     throw new ArgumentException("Manufacturer cannot be null or empty!");
                 }
                 manufacturer = value;
+            }
+        }
+
+        public int Capacity
+        {
+            get { return capacity; }
+            private set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("Capacity cannot be negative or equal to zero!");
+                }
+                capacity = value;
             }
         }
 
