@@ -1,8 +1,8 @@
 ﻿namespace Data.ForSchool.WritingAndDrawing
 {
-    public class Pen : Writing
+    public class Marker : Writing
     {
-        public Pen(string name, string color, string manufacturer)
+        public Marker(string name, string color, string manufacturer)
             : base(name, color, manufacturer)
         {
         }
