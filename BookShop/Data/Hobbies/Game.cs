@@ -1,4 +1,5 @@
 ﻿using Data.Hobbies.Enums;
+using System.Text;
 
 namespace Data.Hobbies
 {
@@ -42,5 +43,14 @@ namespace Data.Hobbies
         }
 
         public GameType GameType { get; set; }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder(base.ToString());
+            sb.AppendLine($"The game is {this.GameType.ToString()}.");
+            sb.AppendLine($"Manufacturer: {this.manufacturer}.");
+            sb.AppendLine($"Description; {this.Description}.");
+            return sb.ToString().TrimEnd();
+        }
     }
 }
