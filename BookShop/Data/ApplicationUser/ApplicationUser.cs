@@ -1,6 +1,6 @@
-﻿namespace BookShop.Data.User
+﻿namespace BookShop.Data.ApplicationUser
 {
-    public class User
+    public class ApplicationUser
     {
 		private int id;
 		private string firstName;
@@ -8,10 +8,10 @@
 		private string email;
         private decimal balance;
 
-        public User(int id, string firstName, string lastName, string email, decimal balance)
+        public ApplicationUser(int id, string firstName, string lastName, string email, decimal balance)
         {
             this.Id = id;
-            this.firstName = firstName;
+            this.FirstName = firstName;
             this.LastName = lastName;
             this.Email = email;
             this.Balance = balance;

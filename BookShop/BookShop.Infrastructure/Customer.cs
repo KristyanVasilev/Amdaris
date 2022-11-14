@@ -4,11 +4,11 @@
     using System.Text;
 
     using BookShop.Data;
-    using BookShop.Data.User;
+    using BookShop.Data.ApplicationUser;
     using BookShop.Infrastructure.Contracts;
     using BookShop.Infrastructure.CustomExceptions;
 
-    public class Customer : User, ICustomer
+    public class Customer : ApplicationUser, ICustomer
     {
         private Order order;
 
