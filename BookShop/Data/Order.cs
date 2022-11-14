@@ -28,6 +28,6 @@
 
         public ICollection<Product> Products { get; set; }
 
-        public bool IsCompleted { get; private set; }
+        public bool IsCompleted { get; set; }
     }
 }
