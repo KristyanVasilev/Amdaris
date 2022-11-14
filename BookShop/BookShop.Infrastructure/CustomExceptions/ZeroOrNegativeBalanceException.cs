@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BookShop.Infrastructure.CustomExceptions
+﻿namespace BookShop.Infrastructure.CustomExceptions
 {
-    internal class ZeroOrNegativeBalanceException
+    public class ZeroOrNegativeBalanceException : Exception
     {
+        public ZeroOrNegativeBalanceException(string? message)
+            : base(message)
+        {
+        }
     }
 }
