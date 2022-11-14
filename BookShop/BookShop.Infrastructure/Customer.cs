@@ -1,14 +1,12 @@
 ﻿namespace BookShop.Infrastructure
 {
+    using System.Linq;
+    using System.Text;
+
     using BookShop.Data;
     using BookShop.Data.User;
     using BookShop.Infrastructure.Contracts;
     using BookShop.Infrastructure.CustomExceptions;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     public class Customer : User, ICustomer
     {
@@ -38,8 +36,8 @@
 
         public string Buy()
         {
-            CheckBalanceAmount();
             CheckOrderIsValid();
+            CheckBalanceAmount(this.order.Products.Sum(p => p.Price));
 
             this.Balance -= order.Products.Sum(p => p.Price);
             this.order.IsCompleted = true;
@@ -55,20 +53,47 @@
             return sb.ToString().TrimEnd();
         }
 
-        private void CheckBalanceAmount()
+        public string Deposit(decimal amount)
         {
-            if (this.Balance <= 0 && (this.Balance - this.order.Products.Sum(p => p.Price) < 0))
-            {
-                throw new ZeroOrNegativeBalanceException("Your balance cannot be zero or negative when you buy a product");
-            }
+            CheckAmount(amount);
+
+            base.Balance += amount;
+
+            return $"Successfuly deposit {amount}$";
         }
-        private void CheckOrderIsValid()
+
+        public string Withdraw(decimal amount)
         {
-            if (this.order.Products.Count == 0)
+            CheckBalanceAmount(amount);
+            CheckAmount(amount);
+
+            base.Balance -= amount;
+
+            return $"Successfuly withdraw {amount}$";
+        }
+
+        private void CheckBalanceAmount(decimal amount)
+        {
+            if (this.Balance <= 0 || (this.Balance - amount) < 0)
             {
-                throw new InvalidOrderException("Invalid order! Add some products to the order and try again!");
+                throw new ZeroOrNegativeBalanceException("Your balance cannot be zero or negative!");
             }
         }
 
+        private void CheckOrderIsValid()
+        {
+            if (this.order.Products.Count == 0 || order.IsCompleted == true)
+            {
+                throw new InvalidOrderException("Invalid Order!");
+            }
+        }
+
+        private static void CheckAmount(decimal amount)
+        {
+            if (amount <= 0)
+            {
+                throw new InvalidOperationException("Amount cannot be zero or negative number!");
+            }
+        }
     }
 }
