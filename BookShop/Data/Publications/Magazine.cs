@@ -1,7 +1,7 @@
-﻿using System.Text;
-
-namespace Data.Publications
+﻿namespace BookShop.Data.Publications
 {
+    using System.Text;
+
     public class Magazine : Publication
     {
         public Magazine(int id, decimal price, string name, string author, int pageCount, Genre genre)

@@ -1,8 +1,7 @@
-﻿using Data.ForSchool.Notebooks.Enums;
-using System.Text;
-
-namespace Data.ForSchool.Notebooks
+﻿namespace BookShop.Data.ForSchool.Notebooks
 {
+    using BookShop.Data.ForSchool.Notebooks.Enums;
+    using System.Text;
     public class NoteBook : Product
     {
         private string color;

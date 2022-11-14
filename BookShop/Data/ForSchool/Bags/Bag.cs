@@ -1,8 +1,8 @@
-﻿using Data.ForSchool.Bags.Enums;
-using System.Text;
-
-namespace Data.ForSchool.Bags
+﻿namespace BookShop.Data.ForSchool.Bags
 {
+    using BookShop.Data.ForSchool.Bags.Enums;
+    using System.Text;
+
     public abstract class Bag : Product
     {
         private string color;

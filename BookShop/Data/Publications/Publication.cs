@@ -1,7 +1,7 @@
-﻿using System.Text;
-
-namespace Data.Publications
+﻿namespace BookShop.Data.Publications
 {
+    using System.Text;
+
     public abstract class Publication : Product
     {
         private string author;

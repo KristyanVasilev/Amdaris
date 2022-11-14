@@ -1,4 +1,4 @@
-﻿namespace Data.User
+﻿namespace BookShop.Data.User
 {
     public class User
     {

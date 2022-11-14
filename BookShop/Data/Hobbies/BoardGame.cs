@@ -1,6 +1,7 @@
 ﻿namespace Data.Hobbies
 {
-    using Data.Hobbies.Enums;
+    using BookShop.Data.Hobbies;
+    using BookShop.Data.Hobbies.Enums;
 
     public class BoardGame : Game
     {

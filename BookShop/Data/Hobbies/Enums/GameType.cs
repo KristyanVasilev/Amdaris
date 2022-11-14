@@ -1,4 +1,4 @@
-﻿namespace Data.Hobbies.Enums
+﻿namespace BookShop.Data.Hobbies.Enums
 {
     public enum GameType
     {

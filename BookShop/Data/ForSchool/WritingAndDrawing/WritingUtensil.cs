@@ -1,7 +1,7 @@
-﻿using System.Text;
-
-namespace Data.ForSchool.WritingAndDrawing
+﻿namespace BookShop.Data.ForSchool.WritingAndDrawing
 {
+    using System.Text;
+
     public abstract class WritingUtensil : Product
     {
         private string color;

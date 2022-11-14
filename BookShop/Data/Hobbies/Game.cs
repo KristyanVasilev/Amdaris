@@ -1,8 +1,8 @@
-﻿using Data.Hobbies.Enums;
-using System.Text;
-
-namespace Data.Hobbies
+﻿namespace BookShop.Data.Hobbies
 {
+    using BookShop.Data.Hobbies.Enums;
+    using System.Text;
+
     public abstract class Game : Product
     {
         private string manufacturer;

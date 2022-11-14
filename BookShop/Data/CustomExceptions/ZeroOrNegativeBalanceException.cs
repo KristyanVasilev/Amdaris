@@ -1,4 +1,4 @@
-﻿namespace Data.CustomExceptions
+﻿namespace BookShop.Data.CustomExceptions
 {
     public class ZeroOrNegativeBalanceException : Exception
     {

@@ -1,7 +1,7 @@
-﻿using Data.ForSchool.Bags.Enums;
-
-namespace Data.ForSchool.Bags
+﻿namespace BookShop.Data.ForSchool.Bags
 {
+    using BookShop.Data.ForSchool.Bags.Enums;
+
     public class Bagpack : Bag
     {
         public Bagpack(int id, decimal price, string name, string color, string manufacturer, int capacity, Gender gender)

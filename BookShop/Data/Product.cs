@@ -1,7 +1,7 @@
-﻿using System.Text;
-
-namespace Data
+﻿namespace BookShop.Data
 {
+    using System.Text;
+
     public abstract class Product
     {
         private int id;

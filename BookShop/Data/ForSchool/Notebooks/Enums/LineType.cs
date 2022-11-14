@@ -1,4 +1,4 @@
-﻿namespace Data.ForSchool.Notebooks.Enums
+﻿namespace BookShop.Data.ForSchool.Notebooks.Enums
 {
     public enum LineType
     {

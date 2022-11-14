@@ -1,13 +1,13 @@
-﻿using Data.Publications;
-using Data.ForSchool.Bags;
-using Data.ForSchool.Bags.Enums;
-using Data.ForSchool.Notebooks;
-using Data.ForSchool.Notebooks.Enums;
-using Data.Hobbies;
-using Data.Hobbies.Enums;
-
-namespace BookShop
+﻿namespace BookShop
 {
+    using BookShop.Data.ForSchool.Bags;
+    using BookShop.Data.ForSchool.Bags.Enums;
+    using BookShop.Data.ForSchool.Notebooks;
+    using BookShop.Data.ForSchool.Notebooks.Enums;
+    using BookShop.Data.Hobbies;
+    using BookShop.Data.Hobbies.Enums;
+    using BookShop.Data.Publications;
+
     internal class Program
     {
         static void Main(string[] args)

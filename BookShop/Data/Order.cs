@@ -1,4 +1,4 @@
-﻿namespace Data
+﻿namespace BookShop.Data
 {
     public class Order
     {
