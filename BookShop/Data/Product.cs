@@ -64,7 +64,7 @@ namespace Data
         {
             var sb = new StringBuilder();
             sb.AppendLine($"Product {this.Name} has Id - {this.id} and cost {this.Price}$.");
-            return sb.ToString().TrimEnd();
+            return sb.ToString();
         }
     }
 }

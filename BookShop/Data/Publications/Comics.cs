@@ -15,7 +15,7 @@ namespace Data.Publications
         public override string ToString()
         {
             var sb = new StringBuilder(base.ToString());
-            sb.AppendLine($"Genre: {this.Genre.ToString()}.");
+            sb.AppendLine($"Genre: {this.Genre.Name}.");
             return sb.ToString().TrimEnd();
         }
     }

@@ -49,7 +49,7 @@ namespace Data.Hobbies
             var sb = new StringBuilder(base.ToString());
             sb.AppendLine($"The game is {this.GameType.ToString()}.");
             sb.AppendLine($"Manufacturer: {this.manufacturer}.");
-            sb.AppendLine($"Description; {this.Description}.");
+            sb.AppendLine($"Description: {this.Description}.");
             return sb.ToString().TrimEnd();
         }
     }
