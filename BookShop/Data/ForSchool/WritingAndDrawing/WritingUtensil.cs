@@ -1,4 +1,6 @@
-﻿namespace Data.ForSchool.WritingAndDrawing
+﻿using System.Text;
+
+namespace Data.ForSchool.WritingAndDrawing
 {
     public abstract class WritingUtensil : Product
     {
@@ -43,5 +45,14 @@
         /// Pen, Pencil, Marker, etc...
         /// </summary>
         public WritingUtensilsType WritingUtensilsType { get; set; }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder(base.ToString());
+            sb.AppendLine($"Color: {this.Color}.");
+            sb.AppendLine($"Manufacturer: {this.Manufacturer}.");
+            sb.AppendLine($"WritingUtensilsType: {this.WritingUtensilsType.ToString()}.");
+            return sb.ToString().TrimEnd();
+        }
     }
 }
