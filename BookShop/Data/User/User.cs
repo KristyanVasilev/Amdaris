@@ -74,7 +74,7 @@
         public decimal Balance
         {
             get { return balance; }
-            private set
+            set
             {
                 if (value < 0)
                 {
