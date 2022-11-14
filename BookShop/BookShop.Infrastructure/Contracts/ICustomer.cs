@@ -11,5 +11,9 @@
         string Deposit(decimal amount);
 
         string Withdraw(decimal amount);
+
+        string AddToWatchlist(Product product);
+
+        string RemoveProductFromWatchlist(Product product);
     }
 }

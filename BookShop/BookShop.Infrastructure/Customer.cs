@@ -59,7 +59,7 @@
 
             base.Balance += amount;
 
-            return $"Successfuly deposit {amount}$";
+            return $"Successfuly deposited {amount}$";
         }
 
         public string Withdraw(decimal amount)
@@ -69,7 +69,26 @@
 
             base.Balance -= amount;
 
-            return $"Successfuly withdraw {amount}$";
+            return $"Successfuly withdrawed {amount}$";
+        }
+
+        public string AddToWatchlist(Product product)
+        {
+            base.WatchList.Add(product);
+
+            return $"Successfuly added product {product.Name} to watchlist!";
+        }
+
+        public string RemoveProductFromWatchlist(Product product)
+        {
+            if (!base.WatchList.Contains(product))
+            {
+                throw new ProductNotFoundException("Product not found!");
+            }
+
+            base.WatchList.Remove(product);
+
+            return $"Successfuly removed product {product.Name} to watchlist!";
         }
 
         private void CheckBalanceAmount(decimal amount)
