@@ -6,13 +6,15 @@
 		private string firstName;
 		private string lastName;
 		private string email;
+        private decimal balance;
 
-        public User(int id, string firstName, string lastName, string email)
+        public User(int id, string firstName, string lastName, string email, decimal balance)
         {
             this.Id = id;
             this.firstName = firstName;
             this.LastName = lastName;
             this.Email = email;
+            this.Balance = balance;
             this.Orders = new List<Order>();
             this.WatchList = new HashSet<Product>();
         }
@@ -68,6 +70,20 @@
                 email = value;
             }
         }
+
+        public decimal Balance
+        {
+            get { return balance; }
+            private set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("balance cannot be negative!");
+                }
+                balance = value;
+            }
+        }
+
 
         public ICollection<Order> Orders { get; set; }
 
