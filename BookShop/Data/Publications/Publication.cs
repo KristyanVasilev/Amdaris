@@ -1,4 +1,6 @@
-﻿namespace Data.Publications
+﻿using System.Text;
+
+namespace Data.Publications
 {
     public abstract class Publication : Product
     {
@@ -42,6 +44,11 @@
 
         public string Description { get; private set; }
 
-        //TODO: Implement some methods?
+        public override string ToString()
+        {
+            var sb = new StringBuilder(base.ToString());
+            sb.AppendLine($"The publication is with {this.PageCount} pages and the author is {this.Author}.");
+            return sb.ToString().TrimEnd();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Data.ForSchool.Bags.Enums;
+using System.Text;
 
 namespace Data.Publications
 {
@@ -11,5 +12,12 @@ namespace Data.Publications
         }
 
         public Genre Genre { get; private set; }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder(base.ToString());
+            sb.AppendLine($"Genre: {this.Genre.ToString()}.");
+            return sb.ToString().TrimEnd();
+        }
     }
 }
