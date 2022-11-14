@@ -1,4 +1,5 @@
 ﻿using Data.ForSchool.Notebooks.Enums;
+using System.Text;
 
 namespace Data.ForSchool.Notebooks
 {
@@ -57,5 +58,13 @@ namespace Data.ForSchool.Notebooks
         }
 
         public LineType LineType { get; private set; }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder(base.ToString());
+            sb.AppendLine($"The notebook is with {this.PageCount} pages and the manufacturer is {this.Manufacturer}.");
+            sb.AppendLine($"The color is {this.Color} and the line type is {this.LineType.ToString()}");
+            return sb.ToString().TrimEnd();
+        }
     }
 }

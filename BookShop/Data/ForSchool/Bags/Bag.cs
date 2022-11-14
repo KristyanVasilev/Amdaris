@@ -1,4 +1,5 @@
 ﻿using Data.ForSchool.Bags.Enums;
+using System.Text;
 
 namespace Data.ForSchool.Bags
 {
@@ -57,5 +58,14 @@ namespace Data.ForSchool.Bags
         }
 
         public Gender Gender { get; private set; }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder(base.ToString());
+            sb.AppendLine($"Color: {this.Color}.");
+            sb.AppendLine($"Manufacturer: {this.Manufacturer}.");
+            sb.AppendLine($"This bag is for {this.Gender.ToString()}");
+            return sb.ToString().TrimEnd();
+        }
     }
 }
