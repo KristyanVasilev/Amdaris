@@ -16,9 +16,7 @@ namespace BookShop.Data.ApplicationUser
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Email = email;
-            this.Balance = balance;
-            this.Orders = new List<Order>();
-            this.WatchList = new HashSet<Product>();
+            this.Balance = balance;         
         }
 
         public int Id
@@ -85,11 +83,6 @@ namespace BookShop.Data.ApplicationUser
                 balance = value;
             }
         }
-
-
-        public ICollection<Order> Orders { get; set; }
-
-        public ICollection<Product> WatchList { get; set; }
 
         public override string ToString()
         {

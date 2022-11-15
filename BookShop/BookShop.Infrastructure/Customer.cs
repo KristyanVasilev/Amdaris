@@ -16,7 +16,13 @@
             : base(id, firstName, lastName, email, balance)
         {
             this.order = new Order(1, base.Id);
+            this.Orders = new List<Order>();
+            this.Watchlist = new HashSet<Product>();
         }
+
+        public ICollection<Order> Orders { get; private set; }
+
+        public ICollection<Product> Watchlist { get; private set; }
 
         public string AddToOrder(Product product)
         {
@@ -29,7 +35,7 @@
             }
 
             this.order.Products.Add(product);
-            base.Orders.Add(order);
+            this.Orders.Add(order);
 
             return $"Product {product.Name} added successfuly to Order with Id-{order.Id}";
         }
@@ -74,19 +80,19 @@
 
         public string AddToWatchlist(Product product)
         {
-            base.WatchList.Add(product);
+            this.Watchlist.Add(product);
 
             return $"Successfuly added product {product.Name} to watchlist!";
         }
 
         public string RemoveProductFromWatchlist(Product product)
         {
-            if (!base.WatchList.Contains(product))
+            if (!this.Watchlist.Contains(product))
             {
                 throw new ProductNotFoundException("Product not found!");
             }
 
-            base.WatchList.Remove(product);
+            this.Watchlist.Remove(product);
 
             return $"Successfuly removed product {product.Name} to watchlist!";
         }
