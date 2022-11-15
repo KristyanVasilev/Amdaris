@@ -1,7 +1,7 @@
-﻿using System.Text;
-
-namespace BookShop.Data.ApplicationUser
+﻿namespace BookShop.Data.ApplicationUser
 {
+    using System.Text;
+
     public class ApplicationUser
     {
         private int id;
@@ -75,7 +75,7 @@ namespace BookShop.Data.ApplicationUser
             sb.AppendLine($"User: {this.FirstName} {this.LastName} with Id - {this.Id}");
             sb.AppendLine($"Email: {this.Email}");
 
-            return sb.ToString().TrimEnd();
+            return sb.ToString();
         }
     }
 }

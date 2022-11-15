@@ -38,6 +38,9 @@
             Console.WriteLine("-----------------------------");
 
             var customer = new Customer(1, "Pesho", "Petrov", "pesho123@gmail.com", 20);
+            Console.WriteLine(customer.UserInfo());
+            Console.WriteLine("-----------------------------");
+
             Console.WriteLine(customer.AddToOrder(notebook));
             //Console.WriteLine(customer.AddToOrder(chess));
             Console.WriteLine(customer.Buy());
@@ -56,10 +59,18 @@
             Console.WriteLine("-----------------------------");
 
             Console.WriteLine(customer.AddToWatchlist(book));
+
+            Console.WriteLine("-----------------------------");
+
+            Console.WriteLine(customer.UserInfo());
+
+            Console.WriteLine("-----------------------------");
+
             Console.WriteLine(customer.RemoveProductFromWatchlist(book));
             //Console.WriteLine(customer.RemoveProductFromWatchlist(book));
 
             Console.WriteLine("-----------------------------");
+
             Console.WriteLine(customer.UserInfo());
         }
     }

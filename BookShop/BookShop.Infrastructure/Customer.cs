@@ -12,11 +12,12 @@
     {
         private Order order;
         private decimal balance;
+        private int counter = 1;
 
-        public Customer(int id, string firstName, string lastName, string email, decimal balance) 
+        public Customer(int id, string firstName, string lastName, string email, decimal balance)
             : base(id, firstName, lastName, email)
         {
-            this.order = new Order(1, base.Id);
+            this.order = new Order(counter, base.Id);
             this.Balance = balance;
             this.Orders = new List<Order>();
             this.Watchlist = new HashSet<Product>();
@@ -41,16 +42,17 @@
 
         public string AddToOrder(Product product)
         {
-            int counter = 2;
-
             if (this.order.IsCompleted)
             {
-                this.order = new Order(counter, base.Id);
                 counter++;
+                this.order = new Order(counter, base.Id);
             }
 
             this.order.Products.Add(product);
-            this.Orders.Add(order);
+            if (!this.Orders.Contains(order))
+            {
+                this.Orders.Add(order);
+            }
 
             return $"Product {product.Name} added successfuly to Order with Id-{order.Id}";
         }
@@ -137,6 +139,26 @@
         }
 
         public string UserInfo()
-            =>base.ToString();
+        {
+            var sb = new StringBuilder(base.ToString());
+            foreach (var currOrder in this.Orders)
+            {
+                sb.AppendLine($"Order Id - {currOrder.Id} with items {currOrder.Products.Count}:");
+                foreach (var product in currOrder.Products.OrderByDescending(x => x.Name))
+                {
+                    sb.AppendLine($"    -{product.Name}");
+                }
+            }
+            if (this.Watchlist.Any())
+            {
+                sb.AppendLine($"Products in wachtlist:");
+            }
+            foreach (var currProduct in this.Watchlist)
+            {
+                sb.AppendLine($"    -{currProduct.Name} ");
+            }
+
+            return sb.ToString().TrimEnd();
+        }
     }
 }
