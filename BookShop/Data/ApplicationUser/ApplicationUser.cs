@@ -8,15 +8,13 @@ namespace BookShop.Data.ApplicationUser
         private string firstName;
         private string lastName;
         private string email;
-        private decimal balance;
 
-        public ApplicationUser(int id, string firstName, string lastName, string email, decimal balance)
+        public ApplicationUser(int id, string firstName, string lastName, string email)
         {
             this.Id = id;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Email = email;
-            this.Balance = balance;         
         }
 
         public int Id
@@ -71,25 +69,11 @@ namespace BookShop.Data.ApplicationUser
             }
         }
 
-        public decimal Balance
-        {
-            get { return balance; }
-            set
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentException("balance cannot be negative!");
-                }
-                balance = value;
-            }
-        }
-
         public override string ToString()
         {
             var sb = new StringBuilder();
             sb.AppendLine($"User: {this.FirstName} {this.LastName} with Id - {this.Id}");
             sb.AppendLine($"Email: {this.Email}");
-            sb.AppendLine($"Balance: {this.Balance}$");
 
             return sb.ToString().TrimEnd();
         }

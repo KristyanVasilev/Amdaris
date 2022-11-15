@@ -11,13 +11,28 @@
     public class Customer : ApplicationUser, ICustomer
     {
         private Order order;
+        private decimal balance;
 
         public Customer(int id, string firstName, string lastName, string email, decimal balance) 
-            : base(id, firstName, lastName, email, balance)
+            : base(id, firstName, lastName, email)
         {
             this.order = new Order(1, base.Id);
+            this.Balance = balance;
             this.Orders = new List<Order>();
             this.Watchlist = new HashSet<Product>();
+        }
+
+        public decimal Balance
+        {
+            get { return balance; }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("balance cannot be negative!");
+                }
+                balance = value;
+            }
         }
 
         public ICollection<Order> Orders { get; private set; }
@@ -63,7 +78,7 @@
         {
             CheckAmount(amount);
 
-            base.Balance += amount;
+            this.Balance += amount;
 
             return $"Successfuly deposited {amount}$";
         }
@@ -73,7 +88,7 @@
             CheckBalanceAmount(amount);
             CheckAmount(amount);
 
-            base.Balance -= amount;
+            this.Balance -= amount;
 
             return $"Successfuly withdrawed {amount}$";
         }
