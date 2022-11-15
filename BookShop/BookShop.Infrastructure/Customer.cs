@@ -114,5 +114,8 @@
                 throw new InvalidOperationException("Amount cannot be zero or negative number!");
             }
         }
+
+        public string UserInfo()
+            =>base.ToString();
     }
 }

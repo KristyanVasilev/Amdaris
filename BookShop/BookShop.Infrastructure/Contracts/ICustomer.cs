@@ -15,5 +15,7 @@
         string AddToWatchlist(Product product);
 
         string RemoveProductFromWatchlist(Product product);
+
+        string UserInfo();
     }
 }
