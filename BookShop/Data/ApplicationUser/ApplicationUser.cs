@@ -1,11 +1,13 @@
-﻿namespace BookShop.Data.ApplicationUser
+﻿using System.Text;
+
+namespace BookShop.Data.ApplicationUser
 {
     public class ApplicationUser
     {
-		private int id;
-		private string firstName;
-		private string lastName;
-		private string email;
+        private int id;
+        private string firstName;
+        private string lastName;
+        private string email;
         private decimal balance;
 
         public ApplicationUser(int id, string firstName, string lastName, string email, decimal balance)
@@ -19,9 +21,9 @@
             this.WatchList = new HashSet<Product>();
         }
 
-		public int Id
-		{
-			get { return id; }
+        public int Id
+        {
+            get { return id; }
             private set
             {
                 if (value <= 0)
@@ -88,5 +90,15 @@
         public ICollection<Order> Orders { get; set; }
 
         public ICollection<Product> WatchList { get; set; }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine($"User: {this.FirstName} {this.LastName} with Id - {this.Id}");
+            sb.AppendLine($"Email: {this.Email}");
+            sb.AppendLine($"Balance: {this.Balance}$");
+
+            return sb.ToString().TrimEnd();
+        }
     }
 }

@@ -58,6 +58,9 @@
             Console.WriteLine(customer.AddToWatchlist(book));
             Console.WriteLine(customer.RemoveProductFromWatchlist(book));
             //Console.WriteLine(customer.RemoveProductFromWatchlist(book));
+
+            Console.WriteLine("-----------------------------");
+            Console.WriteLine(customer.UserInfo());
         }
     }
 }
