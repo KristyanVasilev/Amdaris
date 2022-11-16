@@ -9,7 +9,7 @@
 
         public int Id { get; set; }
 
-        public int UserId {get; private set; }
+        public int UserId {get; set; }
 
         public ICollection<Product> Products { get; set; }
 

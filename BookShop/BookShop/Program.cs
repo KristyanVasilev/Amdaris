@@ -33,22 +33,13 @@
                 Author = "John Grisham",
                 PageCount = 400,
                 Description = "Some description",
-                Genre = new GenreDto("Horror")               
+                Genre = new GenreDto("Horror"),
+                PublicationType = "Book",
             });
 
-        //            public string Author { get; set; } = null!;
 
-        //public int PageCount { get; set; }
-
-        //public decimal Rating { get; set; } = 0;
-
-        //public string Description { get; set; } = null!;
-
-        //public PublicationType PublicationType { get; private set; }
-
-        //public Genre Genre { get; private set; } = null!;
             // var products = await mediator.Send(new GetProductsListQuery());
-            ;
+        
 
             //var bookGenre = new Genre("horror");
             //Product book = new Book(1, 10, "opa", "az", 123, bookGenre);

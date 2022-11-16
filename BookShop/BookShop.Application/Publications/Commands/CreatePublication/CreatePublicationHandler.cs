@@ -14,7 +14,23 @@
 
         public Task<int> Handle(CreatePublicationCommand command, CancellationToken cancellationToken)
         {
-            var product = new Publication(command.Id, command.Price, command.Name, command.Author, command.Description, command.PageCount, command.Genre);
+            var genre = new Genre("Triller");
+            var isEnumParsed = Enum.TryParse(command.PublicationType, true, out PublicationType parsedEnumValue);
+            Console.WriteLine(isEnumParsed ? parsedEnumValue : throw new InvalidOperationException("Invalid enum type! The type should be Book, Magazine, Comics, Dictionary, TextBook."));
+
+            var product = new Publication
+            {
+                Id = command.Id,
+                Price = command.Price,
+                Name = command.Name,
+                Author = command.Author,
+                PageCount = command.PageCount,
+                Rating = command.Rating,
+                Description = command.Description,
+                PublicationType = parsedEnumValue,
+                Genre = genre,
+            };
+
             this.repository.CreateProduct(product);
 
             return Task.FromResult(product.Id);
