@@ -3,61 +3,17 @@
     using BookShop.Data.ForSchool.Bags.Enums;
     using System.Text;
 
-    public abstract class Bag : Product
+    public class Bag : Product
     {
-        private string color;
-        private string manufacturer;
-        private int capacity;
+        public string Color { get; set; } = null!;
 
-        protected Bag(int id, decimal price, string name, string color, string manufacturer, int capacity, Gender gender)
-            : base(id, price, name)
-        {
-            this.Color = color;
-            this.Manufacturer = manufacturer;
-            this.Capacity = capacity;
-            this.Gender = gender;
-        }
+        public string Manufacturer { get; set; } = null!;
 
-        public string Color
-        {
-            get { return color; }
-            private set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException("Color cannot be null or empty!");
-                }
-                color = value;
-            }
-        }
+        public int Capacity { get; set; }
 
-        public string Manufacturer
-        {
-            get { return manufacturer; }
-            private set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException("Manufacturer cannot be null or empty!");
-                }
-                manufacturer = value;
-            }
-        }
+        public BagType BagType { get; set; } = null!;
 
-        public int Capacity
-        {
-            get { return capacity; }
-            private set
-            {
-                if (value <= 0)
-                {
-                    throw new ArgumentException("Capacity cannot be negative or equal to zero!");
-                }
-                capacity = value;
-            }
-        }
-
-        public Gender Gender { get; private set; }
+        public Gender Gender { get; set; }
 
         public override string ToString()
         {
