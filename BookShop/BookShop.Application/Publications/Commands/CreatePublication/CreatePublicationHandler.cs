@@ -1,6 +1,5 @@
-﻿namespace BookShop.Application.Commands.CreatePublication
+﻿namespace BookShop.Application.Publications.Commands.CreatePublication
 {
-    using BookShop.Application.Commands.CreateProduct;
     using BookShop.Data.Publications;
     using MediatR;
 
@@ -15,7 +14,7 @@
 
         public Task<int> Handle(CreatePublicationCommand command, CancellationToken cancellationToken)
         {
-            var product = new Publication(command.Id, command.Price, command.Name, command.Author, command.PageCount, command.PublicationType, command.Genre);
+            var product = new Publication(command.Id, command.Price, command.Name, command.Author, command.Description, command.PageCount, command.Genre);
             this.repository.CreateProduct(product);
 
             return Task.FromResult(product.Id);

@@ -1,4 +1,4 @@
-﻿namespace BookShop.Application.Commands.CreateProduct
+﻿namespace BookShop.Application.Publications.Commands.CreatePublication
 {
     using BookShop.Data.Publications;
     using MediatR;
@@ -9,12 +9,10 @@
 
         public int PageCount { get; set; }
 
-        public decimal Rating { get; set; } = 0;
-
         public string Description { get; set; } = null!;
 
         public PublicationType PublicationType { get; private set; }
 
-        public Genre Genre { get; private set; } = null!;
+        public GenreDto Genre { get; set; } = null!;
     }
 }
