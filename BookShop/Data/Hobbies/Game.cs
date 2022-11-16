@@ -3,44 +3,11 @@
     using BookShop.Data.Hobbies.Enums;
     using System.Text;
 
-    public abstract class Game : Product
+    public class Game : Product
     {
-        private string manufacturer;
-        private string description;
+        public string Manufacturer { get; set; } = null!;
 
-        protected Game(int id, decimal price, string name, string manufacturer, string description, GameType gameType)
-            : base(id, price, name)
-        {
-            this.Manufacturer = manufacturer;
-            this.Description = description;
-            this.GameType = gameType;
-        }
-
-        public string Manufacturer
-        {
-            get { return manufacturer; }
-            private set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException("Manufacturer cannot be null or empty!");
-                }
-                manufacturer = value;
-            }
-        }
-
-        public string Description
-        {
-            get { return description; }
-            private set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException("Description cannot be null or empty!");
-                }
-                description = value;
-            }
-        }
+        public string Description { get; set; } = null!;
 
         public GameType GameType { get; set; }
 
@@ -48,7 +15,7 @@
         {
             var sb = new StringBuilder(base.ToString());
             sb.AppendLine($"The game is {this.GameType.ToString()}.");
-            sb.AppendLine($"Manufacturer: {this.manufacturer}.");
+            sb.AppendLine($"Manufacturer: {this.Manufacturer}.");
             sb.AppendLine($"Description: {this.Description}.");
             return sb.ToString().TrimEnd();
         }
