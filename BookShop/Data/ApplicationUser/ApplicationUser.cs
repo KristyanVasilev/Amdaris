@@ -4,70 +4,13 @@
 
     public class ApplicationUser
     {
-        private int id;
-        private string firstName;
-        private string lastName;
-        private string email;
+        public int Id { get; set; }
 
-        public ApplicationUser(int id, string firstName, string lastName, string email)
-        {
-            this.Id = id;
-            this.FirstName = firstName;
-            this.LastName = lastName;
-            this.Email = email;
-        }
+        public string FirstName { get; set; } = null!;
 
-        public int Id
-        {
-            get { return id; }
-            private set
-            {
-                if (value <= 0)
-                {
-                    throw new ArgumentException("Id cannot be negative or equal to zero!");
-                }
-                id = value;
-            }
-        }
+        public string LastName { get; set; } = null!;
 
-        public string FirstName
-        {
-            get { return firstName; }
-            private set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException("FirstName cannot be null or empty!");
-                }
-                firstName = value;
-            }
-        }
-
-        public string LastName
-        {
-            get { return lastName; }
-            private set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException("LastName cannot be null or empty!");
-                }
-                lastName = value;
-            }
-        }
-
-        public string Email
-        {
-            get { return email; }
-            private set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException("Email cannot be null or empty!");
-                }
-                email = value;
-            }
-        }
+        public string Email { get; set; } = null!;
 
         public override string ToString()
         {
