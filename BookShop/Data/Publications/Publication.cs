@@ -2,16 +2,18 @@
 {
     using System.Text;
 
-    public abstract class Publication : Product
+    public class Publication : Product
     {
         private string author;
         private int pageCount;
 
-        protected Publication(int id, decimal price, string name, string author, int pageCount)
+        public Publication(int id, decimal price, string name, string author, int pageCount, PublicationType publicationType, Genre genre)
             : base(id, price, name)
         {
             this.Author = author;
             this.PageCount = pageCount;
+            this.PublicationType = publicationType;
+            this.Genre = genre;
         }
 
         public string Author
@@ -43,6 +45,10 @@
         public decimal Rating { get; private set; } = 0;
 
         public string Description { get; private set; }
+
+        public PublicationType PublicationType { get; private set; }
+
+        public Genre Genre { get; private set; }
 
         public override string ToString()
         {
