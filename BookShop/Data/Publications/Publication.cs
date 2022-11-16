@@ -7,12 +7,12 @@
         private string author;
         private int pageCount;
 
-        public Publication(int id, decimal price, string name, string author, int pageCount, PublicationType publicationType, Genre genre)
+        public Publication(int id, decimal price, string name, string author, string description, int pageCount, Genre genre)
             : base(id, price, name)
         {
             this.Author = author;
+            this.Description = description;
             this.PageCount = pageCount;
-            this.PublicationType = publicationType;
             this.Genre = genre;
         }
 
@@ -42,9 +42,9 @@
             }
         }
 
-        public decimal Rating { get; private set; } = 0;
+        public double Rating { get; set; } = 0;
 
-        public string Description { get; private set; }
+        public string Description { get; set; }
 
         public PublicationType PublicationType { get; private set; }
 
