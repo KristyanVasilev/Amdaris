@@ -114,6 +114,29 @@
             return $"Successfuly removed product {product.Name} to watchlist!";
         }
 
+        public string UserInfo()
+        {
+            var sb = new StringBuilder(base.ToString());
+            foreach (var currOrder in this.Orders)
+            {
+                sb.AppendLine($"Order Id - {currOrder.Id} with items {currOrder.Products.Count}:");
+                foreach (var product in currOrder.Products.OrderByDescending(x => x.Name))
+                {
+                    sb.AppendLine($"    -{product.Name}");
+                }
+            }
+            if (this.Watchlist.Any())
+            {
+                sb.AppendLine($"Products in wachtlist:");
+            }
+            foreach (var currProduct in this.Watchlist)
+            {
+                sb.AppendLine($"    -{currProduct.Name} ");
+            }
+
+            return sb.ToString().TrimEnd();
+        }
+
         private void CheckBalanceAmount(decimal amount)
         {
             if (this.Balance <= 0 || (this.Balance - amount) < 0)
@@ -136,29 +159,6 @@
             {
                 throw new InvalidOperationException("Amount cannot be zero or negative number!");
             }
-        }
-
-        public string UserInfo()
-        {
-            var sb = new StringBuilder(base.ToString());
-            foreach (var currOrder in this.Orders)
-            {
-                sb.AppendLine($"Order Id - {currOrder.Id} with items {currOrder.Products.Count}:");
-                foreach (var product in currOrder.Products.OrderByDescending(x => x.Name))
-                {
-                    sb.AppendLine($"    -{product.Name}");
-                }
-            }
-            if (this.Watchlist.Any())
-            {
-                sb.AppendLine($"Products in wachtlist:");
-            }
-            foreach (var currProduct in this.Watchlist)
-            {
-                sb.AppendLine($"    -{currProduct.Name} ");
-            }
-
-            return sb.ToString().TrimEnd();
         }
     }
 }
