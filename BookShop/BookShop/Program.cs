@@ -2,15 +2,9 @@
 {
     using BookShop.Application;
     using BookShop.Application.Publications.Commands.CreatePublication;
-    using BookShop.Data;
-    using BookShop.Data.ForSchool.Bags;
-    using BookShop.Data.ForSchool.Bags.Enums;
-    using BookShop.Data.ForSchool.Notebooks;
-    using BookShop.Data.ForSchool.Notebooks.Enums;
-    using BookShop.Data.Hobbies;
-    using BookShop.Data.Hobbies.Enums;
-    using BookShop.Data.Publications;
     using BookShop.Infrastructure;
+    using BookShop.Infrastructure.Services;
+
     using MediatR;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -37,9 +31,25 @@
                 PublicationType = "Book",
             });
 
+            var publicationService = new PublicationService();
+            Console.WriteLine(publicationService.AddBook(1, 10, "The Boys from Biloxi", "John Grisham", 400, 9, "Some description", "Triller"));
 
+            var book = publicationService.GetBook(1);
+
+            var customer = new Customer
+            {
+                Id= 1,
+                FirstName= "Petar",
+                LastName = "Petrov",
+                Balance= 100,
+                Email = "test@gmail.com"
+            };
+
+            Console.WriteLine(customer.AddToWatchlist(book));
+            Console.WriteLine(customer.AddToOrder(book));
+            Console.WriteLine(customer.Buy());
             // var products = await mediator.Send(new GetProductsListQuery());
-        
+
 
             //var bookGenre = new Genre("horror");
             //Product book = new Book(1, 10, "opa", "az", 123, bookGenre);
