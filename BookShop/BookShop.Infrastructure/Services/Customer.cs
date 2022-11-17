@@ -1,4 +1,4 @@
-﻿namespace BookShop.Infrastructure
+﻿namespace BookShop.Infrastructure.Services
 {
     using System.Linq;
     using System.Text;
@@ -14,13 +14,12 @@
         private decimal balance;
         private int counter = 1;
 
-        public Customer(int id, string firstName, string lastName, string email, decimal balance)
-            : base(id, firstName, lastName, email)
+        public Customer()
         {
-            this.order = new Order(counter, base.Id);
-            this.Balance = balance;
-            this.Orders = new List<Order>();
-            this.Watchlist = new HashSet<Product>();
+            order = new Order();
+            Balance = balance;
+            Orders = new List<Order>();
+            Watchlist = new HashSet<Product>();
         }
 
         public decimal Balance
@@ -42,16 +41,16 @@
 
         public string AddToOrder(Product product)
         {
-            if (this.order.IsCompleted)
+            if (order.IsCompleted)
             {
                 counter++;
-                this.order = new Order(counter, base.Id);
+                order = new Order { Id = counter, UserId = Id };
             }
 
-            this.order.Products.Add(product);
-            if (!this.Orders.Contains(order))
+            order.Products.Add(product);
+            if (!Orders.Contains(order))
             {
-                this.Orders.Add(order);
+                Orders.Add(order);
             }
 
             return $"Product {product.Name} added successfuly to Order with Id-{order.Id}";
@@ -60,14 +59,14 @@
         public string Buy()
         {
             CheckOrderIsValid();
-            CheckBalanceAmount(this.order.Products.Sum(p => p.Price));
+            CheckBalanceAmount(order.Products.Sum(p => p.Price));
 
-            this.Balance -= order.Products.Sum(p => p.Price);
-            this.order.IsCompleted = true;
+            Balance -= order.Products.Sum(p => p.Price);
+            order.IsCompleted = true;
 
             var sb = new StringBuilder();
-            sb.AppendLine($"Successfuly completed order with Id-{this.order.Id} with products:");
-            foreach (var product in this.order.Products)
+            sb.AppendLine($"Successfuly completed order with Id-{order.Id} with products:");
+            foreach (var product in order.Products)
             {
                 sb.AppendLine($"-{product.Name}");
             }
@@ -80,7 +79,7 @@
         {
             CheckAmount(amount);
 
-            this.Balance += amount;
+            Balance += amount;
 
             return $"Successfuly deposited {amount}$";
         }
@@ -90,26 +89,26 @@
             CheckBalanceAmount(amount);
             CheckAmount(amount);
 
-            this.Balance -= amount;
+            Balance -= amount;
 
             return $"Successfuly withdrawed {amount}$";
         }
 
         public string AddToWatchlist(Product product)
         {
-            this.Watchlist.Add(product);
+            Watchlist.Add(product);
 
             return $"Successfuly added product {product.Name} to watchlist!";
         }
 
         public string RemoveProductFromWatchlist(Product product)
         {
-            if (!this.Watchlist.Contains(product))
+            if (!Watchlist.Contains(product))
             {
                 throw new ProductNotFoundException("Product not found!");
             }
 
-            this.Watchlist.Remove(product);
+            Watchlist.Remove(product);
 
             return $"Successfuly removed product {product.Name} to watchlist!";
         }
@@ -117,7 +116,7 @@
         public string UserInfo()
         {
             var sb = new StringBuilder(base.ToString());
-            foreach (var currOrder in this.Orders)
+            foreach (var currOrder in Orders)
             {
                 sb.AppendLine($"Order Id - {currOrder.Id} with items {currOrder.Products.Count}:");
                 foreach (var product in currOrder.Products.OrderByDescending(x => x.Name))
@@ -125,11 +124,11 @@
                     sb.AppendLine($"    -{product.Name}");
                 }
             }
-            if (this.Watchlist.Any())
+            if (Watchlist.Any())
             {
                 sb.AppendLine($"Products in wachtlist:");
             }
-            foreach (var currProduct in this.Watchlist)
+            foreach (var currProduct in Watchlist)
             {
                 sb.AppendLine($"    -{currProduct.Name} ");
             }
@@ -139,7 +138,7 @@
 
         private void CheckBalanceAmount(decimal amount)
         {
-            if (this.Balance <= 0 || (this.Balance - amount) < 0)
+            if (Balance <= 0 || Balance - amount < 0)
             {
                 throw new ZeroOrNegativeBalanceException("Your balance cannot be zero or negative!");
             }
@@ -147,7 +146,7 @@
 
         private void CheckOrderIsValid()
         {
-            if (this.order.Products.Count == 0 || order.IsCompleted == true)
+            if (order.Products.Count == 0 || order.IsCompleted == true)
             {
                 throw new InvalidOrderException("Invalid Order!");
             }
