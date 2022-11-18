@@ -3,7 +3,6 @@
     using BookShop.Application;
     using BookShop.Application.Publications.Commands.CreatePublication;
     using BookShop.Infrastructure;
-    using BookShop.Infrastructure.Contracts;
     using BookShop.Infrastructure.Models;
 
     using MediatR;
@@ -13,7 +12,7 @@
     {
         public static async Task Main(string[] args)
         {
-            var editorial = new Editorial();
+            var editorial = Editorial.Instance;
 
             var diContainer = new ServiceCollection()
                .AddMediatR(typeof(IProductRepository))
@@ -52,6 +51,7 @@
             Console.WriteLine(customer.AddToOrder(book));
             Console.WriteLine(customer.Buy());
 
+            //when customer buy or add something to watchlist we must add it to editoral!
             editorial.AddSubscriber(customer);
             editorial.Publish(book);
             // var products = await mediator.Send(new GetProductsListQuery());
