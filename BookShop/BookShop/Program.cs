@@ -3,7 +3,8 @@
     using BookShop.Application;
     using BookShop.Application.Publications.Commands.CreatePublication;
     using BookShop.Infrastructure;
-    using BookShop.Infrastructure.Services;
+    using BookShop.Infrastructure.Contracts;
+    using BookShop.Infrastructure.Models;
 
     using MediatR;
     using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,8 @@
     {
         public static async Task Main(string[] args)
         {
+            var editorial = new Editorial();
+
             var diContainer = new ServiceCollection()
                .AddMediatR(typeof(IProductRepository))
                .AddScoped<IProductRepository, InMemoryProductRepository>()
@@ -48,6 +51,9 @@
             Console.WriteLine(customer.AddToWatchlist(book));
             Console.WriteLine(customer.AddToOrder(book));
             Console.WriteLine(customer.Buy());
+
+            editorial.AddSubscriber(customer);
+            editorial.Publish(book);
             // var products = await mediator.Send(new GetProductsListQuery());
 
 

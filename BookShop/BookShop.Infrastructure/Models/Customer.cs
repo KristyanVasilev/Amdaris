@@ -1,4 +1,4 @@
-﻿namespace BookShop.Infrastructure.Services
+﻿namespace BookShop.Infrastructure.Models
 {
     using System.Linq;
     using System.Text;
@@ -8,7 +8,7 @@
     using BookShop.Infrastructure.Contracts;
     using BookShop.Infrastructure.CustomExceptions;
 
-    public class Customer : ApplicationUser, ICustomer
+    public class Customer : ApplicationUser, ICustomer, ISubscriber<Product>
     {
         private Order order;
         private decimal balance;
@@ -16,10 +16,10 @@
 
         public Customer()
         {
-            order = new Order();
-            Balance = balance;
-            Orders = new List<Order>();
-            Watchlist = new HashSet<Product>();
+            this.order = new Order();
+            this.Balance = balance;
+            this.Orders = new List<Order>();
+            this.Watchlist = new HashSet<Product>();
         }
 
         public decimal Balance
@@ -158,6 +158,11 @@
             {
                 throw new InvalidOperationException("Amount cannot be zero or negative number!");
             }
+        }
+
+        public void Notify(Product item)
+        {
+            Console.WriteLine($@"Hi, I'm {base.FirstName} and I'm buying ""{item.Name}"".");
         }
     }
 }

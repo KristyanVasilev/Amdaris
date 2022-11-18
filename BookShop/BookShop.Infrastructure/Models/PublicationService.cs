@@ -1,4 +1,4 @@
-﻿namespace BookShop.Infrastructure.Services
+﻿namespace BookShop.Infrastructure.Models
 {
     using BookShop.Application;
     using BookShop.Data;
@@ -33,7 +33,7 @@
             };
 
             this.repository.CreateProduct(product);
-            return $"Successfuly added Book with Id - {id}, title - {name} by {author}.";
+            return $"Successfuly added Book with Id - {id}, title - {name} {author}.";
         }
 
         public Product GetBook(int id)
