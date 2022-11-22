@@ -1,4 +1,4 @@
-﻿namespace BookShop.Application.Publications.Queries.GetProducts
+﻿namespace BookShop.Application.Publications.Queries
 {
     public class PublicationViewModel : BaseProductModel
     {

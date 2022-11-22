@@ -11,5 +11,7 @@
         void CreateGame(Game game);
 
         IEnumerable<Publication> GetPublications();
+
+        Publication GetSinglePublication(int id);
     }
 }

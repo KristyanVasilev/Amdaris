@@ -29,5 +29,10 @@
         {
             return this.publications;
         }
+
+        public Publication GetSinglePublication(int id)
+        {
+            return this.publications.FirstOrDefault(x => x.Id == id);
+        }
     }
 }

@@ -4,6 +4,7 @@
     using BookShop.Application.Games.Commands.CreateGame;
     using BookShop.Application.Publications.Commands.CreatePublication;
     using BookShop.Application.Publications.Queries.GetPublication;
+    using BookShop.Application.Publications.Queries.GetSinglePublication;
     using BookShop.Application.Users.Commands.CreateApplicatioUser;
     using BookShop.Infrastructure;
 
@@ -59,11 +60,13 @@
                 GameType = "Strategy",
             });
 
-            var publications = await mediator.Send(new GetPublicationQuery());
+            var publications = await mediator.Send(new GetPublicationsQuery());
             foreach (var publication in publications)
             {
                 Console.WriteLine(publication.Author);
             }
+
+            var book = await mediator.Send(new GetSinglePublicationQuery(1));
 
             var user = await mediator.Send(new CreateApplicationUserCommand
             {
