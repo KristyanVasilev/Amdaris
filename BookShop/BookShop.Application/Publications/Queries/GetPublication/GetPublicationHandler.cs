@@ -2,6 +2,7 @@
 {
     using BookShop.Application.Publications.Queries.GetProducts;
     using MediatR;
+
     public class GetPublicationHandler : IRequestHandler<GetPublicationQuery, IEnumerable<PublicationViewModel>>
     {
         private readonly IProductRepository repository;
