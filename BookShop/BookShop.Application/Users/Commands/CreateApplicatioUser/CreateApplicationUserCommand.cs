@@ -1,4 +1,4 @@
-﻿namespace BookShop.Application.User.Commands.CreateApplicatioUser
+﻿namespace BookShop.Application.Users.Commands.CreateApplicatioUser
 {
     using MediatR;
 

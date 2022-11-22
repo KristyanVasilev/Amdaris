@@ -1,8 +1,9 @@
-﻿namespace BookShop.Application.User.Commands.CreateApplicatioUser
+﻿namespace BookShop.Application.Users.Commands.CreateApplicatioUser
 {
     using BookShop.Domain.ApplicationUser;
+    using MediatR;
 
-    public class CreateApplicationUserHandler
+    public class CreateApplicationUserHandler : IRequestHandler<CreateApplicationUserCommand, int>
     {
         private readonly IApplicationUserRepository repository;
 
