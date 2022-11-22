@@ -1,12 +1,11 @@
 ﻿namespace BookShop.Infrastructure.Models
 {
-    using System.Linq;
-    using System.Text;
-
     using BookShop.Domain;
     using BookShop.Domain.ApplicationUser;
     using BookShop.Infrastructure.Contracts;
     using BookShop.Infrastructure.CustomExceptions;
+    using System.Linq;
+    using System.Text;
 
     public class Customer : ApplicationUser, ICustomer, ISubscriber<Product>
     {
