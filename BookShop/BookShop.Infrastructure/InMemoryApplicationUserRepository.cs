@@ -1,14 +1,8 @@
-﻿using BookShop.Application;
-using BookShop.Domain;
-using BookShop.Domain.ApplicationUser;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BookShop.Infrastructure
+﻿namespace BookShop.Infrastructure
 {
+    using BookShop.Application;
+    using BookShop.Domain.ApplicationUser;
+
     public class InMemoryApplicationUserRepository : IApplicationUserRepository
     {
         private readonly List<ApplicationUser> users;
