@@ -14,4 +14,8 @@
 	  <ProjectReference Include="..\Data\BookShop.Data.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Publications\Commands\NewFolder\" />
+	</ItemGroup>
+
 </Project>
