@@ -1,6 +1,6 @@
 ﻿namespace BookShop.Infrastructure.Contracts
 {
-    using BookShop.Data;
+    using BookShop.Domain;
 
     public interface ICustomer
     {

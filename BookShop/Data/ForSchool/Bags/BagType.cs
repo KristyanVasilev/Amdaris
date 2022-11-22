@@ -1,4 +1,4 @@
-﻿namespace BookShop.Data.ForSchool.Bags
+﻿namespace BookShop.Domain.ForSchool.Bags
 {
     public class BagType
     {

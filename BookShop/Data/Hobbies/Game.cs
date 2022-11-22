@@ -1,6 +1,6 @@
-﻿namespace BookShop.Data.Hobbies
+﻿namespace BookShop.Domain.Hobbies
 {
-    using BookShop.Data.Hobbies.Enums;
+    using BookShop.Domain.Hobbies.Enums;
     using System.Text;
 
     public class Game : Product

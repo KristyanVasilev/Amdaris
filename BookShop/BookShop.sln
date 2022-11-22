@@ -5,11 +5,11 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookShop", "BookShop\BookShop.csproj", "{CF614D53-7065-4370-8815-15E8FF5CDA30}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookShop.Data", "Data\BookShop.Data.csproj", "{A9171FB1-3EAA-4D34-9A0A-A81F346F929E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookShop.Domain", "Data\BookShop.Domain.csproj", "{A9171FB1-3EAA-4D34-9A0A-A81F346F929E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookShop.Infrastructure", "BookShop.Infrastructure\BookShop.Infrastructure.csproj", "{FF5FA53D-0AF1-46F0-B789-D4833D3A779E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShop.Application", "BookShop.Application\BookShop.Application.csproj", "{CEDF44F2-5A74-453F-AC75-D4BF2BB01110}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookShop.Application", "BookShop.Application\BookShop.Application.csproj", "{CEDF44F2-5A74-453F-AC75-D4BF2BB01110}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,6 +1,6 @@
 ﻿namespace BookShop.Application
 {
-    using BookShop.Data;
+    using BookShop.Domain;
 
     public interface IProductRepository
     {

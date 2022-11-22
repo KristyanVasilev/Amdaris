@@ -3,8 +3,8 @@
     using System.Linq;
     using System.Text;
 
-    using BookShop.Data;
-    using BookShop.Data.ApplicationUser;
+    using BookShop.Domain;
+    using BookShop.Domain.ApplicationUser;
     using BookShop.Infrastructure.Contracts;
     using BookShop.Infrastructure.CustomExceptions;
 

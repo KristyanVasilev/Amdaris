@@ -1,4 +1,4 @@
-﻿namespace BookShop.Data.Publications
+﻿namespace BookShop.Domain.Publications
 {
     public class Genre
     {

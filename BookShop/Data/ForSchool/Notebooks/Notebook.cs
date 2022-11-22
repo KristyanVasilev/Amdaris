@@ -1,6 +1,6 @@
-﻿namespace BookShop.Data.ForSchool.Notebooks
+﻿namespace BookShop.Domain.ForSchool.Notebooks
 {
-    using BookShop.Data.ForSchool.Notebooks.Enums;
+    using BookShop.Domain.ForSchool.Notebooks.Enums;
     using System.Text;
     public class NoteBook : Product
     {

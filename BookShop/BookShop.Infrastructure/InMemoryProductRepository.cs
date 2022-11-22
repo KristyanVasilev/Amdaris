@@ -1,7 +1,7 @@
 ﻿namespace BookShop.Infrastructure
 {
     using BookShop.Application;
-    using BookShop.Data;
+    using BookShop.Domain;
 
     public class InMemoryProductRepository : IProductRepository
     {

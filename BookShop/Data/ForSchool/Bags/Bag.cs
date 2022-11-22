@@ -1,6 +1,6 @@
-﻿namespace BookShop.Data.ForSchool.Bags
+﻿namespace BookShop.Domain.ForSchool.Bags
 {
-    using BookShop.Data.ForSchool.Bags.Enums;
+    using BookShop.Domain.ForSchool.Bags.Enums;
     using System.Text;
 
     public class Bag : Product

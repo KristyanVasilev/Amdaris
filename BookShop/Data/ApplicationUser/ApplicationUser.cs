@@ -1,4 +1,4 @@
-﻿namespace BookShop.Data.ApplicationUser
+﻿namespace BookShop.Domain.ApplicationUser
 {
     using System.Text;
 

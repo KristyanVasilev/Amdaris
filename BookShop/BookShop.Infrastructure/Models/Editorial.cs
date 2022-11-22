@@ -1,6 +1,6 @@
 ﻿namespace BookShop.Infrastructure.Models
 {
-    using BookShop.Data;
+    using BookShop.Domain;
 
     public class Editorial : AbstractPublisher<Product>
     {

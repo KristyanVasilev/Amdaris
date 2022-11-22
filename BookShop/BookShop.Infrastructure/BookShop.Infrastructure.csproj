@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BookShop.Application\BookShop.Application.csproj" />
-    <ProjectReference Include="..\Data\BookShop.Data.csproj" />
+    <ProjectReference Include="..\Data\BookShop.Domain.csproj" />
   </ItemGroup>
 
 </Project>

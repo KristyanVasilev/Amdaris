@@ -1,4 +1,4 @@
-﻿namespace BookShop.Data
+﻿namespace BookShop.Domain
 {
     using System.Text;
 

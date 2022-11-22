@@ -1,6 +1,6 @@
 ﻿namespace BookShop.Application.Publications.Commands.CreatePublication
 {
-    using BookShop.Data.Publications;
+    using BookShop.Domain.Publications;
     using MediatR;
 
     public class CreatePublicationHandler : IRequestHandler<CreatePublicationCommand, int>

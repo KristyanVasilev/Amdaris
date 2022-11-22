@@ -1,4 +1,4 @@
-﻿namespace BookShop.Data.ForSchool.Bags.Enums
+﻿namespace BookShop.Domain.ForSchool.Bags.Enums
 {
     public enum Gender
     {

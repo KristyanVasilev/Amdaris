@@ -1,4 +1,4 @@
-﻿namespace BookShop.Data
+﻿namespace BookShop.Domain
 {
     public class Order
     {

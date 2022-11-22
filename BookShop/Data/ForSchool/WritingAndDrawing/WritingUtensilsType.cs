@@ -1,4 +1,4 @@
-﻿namespace BookShop.Data.ForSchool.WritingAndDrawing
+﻿namespace BookShop.Domain.ForSchool.WritingAndDrawing
 {
     public class WritingUtensilsType
     {
