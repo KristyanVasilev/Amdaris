@@ -1,33 +1,23 @@
 ﻿namespace BookShop.Infrastructure
 {
     using BookShop.Application;
-    using BookShop.Domain;
+    using BookShop.Domain.Hobbies;
     using BookShop.Domain.Publications;
 
     public class InMemoryProductRepository : IProductRepository
     {
-        private readonly List<Product> products;
         private readonly List<Publication> publications;
+        private readonly List<Game> games;
 
         public InMemoryProductRepository()
         {
-            this.products = new List<Product>();
             this.publications= new List<Publication>();
+            this.games = new List<Game>();
         }
 
-        public void CreateProduct(Product product)
+        public void CreateGame(Game game)
         {
-            this.products.Add(product);
-        }
-
-        public Product GetProduct(int id)
-        {
-            return this.products.FirstOrDefault(p => p.Id == id);
-        }
-
-        public IEnumerable<Product> GetProducts()
-        {
-            return this.products;
+            this.games.Add(game);
         }
 
         public void CreatePublication(Publication publication)
