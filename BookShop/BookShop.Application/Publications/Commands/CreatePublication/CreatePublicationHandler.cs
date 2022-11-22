@@ -18,7 +18,7 @@
             var isEnumParsed = Enum.TryParse(command.PublicationType, true, out PublicationType parsedEnumValue);
             Console.WriteLine(isEnumParsed ? parsedEnumValue : throw new InvalidOperationException("Invalid enum type! The type should be Book, Magazine, Comics, Dictionary, TextBook."));
 
-            var product = new Publication
+            var publication = new Publication
             {
                 Id = command.Id,
                 Price = command.Price,
@@ -31,9 +31,9 @@
                 Genre = genre,
             };
 
-            this.repository.CreateProduct(product);
+            this.repository.CreatePublication(publication);
 
-            return Task.FromResult(product.Id);
+            return Task.FromResult(publication.Id);
         }
     }
 }
