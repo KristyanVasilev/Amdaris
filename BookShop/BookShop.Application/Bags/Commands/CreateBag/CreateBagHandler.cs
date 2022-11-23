@@ -13,23 +13,23 @@
             this.repository = repository;
         }
 
-        public Task<int> Handle(CreateBagCommand command, CancellationToken cancellationToken)
+        public Task<int> Handle(CreateBagCommand request, CancellationToken cancellationToken)
         {
             var bagType = new BagType
             {
-                Name = command.BagType.Name,
+                Name = request.BagType.Name,
             };
-            var isEnumParsed = Enum.TryParse(command.Gender, true, out Gender parsedEnumValue);
+            var isEnumParsed = Enum.TryParse(request.Gender, true, out Gender parsedEnumValue);
             Console.WriteLine(isEnumParsed ? parsedEnumValue : throw new InvalidOperationException("Invalid enum type!"));
 
             var bag = new Bag
             {
-                Id = command.Id,
-                Price = command.Price,
-                Name = command.Name,
-                Capacity= command.Capacity,
-                Color = command.Color,
-                Manufacturer = command.Manufacturer,
+                Id = request.Id,
+                Price = request.Price,
+                Name = request.Name,
+                Capacity= request.Capacity,
+                Color = request.Color,
+                Manufacturer = request.Manufacturer,
                 Gender = parsedEnumValue,
                 BagType = bagType,
             };

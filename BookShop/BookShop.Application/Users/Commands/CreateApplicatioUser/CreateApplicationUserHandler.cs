@@ -12,14 +12,14 @@
             this.repository = repository;
         }
 
-        public Task<int> Handle(CreateApplicationUserCommand command, CancellationToken cancellationToken)
+        public Task<int> Handle(CreateApplicationUserCommand request, CancellationToken cancellationToken)
         {
             var user = new ApplicationUser
             {
-                Id= command.Id,
-                FirstName = command.FirstName,
-                LastName = command.LastName,
-                Email = command.Email,
+                Id= request.Id,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Email = request.Email,
             };
 
             this.repository.CreateUser(user);

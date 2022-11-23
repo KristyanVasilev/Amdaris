@@ -13,19 +13,19 @@
             this.repository = repository;
         }
 
-        public Task<int> Handle(CreateNotebookCommand command, CancellationToken cancellationToken)
+        public Task<int> Handle(CreateNotebookCommand request, CancellationToken cancellationToken)
         {
-            var isEnumParsed = Enum.TryParse(command.LineType, true, out LineType parsedEnumValue);
+            var isEnumParsed = Enum.TryParse(request.LineType, true, out LineType parsedEnumValue);
             Console.WriteLine(isEnumParsed ? parsedEnumValue : throw new InvalidOperationException("Invalid enum type!"));
 
             var notebook = new Notebook
             {
-                Id = command.Id,
-                Price = command.Price,
-                Name = command.Name,
-                Color= command.Color,
-                Manufacturer = command.Manufacturer,
-                PageCount = command.PageCount,
+                Id = request.Id,
+                Price = request.Price,
+                Name = request.Name,
+                Color= request.Color,
+                Manufacturer = request.Manufacturer,
+                PageCount = request.PageCount,
                 LineType = parsedEnumValue,
             };
             
