@@ -6,9 +6,9 @@
 
     public class CreateGamehandler : IRequestHandler<CreateGameCommand, int>
     {
-        private readonly IProductRepository repository;
+        private readonly IGameRepository repository;
 
-        public CreateGamehandler(IProductRepository repository)
+        public CreateGamehandler(IGameRepository repository)
         {
             this.repository = repository;
         }
@@ -28,7 +28,7 @@
                 GameType = parsedEnumValue,
             };
 
-            this.repository.CreateProduct(game);
+            this.repository.CreateGame(game);
 
             return Task.FromResult(game.Id);
         }
