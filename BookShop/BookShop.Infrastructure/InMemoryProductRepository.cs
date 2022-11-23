@@ -1,6 +1,7 @@
 ﻿namespace BookShop.Infrastructure
 {
     using BookShop.Application;
+    using BookShop.Domain.ForSchool.Bags;
     using BookShop.Domain.Hobbies;
     using BookShop.Domain.Publications;
 
@@ -8,11 +9,18 @@
     {
         private readonly List<Publication> publications;
         private readonly List<Game> games;
+        private readonly List<Bag> bags;
 
         public InMemoryProductRepository()
         {
             this.publications= new List<Publication>();
             this.games = new List<Game>();
+            this.bags = new List<Bag>();
+        }
+
+        public void CreateBag(Bag bag)
+        {
+            this.bags.Add(bag);
         }
 
         public void CreateGame(Game game)
