@@ -1,6 +1,7 @@
 ﻿namespace BookShop.Application
 {
     using BookShop.Domain.ForSchool.Bags;
+    using BookShop.Domain.ForSchool.Notebooks;
     using BookShop.Domain.Hobbies;
     using BookShop.Domain.Publications;
 
@@ -12,6 +13,8 @@
         void CreateGame(Game game);
 
         void CreateBag(Bag bag);
+
+        void CreateNotebook(Notebook notebook);
 
         IEnumerable<Publication> GetPublications();
 
