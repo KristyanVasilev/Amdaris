@@ -14,7 +14,7 @@
 
         public Task<int> Handle(CreatePublicationCommand request, CancellationToken cancellationToken)
         {
-            var genre = new Genre(request.Genre.ToString());
+            var genre = new Genre { Name = request.Genre.Name };
             var isEnumParsed = Enum.TryParse(request.PublicationType, true, out PublicationType parsedEnumValue);
             Console.WriteLine(isEnumParsed ? parsedEnumValue : throw new InvalidOperationException("Invalid enum type! The type should be Book, Magazine, Comics, Dictionary, TextBook."));
 
