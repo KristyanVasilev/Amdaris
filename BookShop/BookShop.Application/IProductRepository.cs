@@ -2,6 +2,7 @@
 {
     using BookShop.Domain.ForSchool.Bags;
     using BookShop.Domain.ForSchool.Notebooks;
+    using BookShop.Domain.ForSchool.WritingAndDrawing;
     using BookShop.Domain.Hobbies;
     using BookShop.Domain.Publications;
 
@@ -15,6 +16,8 @@
         void CreateBag(Bag bag);
 
         void CreateNotebook(Notebook notebook);
+
+        void CreateWritingUtensils(WritingUtensil utensil);
 
         IEnumerable<Publication> GetPublications();
 
