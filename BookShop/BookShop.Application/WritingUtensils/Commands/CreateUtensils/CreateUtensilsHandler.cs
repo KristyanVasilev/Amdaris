@@ -5,9 +5,9 @@
 
     public class CreateUtensilsHandler : IRequestHandler<CreateUtensilsCommand, int>
     {
-        private readonly IProductRepository repository;
+        private readonly IWritingUtensilsRepository repository;
 
-        public CreateUtensilsHandler(IProductRepository repository)
+        public CreateUtensilsHandler(IWritingUtensilsRepository repository)
         {
             this.repository = repository;
         }
@@ -26,7 +26,7 @@
                 WritingUtensilsType = untensilType,
             };
 
-            this.repository.CreateProduct(utensil);
+            this.repository.CreateUtensil(utensil);
 
             return Task.FromResult(utensil.Id);
         }
