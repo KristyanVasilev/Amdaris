@@ -6,9 +6,9 @@
 
     public class CreateNotebookHandler : IRequestHandler<CreateNotebookCommand, int>
     {
-        private readonly IProductRepository repository;
+        private readonly INotebookRepository repository;
 
-        public CreateNotebookHandler(IProductRepository repository)
+        public CreateNotebookHandler(INotebookRepository repository)
         {
             this.repository = repository;
         }
