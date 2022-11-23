@@ -6,9 +6,9 @@
 
     public class CreateBagHandler : IRequestHandler<CreateBagCommand, int>
     {
-        private readonly IProductRepository repository;
+        private readonly IBagRepository repository;
 
-        public CreateBagHandler(IProductRepository repository)
+        public CreateBagHandler(IBagRepository repository)
         {
             this.repository = repository;
         }
@@ -34,7 +34,7 @@
                 BagType = bagType,
             };
 
-            this.repository.CreateProduct(bag);
+            this.repository.CreateBag(bag);
 
             return Task.FromResult(bag.Id);
         }
