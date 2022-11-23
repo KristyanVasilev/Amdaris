@@ -3,6 +3,7 @@
     using BookShop.Application;
     using BookShop.Application.Bags.Commands.CreateBag;
     using BookShop.Application.Games.Commands.CreateGame;
+    using BookShop.Application.Notebooks.Commands.CreateNotebook;
     using BookShop.Application.Publications.Commands.CreatePublication;
     using BookShop.Application.Publications.Queries.GetPublication;
     using BookShop.Application.Publications.Queries.GetSinglePublication;
@@ -86,7 +87,18 @@
                 Capacity = 50,
                 Color = "black",
                 Gender = "Boy",
-                BagType = new BagTypeDto { Name = "Big"}
+                BagType = new BagTypeDto { Name = "Big" }
+            });
+
+            var notebookId = await mediator.Send(new CreateNotebookCommand
+            {
+                Id = 1,
+                Price = 40,
+                Name = "Nike bag",
+                Manufacturer = "Orange",
+                Color = "red",
+                PageCount = 50,
+                LineType = "Squares"
             });
         }
     }
