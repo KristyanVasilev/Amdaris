@@ -8,6 +8,7 @@
     using BookShop.Application.Publications.Queries.GetPublication;
     using BookShop.Application.Publications.Queries.GetSinglePublication;
     using BookShop.Application.Users.Commands.CreateApplicatioUser;
+    using BookShop.Application.WritingUtensils.Commands.CreateUtensils;
     using BookShop.Infrastructure;
 
     using MediatR;
@@ -99,6 +100,16 @@
                 Color = "red",
                 PageCount = 50,
                 LineType = "Squares"
+            });
+
+            var utensilId = await mediator.Send(new CreateUtensilsCommand
+            {
+                Id = 1,
+                Price = 40,
+                Name = "Nike bag",
+                Manufacturer = "Orange",
+                Color = "red",
+                WritingUtensilsType= new WritingUtensilsTypeDto { Name = "Pen"},
             });
         }
     }
