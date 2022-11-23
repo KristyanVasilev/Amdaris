@@ -28,7 +28,7 @@
                 GameType = parsedEnumValue,
             };
 
-            this.repository.CreateGame(game);
+            this.repository.CreateProduct(game);
 
             return Task.FromResult(game.Id);
         }

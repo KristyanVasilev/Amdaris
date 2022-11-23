@@ -109,7 +109,7 @@
                 Name = "Nike bag",
                 Manufacturer = "Orange",
                 Color = "red",
-                WritingUtensilsType= new WritingUtensilsTypeDto { Name = "Pen"},
+                WritingUtensilsType = new WritingUtensilsTypeDto { Name = "Pen" },
             });
         }
     }

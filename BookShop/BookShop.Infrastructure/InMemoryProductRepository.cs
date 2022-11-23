@@ -1,11 +1,13 @@
 ﻿namespace BookShop.Infrastructure
 {
     using BookShop.Application;
+    using BookShop.Domain;
     using BookShop.Domain.ForSchool.Bags;
     using BookShop.Domain.ForSchool.Notebooks;
     using BookShop.Domain.ForSchool.WritingAndDrawing;
     using BookShop.Domain.Hobbies;
     using BookShop.Domain.Publications;
+    using System.Linq.Expressions;
 
     public class InMemoryProductRepository : IProductRepository
     {
@@ -24,29 +26,28 @@
             this.writingUtensil = new List<WritingUtensil>();
         }
 
-        public void CreateBag(Bag bag)
+        public void CreateProduct(Product product)
         {
-            this.bags.Add(bag);
-        }
-
-        public void CreateGame(Game game)
-        {
-            this.games.Add(game);
-        }
-
-        public void CreateNotebook(Notebook notebook)
-        {
-            this.notebooks.Add(notebook);
-        }
-
-        public void CreatePublication(Publication publication)
-        {
-            this.publications.Add(publication);
-        }
-
-        public void CreateWritingUtensils(WritingUtensil utensil)
-        {
-            this.writingUtensil.Add(utensil);
+            if (product is Bag)
+            {
+                this.bags.Add(product as Bag);
+            }
+            else if (product is Game)
+            {
+                this.games.Add(product as Game);
+            }
+            else if (product is Publication)
+            {
+                this.publications.Add(product as Publication);
+            }
+            else if (product is Notebook)
+            {
+                this.notebooks.Add(product as Notebook);
+            }
+            else
+            {
+                this.writingUtensil.Add(product as WritingUtensil);
+            }
         }
 
         public IEnumerable<Publication> GetPublications()

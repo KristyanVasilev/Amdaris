@@ -29,7 +29,7 @@
                 LineType = parsedEnumValue,
             };
             
-            this.repository.CreateNotebook(notebook);
+            this.repository.CreateProduct(notebook);
 
             return Task.FromResult(notebook.Id);
         }

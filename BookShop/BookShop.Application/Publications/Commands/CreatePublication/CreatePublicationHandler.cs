@@ -31,7 +31,7 @@
                 Genre = genre,
             };
 
-            this.repository.CreatePublication(publication);
+            this.repository.CreateProduct(publication);
 
             return Task.FromResult(publication.Id);
         }

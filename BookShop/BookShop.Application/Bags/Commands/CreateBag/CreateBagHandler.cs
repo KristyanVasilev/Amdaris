@@ -34,7 +34,7 @@
                 BagType = bagType,
             };
 
-            this.repository.CreateBag(bag);
+            this.repository.CreateProduct(bag);
 
             return Task.FromResult(bag.Id);
         }
