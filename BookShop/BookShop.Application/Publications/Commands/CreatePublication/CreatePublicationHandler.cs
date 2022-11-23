@@ -5,9 +5,9 @@
 
     public class CreatePublicationHandler : IRequestHandler<CreatePublicationCommand, int>
     {
-        private readonly IProductRepository repository;
+        private readonly IPublicationRepository repository;
 
-        public CreatePublicationHandler(IProductRepository repository)
+        public CreatePublicationHandler(IPublicationRepository repository)
         {
             this.repository = repository;
         }
@@ -31,7 +31,7 @@
                 Genre = genre,
             };
 
-            this.repository.CreateProduct(publication);
+            this.repository.CreatePublication(publication);
 
             return Task.FromResult(publication.Id);
         }

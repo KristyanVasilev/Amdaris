@@ -5,9 +5,9 @@
     public class GetSinglePublicationHandler : IRequestHandler<GetSinglePublicationQuery, PublicationViewModel>
     {
 
-        private readonly IProductRepository repository;
+        private readonly IPublicationRepository repository;
 
-        public GetSinglePublicationHandler(IProductRepository repository)
+        public GetSinglePublicationHandler(IPublicationRepository repository)
         {
             this.repository = repository;
         }

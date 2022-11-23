@@ -24,7 +24,7 @@
             this.notebooks = new List<Notebook>();
             this.writingUtensil = new List<WritingUtensil>();
         }
-
+    
         public void CreateProduct(Product product)
         {
             if (product is Bag)
