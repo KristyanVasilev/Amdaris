@@ -2,7 +2,8 @@
 {
     using BookShop.Domain.ForSchool.Notebooks.Enums;
     using System.Text;
-    public class NoteBook : Product
+
+    public class Notebook : Product
     {
         public string Color { get; set; } = null!;
 
