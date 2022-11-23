@@ -4,9 +4,5 @@
 
     public class GenreDto : Genre
     {
-        public GenreDto(string name)
-            : base(name)
-        {
-        }
     }
 }

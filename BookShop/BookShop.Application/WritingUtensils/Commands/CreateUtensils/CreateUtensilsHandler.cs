@@ -26,7 +26,7 @@
                 WritingUtensilsType = untensilType,
             };
 
-            this.repository.CreateWritingUtensils(utensil);
+            this.repository.CreateProduct(utensil);
 
             return Task.FromResult(utensil.Id);
         }

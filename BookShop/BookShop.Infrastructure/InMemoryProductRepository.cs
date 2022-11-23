@@ -7,7 +7,6 @@
     using BookShop.Domain.ForSchool.WritingAndDrawing;
     using BookShop.Domain.Hobbies;
     using BookShop.Domain.Publications;
-    using System.Linq.Expressions;
 
     public class InMemoryProductRepository : IProductRepository
     {
@@ -19,7 +18,7 @@
 
         public InMemoryProductRepository()
         {
-            this.publications= new List<Publication>();
+            this.publications = new List<Publication>();
             this.games = new List<Game>();
             this.bags = new List<Bag>();
             this.notebooks = new List<Notebook>();
@@ -30,23 +29,23 @@
         {
             if (product is Bag)
             {
-                this.bags.Add(product as Bag);
+                this.bags.Add((Bag)product);
             }
             else if (product is Game)
             {
-                this.games.Add(product as Game);
+                this.games.Add((Game)product);
             }
             else if (product is Publication)
             {
-                this.publications.Add(product as Publication);
+                this.publications.Add((Publication)product);
             }
             else if (product is Notebook)
             {
-                this.notebooks.Add(product as Notebook);
+                this.notebooks.Add((Notebook)product);
             }
-            else
+            else if (product is WritingUtensil)
             {
-                this.writingUtensil.Add(product as WritingUtensil);
+                this.writingUtensil.Add((WritingUtensil)product);
             }
         }
 

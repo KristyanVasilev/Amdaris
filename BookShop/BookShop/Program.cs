@@ -37,7 +37,7 @@
                 Author = "John Grisham",
                 PageCount = 400,
                 Description = "Some description",
-                Genre = new GenreDto("Horror"),
+                Genre = new GenreDto { Name = "Horror" },
                 PublicationType = "Book",
             });
 
@@ -49,7 +49,7 @@
                 Author = "Grisham",
                 PageCount = 400,
                 Description = "Some description",
-                Genre = new GenreDto("Horror"),
+                Genre = new GenreDto{ Name = "Horror" },
                 PublicationType = "Book",
             });
 
