@@ -21,10 +21,17 @@
             //var editorial = Editorial.Instance;
 
             var diContainer = new ServiceCollection()
-               .AddMediatR(typeof(IProductRepository))
+               .AddMediatR(typeof(IPublicationRepository))
                .AddMediatR(typeof(IApplicationUserRepository))
-               .AddScoped<IProductRepository, InMemoryProductRepository>()
+               .AddMediatR(typeof(IGameRepository))
+               .AddMediatR(typeof(IWritingUtensilsRepository))
+               .AddMediatR(typeof(IBagRepository))
+               .AddScoped<IPublicationRepository, InMemoryPublicationRepository>()
                .AddScoped<IApplicationUserRepository, InMemoryApplicationUserRepository>()
+               .AddScoped<IGameRepository, InMemoryGameRepository>()
+               .AddScoped<IWritingUtensilsRepository, InMemoryWritingUtensilsRepository>()
+               .AddScoped<INotebookRepository, InMemoryNotebookRepository>()
+               .AddScoped<IBagRepository, InMemoryBagRepository>()
                .BuildServiceProvider();
 
             var mediator = diContainer.GetRequiredService<IMediator>();
