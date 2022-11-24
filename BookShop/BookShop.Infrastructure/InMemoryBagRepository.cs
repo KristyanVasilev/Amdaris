@@ -34,7 +34,13 @@
 
         public Bag GetSingleBag(int id)
         {
-            return this.bags.FirstOrDefault(x => x.Id == id);
+            var result = this.bags.FirstOrDefault(x => x.Id == id);
+            if (result == null)
+            {
+                throw new InvalidOperationException("Bag not found!");
+            }
+
+            return result;
         }
     }
 }

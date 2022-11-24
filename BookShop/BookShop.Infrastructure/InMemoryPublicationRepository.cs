@@ -19,7 +19,7 @@
 
         public string DeletePublication(int id)
         {
-            var publicationToRemove = GetSinglePublication(id);
+            var publicationToRemove = GetSinglePublication(id);         
             this.publications.Remove(publicationToRemove);
 
             return $"Publication with Id - {id} deleted succesufuly!";
@@ -32,7 +32,13 @@
 
         public Publication GetSinglePublication(int id)
         {
-            return this.publications.FirstOrDefault(x => x.Id == id);
+            var result = this.publications.FirstOrDefault(x => x.Id == id);
+            if (result == null)
+            {
+                throw new InvalidOperationException("Publiaction not found!");
+            }
+
+            return result;
         }
     }
 }
