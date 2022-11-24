@@ -1,7 +1,7 @@
 ﻿namespace BookShop.Application.Publications.Queries.GetPublication
 {
     using BookShop.Application.Contracts;
-    using BookShop.Application.Publications.Queries;
+    using BookShop.Application.Publications;
     using MediatR;
 
     public class GetPublicationsHandler : IRequestHandler<GetPublicationsQuery, IEnumerable<PublicationViewModel>>

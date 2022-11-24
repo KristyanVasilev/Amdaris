@@ -1,5 +1,6 @@
 ﻿namespace BookShop.Application.Publications.Queries.GetSinglePublication
 {
+    using BookShop.Application.Publications;
     using MediatR;
 
     public class GetSinglePublicationQuery : IRequest<PublicationViewModel>
