@@ -2,7 +2,7 @@
 {
     using MediatR;
 
-    public class CreateGameCommand : BaseProductModel, IRequest<int>
+    public class CreateGameCommand : BaseProductDto, IRequest<int>
     {
         public string Manufacturer { get; set; } = null!;
 

@@ -2,7 +2,7 @@
 {
     using MediatR;
 
-    public class CreateBagCommand : BaseProductModel, IRequest<int>
+    public class CreateBagCommand : BaseProductDto, IRequest<int>
     {
         public string Color { get; set; } = null!;
 

@@ -1,6 +1,6 @@
 ﻿namespace BookShop.Application
 {
-    public class BaseProductModel
+    public class BaseProductDto
     {
         public int Id { get; set; }
 

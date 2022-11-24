@@ -2,7 +2,7 @@
 {
     using MediatR;
 
-    public class CreateUtensilsCommand : BaseProductModel, IRequest<int>
+    public class CreateUtensilsCommand : BaseProductDto, IRequest<int>
     {
         public string Color { get; set; } = null!;
 

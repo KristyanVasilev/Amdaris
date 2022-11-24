@@ -2,7 +2,7 @@
 {
     using MediatR;
 
-    public class CreatePublicationCommand : BaseProductModel, IRequest<int>
+    public class CreatePublicationCommand : BaseProductDto, IRequest<int>
     {
         public string Author { get; set; } = null!;
 
