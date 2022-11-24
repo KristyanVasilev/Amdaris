@@ -1,5 +1,6 @@
 ﻿namespace BookShop.Application.Publications.Commands.CreatePublication
 {
+    using BookShop.Application.Contracts;
     using BookShop.Domain.Publications;
     using MediatR;
 

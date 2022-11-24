@@ -1,5 +1,6 @@
 ﻿namespace BookShop.Application.Games.Commands.CreateGame
 {
+    using BookShop.Application.Contracts;
     using BookShop.Domain.Hobbies;
     using BookShop.Domain.Hobbies.Enums;
     using MediatR;

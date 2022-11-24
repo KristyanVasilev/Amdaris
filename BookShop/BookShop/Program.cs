@@ -1,7 +1,7 @@
 ﻿namespace BookShop
 {
-    using BookShop.Application;
     using BookShop.Application.Bags.Commands.CreateBag;
+    using BookShop.Application.Contracts;
     using BookShop.Application.Games.Commands.CreateGame;
     using BookShop.Application.Notebooks.Commands.CreateNotebook;
     using BookShop.Application.Publications.Commands.CreatePublication;

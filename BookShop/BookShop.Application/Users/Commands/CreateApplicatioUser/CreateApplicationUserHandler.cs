@@ -1,5 +1,6 @@
 ﻿namespace BookShop.Application.Users.Commands.CreateApplicatioUser
 {
+    using BookShop.Application.Contracts;
     using BookShop.Domain.ApplicationUser;
     using MediatR;
 

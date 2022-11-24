@@ -1,5 +1,6 @@
 ﻿namespace BookShop.Application.Publications.Queries.GetPublication
 {
+    using BookShop.Application.Contracts;
     using BookShop.Application.Publications.Queries;
     using MediatR;
 

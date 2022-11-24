@@ -1,5 +1,4 @@
-﻿
-namespace BookShop.Application
+﻿namespace BookShop.Application.Contracts
 {
     using BookShop.Domain.ForSchool.WritingAndDrawing;
 

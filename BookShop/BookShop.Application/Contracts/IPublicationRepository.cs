@@ -1,4 +1,4 @@
-﻿namespace BookShop.Application
+﻿namespace BookShop.Application.Contracts
 {
     using BookShop.Domain.Publications;
 

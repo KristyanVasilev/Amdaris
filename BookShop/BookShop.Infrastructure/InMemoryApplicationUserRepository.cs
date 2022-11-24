@@ -1,6 +1,6 @@
 ﻿namespace BookShop.Infrastructure
 {
-    using BookShop.Application;
+    using BookShop.Application.Contracts;
     using BookShop.Domain.ApplicationUser;
 
     public class InMemoryApplicationUserRepository : IApplicationUserRepository

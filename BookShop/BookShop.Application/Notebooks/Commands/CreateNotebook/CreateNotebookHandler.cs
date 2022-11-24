@@ -3,6 +3,7 @@
     using BookShop.Domain.ForSchool.Notebooks.Enums;
     using BookShop.Domain.ForSchool.Notebooks;
     using MediatR;
+    using BookShop.Application.Contracts;
 
     public class CreateNotebookHandler : IRequestHandler<CreateNotebookCommand, int>
     {

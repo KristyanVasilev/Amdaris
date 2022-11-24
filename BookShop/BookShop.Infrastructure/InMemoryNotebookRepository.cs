@@ -1,9 +1,8 @@
-﻿using BookShop.Application;
-using BookShop.Domain.ForSchool.Notebooks;
-using BookShop.Domain.Hobbies;
-
-namespace BookShop.Infrastructure
+﻿namespace BookShop.Infrastructure
 {
+    using BookShop.Application.Contracts;
+    using BookShop.Domain.ForSchool.Notebooks;
+
     public class InMemoryNotebookRepository : INotebookRepository
     {
         private readonly List<Notebook> notebooks;
