@@ -6,5 +6,11 @@
     {
 
         void CreateUtensil(WritingUtensil utensil);
+
+        string DeleteUtensil(int id);
+
+        WritingUtensil GetSingleUtensil(int id);
+
+        IEnumerable<WritingUtensil> GetUtensils();
     }
 }

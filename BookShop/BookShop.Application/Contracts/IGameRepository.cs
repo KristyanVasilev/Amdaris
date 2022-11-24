@@ -11,6 +11,5 @@
         Game GetSingleGame(int id);
 
         IEnumerable<Game> GetGames();
-
     }
 }
