@@ -9,5 +9,7 @@
         IEnumerable<Publication> GetPublications();
 
         Publication GetSinglePublication(int id);
+
+        string DeletePublication(int id);
     }
 }

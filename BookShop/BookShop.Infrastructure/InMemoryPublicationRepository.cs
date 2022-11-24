@@ -14,7 +14,15 @@
 
         public void CreatePublication(Publication publication)
         {
-           this.publications.Add(publication);
+            this.publications.Add(publication);
+        }
+
+        public string DeletePublication(int id)
+        {
+            var publicationToRemove = GetSinglePublication(id);
+            this.publications.Remove(publicationToRemove);
+
+            return $"Publication with Id - {id} deleted succesufuly!";
         }
 
         public IEnumerable<Publication> GetPublications()
