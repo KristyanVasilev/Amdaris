@@ -14,4 +14,8 @@
 	  <ProjectReference Include="..\Data\BookShop.Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="WritingUtensils\Queries\GetUtensils\" />
+	</ItemGroup>
+
 </Project>

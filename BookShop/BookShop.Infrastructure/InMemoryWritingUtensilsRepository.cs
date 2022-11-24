@@ -23,7 +23,7 @@
             var utensilToRemove = GetSingleUtensil(id);
             this.writingUtensil.Remove(utensilToRemove);
 
-            return $"Game with Id - {id} deleted succesufuly!";
+            return $"Utensil with Id - {id} deleted succesufuly!";
         }
 
         public IEnumerable<WritingUtensil> GetUtensils()
