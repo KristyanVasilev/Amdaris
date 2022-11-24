@@ -1,6 +1,6 @@
 ﻿namespace BookShop.Application.Publications
 {
-    public class PublicationViewModel : BaseProductDto
+    public class PublicationDto : BaseProductDto
     {
         public string Author { get; set; } = null!;
 

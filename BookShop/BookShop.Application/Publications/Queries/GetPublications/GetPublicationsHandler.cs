@@ -4,7 +4,7 @@
     using BookShop.Application.Publications;
     using MediatR;
 
-    public class GetPublicationsHandler : IRequestHandler<GetPublicationsQuery, IEnumerable<PublicationViewModel>>
+    public class GetPublicationsHandler : IRequestHandler<GetPublicationsQuery, IEnumerable<PublicationDto>>
     {
         private readonly IPublicationRepository repository;
 
@@ -13,9 +13,9 @@
             this.repository = repository;
         }
 
-        public Task<IEnumerable<PublicationViewModel>> Handle(GetPublicationsQuery request, CancellationToken cancellationToken)
+        public Task<IEnumerable<PublicationDto>> Handle(GetPublicationsQuery request, CancellationToken cancellationToken)
         {
-            var result = this.repository.GetPublications().Select(publication => new PublicationViewModel
+            var result = this.repository.GetPublications().Select(publication => new PublicationDto
             {
                 Id = publication.Id,
                 Name = publication.Name,

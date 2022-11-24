@@ -4,7 +4,7 @@
     using BookShop.Application.Publications;
     using MediatR;
 
-    public class GetSinglePublicationHandler : IRequestHandler<GetSinglePublicationQuery, PublicationViewModel>
+    public class GetSinglePublicationHandler : IRequestHandler<GetSinglePublicationQuery, PublicationDto>
     {
 
         private readonly IPublicationRepository repository;
@@ -14,11 +14,11 @@
             this.repository = repository;
         }
 
-        public Task<PublicationViewModel> Handle(GetSinglePublicationQuery request, CancellationToken cancellationToken)
+        public Task<PublicationDto> Handle(GetSinglePublicationQuery request, CancellationToken cancellationToken)
         {
             var publication = this.repository.GetSinglePublication(request.Id);
 
-            var result = new PublicationViewModel
+            var result = new PublicationDto
             {
                 Id = publication.Id,
                 Name = publication.Name,

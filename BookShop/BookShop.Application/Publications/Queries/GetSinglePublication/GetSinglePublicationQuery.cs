@@ -3,7 +3,7 @@
     using BookShop.Application.Publications;
     using MediatR;
 
-    public class GetSinglePublicationQuery : IRequest<PublicationViewModel>
+    public class GetSinglePublicationQuery : IRequest<PublicationDto>
     {
         public int Id { get; set; }
         public GetSinglePublicationQuery(int id)

@@ -3,7 +3,7 @@
     using BookShop.Application.Publications;
     using MediatR;
 
-    public class GetPublicationsQuery : IRequest<IEnumerable<PublicationViewModel>>
+    public class GetPublicationsQuery : IRequest<IEnumerable<PublicationDto>>
     {
     }
 }
