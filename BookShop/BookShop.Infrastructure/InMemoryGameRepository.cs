@@ -17,5 +17,29 @@
         {
             this.games.Add(game);
         }
+
+        public string DeleteGame(int id)
+        {
+            var gameToRemove = GetSingleGame(id);
+            this.games.Remove(gameToRemove);
+
+            return $"Game with Id - {id} deleted succesufuly!";
+        }
+
+        public IEnumerable<Game> GetGames()
+        {
+            return this.games;
+        }
+
+        public Game GetSingleGame(int id)
+        {
+            var result = this.games.FirstOrDefault(x => x.Id == id);
+            if (result == null)
+            {
+                throw new InvalidOperationException("Game not found!");
+            }
+
+            return result;
+        }
     }
 }
