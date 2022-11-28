@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BookShop.Domain;
+using BookShop.Domain.Publications;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -14,5 +16,7 @@ namespace BookShop.Infrastructure
         {
 
         }
+
+
     }
 }
