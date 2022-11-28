@@ -1,20 +1,30 @@
 ﻿namespace BookShop.Application.Games.Commands.DeleteGame
 {
-    using BookShop.Application.Contracts;
+    using BookShop.Application.Repositories;
+    using BookShop.Domain;
     using MediatR;
 
     public class DeleteGameHandler : IRequestHandler<DeleteGameCommand, string>
     {
-        private readonly IGameRepository repository;
+        private readonly IDeletableEntityRepository<Game> repository;
 
-        public DeleteGameHandler(IGameRepository repository)
+        public DeleteGameHandler(IDeletableEntityRepository<Game> repository)
         {
             this.repository = repository;
         }
 
-        public Task<string> Handle(DeleteGameCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeleteGameCommand request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(this.repository.DeleteGame(request.Id));
+            var game = this.repository.AllAsNoTracking().FirstOrDefault(x => x.Id == request.Id);
+            if (game == null)
+            {
+                throw new InvalidOperationException("Game cannot be null!");
+            }
+
+            this.repository.Delete(game);
+            await this.repository.SaveChangesAsync();
+
+            return await Task.FromResult($"Publication with id - {game.Id} deleted successfully!");
         }
     }
 }

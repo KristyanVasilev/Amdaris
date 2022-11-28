@@ -1,30 +1,31 @@
 ﻿namespace BookShop.Application.Games.Queries.GetGames
 {
-    using BookShop.Application.Contracts;
+    using BookShop.Application.Repositories;
+    using BookShop.Domain;
     using MediatR;
 
     public class GetGamesHandler : IRequestHandler<GetGamesQuery, IEnumerable<GameDto>>
     {
-        private readonly IGameRepository repository;
+        private readonly IDeletableEntityRepository<Game> repository;
 
-        public GetGamesHandler(IGameRepository repository)
+        public GetGamesHandler(IDeletableEntityRepository<Game> repository)
         {
             this.repository = repository;
         }
 
-        public Task<IEnumerable<GameDto>> Handle(GetGamesQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<GameDto>> Handle(GetGamesQuery request, CancellationToken cancellationToken)
         {
-            var result = this.repository.GetGames().Select(game => new GameDto
+            var result = this.repository.AllAsNoTracking().Select(game => new GameDto
             {
                 Id = game.Id,
                 Name = game.Name,
                 Price = game.Price,
                 Description = game.Description,
                 Manufacturer = game.Manufacturer,
-                GameType = game.GameType.ToString(),
+                GameType = game.Genre.Name,
             });
 
-            return Task.FromResult(result);
+            return await Task.FromResult(result);
         }
     }
 }

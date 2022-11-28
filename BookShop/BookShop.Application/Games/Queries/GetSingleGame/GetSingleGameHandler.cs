@@ -1,20 +1,21 @@
 ﻿namespace BookShop.Application.Games.Queries.GetSingleGame
 {
-    using BookShop.Application.Contracts;
+    using BookShop.Application.Repositories;
+    using BookShop.Domain;
     using MediatR;
 
     public class GetSingleGameHandler : IRequestHandler<GetSingleGameQuery, GameDto>
     {
-        private readonly IGameRepository repository;
+        private readonly IDeletableEntityRepository<Game> repository;
 
-        public GetSingleGameHandler(IGameRepository repository)
+        public GetSingleGameHandler(IDeletableEntityRepository<Game> repository)
         {
             this.repository = repository;
         }
 
-        public Task<GameDto> Handle(GetSingleGameQuery request, CancellationToken cancellationToken)
+        public async Task<GameDto> Handle(GetSingleGameQuery request, CancellationToken cancellationToken)
         {
-            var game = this.repository.GetSingleGame(request.Id);
+            var game = this.repository.AllAsNoTracking().FirstOrDefault(x => x.Id == request.Id);
 
             var result = new GameDto
             {
@@ -23,10 +24,10 @@
                 Price = game.Price,
                 Description = game.Description,
                 Manufacturer = game.Manufacturer,
-                GameType = game.GameType.ToString(),
+                GameType = game.Genre.Name,
             };
 
-            return Task.FromResult(result);
+            return await Task.FromResult(result);
         }
     }
 }

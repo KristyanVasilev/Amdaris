@@ -1,23 +1,21 @@
 ﻿namespace BookShop.Application.Games.Commands.CreateGame
 {
-    using BookShop.Application.Contracts;
-    using BookShop.Domain.Hobbies;
-    using BookShop.Domain.Hobbies.Enums;
+    using BookShop.Application.Repositories;
+    using BookShop.Domain;
     using MediatR;
 
     public class CreateGamehandler : IRequestHandler<CreateGameCommand, int>
     {
-        private readonly IGameRepository repository;
+        private readonly IDeletableEntityRepository<Game> repository;
 
-        public CreateGamehandler(IGameRepository repository)
+        public CreateGamehandler(IDeletableEntityRepository<Game> repository)
         {
             this.repository = repository;
         }
 
-        public Task<int> Handle(CreateGameCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateGameCommand request, CancellationToken cancellationToken)
         {
-            var isEnumParsed = Enum.TryParse(request.GameType, true, out GameType parsedEnumValue);
-            Console.WriteLine(isEnumParsed ? parsedEnumValue : throw new InvalidOperationException("Invalid enum type!"));
+            var genre = new Genre { Name = request.Genre.Name };
 
             var game = new Game
             {
@@ -26,12 +24,13 @@
                 Name = request.Name,
                 Description= request.Description,
                 Manufacturer= request.Manufacturer,
-                GameType = parsedEnumValue,
+                Genre = genre,
             };
 
-            this.repository.CreateGame(game);
+            await this.repository.AddAsync(game);
+            await this.repository.SaveChangesAsync();
 
-            return Task.FromResult(game.Id);
+            return await Task.FromResult(game.Id);
         }
     }
 }
