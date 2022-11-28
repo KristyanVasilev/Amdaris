@@ -1,17 +1,21 @@
 ﻿namespace BookShop.Domain
 {
-    public class Order
+    using BookShop.Domain.Models;
+
+    public class Order : BaseDeletableModel<int>
     {
         public Order()
         {
-            this.Products = new List<Product>();
+            this.ProductsIds = new HashSet<int>();
         }
 
-        public int Id { get; set; }
+        public string UserId { get; set; }
 
-        public int UserId {get; set; }
+        public ApplicationUser User { get; set; }
 
-        public ICollection<Product> Products { get; set; }
+        public ICollection<int> ProductsIds { get; set; }
+
+        public decimal Price { get; set; }
 
         public bool IsCompleted { get; set; }
     }

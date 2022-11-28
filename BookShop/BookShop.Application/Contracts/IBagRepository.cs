@@ -1,6 +1,6 @@
 ﻿namespace BookShop.Application.Contracts
 {
-    using BookShop.Domain.ForSchool.Bags;
+    using BookShop.Domain;
 
     public interface IBagRepository
     {

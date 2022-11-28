@@ -1,7 +1,7 @@
 ﻿namespace BookShop.Infrastructure
 {
     using BookShop.Application.Contracts;
-    using BookShop.Domain.ForSchool.Bags;
+    using BookShop.Domain;
     using System.Collections.Generic;
 
     public class InMemoryBagRepository : IBagRepository

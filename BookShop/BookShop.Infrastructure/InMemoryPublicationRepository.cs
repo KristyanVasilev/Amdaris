@@ -1,7 +1,7 @@
 ﻿namespace BookShop.Infrastructure
 {
     using BookShop.Application.Contracts;
-    using BookShop.Domain.Publications;
+    using BookShop.Domain;
 
     public class InMemoryPublicationRepository : IPublicationRepository
     {

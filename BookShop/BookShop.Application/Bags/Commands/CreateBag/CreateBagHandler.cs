@@ -1,8 +1,8 @@
 ﻿namespace BookShop.Application.Bags.Commands.CreateBag
 {
     using BookShop.Application.Contracts;
+    using BookShop.Domain;
     using BookShop.Domain.ForSchool.Bags;
-    using BookShop.Domain.ForSchool.Bags.Enums;
     using MediatR;
 
     public class CreateBagHandler : IRequestHandler<CreateBagCommand, int>

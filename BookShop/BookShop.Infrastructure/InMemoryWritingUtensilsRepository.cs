@@ -1,7 +1,7 @@
 ﻿namespace BookShop.Infrastructure
 {
     using BookShop.Application.Contracts;
-    using BookShop.Domain.ForSchool.WritingAndDrawing;
+    using BookShop.Domain;
 
     public class InMemoryWritingUtensilsRepository : IWritingUtensilsRepository
     {

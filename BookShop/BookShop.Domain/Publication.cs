@@ -1,7 +1,13 @@
-﻿namespace BookShop.Domain.Publications
+﻿namespace BookShop.Domain
 {
-    public class Publication : Product
+    using BookShop.Domain.Models;
+
+    public class Publication : BaseDeletableModel<int>
     {
+        public string Name { get; set; } = null!;
+
+        public decimal Price { get; set; }
+
         public string Author { get; set; } = null!;
 
         public int PageCount { get; set; }
@@ -10,7 +16,7 @@
 
         public string Description { get; set; } = null!;
 
-        public PublicationType PublicationType { get; set; }
+        public int GenreId { get; set; }
 
         public Genre Genre { get; set; } = null!;
     }

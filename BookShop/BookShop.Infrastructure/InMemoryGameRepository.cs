@@ -1,7 +1,7 @@
 ﻿namespace BookShop.Infrastructure
 {
     using BookShop.Application.Contracts;
-    using BookShop.Domain.Hobbies;
+    using BookShop.Domain;
 
     public class InMemoryGameRepository : IGameRepository
     {

@@ -1,6 +1,6 @@
 ﻿namespace BookShop.Application.Contracts
 {
-    using BookShop.Domain.Hobbies;
+    using BookShop.Domain;
 
     public interface IGameRepository
     {
