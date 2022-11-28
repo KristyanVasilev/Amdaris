@@ -1,4 +1,6 @@
+using BookShop.Application.Repositories;
 using BookShop.Infrastructure;
+using BookShop.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 
 //builder.Services.AddMediatR(typeof(CreateProduct));
+
+// Data repositories
+builder.Services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
+builder.Services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 
 var app = builder.Build();
 

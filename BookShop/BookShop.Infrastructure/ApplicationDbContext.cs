@@ -1,22 +1,26 @@
-﻿using BookShop.Domain;
-using BookShop.Domain.Publications;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BookShop.Infrastructure
+﻿namespace BookShop.Infrastructure
 {
-    public class ApplicationDbContext : DbContext
+      using BookShop.Domain;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions options) : base(options)
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
         }
-         
 
+        public DbSet<Game> Games { get; set; }
+
+        public DbSet<Genre> Genres { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<Publication> Publications { get; set; }
+
+        public DbSet<WritingUtensil> WritingUtensils { get; set; }
+
+        public DbSet<WritingUtensilsType> WritingUtensilstypes { get; set; }
     }
 }
