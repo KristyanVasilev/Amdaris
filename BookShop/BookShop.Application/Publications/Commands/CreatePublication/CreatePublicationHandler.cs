@@ -1,23 +1,21 @@
 ﻿namespace BookShop.Application.Publications.Commands.CreatePublication
 {
-    using BookShop.Application.Contracts;
-    using BookShop.Domain.Publications;
+    using BookShop.Application.Repositories;
+    using BookShop.Domain;
     using MediatR;
 
     public class CreatePublicationHandler : IRequestHandler<CreatePublicationCommand, int>
     {
-        private readonly IPublicationRepository repository;
+        private readonly IDeletableEntityRepository<Publication> repository;
 
-        public CreatePublicationHandler(IPublicationRepository repository)
+        public CreatePublicationHandler(IDeletableEntityRepository<Publication> repository)
         {
             this.repository = repository;
         }
 
-        public Task<int> Handle(CreatePublicationCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreatePublicationCommand request, CancellationToken cancellationToken)
         {
-            var genre = new Genre { Name = request.Genre.Name };
-            var isEnumParsed = Enum.TryParse(request.PublicationType, true, out PublicationType parsedEnumValue);
-            Console.WriteLine(isEnumParsed ? parsedEnumValue : throw new InvalidOperationException("Invalid enum type! The type should be Book, Magazine, Comics, Dictionary, TextBook."));
+            var genre = new Genre { Name = request.Genre.Name };            
 
             var publication = new Publication
             {
@@ -28,13 +26,13 @@
                 PageCount = request.PageCount,
                 Rating = request.Rating,
                 Description = request.Description,
-                PublicationType = parsedEnumValue,
                 Genre = genre,
             };
 
-            this.repository.CreatePublication(publication);
+            await this.repository.AddAsync(publication);
+            await this.repository.SaveChangesAsync();
 
-            return Task.FromResult(publication.Id);
+            return await Task.FromResult(publication.Id);
         }
     }
 }

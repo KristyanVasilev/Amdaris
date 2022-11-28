@@ -1,22 +1,23 @@
 ﻿namespace BookShop.Application.Publications.Queries.GetSinglePublication
 {
-    using BookShop.Application.Contracts;
     using BookShop.Application.Publications;
+    using BookShop.Application.Repositories;
+    using BookShop.Domain;
     using MediatR;
 
     public class GetSinglePublicationHandler : IRequestHandler<GetSinglePublicationQuery, PublicationDto>
     {
 
-        private readonly IPublicationRepository repository;
+        private readonly IDeletableEntityRepository<Publication> repository;
 
-        public GetSinglePublicationHandler(IPublicationRepository repository)
+        public GetSinglePublicationHandler(IDeletableEntityRepository<Publication> repository)
         {
             this.repository = repository;
         }
 
-        public Task<PublicationDto> Handle(GetSinglePublicationQuery request, CancellationToken cancellationToken)
+        public async Task<PublicationDto> Handle(GetSinglePublicationQuery request, CancellationToken cancellationToken)
         {
-            var publication = this.repository.GetSinglePublication(request.Id);
+            var publication = this.repository.AllAsNoTracking().FirstOrDefault(x => x.Id == request.Id);
 
             var result = new PublicationDto
             {
@@ -27,11 +28,10 @@
                 PageCount = publication.PageCount,
                 Rating = publication.Rating,
                 Description = publication.Description,
-                PublicationType = publication.PublicationType.ToString(),
                 Genre = publication.Genre.Name,
             };
 
-            return Task.FromResult(result);
+            return await Task.FromResult(result);
         }
     }
 }

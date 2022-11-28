@@ -1,4 +1,4 @@
-﻿namespace BookShop.Application.Publications.Commands.CreatePublication
+﻿namespace BookShop.Application
 {
     using BookShop.Domain;
 

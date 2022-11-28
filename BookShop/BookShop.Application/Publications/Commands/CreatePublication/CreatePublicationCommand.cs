@@ -1,5 +1,6 @@
 ﻿namespace BookShop.Application.Publications.Commands.CreatePublication
 {
+    using BookShop.Application;
     using MediatR;
 
     public class CreatePublicationCommand : BaseProductDto, IRequest<int>

@@ -10,8 +10,6 @@
 
         public string Description { get; set; } = null!;
 
-        public string PublicationType { get; set; } = null!;
-
         public string Genre { get; set; } = null!;
     }
 }
