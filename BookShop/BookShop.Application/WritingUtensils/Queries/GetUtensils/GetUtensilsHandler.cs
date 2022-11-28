@@ -1,20 +1,21 @@
 ﻿namespace BookShop.Application.WritingUtensils.Queries.GetUtensils
 {
-    using BookShop.Application.Contracts;
+    using BookShop.Application.Repositories;
+    using BookShop.Domain;
     using MediatR;
 
     public class GetUtensilsHandler : IRequestHandler<GetUtensilsQuery, IEnumerable<WritingUtensilDto>>
     {
-        private readonly IWritingUtensilsRepository repository;
+        private readonly IDeletableEntityRepository<WritingUtensil> repository;
 
-        public GetUtensilsHandler(IWritingUtensilsRepository repository)
+        public GetUtensilsHandler(IDeletableEntityRepository<WritingUtensil> repository)
         {
             this.repository = repository;
         }
 
-        public Task<IEnumerable<WritingUtensilDto>> Handle(GetUtensilsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<WritingUtensilDto>> Handle(GetUtensilsQuery request, CancellationToken cancellationToken)
         {
-            var result = this.repository.GetUtensils().Select(utensil => new WritingUtensilDto
+            var result = this.repository.AllAsNoTracking().Select(utensil => new WritingUtensilDto
             {
                 Id = utensil.Id,
                 Name = utensil.Name,
@@ -24,7 +25,7 @@
                 WritingUtensilsType = utensil.WritingUtensilsType.Name,
             });
 
-            return Task.FromResult(result);
+            return await Task.FromResult(result);
         }
     }
 }

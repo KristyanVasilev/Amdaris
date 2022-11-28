@@ -1,19 +1,19 @@
 ﻿namespace BookShop.Application.WritingUtensils.Commands.CreateUtensils
 {
-    using BookShop.Application.Contracts;
-    using BookShop.Domain.ForSchool.WritingAndDrawing;
+    using BookShop.Application.Repositories;
+    using BookShop.Domain;
     using MediatR;
 
     public class CreateUtensilsHandler : IRequestHandler<CreateUtensilsCommand, int>
     {
-        private readonly IWritingUtensilsRepository repository;
+        private readonly IDeletableEntityRepository<WritingUtensil> repository;
 
-        public CreateUtensilsHandler(IWritingUtensilsRepository repository)
+        public CreateUtensilsHandler(IDeletableEntityRepository<WritingUtensil> repository)
         {
             this.repository = repository;
         }
 
-        public Task<int> Handle(CreateUtensilsCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateUtensilsCommand request, CancellationToken cancellationToken)
         {
             var untensilType = new WritingUtensilsType { Name = request.WritingUtensilsType.Name };
 
@@ -27,9 +27,10 @@
                 WritingUtensilsType = untensilType,
             };
 
-            this.repository.CreateUtensil(utensil);
+            await this.repository.AddAsync(utensil);
+            await this.repository.SaveChangesAsync();
 
-            return Task.FromResult(utensil.Id);
+            return await Task.FromResult(utensil.Id);
         }
     }
 }

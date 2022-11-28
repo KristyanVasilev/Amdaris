@@ -1,20 +1,30 @@
 ﻿namespace BookShop.Application.WritingUtensils.Commands.DeleteUtensils
 {
-    using BookShop.Application.Contracts;
+    using BookShop.Application.Repositories;
+    using BookShop.Domain;
     using MediatR;
 
     public class DeleteUtensilHandler : IRequestHandler<DeleteUtensilCommand, string>
     {
-        private readonly IWritingUtensilsRepository repository;
+        private readonly IDeletableEntityRepository<WritingUtensil> repository;
 
-        public DeleteUtensilHandler(IWritingUtensilsRepository repository)
+        public DeleteUtensilHandler(IDeletableEntityRepository<WritingUtensil> repository)
         {
             this.repository = repository;
         }
 
-        public Task<string> Handle(DeleteUtensilCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeleteUtensilCommand request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(this.repository.DeleteUtensil(request.Id));
+            var utensil = this.repository.AllAsNoTracking().FirstOrDefault(x => x.Id == request.Id);
+            if (utensil == null)
+            {
+                throw new InvalidOperationException("Utensil cannot be null!");
+            }
+
+            this.repository.Delete(utensil);
+            await this.repository.SaveChangesAsync();
+
+            return await Task.FromResult($"Utensil with id - {utensil.Id} deleted successfully!");
         }
     }
 }

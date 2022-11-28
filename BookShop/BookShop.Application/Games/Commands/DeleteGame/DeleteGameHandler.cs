@@ -24,7 +24,7 @@
             this.repository.Delete(game);
             await this.repository.SaveChangesAsync();
 
-            return await Task.FromResult($"Publication with id - {game.Id} deleted successfully!");
+            return await Task.FromResult($"Game with id - {game.Id} deleted successfully!");
         }
     }
 }
