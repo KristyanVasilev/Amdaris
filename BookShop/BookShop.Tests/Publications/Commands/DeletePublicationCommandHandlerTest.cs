@@ -25,9 +25,9 @@
 
             var result = await handler.Handle(new DeletePublicationCommand { Id = 1 }, CancellationToken.None);
 
-            var count = this.mockRepo.Object.All().Count();
+            var count = this.mockRepo.Object.AllAsNoTracking().Count();
 
-            Assert.True(count == 2);
+            Assert.True(count == 1);
         }
 
         [Fact]

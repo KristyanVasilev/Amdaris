@@ -1,8 +1,9 @@
 ﻿namespace BookShop.Infrastructure
 {
-      using BookShop.Domain;
+    using BookShop.Domain;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
 

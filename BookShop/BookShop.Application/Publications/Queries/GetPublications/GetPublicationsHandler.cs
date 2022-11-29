@@ -28,6 +28,11 @@
                 Genre = publication.Genre.Name,
             });
 
+            if (result.Count() == 0)
+            {
+                throw new InvalidOperationException();
+            }
+
             return await Task.FromResult(result);
         }
     }
