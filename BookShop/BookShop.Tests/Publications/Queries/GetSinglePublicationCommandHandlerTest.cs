@@ -1,6 +1,7 @@
 ﻿namespace BookShop.Tests.Publications.Queries
 {
     using BookShop.Application.Publications;
+    using BookShop.Application.Publications.Commands.DeletePublication;
     using BookShop.Application.Publications.Queries.GetSinglePublication;
     using BookShop.Application.Repositories;
     using BookShop.Domain;
