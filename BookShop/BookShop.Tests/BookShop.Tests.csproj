@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0" />
     <PackageReference Include="MoqMicrosoftConfiguration" Version="1.0.5" />
     <PackageReference Include="Shouldly" Version="4.1.0" />
@@ -21,6 +23,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BookShop.Application\BookShop.Application.csproj" />
+    <ProjectReference Include="..\BookShop.Domain\BookShop.Domain.csproj" />
   </ItemGroup>
 
 </Project>
