@@ -35,6 +35,7 @@
             };
 
             mockRepo.Setup(r => r.All()).Returns(list.AsQueryable());
+            mockRepo.Setup(r => r.AllAsNoTracking()).Returns(list.AsQueryable());
             mockRepo.Setup(r => r.AddAsync(It.IsAny<Publication>()))
                                  .Callback((Publication publication) => list.Add(publication));
 
