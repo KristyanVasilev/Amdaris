@@ -7,8 +7,8 @@
 
     using Moq;
     using Shouldly;
-
     using Xunit;
+
     public class DeletePublicationCommandHandlerTest
     {
         private readonly Mock<IDeletableEntityRepository<Publication>> mockRepo;
