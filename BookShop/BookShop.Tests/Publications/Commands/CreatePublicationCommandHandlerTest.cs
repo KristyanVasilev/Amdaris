@@ -64,11 +64,11 @@
         }
 
         [Fact]
-        public async Task ShouldThrowException()
+        public async Task ShouldThrowNullReferenceExceptionTest()
         {
             var handler = new CreatePublicationHandler(this.mockRepo.Object);
 
-            var ex = Assert.ThrowsAsync<NullReferenceException>(() => handler.Handle(new CreatePublicationCommand(), CancellationToken.None));
+            await Assert.ThrowsAsync<NullReferenceException>(() => handler.Handle(new CreatePublicationCommand(), CancellationToken.None));
         }
     }
 }
