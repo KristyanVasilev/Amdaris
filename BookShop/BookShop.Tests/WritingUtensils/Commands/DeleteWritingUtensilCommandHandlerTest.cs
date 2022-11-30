@@ -28,6 +28,7 @@
             var count = this.mockRepo.Object.AllAsNoTracking().Count();
 
             Assert.True(count == 1);
+            Assert.Equal("Utensil with id - 1 deleted successfully!", result);
         }
 
         [Fact]
