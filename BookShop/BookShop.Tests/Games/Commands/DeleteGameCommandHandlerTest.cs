@@ -28,6 +28,7 @@
             var count = this.mockRepo.Object.AllAsNoTracking().Count();
 
             Assert.True(count == 1);
+            Assert.Equal("Game with id - 1 deleted successfully!", result);
         }
 
         [Fact]
