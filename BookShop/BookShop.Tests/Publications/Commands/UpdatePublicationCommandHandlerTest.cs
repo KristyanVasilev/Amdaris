@@ -38,6 +38,7 @@
             }, CancellationToken.None);
 
             result.ShouldBeOfType<Int32>();
+            Assert.Equal(2, result);
         }
 
         [Fact]
