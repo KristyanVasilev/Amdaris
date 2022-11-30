@@ -20,7 +20,7 @@
             var utensil = this.repository.AllAsNoTracking().FirstOrDefault(x => x.Id == request.Id);
             if (utensil == null)
             {
-                throw new InvalidOperationException("Publication cannot be null!");
+                throw new InvalidOperationException("Utensil cannot be null!");
             }
 
             utensil.Price = request.Price;
