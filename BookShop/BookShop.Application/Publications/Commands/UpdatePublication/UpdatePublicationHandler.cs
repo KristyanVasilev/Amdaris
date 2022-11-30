@@ -15,7 +15,6 @@
 
         public async  Task<int> Handle(UpdatePublicationCommand request, CancellationToken cancellationToken)
         {
-
             var genre = new Genre { Name = request.Genre.Name };
 
             var publication = this.repository.AllAsNoTracking().FirstOrDefault(x => x.Id == request.Id);
