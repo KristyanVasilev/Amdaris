@@ -4,11 +4,11 @@
     using BookShop.Domain;
     using MediatR;
 
-    public class CreateGamehandler : IRequestHandler<CreateGameCommand, int>
+    public class CreateGameHandler : IRequestHandler<CreateGameCommand, int>
     {
         private readonly IDeletableEntityRepository<Game> repository;
 
-        public CreateGamehandler(IDeletableEntityRepository<Game> repository)
+        public CreateGameHandler(IDeletableEntityRepository<Game> repository)
         {
             this.repository = repository;
         }
