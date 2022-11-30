@@ -30,7 +30,8 @@
             publication.Rating = request.Rating;
             publication.Description = request.Description;
             publication.Genre = genre;
-            
+            publication.ModifiedOn = DateTime.UtcNow;
+
             this.repository.Update(publication);
             await this.repository.SaveChangesAsync();
 

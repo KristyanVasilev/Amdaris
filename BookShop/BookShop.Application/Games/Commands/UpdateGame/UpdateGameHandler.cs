@@ -27,6 +27,7 @@
             game.Name = request.Name;
             game.Description = request.Description;
             game.Genre = genre;
+            game.ModifiedOn = DateTime.UtcNow;
 
             this.repository.Update(game);
             await this.repository.SaveChangesAsync();
