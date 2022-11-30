@@ -37,8 +37,7 @@
             }, CancellationToken.None);
 
             var count = this.mockRepo.Object.All().Count();
-            Assert.Equal(this.mockRepo.Object.All().FirstOrDefault(x => x.Id == 1).Id, 1);
-            result.ShouldBeOfType<Int32>();
+            Assert.Equal(1, this.mockRepo.Object.All().FirstOrDefault(x => x.Id == 1).Id);
 
             Assert.True(count == 3);
         }
