@@ -23,7 +23,7 @@
                 },
                 new Game
                 {
-                    Id = 1,
+                    Id = 2,
                     Price = 140,
                     Name = "Monopoly",
                     Manufacturer = "Some genius",
