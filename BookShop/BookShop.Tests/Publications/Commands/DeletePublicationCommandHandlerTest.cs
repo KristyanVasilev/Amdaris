@@ -38,6 +38,7 @@
             var result = await handler.Handle(new DeletePublicationCommand { Id = 1 }, CancellationToken.None);
 
             result.ShouldBeOfType<string>();
+            Assert.Equal("Publication with id - 1 deleted successfully!", result);
         }
 
         [Fact]
