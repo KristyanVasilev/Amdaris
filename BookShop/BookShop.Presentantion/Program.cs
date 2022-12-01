@@ -1,6 +1,8 @@
+using BookShop.Application.Publications.Commands.CreatePublication;
 using BookShop.Application.Repositories;
 using BookShop.Infrastructure;
 using BookShop.Infrastructure.Repositories;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
 
-//builder.Services.AddMediatR(typeof(CreateProduct));
+builder.Services.AddMediatR(typeof(CreatePublicationCommand));
 
 // Data repositories
 builder.Services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));

@@ -19,7 +19,6 @@
 
             var publication = new Publication
             {
-                Id = request.Id,
                 Price = request.Price,
                 Name = request.Name,
                 Author = request.Author,
