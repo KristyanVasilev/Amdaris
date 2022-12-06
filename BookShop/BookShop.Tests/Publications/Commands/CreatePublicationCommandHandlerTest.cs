@@ -13,10 +13,12 @@
     public class CreatePublicationCommandHandlerTest
     {
         private readonly Mock<IDeletableEntityRepository<Publication>> mockRepo;
+        private readonly Mock<IRepository<Genre>> genreMockRepo;
 
         public CreatePublicationCommandHandlerTest()
         {
             this.mockRepo = PublicationMockRepository.GetPublicationMockRepo();
+            this.genreMockRepo = GenreMockRepository.GetGenreMockRepo();
         }
 
         [Fact]
