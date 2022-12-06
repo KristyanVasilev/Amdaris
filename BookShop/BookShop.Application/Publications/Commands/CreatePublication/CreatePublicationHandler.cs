@@ -7,15 +7,22 @@
     public class CreatePublicationHandler : IRequestHandler<CreatePublicationCommand, int>
     {
         private readonly IDeletableEntityRepository<Publication> repository;
+        private readonly IRepository<Genre> genreRepository;
 
-        public CreatePublicationHandler(IDeletableEntityRepository<Publication> repository)
+        public CreatePublicationHandler(
+            IDeletableEntityRepository<Publication> repository,
+            IRepository<Genre> genreRepository)
         {
             this.repository = repository;
+            this.genreRepository = genreRepository;
         }
 
         public async Task<int> Handle(CreatePublicationCommand request, CancellationToken cancellationToken)
         {
-            var genre = new Genre { Name = request.Genre.Name };            
+            var genre = genreRepository
+                        .AllAsNoTracking()
+                        .FirstOrDefault(x => x.Name == request.Name)
+                        ?? new Genre { Name = request.Genre };
 
             var publication = new Publication
             {

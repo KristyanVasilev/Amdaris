@@ -9,15 +9,24 @@
     {
 
         private readonly IDeletableEntityRepository<Publication> repository;
+        private readonly IRepository<Genre> genreRepository;
 
-        public GetSinglePublicationHandler(IDeletableEntityRepository<Publication> repository)
+        public GetSinglePublicationHandler(
+            IDeletableEntityRepository<Publication> repository, 
+            IRepository<Genre> genreRepository)
         {
             this.repository = repository;
+            this.genreRepository = genreRepository;
         }
 
         public async Task<PublicationDto> Handle(GetSinglePublicationQuery request, CancellationToken cancellationToken)
         {
-            var publication = this.repository.AllAsNoTracking().FirstOrDefault(x => x.Id == request.Id);
+            var publication = this.repository
+                                  .AllAsNoTracking()
+                                  .FirstOrDefault(x => x.Id == request.Id)
+                                  ?? throw new InvalidOperationException("Publication not found!");
+
+            var genre = this.genreRepository.AllAsNoTracking().FirstOrDefault(g => g.Id == publication.GenreId);
 
             var result = new PublicationDto
             {
@@ -28,7 +37,7 @@
                 PageCount = publication.PageCount,
                 Rating = publication.Rating,
                 Description = publication.Description,
-                Genre = publication.Genre.Name,
+                Genre = genre.Name ?? "No genre",
             };
 
             return await Task.FromResult(result);

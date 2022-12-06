@@ -1,16 +1,9 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BookShop.Application.Publications.Commands.UpdatePublication
+﻿namespace BookShop.Application.Publications.Commands.UpdatePublication
 {
+    using MediatR;
+
     public class UpdatePublicationCommand : BaseProductDto, IRequest<int>
     {
-        public int Id { get; set; }
-
         public string Author { get; set; } = null!;
 
         public int PageCount { get; set; }
@@ -21,6 +14,6 @@ namespace BookShop.Application.Publications.Commands.UpdatePublication
 
         public string PublicationType { get; set; } = null!;
 
-        public GenreDto Genre { get; set; } = null!;
+        public string Genre { get; set; } = null!;
     }
 }

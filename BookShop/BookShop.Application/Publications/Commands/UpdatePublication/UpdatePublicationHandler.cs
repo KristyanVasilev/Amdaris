@@ -7,21 +7,28 @@
     public class UpdatePublicationHandler : IRequestHandler<UpdatePublicationCommand, int>
     {
         private readonly IDeletableEntityRepository<Publication> repository;
+        private readonly IRepository<Genre> genreRepository;
 
-        public UpdatePublicationHandler(IDeletableEntityRepository<Publication> repository)
+        public UpdatePublicationHandler(
+            IDeletableEntityRepository<Publication> repository,
+            IRepository<Genre> genreRepository)
         {
             this.repository = repository;
+            this.genreRepository = genreRepository;
         }
 
         public async  Task<int> Handle(UpdatePublicationCommand request, CancellationToken cancellationToken)
         {
-            var genre = new Genre { Name = request.Genre.Name };
+            var genre = genreRepository
+                       .AllAsNoTracking()
+                       .FirstOrDefault(x => x.Name == request.Name)
+                       ?? new Genre { Name = request.Genre };
 
-            var publication = this.repository.AllAsNoTracking().FirstOrDefault(x => x.Id == request.Id);
-            if (publication == null)
-            {
-                throw new InvalidOperationException("Publication cannot be null!");
-            }
+            var publication = this.repository
+                                  .AllAsNoTracking()
+                                  .FirstOrDefault(x => x.Id == request.Id)
+                                  ?? throw new InvalidOperationException("Publication not found!");
+
 
             publication.Price = request.Price;
             publication.Name = request.Name;

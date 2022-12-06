@@ -15,16 +15,15 @@
 
         public async Task<string> Handle(DeletePublicationCommand request, CancellationToken cancellationToken)
         {
-            var publication = this.repository.AllAsNoTracking().FirstOrDefault(x => x.Id == request.Id);
-            if (publication == null)
-            {
-                throw new InvalidOperationException("Publication cannot be null!");
-            }
+            var publication = this.repository
+                                  .AllAsNoTracking()
+                                  .FirstOrDefault(x => x.Id == request.Id)
+                                  ?? throw new InvalidOperationException("Publication cannot be null!");
 
             this.repository.Delete(publication);
             await this.repository.SaveChangesAsync();
 
-            return await Task.FromResult($"Publication with id - {publication.Id} deleted successfully!");           
+            return await Task.FromResult($"Publication {publication.Name} with id - {publication.Id} deleted successfully!");
         }
     }
 }
