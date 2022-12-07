@@ -8,6 +8,6 @@
 
         public string Manufacturer { get; set; } = null!;
 
-        public WritingUtensilsTypeDto WritingUtensilsType { get; set; } = null!;
+        public string WritingUtensilsType { get; set; } = null!;
     } 
 }

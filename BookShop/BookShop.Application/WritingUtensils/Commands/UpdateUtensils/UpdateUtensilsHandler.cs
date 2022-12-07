@@ -7,28 +7,36 @@
     public class UpdateUtensilsHandler : IRequestHandler<UpdateUtensilsCommand, int>
     {
         private readonly IDeletableEntityRepository<WritingUtensil> repository;
+        private readonly IRepository<WritingUtensilsType> utensilRepository;
 
-        public UpdateUtensilsHandler(IDeletableEntityRepository<WritingUtensil> repository)
+        public UpdateUtensilsHandler(
+            IDeletableEntityRepository<WritingUtensil> repository,
+            IRepository<WritingUtensilsType> utensilRepository)
         {
             this.repository = repository;
+            this.utensilRepository = utensilRepository;
         }
 
         public async Task<int> Handle(UpdateUtensilsCommand request, CancellationToken cancellationToken)
         {
-            var type = new WritingUtensilsType { Name = request.WritingUtensilsType };
+            var type = this.utensilRepository
+                           .AllAsNoTracking()
+                           .FirstOrDefault(x => x.Name == request.WritingUtensilsType)
+                           ?? new WritingUtensilsType { Name = request.WritingUtensilsType, CreatedOn = DateTime.UtcNow };
 
-            var utensil = this.repository.AllAsNoTracking().FirstOrDefault(x => x.Id == request.Id);
-            if (utensil == null)
-            {
-                throw new InvalidOperationException("Utensil cannot be null!");
-            }
+            var utensil = this.repository
+                              .AllAsNoTracking()
+                              .FirstOrDefault(x => x.Id == request.Id)
+                              ?? throw new InvalidOperationException("Utensil cannot be null!");
 
             utensil.Price = request.Price;
             utensil.Name = request.Name;
             utensil.Manufacturer = request.Manufacturer;
             utensil.Color = request.Color;
-            utensil.WritingUtensilsType = type;
             utensil.ModifiedOn = DateTime.UtcNow;
+
+            if (type.Id == 0) utensil.WritingUtensilsType = type;
+            else utensil.WritingUtensilTypeId = type.Id;
 
             this.repository.Update(utensil);
             await this.repository.SaveChangesAsync();

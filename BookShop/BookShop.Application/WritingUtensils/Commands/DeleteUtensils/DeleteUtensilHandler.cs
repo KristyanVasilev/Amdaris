@@ -15,16 +15,15 @@
 
         public async Task<string> Handle(DeleteUtensilCommand request, CancellationToken cancellationToken)
         {
-            var utensil = this.repository.AllAsNoTracking().FirstOrDefault(x => x.Id == request.Id);
-            if (utensil == null)
-            {
-                throw new InvalidOperationException("Utensil cannot be null!");
-            }
+            var utensil = this.repository
+                              .AllAsNoTracking()
+                              .FirstOrDefault(x => x.Id == request.Id)
+                              ?? throw new InvalidOperationException("Utensil cannot be null!");
 
             this.repository.Delete(utensil);
             await this.repository.SaveChangesAsync();
 
-            return await Task.FromResult($"Utensil with id - {utensil.Id} deleted successfully!");
+            return await Task.FromResult($"Utensil {utensil.Name} with id - {utensil.Id} deleted successfully!");
         }
     }
 }

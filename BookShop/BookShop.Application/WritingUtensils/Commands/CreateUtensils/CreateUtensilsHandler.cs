@@ -7,15 +7,22 @@
     public class CreateUtensilsHandler : IRequestHandler<CreateUtensilsCommand, int>
     {
         private readonly IDeletableEntityRepository<WritingUtensil> repository;
+        private readonly IRepository<WritingUtensilsType> utensilRepository;
 
-        public CreateUtensilsHandler(IDeletableEntityRepository<WritingUtensil> repository)
+        public CreateUtensilsHandler(
+            IDeletableEntityRepository<WritingUtensil> repository, 
+            IRepository<WritingUtensilsType> utensilRepository)
         {
             this.repository = repository;
+            this.utensilRepository = utensilRepository;
         }
 
         public async Task<int> Handle(CreateUtensilsCommand request, CancellationToken cancellationToken)
         {
-            var untensilType = new WritingUtensilsType { Name = request.WritingUtensilsType.Name };
+            var type = this.utensilRepository
+                            .AllAsNoTracking()
+                            .FirstOrDefault(x => x.Name == request.WritingUtensilsType)
+                            ?? new WritingUtensilsType { Name = request.WritingUtensilsType, CreatedOn = DateTime.UtcNow };
 
             var utensil = new WritingUtensil
             {
@@ -24,8 +31,12 @@
                 Name = request.Name,
                 Color = request.Color,
                 Manufacturer = request.Manufacturer,
-                WritingUtensilsType = untensilType,
+                WritingUtensilsType = type,
+                CreatedOn = DateTime.UtcNow,
             };
+
+            if (type.Id == 0) utensil.WritingUtensilsType = type;
+            else utensil.WritingUtensilTypeId = type.Id;
 
             await this.repository.AddAsync(utensil);
             await this.repository.SaveChangesAsync();
