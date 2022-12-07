@@ -37,7 +37,7 @@
                 PageCount = publication.PageCount,
                 Rating = publication.Rating,
                 Description = publication.Description,
-                Genre = genre.Name ?? "No genre",
+                Genre = genre?.Name ?? "No genre",
             };
 
             return await Task.FromResult(result);

@@ -1,6 +1,5 @@
 ﻿namespace BookShop.Tests.Publications.Commands
 {
-    using BookShop.Application;
     using BookShop.Application.Publications.Commands.CreatePublication;
     using BookShop.Application.Repositories;
     using BookShop.Domain;
@@ -24,22 +23,25 @@
         [Fact]
         public async Task CreatePublicationTest()
         {
-            var handler = new CreatePublicationHandler(this.mockRepo.Object);
+            var handler = new CreatePublicationHandler(this.mockRepo.Object, this.genreMockRepo.Object);
 
             var result = await handler.Handle(new CreatePublicationCommand
             {
-                Id = 2,
+                Id = 3,
                 Price = 10,
-                Name = "The Boys from Biloxi",
+                Name = "Harry Potter",
                 Author = "Grisham",
                 PageCount = 400,
                 Description = "Some description",
-                Genre = new GenreDto { Name = "Horror" },
+                Genre = "Horror",
                 PublicationType = "Book",
             }, CancellationToken.None);
 
             var count = this.mockRepo.Object.All().Count();
-            Assert.Equal(1, this.mockRepo.Object.All().FirstOrDefault(x => x.Id == 1).Id);
+            var publication = this.mockRepo.Object.AllAsNoTracking().Skip(2).First();
+
+            Assert.Equal("Harry Potter", publication.Name);
+            Assert.Equal(10, publication.Price);
 
             Assert.True(count == 3);
         }
@@ -47,29 +49,21 @@
         [Fact]
         public async Task ShouldReturnIntTest()
         {
-            var handler = new CreatePublicationHandler(this.mockRepo.Object);
+            var handler = new CreatePublicationHandler(this.mockRepo.Object, this.genreMockRepo.Object);
 
             var result = await handler.Handle(new CreatePublicationCommand
             {
-                Id = 2,
+                Id = 3,
                 Price = 10,
-                Name = "The Boys from Biloxi",
+                Name = "Harry Potter",
                 Author = "Grisham",
                 PageCount = 400,
                 Description = "Some description",
-                Genre = new GenreDto { Name = "Horror" },
+                Genre = "Horror",
                 PublicationType = "Book",
             }, CancellationToken.None);
 
             result.ShouldBeOfType<Int32>();
-        }
-
-        [Fact]
-        public async Task ShouldThrowNullReferenceExceptionTest()
-        {
-            var handler = new CreatePublicationHandler(this.mockRepo.Object);
-
-            await Assert.ThrowsAsync<NullReferenceException>(() => handler.Handle(new CreatePublicationCommand(), CancellationToken.None));
         }
     }
 }

@@ -13,59 +13,66 @@
     public class UpdatePublicationCommandHandlerTest
     {
         private readonly Mock<IDeletableEntityRepository<Publication>> mockRepo;
+        private readonly Mock<IRepository<Genre>> genreMockRepo;
+
 
         public UpdatePublicationCommandHandlerTest()
         {
             this.mockRepo = PublicationMockRepository.GetPublicationMockRepo();
+            this.genreMockRepo = GenreMockRepository.GetGenreMockRepo();
+
         }
 
 
         [Fact]
         public async Task ShouldReturnIntTest()
         {
-            var handler = new UpdatePublicationHandler(this.mockRepo.Object);
+            var handler = new UpdatePublicationHandler(this.mockRepo.Object, this.genreMockRepo.Object);
 
             var result = await handler.Handle(new UpdatePublicationCommand
             {
-                Id = 2,
-                Price = 10234423,
-                Name = "The Boys from Biloxi",
+                Id = 1,
+                Price = 10,
+                Name = "Harry Potter",
                 Author = "Grisham",
-                PageCount = 423400,
+                PageCount = 400,
                 Description = "Some description",
-                Genre = new GenreDto { Name = "Horror" },
+                Genre = "Horror",
                 PublicationType = "Book",
             }, CancellationToken.None);
 
             result.ShouldBeOfType<Int32>();
-            Assert.Equal(2, result);
+            Assert.Equal(1, result);
         }
 
         [Fact]
         public async Task ShouldThrowNullReferenceExceptionTest()
         {
-            var handler = new UpdatePublicationHandler(this.mockRepo.Object);
+            var handler = new UpdatePublicationHandler(this.mockRepo.Object, this.genreMockRepo.Object);
 
-            await Assert.ThrowsAsync<NullReferenceException>(() => handler.Handle(new UpdatePublicationCommand(), CancellationToken.None));
+            await Assert.ThrowsAsync<InvalidOperationException>(() => handler.Handle(new UpdatePublicationCommand(), CancellationToken.None));
         }
 
         [Fact]
         public async Task UpdatePublicationTest()
         {
-            var handler = new UpdatePublicationHandler(this.mockRepo.Object);
+            var handler = new UpdatePublicationHandler(this.mockRepo.Object, this.genreMockRepo.Object);
 
             var result = await handler.Handle(new UpdatePublicationCommand
             {
                 Id = 1,
-                Price = 10000,
-                Name = "The Boys from Biloxi",
+                Price = 10,
+                Name = "Harry Potter",
                 Author = "Grisham",
                 PageCount = 400,
-                Description = "Some description",
-                Genre = new GenreDto { Name = "Horror" },
+                Description = "Edited description",
+                Genre = "Horror",
                 PublicationType = "Book",
             }, CancellationToken.None);
-            Assert.Equal(10000, this.mockRepo.Object.All().FirstOrDefault(x => x.Id == 1).Price);         
+
+            Assert.Equal(10, this.mockRepo.Object.All().First().Price);
+            Assert.Equal("Harry Potter", this.mockRepo.Object.All().First().Name);
+            Assert.Equal("Edited description", this.mockRepo.Object.All().First().Description);
         }
     }
 }

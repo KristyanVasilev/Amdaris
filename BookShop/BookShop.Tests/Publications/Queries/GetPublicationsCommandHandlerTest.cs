@@ -50,9 +50,8 @@
 
             for (int i = 1; i < 3; i++)
             {
-                var deleteResult = await deleteHandler.Handle(new DeletePublicationCommand { Id = i },
+                var deleteResult = await deleteHandler.Handle(new DeletePublicationCommand(i),
                     CancellationToken.None);
-
             }
 
             await Assert.ThrowsAsync<InvalidOperationException>(() =>

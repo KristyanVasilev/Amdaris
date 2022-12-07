@@ -21,8 +21,8 @@
         {
             var genre = genreRepository
                         .AllAsNoTracking()
-                        .FirstOrDefault(x => x.Name == request.Name)
-                        ?? new Genre { Name = request.Genre };
+                        .FirstOrDefault(x => x.Name == request.Genre)
+                        ?? new Genre { Name = request.Genre, CreatedOn = DateTime.UtcNow };
 
             var publication = new Publication
             {
@@ -32,7 +32,8 @@
                 PageCount = request.PageCount,
                 Rating = request.Rating,
                 Description = request.Description,
-                Genre = genre,
+                GenreId= genre.Id,
+                CreatedOn = DateTime.UtcNow,
             };
 
             await this.repository.AddAsync(publication);

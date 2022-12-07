@@ -23,7 +23,7 @@
         {
             var handler = new DeletePublicationHandler(this.mockRepo.Object);
 
-            var result = await handler.Handle(new DeletePublicationCommand { Id = 1 }, CancellationToken.None);
+            var result = await handler.Handle(new DeletePublicationCommand(1), CancellationToken.None);
 
             var count = this.mockRepo.Object.AllAsNoTracking().Count();
 
@@ -35,10 +35,10 @@
         {
             var handler = new DeletePublicationHandler(this.mockRepo.Object);
 
-            var result = await handler.Handle(new DeletePublicationCommand { Id = 1 }, CancellationToken.None);
+            var result = await handler.Handle(new DeletePublicationCommand(2), CancellationToken.None);
 
             result.ShouldBeOfType<string>();
-            Assert.Equal("Publication with id - 1 deleted successfully!", result);
+            Assert.Equal("Publication Test with id - 2 deleted successfully!", result);
         }
 
         [Fact]
@@ -46,14 +46,14 @@
         {
             var handler = new DeletePublicationHandler(this.mockRepo.Object);
 
-            var firstDelete = await handler.Handle(new DeletePublicationCommand { Id = 1 }, CancellationToken.None);
+            var firstDelete = await handler.Handle(new DeletePublicationCommand(1), CancellationToken.None);
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            handler.Handle(new DeletePublicationCommand { Id = 12312 }, CancellationToken.None));
+            handler.Handle(new DeletePublicationCommand(1234), CancellationToken.None));
 
-            var SecondDelete = await handler.Handle(new DeletePublicationCommand { Id = 2 }, CancellationToken.None);
+            var SecondDelete = await handler.Handle(new DeletePublicationCommand(2), CancellationToken.None);
 
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            handler.Handle(new DeletePublicationCommand { Id = 3 }, CancellationToken.None));
+            handler.Handle(new DeletePublicationCommand(1), CancellationToken.None));
         }
     }
 }

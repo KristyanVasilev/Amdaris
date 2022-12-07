@@ -13,16 +13,19 @@
     public class GetSinglePublicationCommandHandlerTest
     {
         private readonly Mock<IDeletableEntityRepository<Publication>> mockRepo;
+        private readonly Mock<IRepository<Genre>> genreMockRepo;
+
 
         public GetSinglePublicationCommandHandlerTest()
         {
             this.mockRepo = PublicationMockRepository.GetPublicationMockRepo();
+            this.genreMockRepo = GenreMockRepository.GetGenreMockRepo();
         }
 
         [Fact]
         public async Task GetSinglePublicationTest()
         {
-            var handler = new GetSinglePublicationHandler(this.mockRepo.Object);
+            var handler = new GetSinglePublicationHandler(this.mockRepo.Object, this.genreMockRepo.Object);
 
             var result = await handler.Handle(new GetSinglePublicationQuery(1), CancellationToken.None);
 
@@ -32,7 +35,7 @@
         [Fact]
         public async Task ShouldntChangeRepoCountTest()
         {
-            var handler = new GetSinglePublicationHandler(this.mockRepo.Object);
+            var handler = new GetSinglePublicationHandler(this.mockRepo.Object, this.genreMockRepo.Object);
 
             var result = await handler.Handle(new GetSinglePublicationQuery(1), CancellationToken.None);
 
@@ -44,9 +47,9 @@
         [Fact]
         public async Task ShouldThrowNullReferenceExceptionTest()
         {
-            var handler = new GetSinglePublicationHandler(this.mockRepo.Object);
+            var handler = new GetSinglePublicationHandler(this.mockRepo.Object, this.genreMockRepo.Object);
 
-            await Assert.ThrowsAsync<NullReferenceException>(() =>
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
             handler.Handle(new GetSinglePublicationQuery(12321), CancellationToken.None));
         }
     }
