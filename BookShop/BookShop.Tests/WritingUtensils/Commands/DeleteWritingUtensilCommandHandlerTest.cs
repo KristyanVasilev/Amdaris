@@ -19,16 +19,16 @@
         }
 
         [Fact]
-        public async Task DeletePublicationTest()
+        public async Task DeleteUtensilTest()
         {
             var handler = new DeleteUtensilHandler(this.mockRepo.Object);
 
-            var result = await handler.Handle(new DeleteUtensilCommand { Id = 1 }, CancellationToken.None);
+            var result = await handler.Handle(new DeleteUtensilCommand(1), CancellationToken.None);
 
             var count = this.mockRepo.Object.AllAsNoTracking().Count();
 
             Assert.True(count == 1);
-            Assert.Equal("Utensil with id - 1 deleted successfully!", result);
+            Assert.Equal("Utensil Pen with id - 1 deleted successfully!", result);
         }
 
         [Fact]
@@ -36,7 +36,7 @@
         {
             var handler = new DeleteUtensilHandler(this.mockRepo.Object);
 
-            var result = await handler.Handle(new DeleteUtensilCommand { Id = 1 }, CancellationToken.None);
+            var result = await handler.Handle(new DeleteUtensilCommand(1), CancellationToken.None);
 
             result.ShouldBeOfType<string>();
         }
@@ -46,14 +46,14 @@
         {
             var handler = new DeleteUtensilHandler(this.mockRepo.Object);
 
-            var firstDelete = await handler.Handle(new DeleteUtensilCommand { Id = 1 }, CancellationToken.None);
+            var firstDelete = await handler.Handle(new DeleteUtensilCommand(1), CancellationToken.None);
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            handler.Handle(new DeleteUtensilCommand { Id = 12312 }, CancellationToken.None));
+            handler.Handle(new DeleteUtensilCommand(12312), CancellationToken.None));
 
-            var SecondDelete = await handler.Handle(new DeleteUtensilCommand { Id = 2 }, CancellationToken.None);
+            var SecondDelete = await handler.Handle(new DeleteUtensilCommand(2), CancellationToken.None);
 
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            handler.Handle(new DeleteUtensilCommand { Id = 3 }, CancellationToken.None));
+            handler.Handle(new DeleteUtensilCommand(1), CancellationToken.None));
         }
     }
 }

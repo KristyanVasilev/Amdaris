@@ -13,16 +13,18 @@
     public class GetSingleWritingUtensilCommandHandlerTest
     {
         private readonly Mock<IDeletableEntityRepository<WritingUtensil>> mockRepo;
+        private readonly Mock<IRepository<WritingUtensilsType>> typeMockRepo;
 
         public GetSingleWritingUtensilCommandHandlerTest()
         {
             this.mockRepo = WritingUtensilMockRepository.GetWritingUtensilMockRepo();
+            this.typeMockRepo = WritingUtensilTypeMockRepository.GetWritingUtensilTypeMockRepo();
         }
 
         [Fact]
         public async Task GetSingleWritingUtensilTest()
         {
-            var handler = new GetSingleUtensilHandler(this.mockRepo.Object);
+            var handler = new GetSingleUtensilHandler(this.mockRepo.Object, this.typeMockRepo.Object);
 
             var result = await handler.Handle(new GetSingleUtensilQuery(1), CancellationToken.None);
 
@@ -32,7 +34,7 @@
         [Fact]
         public async Task ShouldntChangeRepoCountTest()
         {
-            var handler = new GetSingleUtensilHandler(this.mockRepo.Object);
+            var handler = new GetSingleUtensilHandler(this.mockRepo.Object, this.typeMockRepo.Object);
 
             var result = await handler.Handle(new GetSingleUtensilQuery(1), CancellationToken.None);
 
@@ -42,11 +44,11 @@
         }
 
         [Fact]
-        public async Task ShouldThrowNullReferenceExceptionTest()
+        public async Task ShouldThrowInvalidOperationExceptionTest()
         {
-            var handler = new GetSingleUtensilHandler(this.mockRepo.Object);
+            var handler = new GetSingleUtensilHandler(this.mockRepo.Object, this.typeMockRepo.Object);
 
-            await Assert.ThrowsAsync<NullReferenceException>(() =>
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
             handler.Handle(new GetSingleUtensilQuery(12321), CancellationToken.None));
         }
     }

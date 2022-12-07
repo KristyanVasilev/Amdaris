@@ -43,14 +43,14 @@
         }
 
         [Fact]
-        public async Task ShouldThrowNullReferenceExceptionTest()
+        public async Task ShouldThrowInvalidOperationExceptionTest()
         {
             var handler = new GetUtensilsHandler(this.mockRepo.Object);
             var deleteHandler = new DeleteUtensilHandler(this.mockRepo.Object);
 
             for (int i = 1; i < 3; i++)
             {
-                var deleteResult = await deleteHandler.Handle(new DeleteUtensilCommand { Id = i },
+                var deleteResult = await deleteHandler.Handle(new DeleteUtensilCommand(i),
                     CancellationToken.None);
             }
 

@@ -12,16 +12,18 @@
     public class CreateWritingUtensilCommandHandlerTest
     {
         private readonly Mock<IDeletableEntityRepository<WritingUtensil>> mockRepo;
+        private readonly Mock<IRepository<WritingUtensilsType>> typeMockRepo;
 
         public CreateWritingUtensilCommandHandlerTest()
         {
             this.mockRepo = WritingUtensilMockRepository.GetWritingUtensilMockRepo();
+            this.typeMockRepo = WritingUtensilTypeMockRepository.GetWritingUtensilTypeMockRepo();
         }
 
         [Fact]
         public async Task CreateWritingUtensilTest()
         {
-            var handler = new CreateUtensilsHandler(this.mockRepo.Object);
+            var handler = new CreateUtensilsHandler(this.mockRepo.Object, this.typeMockRepo.Object);
 
             var result = await handler.Handle(new CreateUtensilsCommand
             {
@@ -30,11 +32,14 @@
                 Name = "Marker",
                 Manufacturer = "Orange",
                 Color = "red",
-                WritingUtensilsType = new WritingUtensilsTypeDto { Name = "Marker" },
+                WritingUtensilsType = "Marker",
             }, CancellationToken.None);
 
             var count = this.mockRepo.Object.All().Count();
-            Assert.Equal(1, this.mockRepo.Object.All().FirstOrDefault(x => x.Id == 1).Id);
+            var utensil = this.mockRepo.Object.AllAsNoTracking().Skip(2).First();
+
+            Assert.Equal("Marker", utensil.Name);
+            Assert.Equal(40, utensil.Price);
 
             Assert.True(count == 3);
         }
@@ -42,7 +47,7 @@
         [Fact]
         public async Task ShouldReturnIntTest()
         {
-            var handler = new CreateUtensilsHandler(this.mockRepo.Object);
+            var handler = new CreateUtensilsHandler(this.mockRepo.Object, this.typeMockRepo.Object);
 
             var result = await handler.Handle(new CreateUtensilsCommand
             {
@@ -51,18 +56,10 @@
                 Name = "Marker",
                 Manufacturer = "Orange",
                 Color = "red",
-                WritingUtensilsType = new WritingUtensilsTypeDto { Name = "Marker" },
+                WritingUtensilsType = "Marker",
             }, CancellationToken.None);
 
             result.ShouldBeOfType<Int32>();
-        }
-
-        [Fact]
-        public async Task ShouldThrowNullReferenceExceptionTest()
-        {
-            var handler = new CreateUtensilsHandler(this.mockRepo.Object);
-
-            await Assert.ThrowsAsync<NullReferenceException>(() => handler.Handle(new CreateUtensilsCommand(), CancellationToken.None));
         }
     }
 }

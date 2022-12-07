@@ -23,7 +23,6 @@
 
         }
 
-
         [Fact]
         public async Task ShouldReturnIntTest()
         {
@@ -46,7 +45,7 @@
         }
 
         [Fact]
-        public async Task ShouldInvalidOperationExceptionTest()
+        public async Task ShouldThrowInvalidOperationExceptionTest()
         {
             var handler = new UpdatePublicationHandler(this.mockRepo.Object, this.genreMockRepo.Object);
 

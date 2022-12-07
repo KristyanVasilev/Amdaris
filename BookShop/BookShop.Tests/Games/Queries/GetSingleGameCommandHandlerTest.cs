@@ -44,7 +44,7 @@
         }
 
         [Fact]
-        public async Task ShouldInvalidOperationExceptionTest()
+        public async Task ShouldThrowInvalidOperationExceptionTest()
         {
             var handler = new GetSingleGameHandler(this.mockRepo.Object, this.genreMockRepo.Object);
 

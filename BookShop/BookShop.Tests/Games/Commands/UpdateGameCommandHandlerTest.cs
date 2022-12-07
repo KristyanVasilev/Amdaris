@@ -40,7 +40,7 @@
         }
 
         [Fact]
-        public async Task ShouldInvalidOperationExceptionTest()
+        public async Task ShouldThrowInvalidOperationExceptionTest()
         {
             var handler = new UpdateGameHandler(this.mockRepo.Object, this.genreMockRepo.Object);
 

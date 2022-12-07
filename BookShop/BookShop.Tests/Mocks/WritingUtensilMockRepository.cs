@@ -1,7 +1,6 @@
 ﻿namespace BookShop.Tests.Mocks
 {
     using BookShop.Application.Repositories;
-    using BookShop.Application.WritingUtensils.Commands.CreateUtensils;
     using BookShop.Domain;
     using Moq;
 
@@ -20,7 +19,7 @@
                    Name = "Pen",
                    Manufacturer = "Orange",
                    Color = "red",
-                   WritingUtensilsType = new WritingUtensilsTypeDto { Name = "Pen" },
+                   WritingUtensilsType = new WritingUtensilsType { Name = "Pen" },
                 },
                 new WritingUtensil
                 {
@@ -29,7 +28,7 @@
                    Name = "Marker",
                    Manufacturer = "Orange",
                    Color = "red",
-                   WritingUtensilsType = new WritingUtensilsTypeDto { Name = "Marker" },                  
+                   WritingUtensilsType = new WritingUtensilsType { Name = "Pencil" },                  
                 },
             };
 

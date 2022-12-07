@@ -43,7 +43,7 @@
         }
 
         [Fact]
-        public async Task ShouldInvalidOperationExceptionTest()
+        public async Task ShouldThrowInvalidOperationExceptionTest()
         {
             var handler = new GetPublicationsHandler(this.mockRepo.Object);
             var deleteHandler = new DeletePublicationHandler(this.mockRepo.Object);
