@@ -79,7 +79,7 @@
 
         [HttpGet]
         [Route("delete")]
-        public async Task<IActionResult> DeletePublications(int id)
+        public async Task<IActionResult> DeletePublication(int id)
         {
             var command = new DeletePublicationCommand(id);
 

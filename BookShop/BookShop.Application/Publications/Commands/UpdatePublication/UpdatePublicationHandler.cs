@@ -19,16 +19,15 @@
 
         public async  Task<int> Handle(UpdatePublicationCommand request, CancellationToken cancellationToken)
         {
-            var genre = genreRepository
-                       .AllAsNoTracking()
-                       .FirstOrDefault(x => x.Name == request.Name)
-                       ?? new Genre { Name = request.Genre };
+            var genre = this.genreRepository
+                            .AllAsNoTracking()
+                            .FirstOrDefault(x => x.Name == request.Genre)
+                            ?? new Genre { Name = request.Genre, CreatedOn = DateTime.UtcNow };
 
             var publication = this.repository
                                   .AllAsNoTracking()
                                   .FirstOrDefault(x => x.Id == request.Id)
                                   ?? throw new InvalidOperationException("Publication not found!");
-
 
             publication.Price = request.Price;
             publication.Name = request.Name;
@@ -36,8 +35,10 @@
             publication.PageCount = request.PageCount;
             publication.Rating = request.Rating;
             publication.Description = request.Description;
-            publication.Genre = genre;
             publication.ModifiedOn = DateTime.UtcNow;
+
+            if (genre.Id == 0) publication.Genre = genre;
+            else publication.GenreId = genre.Id;
 
             this.repository.Update(publication);
             await this.repository.SaveChangesAsync();

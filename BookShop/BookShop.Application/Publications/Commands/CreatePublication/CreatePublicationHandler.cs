@@ -32,9 +32,11 @@
                 PageCount = request.PageCount,
                 Rating = request.Rating,
                 Description = request.Description,
-                GenreId= genre.Id,
                 CreatedOn = DateTime.UtcNow,
             };
+
+            if (genre.Id == 0) publication.Genre = genre;
+            else publication.GenreId = genre.Id;
 
             await this.repository.AddAsync(publication);
             await this.repository.SaveChangesAsync();
