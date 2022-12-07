@@ -1,6 +1,5 @@
 ﻿namespace BookShop.Tests.Games.Commands
 {
-    using BookShop.Application;
     using BookShop.Application.Games.Commands.UpdateGame;
     using BookShop.Application.Repositories;
     using BookShop.Domain;
@@ -13,16 +12,18 @@
     public class UpdateGameCommandHandlerTest
     {
         private readonly Mock<IDeletableEntityRepository<Game>> mockRepo;
+        private readonly Mock<IRepository<Genre>> genreMockRepo;
 
         public UpdateGameCommandHandlerTest()
         {
             this.mockRepo = GameMockRepository.GetGameMockRepo();
+            this.genreMockRepo = GenreMockRepository.GetGenreMockRepo();
         }
 
         [Fact]
         public async Task ShouldReturnIntTest()
         {
-            var handler = new UpdateGameHandler(this.mockRepo.Object);
+            var handler = new UpdateGameHandler(this.mockRepo.Object, this.genreMockRepo.Object);
 
             var result = await handler.Handle(new UpdateGameCommand
             {
@@ -31,7 +32,7 @@
                 Name = "Europolia",
                 Manufacturer = "Some genius",
                 Description = "Some description",
-                Genre = new GenreDto { Name = "Strategy" },
+                Genre = "Strategy",
             }, CancellationToken.None);
 
             result.ShouldBeOfType<Int32>();
@@ -39,29 +40,31 @@
         }
 
         [Fact]
-        public async Task ShouldThrowNullReferenceExceptionTest()
+        public async Task ShouldInvalidOperationExceptionTest()
         {
-            var handler = new UpdateGameHandler(this.mockRepo.Object);
+            var handler = new UpdateGameHandler(this.mockRepo.Object, this.genreMockRepo.Object);
 
-            await Assert.ThrowsAsync<NullReferenceException>(() => handler.Handle(new UpdateGameCommand(), CancellationToken.None));
+            await Assert.ThrowsAsync<InvalidOperationException>(() => handler.Handle(new UpdateGameCommand(), CancellationToken.None));
         }
 
         [Fact]
-        public async Task UpdatePublicationTest()
+        public async Task UpdateGameTest()
         {
-            var handler = new UpdateGameHandler(this.mockRepo.Object);
+            var handler = new UpdateGameHandler(this.mockRepo.Object, this.genreMockRepo.Object);
 
             var result = await handler.Handle(new UpdateGameCommand
             {
-
                 Id = 1,
-                Price = 14032,
-                Name = "Europolia",
+                Price = 14,
+                Name = "Fifa",
                 Manufacturer = "Some genius",
-                Description = "Some description",
-                Genre = new GenreDto { Name = "Strategy" },
+                Description = "Edited description",
+                Genre = "Strategy",
             }, CancellationToken.None);
-            Assert.Equal(14032, this.mockRepo.Object.All().FirstOrDefault(x => x.Id == 1).Price);
+
+            Assert.Equal(14, this.mockRepo.Object.All().First().Price);
+            Assert.Equal("Fifa", this.mockRepo.Object.All().First().Name);
+            Assert.Equal("Edited description", this.mockRepo.Object.All().First().Description);
         }
     }
 }

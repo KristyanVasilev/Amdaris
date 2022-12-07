@@ -45,7 +45,7 @@
         }
 
         [Fact]
-        public async Task ShouldThrowNullReferenceExceptionTest()
+        public async Task ShouldInvalidOperationExceptionTest()
         {
             var handler = new GetSinglePublicationHandler(this.mockRepo.Object, this.genreMockRepo.Object);
 

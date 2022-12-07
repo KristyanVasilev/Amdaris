@@ -23,12 +23,12 @@
         {
             var handler = new DeleteGameHandler(this.mockRepo.Object);
 
-            var result = await handler.Handle(new DeleteGameCommand { Id = 1 }, CancellationToken.None);
+            var result = await handler.Handle(new DeleteGameCommand(1), CancellationToken.None);
 
             var count = this.mockRepo.Object.AllAsNoTracking().Count();
 
             Assert.True(count == 1);
-            Assert.Equal("Game with id - 1 deleted successfully!", result);
+            Assert.Equal("Game Chess with id - 1 deleted successfully!", result);
         }
 
         [Fact]
@@ -36,7 +36,7 @@
         {
             var handler = new DeleteGameHandler(this.mockRepo.Object);
 
-            var result = await handler.Handle(new DeleteGameCommand { Id = 1 }, CancellationToken.None);
+            var result = await handler.Handle(new DeleteGameCommand(1), CancellationToken.None);
 
             result.ShouldBeOfType<string>();
         }
@@ -46,14 +46,14 @@
         {
             var handler = new DeleteGameHandler(this.mockRepo.Object);
 
-            var firstDelete = await handler.Handle(new DeleteGameCommand { Id = 1 }, CancellationToken.None);
+            var firstDelete = await handler.Handle(new DeleteGameCommand(1), CancellationToken.None);
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            handler.Handle(new DeleteGameCommand { Id = 12312 }, CancellationToken.None));
+            handler.Handle(new DeleteGameCommand(12131), CancellationToken.None));
 
-            var SecondDelete = await handler.Handle(new DeleteGameCommand { Id = 2 }, CancellationToken.None);
+            var SecondDelete = await handler.Handle(new DeleteGameCommand(2), CancellationToken.None);
 
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            handler.Handle(new DeleteGameCommand { Id = 3 }, CancellationToken.None));
+            handler.Handle(new DeleteGameCommand(1), CancellationToken.None));
         }
     }
 }

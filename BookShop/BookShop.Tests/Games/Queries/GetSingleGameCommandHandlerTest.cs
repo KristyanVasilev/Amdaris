@@ -13,16 +13,18 @@
     public class GetSingleGameCommandHandlerTest
     {
         private readonly Mock<IDeletableEntityRepository<Game>> mockRepo;
+        private readonly Mock<IRepository<Genre>> genreMockRepo;
 
         public GetSingleGameCommandHandlerTest()
         {
             this.mockRepo = GameMockRepository.GetGameMockRepo();
+            this.genreMockRepo = GenreMockRepository.GetGenreMockRepo();
         }
 
         [Fact]
-        public async Task GetSinglePublicationTest()
+        public async Task GetSingleGameTest()
         {
-            var handler = new GetSingleGameHandler(this.mockRepo.Object);
+            var handler = new GetSingleGameHandler(this.mockRepo.Object, this.genreMockRepo.Object);
 
             var result = await handler.Handle(new GetSingleGameQuery(1), CancellationToken.None);
 
@@ -32,7 +34,7 @@
         [Fact]
         public async Task ShouldntChangeRepoCountTest()
         {
-            var handler = new GetSingleGameHandler(this.mockRepo.Object);
+            var handler = new GetSingleGameHandler(this.mockRepo.Object, this.genreMockRepo.Object);
 
             var result = await handler.Handle(new GetSingleGameQuery(1), CancellationToken.None);
 
@@ -42,11 +44,11 @@
         }
 
         [Fact]
-        public async Task ShouldThrowNullReferenceExceptionTest()
+        public async Task ShouldInvalidOperationExceptionTest()
         {
-            var handler = new GetSingleGameHandler(this.mockRepo.Object);
+            var handler = new GetSingleGameHandler(this.mockRepo.Object, this.genreMockRepo.Object);
 
-            await Assert.ThrowsAsync<NullReferenceException>(() =>
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
             handler.Handle(new GetSingleGameQuery(12321), CancellationToken.None));
         }
     }
