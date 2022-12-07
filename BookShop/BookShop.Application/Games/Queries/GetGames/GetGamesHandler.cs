@@ -22,7 +22,7 @@
                 Price = game.Price,
                 Description = game.Description,
                 Manufacturer = game.Manufacturer,
-                GameType = game.Genre.Name,
+                Genre = game.Genre.Name,
             });
 
             if (result.Count() == 0)
