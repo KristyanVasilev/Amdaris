@@ -15,16 +15,15 @@
 
         public async Task<string> Handle(DeleteGameCommand request, CancellationToken cancellationToken)
         {
-            var game = this.repository.AllAsNoTracking().FirstOrDefault(x => x.Id == request.Id);
-            if (game == null)
-            {
-                throw new InvalidOperationException("Game cannot be null!");
-            }
+            var game = this.repository
+                           .AllAsNoTracking()
+                           .FirstOrDefault(x => x.Id == request.Id)
+                           ?? throw new InvalidOperationException("Game cannot be null!");
 
             this.repository.Delete(game);
             await this.repository.SaveChangesAsync();
 
-            return await Task.FromResult($"Game with id - {game.Id} deleted successfully!");
+            return await Task.FromResult($"Game {game.Name} with id - {game.Id} deleted successfully!");
         }
     }
 }

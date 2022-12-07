@@ -6,6 +6,6 @@
 
         public string Description { get; set; } = null!;
 
-        public string GameType { get; set; } = null!;
+        public string Genre { get; set; } = null!;
     }
 }
