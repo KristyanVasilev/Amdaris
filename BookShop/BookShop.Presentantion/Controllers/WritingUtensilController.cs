@@ -25,9 +25,6 @@
         [Route("create")]
         public async Task<IActionResult> CreateUtensil([FromBody] UtensilDto utensil)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             var command = new CreateUtensilsCommand
             {
                 Name = utensil.Name,
@@ -96,9 +93,6 @@
         [Route("update")]
         public async Task<IActionResult> UpdateUtensil([FromBody] UtensilDto utensil, int id)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             var command = new UpdateUtensilsCommand
             {
                 Id = id,

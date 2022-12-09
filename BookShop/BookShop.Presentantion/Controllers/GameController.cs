@@ -5,10 +5,6 @@
     using BookShop.Application.Games.Commands.UpdateGame;
     using BookShop.Application.Games.Queries.GetGames;
     using BookShop.Application.Games.Queries.GetSingleGame;
-    using BookShop.Application.Publications.Commands.DeletePublication;
-    using BookShop.Application.Publications.Commands.UpdatePublication;
-    using BookShop.Application.Publications.Queries.GetPublication;
-    using BookShop.Application.Publications.Queries.GetSinglePublication;
     using BookShop.Presentantion.Dto;
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
@@ -28,9 +24,6 @@
         [Route("create")]
         public async Task<IActionResult> CreateGame([FromBody] GameDto game)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             var command = new CreateGameCommand
             {
                 Name = game.Name,
@@ -99,9 +92,6 @@
         [Route("update")]
         public async Task<IActionResult> UpdateGame([FromBody] GameDto game, int id)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             var command = new UpdateGameCommand
             {
                 Id = id,

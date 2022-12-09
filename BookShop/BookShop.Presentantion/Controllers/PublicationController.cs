@@ -25,9 +25,6 @@
         [Route("create")]
         public async Task<IActionResult> CreatePublication([FromBody] PublicationDto publication)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             var command = new CreatePublicationCommand
             {
                 Name = publication.Name,
@@ -98,9 +95,6 @@
         [Route("update")]
         public async Task<IActionResult> UpdatePublication([FromBody] PublicationDto publication, int id)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             var command = new UpdatePublicationCommand
             {
                 Id = id,
