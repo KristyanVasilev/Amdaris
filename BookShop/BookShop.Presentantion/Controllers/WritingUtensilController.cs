@@ -75,7 +75,7 @@
             };
         }
 
-        [HttpGet]
+        [HttpDelete]
         [Route("delete")]
         public async Task<IActionResult> DeleteUtensil(int id)
         {
@@ -92,7 +92,7 @@
             };
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("update")]
         public async Task<IActionResult> UpdateUtensil([FromBody] UtensilDto utensil, int id)
         {

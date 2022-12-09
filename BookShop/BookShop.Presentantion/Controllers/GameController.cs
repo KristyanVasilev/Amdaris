@@ -78,7 +78,7 @@
             };
         }
 
-        [HttpGet]
+        [HttpDelete]
         [Route("delete")]
         public async Task<IActionResult> DeleteGame(int id)
         {
@@ -95,7 +95,7 @@
             };
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("update")]
         public async Task<IActionResult> UpdateGame([FromBody] GameDto game, int id)
         {

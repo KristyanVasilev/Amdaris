@@ -77,7 +77,7 @@
             };
         }
 
-        [HttpGet]
+        [HttpDelete]
         [Route("delete")]
         public async Task<IActionResult> DeletePublication(int id)
         {
@@ -94,7 +94,7 @@
             };
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("update")]
         public async Task<IActionResult> UpdatePublication([FromBody] PublicationDto publication, int id)
         {
