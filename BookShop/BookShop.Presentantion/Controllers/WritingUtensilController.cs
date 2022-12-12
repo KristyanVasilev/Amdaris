@@ -23,7 +23,7 @@
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> CreateUtensil([FromBody] UtensilDto utensil)
+        public async Task<IActionResult> CreateUtensilAsync([FromBody] UtensilDto utensil)
         {
             var command = new CreateUtensilsCommand
             {
@@ -41,57 +41,37 @@
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetByIdAsync(int id)
         {
             var command = new GetSingleUtensilQuery(id);
-            try
-            {
-                var result = await this.mediator.Send(command);
-                return Ok(result);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
+
+            var result = await this.mediator.Send(command);
+            return Ok(result);
         }
 
         [HttpGet]
         [Route("all")]
-        public async Task<IActionResult> GetUtensils()
+        public async Task<IActionResult> GetUtensilsAsync()
         {
             var command = new GetUtensilsQuery();
 
-            try
-            {
-                var result = await this.mediator.Send(command);
-                return Ok(result);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            };
+            var result = await this.mediator.Send(command);
+            return Ok(result);
         }
 
         [HttpDelete]
         [Route("delete")]
-        public async Task<IActionResult> DeleteUtensil(int id)
+        public async Task<IActionResult> DeleteUtensilAsync(int id)
         {
             var command = new DeleteUtensilCommand(id);
 
-            try
-            {
-                var result = await this.mediator.Send(command);
-                return Ok(result);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            };
+            var result = await this.mediator.Send(command);
+            return Ok(result);
         }
 
         [HttpPut]
         [Route("update")]
-        public async Task<IActionResult> UpdateUtensil([FromBody] UtensilDto utensil, int id)
+        public async Task<IActionResult> UpdateUtensilAsync([FromBody] UtensilDto utensil, int id)
         {
             var command = new UpdateUtensilsCommand
             {
@@ -103,15 +83,8 @@
                 WritingUtensilsType = utensil.WritingUtensilsType,
             };
 
-            try
-            {
-                var result = await this.mediator.Send(command);
-                return Ok(result);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            };
+            var result = await this.mediator.Send(command);
+            return Ok(result);
         }
     }
 }

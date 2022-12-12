@@ -6,6 +6,7 @@
     using BookShop.Application.Games.Queries.GetGames;
     using BookShop.Application.Games.Queries.GetSingleGame;
     using BookShop.Presentantion.Dto;
+
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
 
@@ -22,7 +23,7 @@
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> CreateGame([FromBody] GameDto game)
+        public async Task<IActionResult> CreateGameAsync([FromBody] GameDto game)
         {
             var command = new CreateGameCommand
             {
@@ -30,7 +31,7 @@
                 Price = game.Price,
                 Manufacturer = game.Manufacturer,
                 Description = game.Description,
-                Genre = game.Genre,              
+                Genre = game.Genre,
             };
 
             var result = await this.mediator.Send(command);
@@ -40,57 +41,38 @@
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetByIdAsync(int id)
         {
             var command = new GetSingleGameQuery(id);
-            try
-            {
-                var result = await this.mediator.Send(command);
-                return Ok(result);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
+
+            var result = await this.mediator.Send(command);
+            return Ok(result);
         }
 
         [HttpGet]
         [Route("all")]
-        public async Task<IActionResult> GetGames()
+        public async Task<IActionResult> GetGamesAsync()
         {
             var command = new GetGamesQuery();
 
-            try
-            {
-                var result = await this.mediator.Send(command);
-                return Ok(result);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            };
+            var result = await this.mediator.Send(command);
+            return Ok(result);
+
         }
 
         [HttpDelete]
         [Route("delete")]
-        public async Task<IActionResult> DeleteGame(int id)
+        public async Task<IActionResult> DeleteGameAsync(int id)
         {
             var command = new DeleteGameCommand(id);
 
-            try
-            {
-                var result = await this.mediator.Send(command);
-                return Ok(result);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            };
+            var result = await this.mediator.Send(command);
+            return Ok(result);
         }
 
         [HttpPut]
         [Route("update")]
-        public async Task<IActionResult> UpdateGame([FromBody] GameDto game, int id)
+        public async Task<IActionResult> UpdateGameAsync([FromBody] GameDto game, int id)
         {
             var command = new UpdateGameCommand
             {
@@ -102,15 +84,8 @@
                 Genre = game.Genre,
             };
 
-            try
-            {
-                var result = await this.mediator.Send(command);
-                return Ok(result);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            };
+            var result = await this.mediator.Send(command);
+            return Ok(result);
         }
     }
 }

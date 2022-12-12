@@ -18,12 +18,12 @@
 
         public PublicationController(IMediator mediator)
         {
-            this.mediator= mediator;
+            this.mediator = mediator;
         }
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> CreatePublication([FromBody] PublicationDto publication)
+        public async Task<IActionResult> CreatePublicationAsync([FromBody] PublicationDto publication)
         {
             var command = new CreatePublicationCommand
             {
@@ -43,57 +43,37 @@
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetByIdAsync(int id)
         {
             var command = new GetSinglePublicationQuery(id);
-            try
-            {
-                var result = await this.mediator.Send(command);
-                return Ok(result);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
+
+            var result = await this.mediator.Send(command);
+            return Ok(result);
         }
 
         [HttpGet]
         [Route("all")]
-        public async Task<IActionResult> GetPublications()
+        public async Task<IActionResult> GetPublicationsAsync()
         {
             var command = new GetPublicationsQuery();
 
-            try
-            {
-                var result = await this.mediator.Send(command);
-                return Ok(result);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            };
+            var result = await this.mediator.Send(command);
+            return Ok(result);
         }
 
         [HttpDelete]
         [Route("delete")]
-        public async Task<IActionResult> DeletePublication(int id)
+        public async Task<IActionResult> DeletePublicationAsync(int id)
         {
             var command = new DeletePublicationCommand(id);
 
-            try
-            {
-                var result = await this.mediator.Send(command);
-                return Ok(result);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            };
+            var result = await this.mediator.Send(command);
+            return Ok(result);
         }
 
         [HttpPut]
         [Route("update")]
-        public async Task<IActionResult> UpdatePublication([FromBody] PublicationDto publication, int id)
+        public async Task<IActionResult> UpdatePublicationAsync([FromBody] PublicationDto publication, int id)
         {
             var command = new UpdatePublicationCommand
             {
@@ -107,15 +87,8 @@
                 PublicationType = publication.PublicationType,
             };
 
-            try
-            {
-                var result = await this.mediator.Send(command);
-                return Ok(result);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            };
+            var result = await this.mediator.Send(command);
+            return Ok(result);
         }
     }
 }
