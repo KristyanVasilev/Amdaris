@@ -1,5 +1,6 @@
 ﻿namespace BookShop.Presentantion.Controllers
 {
+    using AutoMapper;
     using BookShop.Application.Publications.Commands.CreatePublication;
     using BookShop.Application.Publications.Commands.DeletePublication;
     using BookShop.Application.Publications.Commands.UpdatePublication;
@@ -15,10 +16,12 @@
     public class PublicationController : ControllerBase
     {
         public readonly IMediator mediator;
+        public readonly IMapper mapper;
 
-        public PublicationController(IMediator mediator)
+        public PublicationController(IMediator mediator, IMapper mapper)
         {
             this.mediator = mediator;
+            this.mapper = mapper;
         }
 
         [HttpPost]
@@ -37,8 +40,9 @@
             };
 
             var result = await this.mediator.Send(command);
+            var mappedResult = this.mapper.Map<PublicationGetDto>(result);
 
-            return Ok(result);
+            return CreatedAtAction(nameof(GetByIdAsync), new { Id = mappedResult.Id }, mappedResult);
         }
 
         [HttpGet]
@@ -48,7 +52,9 @@
             var command = new GetSinglePublicationQuery(id);
 
             var result = await this.mediator.Send(command);
-            return Ok(result);
+            var mappedResult = this.mapper.Map<PublicationGetDto>(result);
+            return Ok(mappedResult);
+            //return Ok(result);
         }
 
         [HttpGet]
