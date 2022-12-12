@@ -36,13 +36,13 @@
                 PageCount = publication.PageCount,
                 Description = publication.Description,
                 Genre = publication.Genre,
-                PublicationType = publication.PublicationType,
             };
 
             var result = await this.mediator.Send(command);
             var mappedResult = this.mapper.Map<PublicationGetDto>(result);
 
-            return CreatedAtAction(nameof(GetByIdAsync), new { Id = mappedResult.Id }, mappedResult);
+            //return CreatedAtAction(nameof(GetByIdAsync), new { Id = mappedResult.Id }, mappedResult);
+            return Ok(mappedResult);
         }
 
         [HttpGet]
@@ -90,7 +90,6 @@
                 PageCount = publication.PageCount,
                 Description = publication.Description,
                 Genre = publication.Genre,
-                PublicationType = publication.PublicationType,
             };
 
             var result = await this.mediator.Send(command);

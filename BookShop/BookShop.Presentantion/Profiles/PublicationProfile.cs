@@ -9,8 +9,8 @@
     {
         public PublicationProfile()
         {
+            CreateMap<Genre, PublicationGenreDto>();
             CreateMap<Publication, PublicationGetDto>();
-            CreateMap<PublicationGetDto, Publication>();
 
         }
     }

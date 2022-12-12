@@ -24,10 +24,6 @@
 
         [Required]
         [StringLength(50, MinimumLength = 3)]
-        public string PublicationType { get; set; } = null!;
-
-        [Required]
-        [StringLength(50, MinimumLength = 3)]
         public string Genre { get; set; } = null!;
     }
 }
