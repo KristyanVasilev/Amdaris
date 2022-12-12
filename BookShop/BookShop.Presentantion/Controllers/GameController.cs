@@ -57,7 +57,6 @@
 
             var result = await this.mediator.Send(command);
             return Ok(result);
-
         }
 
         [HttpDelete]
