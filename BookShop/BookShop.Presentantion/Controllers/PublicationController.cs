@@ -26,7 +26,7 @@
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> CreatePublicationAsync([FromBody] PublicationDto publication)
+        public async Task<IActionResult> CreatePublicationAsync([FromBody] PublicationPutPostDto publication)
         {
             var command = new CreatePublicationCommand
             {
@@ -39,10 +39,7 @@
             };
 
             var result = await this.mediator.Send(command);
-            var mappedResult = this.mapper.Map<PublicationGetDto>(result);
-
-            //return CreatedAtAction(nameof(GetByIdAsync), new { Id = mappedResult.Id }, mappedResult);
-            return Ok(mappedResult);
+            return Ok(result);
         }
 
         [HttpGet]
@@ -54,7 +51,6 @@
             var result = await this.mediator.Send(command);
             var mappedResult = this.mapper.Map<PublicationGetDto>(result);
             return Ok(mappedResult);
-            //return Ok(result);
         }
 
         [HttpGet]
@@ -64,7 +60,8 @@
             var command = new GetPublicationsQuery();
 
             var result = await this.mediator.Send(command);
-            return Ok(result);
+            var mappedResult = this.mapper.Map<List<PublicationGetDto>>(result);
+            return Ok(mappedResult);
         }
 
         [HttpDelete]
@@ -79,7 +76,7 @@
 
         [HttpPut]
         [Route("update")]
-        public async Task<IActionResult> UpdatePublicationAsync([FromBody] PublicationDto publication, int id)
+        public async Task<IActionResult> UpdatePublicationAsync([FromBody] PublicationPutPostDto publication, int id)
         {
             var command = new UpdatePublicationCommand
             {

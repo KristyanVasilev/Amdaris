@@ -4,7 +4,7 @@
     using BookShop.Domain;
     using MediatR;
 
-    public class CreatePublicationHandler : IRequestHandler<CreatePublicationCommand, Publication>
+    public class CreatePublicationHandler : IRequestHandler<CreatePublicationCommand, int>
     {
         private readonly IDeletableEntityRepository<Publication> repository;
         private readonly IRepository<Genre> genreRepository;
@@ -17,7 +17,7 @@
             this.genreRepository = genreRepository;
         }
 
-        public async Task<Publication> Handle(CreatePublicationCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreatePublicationCommand request, CancellationToken cancellationToken)
         {
             var genre = genreRepository
                         .AllAsNoTracking()
@@ -41,7 +41,7 @@
             await this.repository.AddAsync(publication);
             await this.repository.SaveChangesAsync();
 
-            return publication;
+            return publication.Id;
         }
     }
 }

@@ -32,20 +32,20 @@ builder.Services.AddAutoMapper(typeof(AssemblyMarketPresentatio));
 
 var app = builder.Build();
 
-//app.UseExceptionHandler(
-//    options =>
-//    {
-//        options.Run(
-//            async contex =>
-//            {
-//                contex.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-//                var ex = contex.Features.Get<IExceptionHandlerFeature>();
-//                if (ex != null)
-//                {
-//                    await contex.Response.WriteAsync(ex.Error.Message);
-//                }
-//            });
-//    });
+app.UseExceptionHandler(
+    options =>
+    {
+        options.Run(
+            async contex =>
+            {
+                contex.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                var ex = contex.Features.Get<IExceptionHandlerFeature>();
+                if (ex != null)
+                {
+                    await contex.Response.WriteAsync(ex.Error.Message);
+                }
+            });
+    });
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

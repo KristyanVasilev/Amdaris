@@ -22,7 +22,7 @@
         public async Task<PublicationDto> Handle(GetSinglePublicationQuery request, CancellationToken cancellationToken)
         {
             var publication = this.repository
-                                  .AllAsNoTracking()
+                                  .AllAsNoTracking()                                  
                                   .FirstOrDefault(x => x.Id == request.Id)
                                   ?? throw new InvalidOperationException("Publication not found!");
 

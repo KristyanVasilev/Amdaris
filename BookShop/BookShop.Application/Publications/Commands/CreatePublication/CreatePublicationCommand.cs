@@ -4,7 +4,7 @@
     using BookShop.Domain;
     using MediatR;
 
-    public class CreatePublicationCommand : BaseProductDto, IRequest<Publication>
+    public class CreatePublicationCommand : BaseProductDto, IRequest<int>
     {
         public string Author { get; set; } = null!;
 

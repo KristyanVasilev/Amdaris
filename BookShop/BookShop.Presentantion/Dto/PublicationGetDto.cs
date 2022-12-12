@@ -14,6 +14,6 @@
 
         public string Description { get; set; } = null!;
 
-        public PublicationGenreDto GenreName { get; set; } = null!;
+        public string Genre { get; set; } = null!;
     }
 }

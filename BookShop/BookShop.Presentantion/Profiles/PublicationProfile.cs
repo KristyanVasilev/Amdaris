@@ -2,16 +2,13 @@
 {
     using AutoMapper;
     using BookShop.Application.Publications;
-    using BookShop.Domain;
     using BookShop.Presentantion.Dto;
 
     public class PublicationProfile : Profile
     {
         public PublicationProfile()
         {
-            CreateMap<Genre, PublicationGenreDto>();
-            CreateMap<Publication, PublicationGetDto>();
-
+            CreateMap<PublicationDto, PublicationGetDto>();
         }
     }
 }
