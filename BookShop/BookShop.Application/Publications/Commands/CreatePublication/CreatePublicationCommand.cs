@@ -1,9 +1,10 @@
 ﻿namespace BookShop.Application.Publications.Commands.CreatePublication
 {
     using BookShop.Application;
+    using BookShop.Domain;
     using MediatR;
 
-    public class CreatePublicationCommand : BaseProductDto, IRequest<int>
+    public class CreatePublicationCommand : BaseProductDto, IRequest<Publication>
     {
         public string Author { get; set; } = null!;
 
