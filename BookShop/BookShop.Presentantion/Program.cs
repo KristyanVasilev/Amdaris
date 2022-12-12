@@ -3,7 +3,9 @@ using BookShop.Application.Repositories;
 using BookShop.Infrastructure;
 using BookShop.Infrastructure.Repositories;
 using MediatR;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +30,21 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 //builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
+
+app.UseExceptionHandler(
+    options =>
+    {
+        options.Run(
+            async contex =>
+            {
+                contex.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                var ex = contex.Features.Get<IExceptionHandlerFeature>();
+                if (ex != null)
+                {
+                    await contex.Response.WriteAsync(ex.Error.Message);
+                }
+            });
+    });
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
