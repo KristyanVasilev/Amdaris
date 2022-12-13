@@ -1,5 +1,6 @@
 ﻿namespace BookShop.Presentantion.Controllers
 {
+    using AutoMapper;
     using BookShop.Application.WritingUtensils.Commands.CreateUtensils;
     using BookShop.Application.WritingUtensils.Commands.DeleteUtensils;
     using BookShop.Application.WritingUtensils.Commands.UpdateUtensils;
@@ -15,27 +16,21 @@
     public class WritingUtensilController : ControllerBase
     {
         public readonly IMediator mediator;
+        public readonly IMapper mapper;
 
-        public WritingUtensilController(IMediator mediator)
+        public WritingUtensilController(IMediator mediator, IMapper mapper)
         {
             this.mediator = mediator;
+            this.mapper = mapper;
         }
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> CreateUtensilAsync([FromBody] UtensilDto utensil)
+        public async Task<IActionResult> CreateUtensilAsync([FromBody] UtensilPostDto utensil)
         {
-            var command = new CreateUtensilsCommand
-            {
-                Name = utensil.Name,
-                Price = utensil.Price,
-                Color = utensil.Color,
-                Manufacturer = utensil.Manufacturer,
-                WritingUtensilsType = utensil.WritingUtensilsType,
-            };
+            var command = this.mapper.Map<CreateUtensilsCommand>(utensil);
 
             var result = await this.mediator.Send(command);
-
             return Ok(result);
         }
 
@@ -46,6 +41,7 @@
             var command = new GetSingleUtensilQuery(id);
 
             var result = await this.mediator.Send(command);
+            var mappedResult = this.mapper.Map<UtensilGetDto>(result);
             return Ok(result);
         }
 
@@ -56,6 +52,7 @@
             var command = new GetUtensilsQuery();
 
             var result = await this.mediator.Send(command);
+            var mappedResult = this.mapper.Map<IEnumerable<UtensilGetDto>>(result);
             return Ok(result);
         }
 
@@ -71,7 +68,7 @@
 
         [HttpPut]
         [Route("update")]
-        public async Task<IActionResult> UpdateUtensilAsync([FromBody] UtensilDto utensil, int id)
+        public async Task<IActionResult> UpdateUtensilAsync([FromBody] UtensilPostDto utensil, int id)
         {
             var command = new UpdateUtensilsCommand
             {
