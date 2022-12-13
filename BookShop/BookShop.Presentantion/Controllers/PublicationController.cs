@@ -28,15 +28,7 @@
         [Route("create")]
         public async Task<IActionResult> CreatePublicationAsync([FromBody] PublicationPutPostDto publication)
         {
-            var command = new CreatePublicationCommand
-            {
-                Name = publication.Name,
-                Author = publication.Author,
-                Price = publication.Price,
-                PageCount = publication.PageCount,
-                Description = publication.Description,
-                Genre = publication.Genre,
-            };
+            var command = this.mapper.Map<CreatePublicationCommand>(publication);
 
             var result = await this.mediator.Send(command);
             return Ok(result);
@@ -76,18 +68,10 @@
 
         [HttpPut]
         [Route("update")]
-        public async Task<IActionResult> UpdatePublicationAsync([FromBody] PublicationPutPostDto publication, int id)
+        public async Task<IActionResult> UpdatePublicationAsync([FromBody] PublicationPutDto publication, int id)
         {
-            var command = new UpdatePublicationCommand
-            {
-                Id = id,
-                Name = publication.Name,
-                Author = publication.Author,
-                Price = publication.Price,
-                PageCount = publication.PageCount,
-                Description = publication.Description,
-                Genre = publication.Genre,
-            };
+            publication.Id = id;
+            var command = this.mapper.Map<UpdatePublicationCommand>(publication);
 
             var result = await this.mediator.Send(command);
             return Ok(result);
