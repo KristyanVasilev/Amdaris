@@ -37,7 +37,6 @@
                 PageCount = 400,
                 Description = "Some description",
                 Genre = "Horror",
-                PublicationType = "Book",
             }, CancellationToken.None);
 
             result.ShouldBeOfType<Int32>();
@@ -66,7 +65,6 @@
                 PageCount = 400,
                 Description = "Edited description",
                 Genre = "Horror",
-                PublicationType = "Book",
             }, CancellationToken.None);
 
             Assert.Equal(10, this.mockRepo.Object.All().First().Price);

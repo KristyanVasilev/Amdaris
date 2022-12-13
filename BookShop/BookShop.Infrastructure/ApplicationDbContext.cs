@@ -22,6 +22,6 @@
 
         public DbSet<WritingUtensil> WritingUtensils { get; set; }
 
-        public DbSet<WritingUtensilsType> WritingUtensilstypes { get; set; }
+        public DbSet<WritingUtensilsType> WritingUtensilsTypes { get; set; }
     }
 }
