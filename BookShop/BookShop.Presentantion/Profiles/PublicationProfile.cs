@@ -1,10 +1,10 @@
 ﻿namespace BookShop.Presentantion.Profiles
 {
     using AutoMapper;
-    using BookShop.Presentantion.Dto;
     using BookShop.Application.Publications;
     using BookShop.Application.Publications.Commands.CreatePublication;
     using BookShop.Application.Publications.Commands.UpdatePublication;
+    using BookShop.Presentantion.Dto;
 
     public class PublicationProfile : Profile
     {

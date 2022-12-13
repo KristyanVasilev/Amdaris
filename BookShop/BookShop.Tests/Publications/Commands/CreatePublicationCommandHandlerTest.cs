@@ -34,7 +34,6 @@
                 PageCount = 400,
                 Description = "Some description",
                 Genre = "Horror",
-                PublicationType = "Book",
             }, CancellationToken.None);
 
             var count = this.mockRepo.Object.All().Count();
@@ -60,7 +59,6 @@
                 PageCount = 400,
                 Description = "Some description",
                 Genre = "Horror",
-                PublicationType = "Book",
             }, CancellationToken.None);
 
             result.ShouldBeOfType<Int32>();

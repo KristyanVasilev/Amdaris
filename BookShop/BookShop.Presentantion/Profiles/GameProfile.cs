@@ -1,9 +1,9 @@
 ﻿namespace BookShop.Presentantion.Profiles
 {
     using AutoMapper;
-    using BookShop.Presentantion.Dto;
     using BookShop.Application.Games;
     using BookShop.Application.Games.Commands.CreateGame;
+    using BookShop.Presentantion.Dto;
 
     public class GameProfile : Profile
     {
