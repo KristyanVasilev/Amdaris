@@ -1,10 +1,13 @@
 ﻿namespace BookShop.Presentantion.Controllers
 {
+    using AutoMapper;
     using BookShop.Application.Games.Commands.CreateGame;
     using BookShop.Application.Games.Commands.DeleteGame;
     using BookShop.Application.Games.Commands.UpdateGame;
     using BookShop.Application.Games.Queries.GetGames;
     using BookShop.Application.Games.Queries.GetSingleGame;
+    using BookShop.Application.Publications.Commands.CreatePublication;
+    using BookShop.Domain;
     using BookShop.Presentantion.Dto;
 
     using MediatR;
@@ -15,27 +18,21 @@
     public class GameController : ControllerBase
     {
         public readonly IMediator mediator;
+        public readonly IMapper mapper;
 
-        public GameController(IMediator mediator)
+        public GameController(IMediator mediator, IMapper mapper)
         {
             this.mediator = mediator;
+            this.mapper = mapper;
         }
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> CreateGameAsync([FromBody] GameDto game)
+        public async Task<IActionResult> CreateGameAsync([FromBody] GamePostDto game)
         {
-            var command = new CreateGameCommand
-            {
-                Name = game.Name,
-                Price = game.Price,
-                Manufacturer = game.Manufacturer,
-                Description = game.Description,
-                Genre = game.Genre,
-            };
+            var command = this.mapper.Map<CreateGameCommand>(game);
 
             var result = await this.mediator.Send(command);
-
             return Ok(result);
         }
 
@@ -46,7 +43,8 @@
             var command = new GetSingleGameQuery(id);
 
             var result = await this.mediator.Send(command);
-            return Ok(result);
+            var mappedResult = this.mapper.Map<GameGetDto>(result);
+            return Ok(mappedResult);
         }
 
         [HttpGet]
@@ -71,7 +69,7 @@
 
         [HttpPut]
         [Route("update")]
-        public async Task<IActionResult> UpdateGameAsync([FromBody] GameDto game, int id)
+        public async Task<IActionResult> UpdateGameAsync([FromBody] GamePostDto game, int id)
         {
             var command = new UpdateGameCommand
             {

@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class PublicationPutPostDto
+    public class PublicationPostDto
     {
         [Required]
         [StringLength(50, MinimumLength = 2)]

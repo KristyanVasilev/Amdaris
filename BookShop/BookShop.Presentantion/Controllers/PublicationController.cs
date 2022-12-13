@@ -26,7 +26,7 @@
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> CreatePublicationAsync([FromBody] PublicationPutPostDto publication)
+        public async Task<IActionResult> CreatePublicationAsync([FromBody] PublicationPostDto publication)
         {
             var command = this.mapper.Map<CreatePublicationCommand>(publication);
 
@@ -52,7 +52,7 @@
             var command = new GetPublicationsQuery();
 
             var result = await this.mediator.Send(command);
-            var mappedResult = this.mapper.Map<List<PublicationGetDto>>(result);
+            var mappedResult = this.mapper.Map<IEnumerable<PublicationGetDto>>(result);
             return Ok(mappedResult);
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace BookShop.Presentantion.Dto
 {
-    public class PublicationPutDto : PublicationPutPostDto
+    public class PublicationPutDto : PublicationPostDto
     {
         public int Id { get; set; }
     }

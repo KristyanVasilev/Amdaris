@@ -12,7 +12,7 @@
         {
             CreateMap<PublicationDto, PublicationGetDto>();
 
-            CreateMap<PublicationPutPostDto, CreatePublicationCommand>();
+            CreateMap<PublicationPostDto, CreatePublicationCommand>();
 
             CreateMap<PublicationPutDto, UpdatePublicationCommand>();
         }
