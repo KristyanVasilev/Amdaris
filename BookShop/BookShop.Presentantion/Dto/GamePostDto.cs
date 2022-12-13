@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class GameDto
+    public class GamePostDto
     {
         [Required]
         [StringLength(50, MinimumLength = 2)]

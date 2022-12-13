@@ -2,12 +2,7 @@
 {
     using MediatR;
 
-    public class UpdateGameCommand : BaseProductDto, IRequest<int>
+    public class UpdateGameCommand : GameDto, IRequest<int>
     {
-        public string Manufacturer { get; set; } = null!;
-
-        public string Description { get; set; } = null!;
-
-        public string Genre { get; set; } = null!;
     }
 }
