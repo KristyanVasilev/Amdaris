@@ -6,11 +6,11 @@
     {
         public WritingUtensilsType()
         {
-            this.Utensils = new HashSet<WritingUtensil>();
+            this.WritingUtensil = new HashSet<WritingUtensil>();
         }
 
         public string Name { get; set; } = null!;
 
-        public ICollection<WritingUtensil> Utensils { get; set; } = null!;
+        public ICollection<WritingUtensil> WritingUtensil { get; set; } = null!;
     }
 }

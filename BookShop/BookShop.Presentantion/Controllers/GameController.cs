@@ -6,8 +6,6 @@
     using BookShop.Application.Games.Commands.UpdateGame;
     using BookShop.Application.Games.Queries.GetGames;
     using BookShop.Application.Games.Queries.GetSingleGame;
-    using BookShop.Application.Publications.Commands.CreatePublication;
-    using BookShop.Domain;
     using BookShop.Presentantion.Dto;
 
     using MediatR;
@@ -54,7 +52,8 @@
             var command = new GetGamesQuery();
 
             var result = await this.mediator.Send(command);
-            return Ok(result);
+            var mappedResult = this.mapper.Map<IEnumerable<GameGetDto>>(result);
+            return Ok(mappedResult);
         }
 
         [HttpDelete]

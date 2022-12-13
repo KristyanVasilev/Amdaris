@@ -12,7 +12,7 @@
 
         public string Manufacturer { get; set; } = null!;
 
-        public int WritingUtensilTypeId { get; set; }
+        public int WritingUtensilsTypeId { get; set; }
 
         public WritingUtensilsType WritingUtensilsType { get; set; } = null!;
     }

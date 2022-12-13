@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class UtensilDto
+    public class UtensilPostDto
     {
         [Required]
         [StringLength(50, MinimumLength = 2)]
