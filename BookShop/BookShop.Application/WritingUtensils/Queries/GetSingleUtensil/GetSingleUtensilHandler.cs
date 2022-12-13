@@ -26,7 +26,7 @@
 
             var type = this.utensilRepository
                            .AllAsNoTracking()
-                           .FirstOrDefault(t => t.Id == utensil.WritingUtensilTypeId);
+                           .FirstOrDefault(t => t.Id == utensil.WritingUtensilsTypeId);
 
             var result = new WritingUtensilDto
             {

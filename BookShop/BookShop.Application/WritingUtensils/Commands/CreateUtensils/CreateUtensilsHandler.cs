@@ -26,17 +26,15 @@
 
             var utensil = new WritingUtensil
             {
-                Id = request.Id,
                 Price = request.Price,
                 Name = request.Name,
                 Color = request.Color,
                 Manufacturer = request.Manufacturer,
-                WritingUtensilsType = type,
                 CreatedOn = DateTime.UtcNow,
             };
 
             if (type.Id == 0) utensil.WritingUtensilsType = type;
-            else utensil.WritingUtensilTypeId = type.Id;
+            else utensil.WritingUtensilsTypeId = type.Id;
 
             await this.repository.AddAsync(utensil);
             await this.repository.SaveChangesAsync();

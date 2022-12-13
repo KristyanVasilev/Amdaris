@@ -36,7 +36,7 @@
             utensil.ModifiedOn = DateTime.UtcNow;
 
             if (type.Id == 0) utensil.WritingUtensilsType = type;
-            else utensil.WritingUtensilTypeId = type.Id;
+            else utensil.WritingUtensilsTypeId = type.Id;
 
             this.repository.Update(utensil);
             await this.repository.SaveChangesAsync();

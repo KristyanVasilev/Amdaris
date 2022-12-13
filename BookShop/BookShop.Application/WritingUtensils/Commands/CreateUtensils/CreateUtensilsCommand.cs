@@ -2,12 +2,7 @@
 {
     using MediatR;
 
-    public class CreateUtensilsCommand : BaseProductDto, IRequest<int>
+    public class CreateUtensilsCommand : WritingUtensilDto, IRequest<int>
     {
-        public string Color { get; set; } = null!;
-
-        public string Manufacturer { get; set; } = null!;
-
-        public string WritingUtensilsType { get; set; } = null!;
     } 
 }
