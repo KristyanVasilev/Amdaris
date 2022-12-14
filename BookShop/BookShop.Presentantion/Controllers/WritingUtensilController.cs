@@ -42,7 +42,7 @@
 
             var result = await this.mediator.Send(command);
             var mappedResult = this.mapper.Map<UtensilGetDto>(result);
-            return Ok(result);
+            return Ok(mappedResult);
         }
 
         [HttpGet]
@@ -53,7 +53,7 @@
 
             var result = await this.mediator.Send(command);
             var mappedResult = this.mapper.Map<IEnumerable<UtensilGetDto>>(result);
-            return Ok(result);
+            return Ok(mappedResult);
         }
 
         [HttpDelete]
