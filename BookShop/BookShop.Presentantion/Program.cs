@@ -1,12 +1,14 @@
 using BookShop.Application.Publications.Commands.CreatePublication;
 using BookShop.Application.Repositories;
+using BookShop.Domain;
 using BookShop.Infrastructure;
 using BookShop.Infrastructure.Repositories;
 using BookShop.Presentantion;
 using MediatR;
-using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+    options.User.RequireUniqueEmail = false;
+})
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddMediatR(typeof(CreatePublicationCommand));
 
@@ -56,6 +63,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
