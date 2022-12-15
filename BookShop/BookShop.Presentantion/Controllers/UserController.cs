@@ -43,5 +43,25 @@ namespace BookShop.Presentantion.Controllers
 
             return Ok(model);
         }
+
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> Login(LoginDto model)
+        //{
+
+        //    var user = await userManager.FindByNameAsync(model.UserName);
+
+        //    if (user != null)
+        //    {
+        //        var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
+
+        //        if (result.Succeeded)
+        //        {
+        //            return Ok($"Hi, {user.FirstName}!");
+        //        }
+        //    }
+
+        //    return NotFound("Invalid login");
+        //}
     }
 }
