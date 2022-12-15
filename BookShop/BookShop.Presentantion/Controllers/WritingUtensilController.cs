@@ -1,6 +1,5 @@
 ﻿namespace BookShop.Presentantion.Controllers
 {
-    using AutoMapper;
     using BookShop.Application.WritingUtensils.Commands.CreateUtensils;
     using BookShop.Application.WritingUtensils.Commands.DeleteUtensils;
     using BookShop.Application.WritingUtensils.Commands.UpdateUtensils;
@@ -8,67 +7,57 @@
     using BookShop.Application.WritingUtensils.Queries.GetUtensils;
     using BookShop.Presentantion.Dto;
 
-    using MediatR;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
     [ApiController]
-    public class WritingUtensilController : ControllerBase
+    public class WritingUtensilController : BaseController<WritingUtensilController>
     {
-        public readonly IMediator mediator;
-        public readonly IMapper mapper;
-
-        public WritingUtensilController(IMediator mediator, IMapper mapper)
-        {
-            this.mediator = mediator;
-            this.mapper = mapper;
-        }
-
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> CreateUtensilAsync([FromBody] UtensilPostDto utensil)
+        public async Task<IActionResult> CreateUtensil([FromBody] UtensilPostDto utensil)
         {
-            var command = this.mapper.Map<CreateUtensilsCommand>(utensil);
+            var command = Mapper.Map<CreateUtensilsCommand>(utensil);
 
-            var result = await this.mediator.Send(command);
-            return Ok(result);
+            var result = await Mediator.Send(command);
+            return Created("/writingUtensil", result);
         }
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetByIdAsync(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             var command = new GetSingleUtensilQuery(id);
 
-            var result = await this.mediator.Send(command);
-            var mappedResult = this.mapper.Map<UtensilGetDto>(result);
+            var result = await Mediator.Send(command);
+            var mappedResult = Mapper.Map<UtensilGetDto>(result);
             return Ok(mappedResult);
         }
 
         [HttpGet]
         [Route("all")]
-        public async Task<IActionResult> GetUtensilsAsync()
+        public async Task<IActionResult> GetUtensils()
         {
             var command = new GetUtensilsQuery();
 
-            var result = await this.mediator.Send(command);
-            var mappedResult = this.mapper.Map<IEnumerable<UtensilGetDto>>(result);
+            var result = await Mediator.Send(command);
+            var mappedResult = Mapper.Map<IEnumerable<UtensilGetDto>>(result);
             return Ok(mappedResult);
         }
 
         [HttpDelete]
         [Route("delete")]
-        public async Task<IActionResult> DeleteUtensilAsync(int id)
+        public async Task<IActionResult> DeleteUtensil(int id)
         {
             var command = new DeleteUtensilCommand(id);
 
-            var result = await this.mediator.Send(command);
+            var result = await Mediator.Send(command);
             return Ok(result);
         }
 
         [HttpPut]
         [Route("update")]
-        public async Task<IActionResult> UpdateUtensilAsync([FromBody] UtensilPostDto utensil, int id)
+        public async Task<IActionResult> UpdateUtensil([FromBody] UtensilPostDto utensil, int id)
         {
             var command = new UpdateUtensilsCommand
             {
@@ -80,7 +69,7 @@
                 WritingUtensilsType = utensil.WritingUtensilsType,
             };
 
-            var result = await this.mediator.Send(command);
+            var result = await Mediator.Send(command);
             return Ok(result);
         }
     }

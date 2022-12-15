@@ -1,6 +1,5 @@
 ﻿namespace BookShop.Presentantion.Controllers
 {
-    using AutoMapper;
     using BookShop.Application.Games.Commands.CreateGame;
     using BookShop.Application.Games.Commands.DeleteGame;
     using BookShop.Application.Games.Commands.UpdateGame;
@@ -8,67 +7,65 @@
     using BookShop.Application.Games.Queries.GetSingleGame;
     using BookShop.Presentantion.Dto;
 
-    using MediatR;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
     [ApiController]
-    public class GameController : ControllerBase
+    public class GameController : BaseController<GameController>
     {
-        public readonly IMediator mediator;
-        public readonly IMapper mapper;
-
-        public GameController(IMediator mediator, IMapper mapper)
-        {
-            this.mediator = mediator;
-            this.mapper = mapper;
-        }
-
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> CreateGameAsync([FromBody] GamePostDto game)
+        public async Task<IActionResult> CreateGame([FromBody] GamePostDto game)
         {
-            var command = this.mapper.Map<CreateGameCommand>(game);
+            var command = Mapper.Map<CreateGameCommand>(game);
 
-            var result = await this.mediator.Send(command);
-            return Ok(result);
+            var result = await Mediator.Send(command);
+            return Created("/game", result);
         }
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetByIdAsync(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             var command = new GetSingleGameQuery(id);
 
-            var result = await this.mediator.Send(command);
-            var mappedResult = this.mapper.Map<GameGetDto>(result);
+            var result = await Mediator.Send(command);
+            var mappedResult = Mapper.Map<GameGetDto>(result);
             return Ok(mappedResult);
         }
 
         [HttpGet]
         [Route("all")]
-        public async Task<IActionResult> GetGamesAsync()
+        public async Task<IActionResult> GetGames()
         {
+            //Logger.LogInformation("Request recieved by Controller: {nameof(GameController)}, Action: {ControllerAction}," +
+            //    "DateTime: {DateTime}", new object[] { nameof(GameController), nameof(GetGames), DateTime.Now.ToString() });
+
+            Logger.LogInformation(message: $"Request recieved by Controller: {nameof(GameController)}, Action: {nameof(GetGames)}, DateTime: {DateTime.Now}");
+
             var command = new GetGamesQuery();
 
-            var result = await this.mediator.Send(command);
-            var mappedResult = this.mapper.Map<IEnumerable<GameGetDto>>(result);
+            var result = await Mediator.Send(command);
+            var mappedResult = Mapper.Map<IEnumerable<GameGetDto>>(result);
+
+            Logger.LogInformation($"We got {result.Count()} games");
             return Ok(mappedResult);
         }
 
         [HttpDelete]
         [Route("delete")]
-        public async Task<IActionResult> DeleteGameAsync(int id)
+        public async Task<IActionResult> DeleteGame(int id)
         {
             var command = new DeleteGameCommand(id);
 
-            var result = await this.mediator.Send(command);
+            var result = await Mediator.Send(command);
+            Logger.LogInformation($"Game deleted Successfully!");
             return Ok(result);
         }
 
         [HttpPut]
         [Route("update")]
-        public async Task<IActionResult> UpdateGameAsync([FromBody] GamePostDto game, int id)
+        public async Task<IActionResult> UpdateGame([FromBody] GamePostDto game, int id)
         {
             var command = new UpdateGameCommand
             {
@@ -80,7 +77,7 @@
                 Genre = game.Genre,
             };
 
-            var result = await this.mediator.Send(command);
+            var result = await Mediator.Send(command);
             return Ok(result);
         }
     }
