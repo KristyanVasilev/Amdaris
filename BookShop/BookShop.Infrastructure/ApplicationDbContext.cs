@@ -23,5 +23,23 @@
         public DbSet<WritingUtensil> WritingUtensils { get; set; }
 
         public DbSet<WritingUtensilsType> WritingUtensilsTypes { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Game>()
+                .Property(g => g.Price)
+                .HasColumnType("decimal(18,4)");
+
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Publication>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(18,4)");
+
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<WritingUtensil>()
+                .Property(w => w.Price)
+                .HasColumnType("decimal(18,4)");
+        }
     }
 }
