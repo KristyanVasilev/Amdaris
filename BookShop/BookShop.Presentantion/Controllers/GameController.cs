@@ -38,7 +38,7 @@
         [Route("all")]
         public async Task<IActionResult> GetGames()
         {
-            //Logger.LogInformation("Request recieved by Controller: {nameof(GameController)}, Action: {ControllerAction}," +
+            //Logger.LogInformation($"Request recieved by Controller: {nameof(GameController)}, Action: {ControllerAction}," +
             //    "DateTime: {DateTime}", new object[] { nameof(GameController), nameof(GetGames), DateTime.Now.ToString() });
 
             Logger.LogInformation(message: $"Request recieved by Controller: {nameof(GameController)}, Action: {nameof(GetGames)}, DateTime: {DateTime.Now}");
