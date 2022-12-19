@@ -3,12 +3,13 @@ using BookShop.Application.Repositories;
 using BookShop.Domain;
 using BookShop.Infrastructure;
 using BookShop.Infrastructure.Repositories;
+using BookShop.Infrastructure.ThirdPartyServices.AzureServices;
 using BookShop.Presentantion;
 using MediatR;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
-using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +20,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Add Db context
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+
+//Add ThirdPartyServices
+builder.Services.AddThirdPartyServices(builder.Configuration);
 
 //AddUserIdentity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
