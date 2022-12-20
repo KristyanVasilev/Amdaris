@@ -32,6 +32,7 @@
             game.Price = request.Price;
             game.Name = request.Name;
             game.Description = request.Description;
+            game.Images = request.Images;
             game.ModifiedOn = DateTime.UtcNow;
 
             if (genre.Id == 0) game.Genre = genre;

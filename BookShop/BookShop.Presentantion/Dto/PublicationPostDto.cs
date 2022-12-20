@@ -25,5 +25,8 @@
         [Required]
         [StringLength(50, MinimumLength = 3)]
         public string Genre { get; set; } = null!;
+
+        [Required]
+        public string[] Images { get; set; } = null!;
     }
 }

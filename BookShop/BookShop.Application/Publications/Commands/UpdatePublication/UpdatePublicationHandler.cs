@@ -35,6 +35,7 @@
             publication.PageCount = request.PageCount;
             publication.Rating = request.Rating;
             publication.Description = request.Description;
+            publication.Images = request.Images;
             publication.ModifiedOn = DateTime.UtcNow;
 
             if (genre.Id == 0) publication.Genre = genre;

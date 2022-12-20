@@ -32,6 +32,7 @@
                 PageCount = request.PageCount,
                 Rating = request.Rating,
                 Description = request.Description,
+                Images = request.Images,
                 CreatedOn = DateTime.UtcNow,
             };
 

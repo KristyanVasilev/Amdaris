@@ -25,10 +25,11 @@
                 PageCount = publication.PageCount,
                 Rating = publication.Rating,
                 Description = publication.Description,
+                Images = publication.Images,
                 Genre = publication.Genre.Name,
             });
 
-            if (result.Count() == 0)
+            if (!result.Any())
             {
                 throw new InvalidOperationException();
             }

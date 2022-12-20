@@ -26,7 +26,7 @@
                 Images = game.Images,
             });
 
-            if (result.Count() == 0)
+            if (!result.Any())
             {
                 throw new InvalidOperationException();
             }
