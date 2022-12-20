@@ -1,16 +1,14 @@
 ﻿namespace BookShop.Infrastructure
 {
     using BookShop.Domain;
+    using BookShop.Infrastructure.EntityConfigurations;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
-    using Newtonsoft.Json;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-
         }
 
         public DbSet<Game> Games { get; set; }
@@ -25,36 +23,24 @@
 
         public DbSet<WritingUtensilsType> WritingUtensilsTypes { get; set; }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Game>()
-                .Property(g => g.Price)
-                .HasColumnType("decimal(18,4)");
+            modelBuilder.ApplyConfiguration(new GameEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new PublicationEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new WritingUtensilsEntityTypeConfiguration());
 
-            modelBuilder.Entity<Publication>()
-                .Property(p => p.Price)
-                .HasColumnType("decimal(18,4)");
+            var entityTypes = modelBuilder.Model.GetEntityTypes().ToList();
 
-            modelBuilder.Entity<WritingUtensil>()
-                .Property(w => w.Price)
-                .HasColumnType("decimal(18,4)");
-
-            modelBuilder.Entity<Game>()
-                        .Property(g => g.Images)
-                        .HasConversion(v => JsonConvert.SerializeObject(v),
-                                       v => JsonConvert.DeserializeObject<string[]>(v) ?? new string[] { "No Images" });
-
-            modelBuilder.Entity<Publication>()
-                        .Property(p => p.Images)
-                        .HasConversion(v => JsonConvert.SerializeObject(v),
-                                       v => JsonConvert.DeserializeObject<string[]>(v) ?? new string[] { "No Images" });
-
-            modelBuilder.Entity<WritingUtensil>()
-                        .Property(w => w.Images)
-                        .HasConversion(v => JsonConvert.SerializeObject(v),
-                                       v => JsonConvert.DeserializeObject<string[]>(v) ?? new string[] { "No Images" });
+            // Disable cascade delete
+            var foreignKeys = entityTypes
+                .SelectMany(e => e.GetForeignKeys().Where(f => f.DeleteBehavior == DeleteBehavior.Cascade));
+            foreach (var foreignKey in foreignKeys)
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
         }
     }
 }
