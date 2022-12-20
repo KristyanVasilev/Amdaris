@@ -3,6 +3,7 @@
     using BookShop.Domain;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using Newtonsoft.Json;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -27,19 +28,33 @@
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Game>()
                 .Property(g => g.Price)
                 .HasColumnType("decimal(18,4)");
 
-            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Publication>()
                 .Property(p => p.Price)
                 .HasColumnType("decimal(18,4)");
 
-            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<WritingUtensil>()
                 .Property(w => w.Price)
                 .HasColumnType("decimal(18,4)");
+
+            modelBuilder.Entity<Game>()
+                        .Property(g => g.Images)
+                        .HasConversion(v => JsonConvert.SerializeObject(v),
+                                       v => JsonConvert.DeserializeObject<string[]>(v) ?? new string[] { "No Images" });
+
+            modelBuilder.Entity<Publication>()
+                        .Property(p => p.Images)
+                        .HasConversion(v => JsonConvert.SerializeObject(v),
+                                       v => JsonConvert.DeserializeObject<string[]>(v) ?? new string[] { "No Images" });
+
+            modelBuilder.Entity<WritingUtensil>()
+                        .Property(w => w.Images)
+                        .HasConversion(v => JsonConvert.SerializeObject(v),
+                                       v => JsonConvert.DeserializeObject<string[]>(v) ?? new string[] { "No Images" });
         }
     }
 }
