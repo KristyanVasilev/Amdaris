@@ -33,6 +33,7 @@
                 Price = game.Price,
                 Description = game.Description,
                 Manufacturer = game.Manufacturer,
+                Images = game.Images,
                 Genre = genre?.Name ?? "No genre",
             };
 

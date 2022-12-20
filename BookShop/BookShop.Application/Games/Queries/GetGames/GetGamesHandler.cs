@@ -23,6 +23,7 @@
                 Description = game.Description,
                 Manufacturer = game.Manufacturer,
                 Genre = game.Genre.Name,
+                Images = game.Images,
             });
 
             if (result.Count() == 0)
