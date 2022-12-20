@@ -22,10 +22,11 @@
                 Price = utensil.Price,
                 Color = utensil.Color,
                 Manufacturer = utensil.Manufacturer,
+                Images = utensil.Images,
                 WritingUtensilsType = utensil.WritingUtensilsType.Name,
             });
 
-            if (result.Count() == 0)
+            if (!result.Any())
             {
                 throw new InvalidOperationException();
             }

@@ -33,6 +33,7 @@
             utensil.Name = request.Name;
             utensil.Manufacturer = request.Manufacturer;
             utensil.Color = request.Color;
+            utensil.Images = request.Images,
             utensil.ModifiedOn = DateTime.UtcNow;
 
             if (type.Id == 0) utensil.WritingUtensilsType = type;

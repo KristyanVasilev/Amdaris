@@ -7,5 +7,7 @@
         public string Manufacturer { get; set; } = null!;
 
         public string WritingUtensilsType { get; set; } = null!;
+
+        public string[] Images { get; set; } = null!;
     }
 }

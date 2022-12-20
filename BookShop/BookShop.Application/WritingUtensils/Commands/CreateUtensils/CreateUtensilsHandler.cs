@@ -30,6 +30,7 @@
                 Name = request.Name,
                 Color = request.Color,
                 Manufacturer = request.Manufacturer,
+                Images = request.Images,
                 CreatedOn = DateTime.UtcNow,
             };
 

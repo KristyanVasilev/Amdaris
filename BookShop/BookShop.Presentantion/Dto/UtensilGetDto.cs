@@ -11,5 +11,7 @@
         public string WritingUtensilsType { get; set; } = null!;
 
         public string Color { get; set; } = null!;
+
+        public string[] Images { get; set; } = null!;
     }
 }
