@@ -12,6 +12,8 @@
 
         public string Manufacturer { get; set; } = null!;
 
+        public string[] Images { get; set; } = null!;
+
         public int WritingUtensilsTypeId { get; set; }
 
         public WritingUtensilsType WritingUtensilsType { get; set; } = null!;
