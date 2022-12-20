@@ -75,6 +75,7 @@
                 Manufacturer = game.Manufacturer,
                 Description = game.Description,
                 Genre = game.Genre,
+                Images = game.Images,
             };
 
             var result = await Mediator.Send(command);
