@@ -7,10 +7,8 @@ using BookShop.Infrastructure.ThirdPartyServices.AzureServices;
 using BookShop.Presentantion;
 using BookShop.Presentantion.Filters;
 using MediatR;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
