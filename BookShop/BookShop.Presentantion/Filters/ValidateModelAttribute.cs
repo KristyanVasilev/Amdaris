@@ -8,15 +8,16 @@
     {
         public override void OnResultExecuting(ResultExecutingContext context)
         {
-            var apiError = new Error
-            {
-                StatusCode = "400",
-                TimeSpan = DateTime.UtcNow,
-            };
-            var errors = context.ModelState.AsEnumerable();
-
             if (!context.ModelState.IsValid)
             {
+                var apiError = new Error
+                {
+                    StatusCode = "400",
+                    TimeSpan = DateTime.UtcNow,
+                };
+                var errors = context.ModelState.AsEnumerable();
+
+
                 foreach (var error in errors)
                 {
                     foreach (var inner in error.Value.Errors)
@@ -24,9 +25,9 @@
                         apiError.Message.Add(inner.ErrorMessage);
                     }
                 }
-            }
 
-            context.Result = new BadRequestObjectResult(apiError);
+                context.Result = new BadRequestObjectResult(apiError);
+            }
         }
     }
 }
