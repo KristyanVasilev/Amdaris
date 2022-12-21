@@ -1,5 +1,6 @@
 ﻿namespace BookShop.Presentantion.Dto
 {
+    using BookShop.Presentantion.Filters;
     using System.ComponentModel.DataAnnotations;
 
     public class PublicationPostDto
@@ -27,6 +28,7 @@
         public string Genre { get; set; } = null!;
 
         [Required]
+        [ValidateUrlsInArray(ErrorMessage = "Invalid url")]
         public string[] Images { get; set; } = null!;
     }
 }
