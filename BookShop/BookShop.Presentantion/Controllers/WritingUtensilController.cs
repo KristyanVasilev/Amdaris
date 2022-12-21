@@ -6,7 +6,7 @@
     using BookShop.Application.WritingUtensils.Queries.GetSingleUtensil;
     using BookShop.Application.WritingUtensils.Queries.GetUtensils;
     using BookShop.Presentantion.Dto;
-
+    using BookShop.Presentantion.Filters;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
@@ -15,6 +15,7 @@
     {
         [HttpPost]
         [Route("create")]
+        [ValidateModel]
         public async Task<IActionResult> CreateUtensil([FromBody] UtensilPostDto utensil)
         {
             var command = Mapper.Map<CreateUtensilsCommand>(utensil);
@@ -57,6 +58,7 @@
 
         [HttpPut]
         [Route("update")]
+        [ValidateModel]
         public async Task<IActionResult> UpdateUtensil([FromBody] UtensilPostDto utensil, int id)
         {
             var command = new UpdateUtensilsCommand

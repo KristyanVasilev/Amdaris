@@ -6,7 +6,7 @@
     using BookShop.Application.Games.Queries.GetGames;
     using BookShop.Application.Games.Queries.GetSingleGame;
     using BookShop.Presentantion.Dto;
-
+    using BookShop.Presentantion.Filters;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
@@ -15,6 +15,7 @@
     {
         [HttpPost]
         [Route("create")]
+        [ValidateModel]
         public async Task<IActionResult> CreateGame([FromBody] GamePostDto game)
         {
             var command = Mapper.Map<CreateGameCommand>(game);
@@ -65,6 +66,7 @@
 
         [HttpPut]
         [Route("update")]
+        [ValidateModel]
         public async Task<IActionResult> UpdateGame([FromBody] GamePostDto game, int id)
         {
             var command = new UpdateGameCommand

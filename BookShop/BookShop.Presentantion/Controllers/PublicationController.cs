@@ -6,7 +6,7 @@
     using BookShop.Application.Publications.Queries.GetPublication;
     using BookShop.Application.Publications.Queries.GetSinglePublication;
     using BookShop.Presentantion.Dto;
-
+    using BookShop.Presentantion.Filters;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
@@ -15,6 +15,7 @@
     {
         [HttpPost]
         [Route("create")]
+        [ValidateModel]
         public async Task<IActionResult> CreatePublication([FromBody] PublicationPostDto publication)
         {
             var command = Mapper.Map<CreatePublicationCommand>(publication);
@@ -57,6 +58,7 @@
 
         [HttpPut]
         [Route("update")]
+        [ValidateModel]
         public async Task<IActionResult> UpdatePublication([FromBody] PublicationPutDto publication, int id)
         {
             publication.Id = id;
