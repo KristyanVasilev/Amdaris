@@ -1,7 +1,7 @@
 ﻿namespace BookShop.Application.Publications.Queries.GetPublication
 {
-    using BookShop.Application.Publications;
     using BookShop.Application.Repositories;
+    using BookShop.Application.SeedWork.Exceptions;
     using BookShop.Domain;
     using MediatR;
 
@@ -27,11 +27,12 @@
                 Description = publication.Description,
                 Images = publication.Images,
                 Genre = publication.Genre.Name,
-            });
+
+            }).OrderBy(x => x.Price);
 
             if (!result.Any())
             {
-                throw new InvalidOperationException();
+                throw new PublicationNotFoundException("No Publications found!");
             }
 
             return await Task.FromResult(result);

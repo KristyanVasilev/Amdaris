@@ -1,17 +1,17 @@
-﻿namespace BookShop.Application.Publications.Queries.GetSinglePublication
+﻿namespace BookShop.Application.Publications.Queries.GetPublicationById
 {
-    using BookShop.Application.Publications;
     using BookShop.Application.Repositories;
+    using BookShop.Application.SeedWork.Exceptions;
     using BookShop.Domain;
     using MediatR;
 
-    public class GetSinglePublicationHandler : IRequestHandler<GetSinglePublicationQuery, PublicationDto>
+    public class GetPublicationByIdHandler : IRequestHandler<GetPublicationByIdQuery, PublicationDto>
     {
 
         private readonly IDeletableEntityRepository<Publication> repository;
         private readonly IRepository<Genre> genreRepository;
 
-        public GetSinglePublicationHandler(
+        public GetPublicationByIdHandler(
             IDeletableEntityRepository<Publication> repository, 
             IRepository<Genre> genreRepository)
         {
@@ -19,12 +19,12 @@
             this.genreRepository = genreRepository;
         }
 
-        public async Task<PublicationDto> Handle(GetSinglePublicationQuery request, CancellationToken cancellationToken)
+        public async Task<PublicationDto> Handle(GetPublicationByIdQuery request, CancellationToken cancellationToken)
         {
             var publication = this.repository
                                   .AllAsNoTracking()                                  
                                   .FirstOrDefault(x => x.Id == request.Id)
-                                  ?? throw new InvalidOperationException("Publication not found!");
+                                  ?? throw new PublicationNotFoundException("Publication not found!");
 
             var genre = this.genreRepository.AllAsNoTracking().FirstOrDefault(g => g.Id == publication.GenreId);
 

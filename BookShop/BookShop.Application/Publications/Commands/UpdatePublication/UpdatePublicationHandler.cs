@@ -1,6 +1,7 @@
 ﻿namespace BookShop.Application.Publications.Commands.UpdatePublication
 {
     using BookShop.Application.Repositories;
+    using BookShop.Application.SeedWork.Exceptions;
     using BookShop.Domain;
     using MediatR;
 
@@ -27,7 +28,7 @@
             var publication = this.repository
                                   .AllAsNoTracking()
                                   .FirstOrDefault(x => x.Id == request.Id)
-                                  ?? throw new InvalidOperationException("Publication not found!");
+                                  ?? throw new PublicationNotFoundException("Publication not found!");
 
             publication.Price = request.Price;
             publication.Name = request.Name;

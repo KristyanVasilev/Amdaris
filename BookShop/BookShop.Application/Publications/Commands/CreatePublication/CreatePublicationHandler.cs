@@ -19,6 +19,9 @@
 
         public async Task<int> Handle(CreatePublicationCommand request, CancellationToken cancellationToken)
         {
+            var isExist = this.repository.AllAsNoTracking().FirstOrDefault(x => x.Name == request.Name);
+            if (isExist != null) { throw new ArgumentException("Publication already exist!"); }
+
             var genre = genreRepository
                         .AllAsNoTracking()
                         .FirstOrDefault(x => x.Name == request.Genre)

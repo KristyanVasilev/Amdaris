@@ -1,6 +1,7 @@
 ﻿namespace BookShop.Application.Publications.Commands.DeletePublication
 {
     using BookShop.Application.Repositories;
+    using BookShop.Application.SeedWork.Exceptions;
     using BookShop.Domain;
     using MediatR;
 
@@ -18,7 +19,7 @@
             var publication = this.repository
                                   .AllAsNoTracking()
                                   .FirstOrDefault(x => x.Id == request.Id)
-                                  ?? throw new InvalidOperationException("Publication cannot be null!");
+                                  ?? throw new PublicationNotFoundException("Publication not found!");
 
             this.repository.Delete(publication);
             await this.repository.SaveChangesAsync();
