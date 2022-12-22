@@ -1,6 +1,7 @@
 ﻿namespace BookShop.Application.Games.Commands.UpdateGame
 {
     using BookShop.Application.Repositories;
+    using BookShop.Application.SeedWork.Exceptions;
     using BookShop.Domain;
     using MediatR;
 
@@ -27,7 +28,7 @@
             var game = this.repository
                            .AllAsNoTracking()
                            .FirstOrDefault(x => x.Id == request.Id)
-                           ?? throw new InvalidOperationException("Game not found!");
+                           ?? throw new GameNotFoundException("Game not found!");
 
             game.Price = request.Price;
             game.Name = request.Name;

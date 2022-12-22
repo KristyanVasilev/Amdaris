@@ -2,11 +2,11 @@
 {
     using MediatR;
 
-    public class GetSingleGameQuery : IRequest<GameDto>
+    public class GetGameByIdQuery : IRequest<GameDto>
     {
         public int Id { get; set; }
 
-        public GetSingleGameQuery(int id)
+        public GetGameByIdQuery(int id)
         {
             this.Id = id;
         }

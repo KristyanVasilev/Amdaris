@@ -1,6 +1,7 @@
 ﻿namespace BookShop.Application.Games.Commands.DeleteGame
 {
     using BookShop.Application.Repositories;
+    using BookShop.Application.SeedWork.Exceptions;
     using BookShop.Domain;
     using MediatR;
 
@@ -18,7 +19,7 @@
             var game = this.repository
                            .AllAsNoTracking()
                            .FirstOrDefault(x => x.Id == request.Id)
-                           ?? throw new InvalidOperationException("Game cannot be null!");
+                           ?? throw new GameNotFoundException("Game not found!");
 
             this.repository.Delete(game);
             await this.repository.SaveChangesAsync();

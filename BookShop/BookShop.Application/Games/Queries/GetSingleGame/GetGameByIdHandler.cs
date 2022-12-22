@@ -1,15 +1,16 @@
 ﻿namespace BookShop.Application.Games.Queries.GetSingleGame
 {
     using BookShop.Application.Repositories;
+    using BookShop.Application.SeedWork.Exceptions;
     using BookShop.Domain;
     using MediatR;
 
-    public class GetSingleGameHandler : IRequestHandler<GetSingleGameQuery, GameDto>
+    public class GetGameByIdHandler : IRequestHandler<GetGameByIdQuery, GameDto>
     {
         private readonly IDeletableEntityRepository<Game> repository;
         private readonly IRepository<Genre> genreRepository;
 
-        public GetSingleGameHandler(
+        public GetGameByIdHandler(
             IDeletableEntityRepository<Game> repository,
             IRepository<Genre> genreRepository)
         {
@@ -17,12 +18,12 @@
             this.genreRepository = genreRepository;
         }
 
-        public async Task<GameDto> Handle(GetSingleGameQuery request, CancellationToken cancellationToken)
+        public async Task<GameDto> Handle(GetGameByIdQuery request, CancellationToken cancellationToken)
         {
             var game = this.repository
                            .AllAsNoTracking()
                            .FirstOrDefault(x => x.Id == request.Id)
-                           ?? throw new InvalidOperationException("Game not found!");
+                           ?? throw new GameNotFoundException("Game not found!");
 
             var genre = this.genreRepository.AllAsNoTracking().FirstOrDefault(g => g.Id == game.GenreId);
 

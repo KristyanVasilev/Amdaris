@@ -1,6 +1,7 @@
 ﻿namespace BookShop.Application.Games.Queries.GetGames
 {
     using BookShop.Application.Repositories;
+    using BookShop.Application.SeedWork.Exceptions;
     using BookShop.Domain;
     using MediatR;
 
@@ -24,11 +25,12 @@
                 Manufacturer = game.Manufacturer,
                 Genre = game.Genre.Name,
                 Images = game.Images,
-            });
+
+            }).OrderBy(x => x.Price);
 
             if (!result.Any())
             {
-                throw new InvalidOperationException();
+               throw new GameNotFoundException("No games found!");
             }
 
             return await Task.FromResult(result);
