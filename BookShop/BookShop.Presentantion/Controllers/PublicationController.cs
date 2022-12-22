@@ -2,9 +2,13 @@
 {
     using BookShop.Application.Publications.Commands.CreatePublication;
     using BookShop.Application.Publications.Commands.DeletePublication;
+    using BookShop.Application.Publications.Commands.UnDeletePublication;
     using BookShop.Application.Publications.Commands.UpdatePublication;
     using BookShop.Application.Publications.Queries.GetPublication;
-    using BookShop.Application.Publications.Queries.GetSinglePublication;
+    using BookShop.Application.Publications.Queries.GetPublicationByAuthor;
+    using BookShop.Application.Publications.Queries.GetPublicationByGenre;
+    using BookShop.Application.Publications.Queries.GetPublicationByName;
+    using BookShop.Application.Publications.Queries.GetPublicationById;
     using BookShop.Presentantion.Dto;
     using BookShop.Presentantion.Filters;
     using Microsoft.AspNetCore.Mvc;
@@ -24,11 +28,11 @@
             return Created("/publication", result);
         }
 
-        [HttpGet]
-        [Route("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        [HttpPost]
+        [Route("unDelete")]
+        public async Task<IActionResult> UnDeletePublication(string gameName)
         {
-            var command = new GetSinglePublicationQuery(id);
+            var command = new UnDeletePublicationCommand(gameName);
 
             var result = await Mediator.Send(command);
             var mappedResult = Mapper.Map<PublicationGetDto>(result);
@@ -43,6 +47,50 @@
 
             var result = await Mediator.Send(command);
             var mappedResult = Mapper.Map<IEnumerable<PublicationGetDto>>(result);
+            return Ok(mappedResult);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var command = new GetPublicationByIdQuery(id);
+
+            var result = await Mediator.Send(command);
+            var mappedResult = Mapper.Map<PublicationGetDto>(result);
+            return Ok(mappedResult);
+        }
+
+        [HttpGet]
+        [Route("getByAuthor")]
+        public async Task<IActionResult> GetPublicationByAuthor(string authorName)
+        {
+            var command = new GetPublicationByAuthorQuery(authorName);
+
+            var result = await Mediator.Send(command);
+            var mappedResult = Mapper.Map<IEnumerable<PublicationGetDto>>(result);
+            return Ok(mappedResult);
+        }
+
+        [HttpGet]
+        [Route("getByGenre")]
+        public async Task<IActionResult> GetPublicationByGenre(string genreName)
+        {
+            var command = new GetPublicationByGenreQuery(genreName);
+
+            var result = await Mediator.Send(command);
+            var mappedResult = Mapper.Map<IEnumerable<PublicationGetDto>>(result);
+            return Ok(mappedResult);
+        }
+
+        [HttpGet]
+        [Route("getByName")]
+        public async Task<IActionResult> GetPublicationByName(string name)
+        {
+            var command = new GetPublicationByNameQuery(name);
+
+            var result = await Mediator.Send(command);
+            var mappedResult = Mapper.Map<PublicationGetDto>(result);
             return Ok(mappedResult);
         }
 
