@@ -11,7 +11,7 @@
 
         public CreateGameHandler(
             IDeletableEntityRepository<Game> repository,
-             IRepository<Genre> genreRepository)
+            IRepository<Genre> genreRepository)
         {
             this.repository = repository;
             this.genreRepository = genreRepository;
@@ -19,6 +19,9 @@
 
         public async Task<int> Handle(CreateGameCommand request, CancellationToken cancellationToken)
         {
+            var isExist = this.repository.AllAsNoTracking().FirstOrDefault(x => x.Name == request.Name);
+            if (isExist != null) { throw new ArgumentException("Game already exist!"); }
+
             var genre = this.genreRepository
                             .AllAsNoTracking()
                             .FirstOrDefault(x => x.Name == request.Genre)

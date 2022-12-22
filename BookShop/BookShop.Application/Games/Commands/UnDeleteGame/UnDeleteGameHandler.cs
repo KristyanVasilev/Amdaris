@@ -22,6 +22,7 @@
         {
             var game = this.repository
                            .AllAsNoTrackingWithDeleted()
+                           .Where(x => x.IsDeleted == true)
                            .FirstOrDefault(x => x.Name == request.Name)
                            ?? throw new GameNotFoundException("Game not found!");
 
