@@ -21,7 +21,7 @@
         [ValidateModel]
         public async Task<IActionResult> CreateGame([FromBody] GamePostDto game)
         {
-            Logger.LogInformation(message: $"Request recieved by Controller: {nameof(GameController)}, Action: {nameof(GetGames)}, DateTime: {DateTime.Now}");
+            Logger.LogInformation(message: $"Request recieved by Controller: {nameof(GameController)}, Action: {nameof(CreateGame)}, DateTime: {DateTime.Now}");
             var command = Mapper.Map<CreateGameCommand>(game);
 
             var result = await Mediator.Send(command);

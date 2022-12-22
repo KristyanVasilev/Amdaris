@@ -22,6 +22,7 @@
         [ValidateModel]
         public async Task<IActionResult> CreatePublication([FromBody] PublicationPostDto publication)
         {
+            Logger.LogInformation(message: $"Request recieved by Controller: {nameof(PublicationController)}, Action: {nameof(CreatePublication)}, DateTime: {DateTime.Now}");
             var command = Mapper.Map<CreatePublicationCommand>(publication);
 
             var result = await Mediator.Send(command);
@@ -101,6 +102,7 @@
             var command = new DeletePublicationCommand(id);
 
             var result = await Mediator.Send(command);
+            Logger.LogInformation($"Game deleted Successfully!");
             return Ok(result);
         }
 

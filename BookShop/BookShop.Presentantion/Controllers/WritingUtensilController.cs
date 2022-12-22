@@ -21,6 +21,7 @@
         [ValidateModel]
         public async Task<IActionResult> CreateUtensil([FromBody] UtensilPostDto utensil)
         {
+            Logger.LogInformation(message: $"Request recieved by Controller: {nameof(WritingUtensilController)}, Action: {nameof(CreateUtensil)}, DateTime: {DateTime.Now}");
             var command = Mapper.Map<CreateUtensilsCommand>(utensil);
 
             var result = await Mediator.Send(command);
@@ -89,6 +90,7 @@
             var command = new DeleteUtensilCommand(id);
 
             var result = await Mediator.Send(command);
+            Logger.LogInformation($"Game deleted Successfully!");
             return Ok(result);
         }
 
