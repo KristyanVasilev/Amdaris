@@ -2,9 +2,12 @@
 {
     using BookShop.Application.WritingUtensils.Commands.CreateUtensils;
     using BookShop.Application.WritingUtensils.Commands.DeleteUtensils;
+    using BookShop.Application.WritingUtensils.Commands.UnDeleteUtensils;
     using BookShop.Application.WritingUtensils.Commands.UpdateUtensils;
-    using BookShop.Application.WritingUtensils.Queries.GetSingleUtensil;
+    using BookShop.Application.WritingUtensils.Queries.GetUtensilById;
     using BookShop.Application.WritingUtensils.Queries.GetUtensils;
+    using BookShop.Application.WritingUtensils.Queries.GetUtensilsByColor;
+    using BookShop.Application.WritingUtensils.Queries.GetUtensilsByType;
     using BookShop.Presentantion.Dto;
     using BookShop.Presentantion.Filters;
     using Microsoft.AspNetCore.Mvc;
@@ -24,11 +27,33 @@
             return Created("/writingUtensil", result);
         }
 
+        [HttpPost]
+        [Route("unDelete")]
+        public async Task<IActionResult> UnDeleteGame(string utensilName)
+        {
+            var command = new UnDeleteUtensilCommand(utensilName);
+
+            var result = await Mediator.Send(command);
+            var mappedResult = Mapper.Map<UtensilGetDto>(result);
+            return Ok(mappedResult);
+        }   
+
+        [HttpGet]
+        [Route("all")]
+        public async Task<IActionResult> GetUtensils()
+        {
+            var command = new GetUtensilsQuery();
+
+            var result = await Mediator.Send(command);
+            var mappedResult = Mapper.Map<IEnumerable<UtensilGetDto>>(result);
+            return Ok(mappedResult);
+        }
+
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var command = new GetSingleUtensilQuery(id);
+            var command = new GetUtensilByIdQuery(id);
 
             var result = await Mediator.Send(command);
             var mappedResult = Mapper.Map<UtensilGetDto>(result);
@@ -36,10 +61,21 @@
         }
 
         [HttpGet]
-        [Route("all")]
-        public async Task<IActionResult> GetUtensils()
+        [Route("getByColor")]
+        public async Task<IActionResult> GetUtensilsByColor(string color)
         {
-            var command = new GetUtensilsQuery();
+            var command = new GetUtensilsByColorQuery(color);
+
+            var result = await Mediator.Send(command);
+            var mappedResult = Mapper.Map<IEnumerable<UtensilGetDto>>(result);
+            return Ok(mappedResult);
+        }
+
+        [HttpGet]
+        [Route("getByType")]
+        public async Task<IActionResult> GetUtensilsByType(string typeName)
+        {
+            var command = new GetUtensilsByTypeQuery(typeName);
 
             var result = await Mediator.Send(command);
             var mappedResult = Mapper.Map<IEnumerable<UtensilGetDto>>(result);
