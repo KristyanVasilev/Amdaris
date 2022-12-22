@@ -1,4 +1,4 @@
-﻿namespace BookShop.Application.Images.Interfaces
+﻿namespace BookShop.Application.Interfaces
 {
     using BookShop.Application.Images.DTOs;
 

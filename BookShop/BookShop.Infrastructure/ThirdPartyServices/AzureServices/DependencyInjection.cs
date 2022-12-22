@@ -1,7 +1,7 @@
 ﻿namespace BookShop.Infrastructure.ThirdPartyServices.AzureServices
 {
     using Azure.Storage.Blobs;
-    using BookShop.Application.Images.Interfaces;
+    using BookShop.Application.Interfaces;
     using BookShop.Infrastructure.ThirdPartyServices.AzureServices.Settings;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;

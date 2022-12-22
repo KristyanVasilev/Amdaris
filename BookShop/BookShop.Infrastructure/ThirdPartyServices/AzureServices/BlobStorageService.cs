@@ -3,7 +3,7 @@
     using Azure.Storage.Blobs;
     using Azure.Storage.Blobs.Models;
     using BookShop.Application.Images.DTOs;
-    using BookShop.Application.Images.Interfaces;
+    using BookShop.Application.Interfaces;
 
     public class BlobStorageService : IFileStorageService
     {

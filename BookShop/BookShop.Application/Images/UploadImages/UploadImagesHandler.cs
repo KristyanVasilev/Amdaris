@@ -1,7 +1,7 @@
 ﻿namespace BookShop.Application.Images.UploadImages
 {
     using BookShop.Application.Images.DTOs;
-    using BookShop.Application.Images.Interfaces;
+    using BookShop.Application.Interfaces;
     using MediatR;
 
     public class UploadImagesHandler : IRequestHandler<UploadImagesCommand, UrlDto>
