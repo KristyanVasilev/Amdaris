@@ -1,4 +1,4 @@
-﻿namespace BookShop.Application.Games.Queries.GetSingleGame
+﻿namespace BookShop.Application.Games.Queries.GetGameById
 {
     using MediatR;
 
