@@ -19,6 +19,9 @@
 
         public async Task<int> Handle(CreateUtensilsCommand request, CancellationToken cancellationToken)
         {
+            var isExist = this.repository.AllAsNoTracking().FirstOrDefault(x => x.Name == request.Name);
+            if (isExist != null) { throw new ArgumentException("Utensil already exist!"); }
+
             var type = this.utensilRepository
                             .AllAsNoTracking()
                             .FirstOrDefault(x => x.Name == request.WritingUtensilsType)

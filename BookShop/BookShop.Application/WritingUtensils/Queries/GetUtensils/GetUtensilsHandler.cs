@@ -1,6 +1,7 @@
 ﻿namespace BookShop.Application.WritingUtensils.Queries.GetUtensils
 {
     using BookShop.Application.Repositories;
+    using BookShop.Application.SeedWork.Exceptions;
     using BookShop.Domain;
     using MediatR;
 
@@ -24,11 +25,12 @@
                 Manufacturer = utensil.Manufacturer,
                 Images = utensil.Images,
                 WritingUtensilsType = utensil.WritingUtensilsType.Name,
-            });
+
+            }).OrderBy(x => x.Price);
 
             if (!result.Any())
             {
-                throw new InvalidOperationException();
+                throw new WritingUtensilNotFoundException("No Utensils found!");
             }
 
             return await Task.FromResult(result);

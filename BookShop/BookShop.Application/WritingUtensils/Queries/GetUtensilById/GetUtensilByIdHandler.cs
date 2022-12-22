@@ -1,15 +1,16 @@
-﻿namespace BookShop.Application.WritingUtensils.Queries.GetSingleUtensil
+﻿namespace BookShop.Application.WritingUtensils.Queries.GetUtensilById
 {
     using BookShop.Application.Repositories;
+    using BookShop.Application.SeedWork.Exceptions;
     using BookShop.Domain;
     using MediatR;
 
-    public class GetSingleUtensilHandler : IRequestHandler<GetSingleUtensilQuery, WritingUtensilDto>
+    public class GetUtensilByIdHandler : IRequestHandler<GetUtensilByIdQuery, WritingUtensilDto>
     {
         private readonly IDeletableEntityRepository<WritingUtensil> repository;
         private readonly IRepository<WritingUtensilsType> utensilRepository;
 
-        public GetSingleUtensilHandler(
+        public GetUtensilByIdHandler(
             IDeletableEntityRepository<WritingUtensil> repository,
             IRepository<WritingUtensilsType> utensilRepository)
         {
@@ -17,12 +18,12 @@
             this.utensilRepository = utensilRepository;
         }
 
-        public Task<WritingUtensilDto> Handle(GetSingleUtensilQuery request, CancellationToken cancellationToken)
+        public Task<WritingUtensilDto> Handle(GetUtensilByIdQuery request, CancellationToken cancellationToken)
         {
             var utensil = this.repository
                               .AllAsNoTracking()
                               .FirstOrDefault(x => x.Id == request.Id)
-                              ?? throw new InvalidOperationException("Utensil cannot be null!");
+                              ?? throw new WritingUtensilNotFoundException("Utensil not found!");
 
             var type = this.utensilRepository
                            .AllAsNoTracking()

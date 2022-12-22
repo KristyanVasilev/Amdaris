@@ -1,6 +1,7 @@
 ﻿namespace BookShop.Application.WritingUtensils.Commands.DeleteUtensils
 {
     using BookShop.Application.Repositories;
+    using BookShop.Application.SeedWork.Exceptions;
     using BookShop.Domain;
     using MediatR;
 
@@ -18,7 +19,7 @@
             var utensil = this.repository
                               .AllAsNoTracking()
                               .FirstOrDefault(x => x.Id == request.Id)
-                              ?? throw new InvalidOperationException("Utensil cannot be null!");
+                              ?? throw new WritingUtensilNotFoundException("Utensil not found!");
 
             this.repository.Delete(utensil);
             await this.repository.SaveChangesAsync();
