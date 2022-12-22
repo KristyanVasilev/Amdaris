@@ -2,8 +2,11 @@
 {
     using BookShop.Application.Games.Commands.CreateGame;
     using BookShop.Application.Games.Commands.DeleteGame;
+    using BookShop.Application.Games.Commands.UnDeleteGame;
     using BookShop.Application.Games.Commands.UpdateGame;
+    using BookShop.Application.Games.Queries.GetGameByName;
     using BookShop.Application.Games.Queries.GetGames;
+    using BookShop.Application.Games.Queries.GetGamesByGenre;
     using BookShop.Application.Games.Queries.GetSingleGame;
     using BookShop.Presentantion.Dto;
     using BookShop.Presentantion.Filters;
@@ -18,17 +21,18 @@
         [ValidateModel]
         public async Task<IActionResult> CreateGame([FromBody] GamePostDto game)
         {
+            Logger.LogInformation(message: $"Request recieved by Controller: {nameof(GameController)}, Action: {nameof(GetGames)}, DateTime: {DateTime.Now}");
             var command = Mapper.Map<CreateGameCommand>(game);
 
             var result = await Mediator.Send(command);
             return Created("/game", result);
         }
 
-        [HttpGet]
-        [Route("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        [HttpPost]
+        [Route("unDelete")]
+        public async Task<IActionResult> UnDeleteGame(string gameName)
         {
-            var command = new GetSingleGameQuery(id);
+            var command = new UnDeleteGameCommand(gameName);
 
             var result = await Mediator.Send(command);
             var mappedResult = Mapper.Map<GameGetDto>(result);
@@ -39,17 +43,45 @@
         [Route("all")]
         public async Task<IActionResult> GetGames()
         {
-            //Logger.LogInformation($"Request recieved by Controller: {nameof(GameController)}, Action: {ControllerAction}," +
-            //    "DateTime: {DateTime}", new object[] { nameof(GameController), nameof(GetGames), DateTime.Now.ToString() });
-
-            Logger.LogInformation(message: $"Request recieved by Controller: {nameof(GameController)}, Action: {nameof(GetGames)}, DateTime: {DateTime.Now}");
-
             var command = new GetGamesQuery();
 
             var result = await Mediator.Send(command);
             var mappedResult = Mapper.Map<IEnumerable<GameGetDto>>(result);
 
             Logger.LogInformation($"We got {result.Count()} games");
+            return Ok(mappedResult);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var command = new GetGameByIdQuery(id);
+
+            var result = await Mediator.Send(command);
+            var mappedResult = Mapper.Map<GameGetDto>(result);
+            return Ok(mappedResult);
+        }
+
+        [HttpGet]
+        [Route("getByGenre")]
+        public async Task<IActionResult> GetGameByGenre(string genreName)
+        {
+            var command = new GetGamesByGenreQuery(genreName);
+
+            var result = await Mediator.Send(command);
+            var mappedResult = Mapper.Map<IEnumerable<GameGetDto>>(result);
+            return Ok(mappedResult);
+        }
+
+        [HttpGet]
+        [Route("getByName")]
+        public async Task<IActionResult> GetGameByName(string name)
+        {
+            var command = new GetGameByNameQuery(name);
+
+            var result = await Mediator.Send(command);
+            var mappedResult = Mapper.Map<GameGetDto>(result);
             return Ok(mappedResult);
         }
 
