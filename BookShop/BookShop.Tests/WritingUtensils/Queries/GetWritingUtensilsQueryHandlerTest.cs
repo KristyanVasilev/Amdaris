@@ -1,6 +1,7 @@
 ﻿namespace BookShop.Tests.WritingUtensils.Queries
 {
     using BookShop.Application.Repositories;
+    using BookShop.Application.SeedWork.Exceptions;
     using BookShop.Application.WritingUtensils;
     using BookShop.Application.WritingUtensils.Commands.DeleteUtensils;
     using BookShop.Application.WritingUtensils.Queries.GetUtensils;
@@ -11,11 +12,11 @@
     using Shouldly;
     using Xunit;
 
-    public class GetWritingUtensilsCommandHandlerTest
+    public class GetWritingUtensilsQueryHandlerTest
     {
         private readonly Mock<IDeletableEntityRepository<WritingUtensil>> mockRepo;
 
-        public GetWritingUtensilsCommandHandlerTest()
+        public GetWritingUtensilsQueryHandlerTest()
         {
             this.mockRepo = WritingUtensilMockRepository.GetWritingUtensilMockRepo();
         }
@@ -43,7 +44,7 @@
         }
 
         [Fact]
-        public async Task ShouldThrowInvalidOperationExceptionTest()
+        public async Task ShouldThrowWritingUtensilNotFoundExceptionTest()
         {
             var handler = new GetUtensilsHandler(this.mockRepo.Object);
             var deleteHandler = new DeleteUtensilHandler(this.mockRepo.Object);
@@ -54,7 +55,7 @@
                     CancellationToken.None);
             }
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            await Assert.ThrowsAsync<WritingUtensilNotFoundException>(() =>
             handler.Handle(new GetUtensilsQuery(), CancellationToken.None));
         }
     }

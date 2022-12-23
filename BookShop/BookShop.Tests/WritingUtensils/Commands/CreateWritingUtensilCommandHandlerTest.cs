@@ -29,7 +29,7 @@
             {
                 Id = 3,
                 Price = 40,
-                Name = "Marker",
+                Name = "Marker c",
                 Manufacturer = "Orange",
                 Color = "red",
                 WritingUtensilsType = "Marker",
@@ -38,7 +38,7 @@
             var count = this.mockRepo.Object.All().Count();
             var utensil = this.mockRepo.Object.AllAsNoTracking().Skip(2).First();
 
-            Assert.Equal("Marker", utensil.Name);
+            Assert.Equal("Marker c", utensil.Name);
             Assert.Equal(40, utensil.Price);
 
             Assert.True(count == 3);
@@ -53,13 +53,32 @@
             {
                 Id = 3,
                 Price = 40,
-                Name = "Marker",
+                Name = "Marker c",
                 Manufacturer = "Orange",
                 Color = "red",
                 WritingUtensilsType = "Marker",
             }, CancellationToken.None);
 
             result.ShouldBeOfType<Int32>();
+        }
+
+        [Fact]
+        public async Task ShouldTrowArgumentExceptionForCreatingAlreadyExistingUtensil()
+        {
+            var handler = new CreateUtensilsHandler(this.mockRepo.Object, this.typeMockRepo.Object);
+
+            var result = new CreateUtensilsCommand
+            {
+                Id = 3,
+                Price = 40,
+                Name = "Marker",
+                Manufacturer = "Orange",
+                Color = "red",
+                WritingUtensilsType = "Marker",
+            };
+
+            await Assert.ThrowsAsync<ArgumentException>(() =>
+            handler.Handle(result, CancellationToken.None));
         }
     }
 }

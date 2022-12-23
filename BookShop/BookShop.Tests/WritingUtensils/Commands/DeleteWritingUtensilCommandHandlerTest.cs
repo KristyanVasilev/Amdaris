@@ -1,6 +1,7 @@
 ﻿namespace BookShop.Tests.WritingUtensils.Commands
 {
     using BookShop.Application.Repositories;
+    using BookShop.Application.SeedWork.Exceptions;
     using BookShop.Application.WritingUtensils.Commands.DeleteUtensils;
     using BookShop.Domain;
     using BookShop.Tests.Mocks;
@@ -42,17 +43,17 @@
         }
 
         [Fact]
-        public async Task ShouldThrowInvalidOperationExceptionTest()
+        public async Task ShouldThrowWritingUtensilNotFoundExceptionTest()
         {
             var handler = new DeleteUtensilHandler(this.mockRepo.Object);
 
             var firstDelete = await handler.Handle(new DeleteUtensilCommand(1), CancellationToken.None);
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            await Assert.ThrowsAsync<WritingUtensilNotFoundException>(() =>
             handler.Handle(new DeleteUtensilCommand(12312), CancellationToken.None));
 
             var SecondDelete = await handler.Handle(new DeleteUtensilCommand(2), CancellationToken.None);
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            await Assert.ThrowsAsync<WritingUtensilNotFoundException>(() =>
             handler.Handle(new DeleteUtensilCommand(1), CancellationToken.None));
         }
     }

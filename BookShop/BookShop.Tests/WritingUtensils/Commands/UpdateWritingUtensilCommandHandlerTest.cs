@@ -1,6 +1,7 @@
 ﻿namespace BookShop.Tests.WritingUtensils.Commands
 {
     using BookShop.Application.Repositories;
+    using BookShop.Application.SeedWork.Exceptions;
     using BookShop.Application.WritingUtensils.Commands.UpdateUtensils;
     using BookShop.Domain;
     using BookShop.Tests.Mocks;
@@ -40,11 +41,11 @@
         }
 
         [Fact]
-        public async Task ShouldThrowInvalidOperationExceptionTest()
+        public async Task ShouldThrowWritingUtensilNotFoundExceptionTest()
         {
             var handler = new UpdateUtensilsHandler(this.mockRepo.Object, this.typeMockRepo.Object);
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => handler.Handle(new UpdateUtensilsCommand(), CancellationToken.None));
+            await Assert.ThrowsAsync<WritingUtensilNotFoundException>(() => handler.Handle(new UpdateUtensilsCommand(), CancellationToken.None));
         }
 
         [Fact]
