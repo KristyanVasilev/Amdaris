@@ -4,6 +4,7 @@
     using BookShop.Application.Publications.Commands.DeletePublication;
     using BookShop.Application.Publications.Queries.GetPublication;
     using BookShop.Application.Repositories;
+    using BookShop.Application.SeedWork.Exceptions;
     using BookShop.Domain;
     using BookShop.Tests.Mocks;
 
@@ -11,11 +12,11 @@
     using Shouldly;
     using Xunit;
 
-    public class GetPublicationsCommandHandlerTest
+    public class GetPublicationsQueryHandlerTest
     {
         private readonly Mock<IDeletableEntityRepository<Publication>> mockRepo;
 
-        public GetPublicationsCommandHandlerTest()
+        public GetPublicationsQueryHandlerTest()
         {
             this.mockRepo = PublicationMockRepository.GetPublicationMockRepo();
         }
@@ -43,7 +44,7 @@
         }
 
         [Fact]
-        public async Task ShouldThrowInvalidOperationExceptionTest()
+        public async Task ShouldThrowPublicationNotFoundExceptionTest()
         {
             var handler = new GetPublicationsHandler(this.mockRepo.Object);
             var deleteHandler = new DeletePublicationHandler(this.mockRepo.Object);
@@ -54,7 +55,7 @@
                     CancellationToken.None);
             }
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            await Assert.ThrowsAsync<PublicationNotFoundException>(() =>
             handler.Handle(new GetPublicationsQuery(), CancellationToken.None));
         }
     }

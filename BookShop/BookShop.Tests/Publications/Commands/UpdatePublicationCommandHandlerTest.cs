@@ -3,6 +3,7 @@
     using BookShop.Application;
     using BookShop.Application.Publications.Commands.UpdatePublication;
     using BookShop.Application.Repositories;
+    using BookShop.Application.SeedWork.Exceptions;
     using BookShop.Domain;
     using BookShop.Tests.Mocks;
 
@@ -44,11 +45,11 @@
         }
 
         [Fact]
-        public async Task ShouldThrowInvalidOperationExceptionTest()
+        public async Task ShouldThrowPublicationNotFoundExceptionTest()
         {
             var handler = new UpdatePublicationHandler(this.mockRepo.Object, this.genreMockRepo.Object);
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => handler.Handle(new UpdatePublicationCommand(), CancellationToken.None));
+            await Assert.ThrowsAsync<PublicationNotFoundException>(() => handler.Handle(new UpdatePublicationCommand(), CancellationToken.None));
         }
 
         [Fact]

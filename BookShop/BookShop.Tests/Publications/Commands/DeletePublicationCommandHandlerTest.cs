@@ -2,6 +2,7 @@
 {
     using BookShop.Application.Publications.Commands.DeletePublication;
     using BookShop.Application.Repositories;
+    using BookShop.Application.SeedWork.Exceptions;
     using BookShop.Domain;
     using BookShop.Tests.Mocks;
 
@@ -42,17 +43,17 @@
         }
 
         [Fact]
-        public async Task ShouldThrowInvalidOperationExceptionTest()
+        public async Task ShouldThrowPublicationNotFoundExceptionTest()
         {
             var handler = new DeletePublicationHandler(this.mockRepo.Object);
 
             var firstDelete = await handler.Handle(new DeletePublicationCommand(1), CancellationToken.None);
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            await Assert.ThrowsAsync<PublicationNotFoundException>(() =>
             handler.Handle(new DeletePublicationCommand(1234), CancellationToken.None));
 
             var SecondDelete = await handler.Handle(new DeletePublicationCommand(2), CancellationToken.None);
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            await Assert.ThrowsAsync<PublicationNotFoundException>(() =>
             handler.Handle(new DeletePublicationCommand(1), CancellationToken.None));
         }
     }

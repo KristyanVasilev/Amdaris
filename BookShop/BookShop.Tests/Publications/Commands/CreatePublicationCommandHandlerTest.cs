@@ -63,5 +63,25 @@
 
             result.ShouldBeOfType<Int32>();
         }
+
+        [Fact]
+        public async Task ShouldTrowArgumentExceptionForCreatingAlreadyExistingPublication()
+        {
+            var handler = new CreatePublicationHandler(this.mockRepo.Object, this.genreMockRepo.Object);
+
+            var result = new CreatePublicationCommand
+            {
+                Id = 3,
+                Price = 10,
+                Name = "The Boys from Biloxi",
+                Author = "Grisham",
+                PageCount = 400,
+                Description = "Some description",
+                Genre = "Horror",
+            };
+
+            await Assert.ThrowsAsync<ArgumentException>(() =>
+            handler.Handle(result, CancellationToken.None));
+        }
     }
 }
