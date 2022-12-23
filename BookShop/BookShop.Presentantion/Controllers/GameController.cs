@@ -8,7 +8,7 @@
     using BookShop.Application.Games.Queries.GetGames;
     using BookShop.Application.Games.Queries.GetGamesByGenre;
     using BookShop.Application.Games.Queries.GetGameById;
-    using BookShop.Presentantion.Dto;
+    using BookShop.Presentantion.DTOs;
     using BookShop.Presentantion.Filters;
     using Microsoft.AspNetCore.Mvc;
 

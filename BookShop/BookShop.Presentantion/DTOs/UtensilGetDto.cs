@@ -1,4 +1,4 @@
-﻿namespace BookShop.Presentantion.Dto
+﻿namespace BookShop.Presentantion.DTOs
 {
     public class UtensilGetDto
     {

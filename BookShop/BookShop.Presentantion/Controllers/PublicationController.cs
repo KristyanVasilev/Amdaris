@@ -9,7 +9,7 @@
     using BookShop.Application.Publications.Queries.GetPublicationByGenre;
     using BookShop.Application.Publications.Queries.GetPublicationByName;
     using BookShop.Application.Publications.Queries.GetPublicationById;
-    using BookShop.Presentantion.Dto;
+    using BookShop.Presentantion.DTOs;
     using BookShop.Presentantion.Filters;
     using Microsoft.AspNetCore.Mvc;
 

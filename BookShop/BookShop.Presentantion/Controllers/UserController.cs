@@ -1,5 +1,5 @@
 ﻿using BookShop.Domain;
-using BookShop.Presentantion.Dto;
+using BookShop.Presentantion.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

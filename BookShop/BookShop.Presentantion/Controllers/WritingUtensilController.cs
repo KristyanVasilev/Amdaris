@@ -8,7 +8,7 @@
     using BookShop.Application.WritingUtensils.Queries.GetUtensils;
     using BookShop.Application.WritingUtensils.Queries.GetUtensilsByColor;
     using BookShop.Application.WritingUtensils.Queries.GetUtensilsByType;
-    using BookShop.Presentantion.Dto;
+    using BookShop.Presentantion.DTOs;
     using BookShop.Presentantion.Filters;
     using Microsoft.AspNetCore.Mvc;
 

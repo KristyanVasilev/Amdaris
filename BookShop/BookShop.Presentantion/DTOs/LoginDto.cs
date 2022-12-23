@@ -1,4 +1,4 @@
-﻿namespace BookShop.Presentantion.Dto
+﻿namespace BookShop.Presentantion.DTOs   
 {
     using System.ComponentModel.DataAnnotations;
 

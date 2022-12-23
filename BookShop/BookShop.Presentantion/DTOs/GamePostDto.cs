@@ -1,9 +1,9 @@
-﻿namespace BookShop.Presentantion.Dto
+﻿namespace BookShop.Presentantion.DTOs
 {
     using BookShop.Presentantion.Filters;
     using System.ComponentModel.DataAnnotations;
 
-    public class PublicationPostDto
+    public class GamePostDto
     {
         [Required]
         [StringLength(50, MinimumLength = 2)]
@@ -11,13 +11,10 @@
 
         [Required]
         [StringLength(50, MinimumLength = 2)]
-        public string Author { get; set; } = null!;
+        public string Manufacturer { get; set; } = null!;
 
         [Range(0.5, int.MaxValue)]
         public decimal Price { get; set; }
-
-        [Range(5, int.MaxValue)]
-        public int PageCount { get; set; }
 
         [Required]
         [StringLength(500, MinimumLength = 10)]
