@@ -61,5 +61,24 @@
 
             result.ShouldBeOfType<Int32>();
         }
+
+        [Fact]
+        public async Task ShouldTrowArgumentExceptionForCreatingAlreadyExistingGame()
+        {
+            var handler = new CreateGameHandler(this.mockRepo.Object, this.genreMockRepo.Object);
+
+            var result = new CreateGameCommand
+            {
+                Id = 1,
+                Price = 140,
+                Name = "Chess",
+                Manufacturer = "Some genius",
+                Description = "Some description",
+                Genre = "Strategy",
+            };
+
+            await Assert.ThrowsAsync<ArgumentException>(() =>
+            handler.Handle(result, CancellationToken.None));
+        }
     }
 }

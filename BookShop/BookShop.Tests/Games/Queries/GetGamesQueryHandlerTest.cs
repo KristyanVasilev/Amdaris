@@ -4,6 +4,7 @@
     using BookShop.Application.Games.Commands.DeleteGame;
     using BookShop.Application.Games.Queries.GetGames;
     using BookShop.Application.Repositories;
+    using BookShop.Application.SeedWork.Exceptions;
     using BookShop.Domain;
     using BookShop.Tests.Mocks;
 
@@ -11,11 +12,11 @@
     using Shouldly;
     using Xunit;
 
-    public class GetGamesCommandHandlerTest
+    public class GetGamesQueryHandlerTest
     {
         private readonly Mock<IDeletableEntityRepository<Game>> mockRepo;
 
-        public GetGamesCommandHandlerTest()
+        public GetGamesQueryHandlerTest()
         {
             this.mockRepo = GameMockRepository.GetGameMockRepo();
         }
@@ -43,7 +44,7 @@
         }
 
         [Fact]
-        public async Task ShouldThrowInvalidOperationExceptionTest()
+        public async Task ShouldThrowGameNotFoundExceptionTest()
         {
             var handler = new GetGamesHandler(this.mockRepo.Object);
             var deleteHandler = new DeleteGameHandler(this.mockRepo.Object);
@@ -54,7 +55,7 @@
                     CancellationToken.None);
             }
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            await Assert.ThrowsAsync<GameNotFoundException>(() =>
             handler.Handle(new GetGamesQuery(), CancellationToken.None));
         }
     }

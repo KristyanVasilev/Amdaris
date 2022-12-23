@@ -2,6 +2,7 @@
 {
     using BookShop.Application.Games.Commands.DeleteGame;
     using BookShop.Application.Repositories;
+    using BookShop.Application.SeedWork.Exceptions;
     using BookShop.Domain;
     using BookShop.Tests.Mocks;
 
@@ -42,17 +43,17 @@
         }
 
         [Fact]
-        public async Task ShouldThrowInvalidOperationExceptionTest()
+        public async Task ShouldThrowGameNotFoundExceptionTest()
         {
             var handler = new DeleteGameHandler(this.mockRepo.Object);
 
             var firstDelete = await handler.Handle(new DeleteGameCommand(1), CancellationToken.None);
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            await Assert.ThrowsAsync<GameNotFoundException>(() =>
             handler.Handle(new DeleteGameCommand(12131), CancellationToken.None));
 
             var SecondDelete = await handler.Handle(new DeleteGameCommand(2), CancellationToken.None);
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            await Assert.ThrowsAsync<GameNotFoundException>(() =>
             handler.Handle(new DeleteGameCommand(1), CancellationToken.None));
         }
     }

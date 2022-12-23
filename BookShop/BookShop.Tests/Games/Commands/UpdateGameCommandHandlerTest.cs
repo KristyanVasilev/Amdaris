@@ -2,6 +2,7 @@
 {
     using BookShop.Application.Games.Commands.UpdateGame;
     using BookShop.Application.Repositories;
+    using BookShop.Application.SeedWork.Exceptions;
     using BookShop.Domain;
     using BookShop.Tests.Mocks;
 
@@ -40,11 +41,12 @@
         }
 
         [Fact]
-        public async Task ShouldThrowInvalidOperationExceptionTest()
+        public async Task ShouldThrowGameNotFoundExceptionTest()
         {
             var handler = new UpdateGameHandler(this.mockRepo.Object, this.genreMockRepo.Object);
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => handler.Handle(new UpdateGameCommand(), CancellationToken.None));
+            await Assert.ThrowsAsync<GameNotFoundException>(() => 
+            handler.Handle(new UpdateGameCommand(), CancellationToken.None));
         }
 
         [Fact]
