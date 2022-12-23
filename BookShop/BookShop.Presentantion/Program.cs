@@ -1,4 +1,3 @@
-using BookShop.Application.Interfaces;
 using BookShop.Application.Publications.Commands.CreatePublication;
 using BookShop.Application.Repositories;
 using BookShop.Domain;
