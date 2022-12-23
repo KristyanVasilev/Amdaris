@@ -4,7 +4,7 @@
 
     public class Error
     {
-        public string? StatusCode { get; set; }
+        public int? StatusCode { get; set; }
 
         public ICollection<string>? Message { get; set; } = new List<string>();
 

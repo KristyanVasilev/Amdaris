@@ -12,7 +12,7 @@
             {
                 var apiError = new Error
                 {
-                    StatusCode = "400",
+                    StatusCode = 400,
                     TimeSpan = DateTime.UtcNow,
                 };
                 var errors = context.ModelState.AsEnumerable();
