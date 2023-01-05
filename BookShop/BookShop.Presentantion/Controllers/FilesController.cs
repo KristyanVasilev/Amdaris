@@ -10,25 +10,22 @@
     {
 
         [HttpPost("Images")]
-        public async Task<IActionResult> UploadImages(IList<IFormFile> files)
+        public async Task<IActionResult> UploadImages(IFormFile file)
         {
 
             Logger.LogInformation(message: $"Request recieved by Controller: {nameof(FilesController)}, Action: {nameof(UploadImages)}, DateTime: {DateTime.Now}");
 
             var uploadImagesCommand = new UploadImagesCommand();
 
-            foreach (var file in files)
-            {
-
-
+            
                 var file1 = new FileDto
                 {
                     Content = file.OpenReadStream(),
                     Name = file.FileName,
-                    ContentType = file.ContentType
+                    ContentType = file.ContentType                   
                 };
                 uploadImagesCommand.Files.Add(file1);
-            }
+            
 
             var response = await Mediator.Send(uploadImagesCommand);
 
