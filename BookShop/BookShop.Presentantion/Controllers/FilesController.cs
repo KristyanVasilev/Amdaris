@@ -4,25 +4,30 @@
     using BookShop.Application.Images.UploadImages;
     using Microsoft.AspNetCore.Mvc;
 
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class FilesController : BaseController<FilesController>
     {
 
         [HttpPost("Images")]
-        public async Task<IActionResult> UploadImages(IList<IFormFile> formFiles)
+        public async Task<IActionResult> UploadImages(IList<IFormFile> files)
         {
+
+            Logger.LogInformation(message: $"Request recieved by Controller: {nameof(FilesController)}, Action: {nameof(UploadImages)}, DateTime: {DateTime.Now}");
+
             var uploadImagesCommand = new UploadImagesCommand();
 
-            foreach (var formFile in formFiles)
+            foreach (var file in files)
             {
-                var file = new FileDto
+
+
+                var file1 = new FileDto
                 {
-                    Content = formFile.OpenReadStream(),
-                    Name = formFile.FileName,
-                    ContentType = formFile.ContentType                   
+                    Content = file.OpenReadStream(),
+                    Name = file.FileName,
+                    ContentType = file.ContentType
                 };
-                uploadImagesCommand.Files.Add(file);
+                uploadImagesCommand.Files.Add(file1);
             }
 
             var response = await Mediator.Send(uploadImagesCommand);
