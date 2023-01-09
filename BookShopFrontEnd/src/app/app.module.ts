@@ -21,37 +21,41 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './shared/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
-import { ProductsHeaderComponent } from './pages/components/products-header/products-header.component';
-import { FiltersComponent } from './pages/components/filters/filters.component';
+import { ProductsHeaderComponent } from './pages/home/components/products-header/products-header.component';
+import { FiltersComponent } from './pages/home/components/filters/filters.component';
+import { CartComponent } from './pages/cart/cart.component';
+import { ProductBoxComponent } from "./pages/home/components/product-box/product-box.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    HomeComponent,
-    ProductsHeaderComponent,
-    FiltersComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatSidenavModule,
-    MatGridListModule,
-    MatMenuModule,
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    MatExpansionModule,
-    MatTreeModule,
-    MatListModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatBadgeModule,
-    MatSnackBarModule,
-    HttpClientModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        HomeComponent,
+        ProductsHeaderComponent,
+        FiltersComponent,
+        CartComponent,
+        ProductBoxComponent
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatSidenavModule,
+        MatGridListModule,
+        MatMenuModule,
+        MatButtonModule,
+        MatCardModule,
+        MatIconModule,
+        MatExpansionModule,
+        MatTreeModule,
+        MatListModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatBadgeModule,
+        MatSnackBarModule,
+        HttpClientModule,
+    ]
 })
 export class AppModule { }
