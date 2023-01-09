@@ -12,6 +12,7 @@ export class ProductBoxComponent {
   product: any | undefined ={
     id: 1,
     title: 'Need for speed',
+    price: 150,
     category: 'game',
     description: 'descriptipn',
     image: 'https://via.placeholder.com/150'
