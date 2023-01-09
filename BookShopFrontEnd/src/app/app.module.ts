@@ -20,11 +20,17 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './shared/header/header.component';
+import { HomeComponent } from './pages/home/home.component';
+import { ProductsHeaderComponent } from './pages/components/products-header/products-header.component';
+import { FiltersComponent } from './pages/components/filters/filters.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    HomeComponent,
+    ProductsHeaderComponent,
+    FiltersComponent
   ],
   imports: [
     BrowserModule,
