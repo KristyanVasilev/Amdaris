@@ -14,6 +14,4 @@ export class FiltersComponent {
   onShowCategory(category: string): void {
     this.showCategory.emit(category);
   }
-
-  //NgOnDestroy todo
 }

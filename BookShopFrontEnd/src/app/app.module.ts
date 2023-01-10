@@ -26,6 +26,7 @@ import { FiltersComponent } from './pages/home/components/filters/filters.compon
 import { CartComponent } from './pages/cart/cart.component';
 import { PublicationBoxComponent } from './pages/home/components/publication-box/publication-box.component';
 import { GameBoxComponent } from './pages/home/components/game-box/game-box.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -58,6 +59,7 @@ import { GameBoxComponent } from './pages/home/components/game-box/game-box.comp
         MatBadgeModule,
         MatSnackBarModule,
         HttpClientModule,
+        FormsModule
     ]
 })
 export class AppModule { }
