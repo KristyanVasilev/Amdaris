@@ -8,9 +8,11 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class FiltersComponent {
   @Output() showCategory = new EventEmitter<string>();
 
-  categories = ['publications', 'games', 'writing utensils']
+  categories = ['all', 'publications', 'games', 'writing utensils']
 
   onShowCategory(category: string): void {
     this.showCategory.emit(category);
   }
+
+  //NgOnDestroy todo
 }
