@@ -1,14 +1,18 @@
 <mat-card class="mb-4">
     <div class="flex justify-between">
         <div>
-            <button mat-button [matMenuTriggerFor]="sortByMenu">
-                Sort by {{ sort }}
-                <mat-icon>expand_more</mat-icon>
+            <button mat-raised-button color="primary" [routerLink]="['/create']">
+                <mat-icon>create</mat-icon>
+                Create
             </button>
-            <mat-menu #sortByMenu="matMenu">
-                <button (click)="onSortUpdated('desc')" mat-menu-item>desc</button>
-                <button (click)="onSortUpdated('asc')" mat-menu-item>asc</button>
-            </mat-menu>
+            <button mat-raised-button color="accent" [routerLink]="['/update']">
+                <mat-icon>update</mat-icon>
+                Update
+            </button>
+            <button mat-raised-button color="warn" [routerLink]="['/delete']">
+                <mat-icon>delete</mat-icon>
+                Delete
+            </button>
         </div>
         <div class="flex items-center">
             <button (click)="onColumnsUpdated(1)">
