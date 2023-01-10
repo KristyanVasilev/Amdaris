@@ -27,8 +27,7 @@ export class HomeComponent {
     private gameService: GameService,
     private publicationService: PublicationService) {
 
-    this.getGames();
-    this.getPublications();
+    this.onShowCategory('all');
   }
 
   getGames(): void {
@@ -54,12 +53,23 @@ export class HomeComponent {
 
   onShowCategory(newCategory: string): void {
     this.category = newCategory;
+    console.log(this.category);
+    if (this.category === 'all') {
+      this.getGames();
+      this.getPublications();
+    }
+    if (this.category === 'games') {
+      this.getGames();
+    }
+    if (this.category === 'publications') {     
+      this.getPublications();
+    } 
   }
 
   onAddToCart(product: any): void {
     this.cartService.addToCart({
-      product: product.image,
-      name: product.title,
+      product: product.images,
+      name: product.name,
       price: product.price,
       quantity: 1,
       id: product.id,
