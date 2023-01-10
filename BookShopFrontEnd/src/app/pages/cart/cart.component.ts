@@ -8,22 +8,7 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent {
-  cart: Cart = {
-    items: [{
-      product: 'https://via.placeholder.com/150',
-      name: 'Need for Speed',
-      price: 150,
-      quantity: 1,
-      id: 1,
-    },
-    {
-      product: 'https://via.placeholder.com/150',
-      name: 'Need for Speed 2',
-      price: 130,
-      quantity: 2,
-      id: 2,
-    }]
-  };
+  cart: Cart = { items: [] };
 
   dataSource: Array<CartItem> = [];
   displayedColumns: Array<string> = [
