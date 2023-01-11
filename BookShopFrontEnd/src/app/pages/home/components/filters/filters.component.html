@@ -13,8 +13,8 @@
     <mat-panel-title> CREATE</mat-panel-title> <mat-icon class="small-icon">create</mat-icon>
   </mat-expansion-panel-header>
   <mat-selection-list [multiple]="false">
-    <mat-list-option *ngFor="let item of items" [value]="item">
-      <button [routerLink]="['/{{item}}']">{{ item }}</button>
+    <mat-list-option *ngFor="let item of items">
+      <button [routerLink]="['/create', item]">{{ item }}</button>
     </mat-list-option>
   </mat-selection-list>
 </mat-expansion-panel>
@@ -24,7 +24,7 @@
   </mat-expansion-panel-header>
   <mat-selection-list [multiple]="false">
     <mat-list-option *ngFor="let item of items" [value]="item">
-      <button [routerLink]="['/{{item}}']">{{ item }}</button>
+      <button [routerLink]="['/update', item]">{{ item }}</button>
     </mat-list-option>
   </mat-selection-list>
 </mat-expansion-panel>
@@ -34,7 +34,7 @@
   </mat-expansion-panel-header>
   <mat-selection-list [multiple]="false">
     <mat-list-option *ngFor="let item of items" [value]="item">
-      <button [routerLink]="['/{{item}}']">{{ item }}</button>
+      <button [routerLink]="['/delete', item]">{{ item }}</button>
     </mat-list-option>
   </mat-selection-list>
 </mat-expansion-panel>
