@@ -1,1 +1,45 @@
-<p>create-game works!</p>
+<div>
+    <h2 class="text-center py-10">To create a game you need first to upload the image and then complete the form
+        bellow!</h2>
+</div>
+<div class="text-center py-10">
+    <input type="file" (change)="onChange($event)">
+    <button (click)="onUpload()" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">
+        Upload
+    </button>
+</div>
+<div class="container text-center py-10" *ngIf="loading">
+    <h3>Loading ...</h3>
+</div>
+<form (ngSubmit)="createGame()" class="bg-white p-6 rounded-lg shadow-md" #gameForm="ngForm">
+    <div class="mb-4 text-center">
+        <label class="block text-gray-700 font-medium mb-2 text-center" for="name">Game Name</label>
+        <input class="bg-gray-200 border border-black p-2 rounded-lg w-1/2 py-2 px-3 text-gray-700 leading-tight mx-auto" type="text" id="name" required
+            [(ngModel)]="game.name" name="name">
+    </div>
+    <div class="mb-4 text-center">
+        <label class="block text-gray-700 font-medium mb-2 text-center" for="manufacturer">Manufacturer</label>
+        <input class="bg-gray-200 border border-black p-2 rounded-lg w-1/2 py-2 px-3 text-gray-700 leading-tight mx-auto" type="text" id="manufacturer" required
+            [(ngModel)]="game.manufacturer" name="manufacturer">
+    </div>
+    <div class="mb-4 text-center">
+        <label class="block text-gray-700 font-medium mb-2 text-center" for="description">Description</label>
+        <textarea class="bg-gray-200 border border-black p-2 rounded-lg w-1/2 py-2 px-3 text-gray-700 leading-tight mx-auto" id="description" required
+            [(ngModel)]="game.description" name="description"></textarea>
+    </div>
+    <div class="mb-4 text-center">
+        <label class="block text-gray-700 font-medium mb-2 text-center" for="genre">Genre</label>
+        <input class="bg-gray-200 border border-black p-2 rounded-lg w-1/2 py-2 px-3 text-gray-700 leading-tight mx-auto" id="genre" required
+            [(ngModel)]="game.genre" name="genre">
+    </div>
+    <div class="mb-4 text-center">
+        <label class="block text-gray-700 font-medium mb-2 text-center" for="price">Price</label>
+        <input class="bg-gray-200 border border-black p-2 rounded-lg w-1/2 py-2 px-3 text-gray-700 leading-tight mx-auto" type="number" id="price" required
+            [(ngModel)]="game.price" name="price">
+    </div>
+    <div class="text-center">
+        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
+            [disabled]="!gameForm.form.valid">Create</button>
+    </div>
+</form>
+

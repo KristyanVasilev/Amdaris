@@ -15,4 +15,8 @@ export class GameService {
   getAllGames(): Observable<Array<Game>> {
     return this.httpClient.get<Array<Game>>(`${STORE_BASE_URL}/all`);
   }
+
+  createGame(game: Game){
+    return this.httpClient.post(`${STORE_BASE_URL}/create`, game)
+  }
 }
