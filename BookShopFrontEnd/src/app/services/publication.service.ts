@@ -15,4 +15,8 @@ export class PublicationService {
   getAllPublications(): Observable<Array<Publication>> {
     return this.httpClient.get<Array<Publication>>(`${STORE_BASE_URL}/all`);
   }
+
+  createPublication(publication: Publication){
+    return this.httpClient.post(`${STORE_BASE_URL}/create`, publication)
+  }
 }
