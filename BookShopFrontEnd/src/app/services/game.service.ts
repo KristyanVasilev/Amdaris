@@ -19,4 +19,12 @@ export class GameService {
   createGame(game: Game){
     return this.httpClient.post(`${STORE_BASE_URL}/create`, game)
   }
+
+  deleteGame(id: number){
+    return this.httpClient.delete(`${STORE_BASE_URL}/delete?id=` + id)
+  }
+
+  findGame(name: string): Observable<any>{
+    return this.httpClient.get(`${STORE_BASE_URL}/getByName?name=` + name)
+  }
 }

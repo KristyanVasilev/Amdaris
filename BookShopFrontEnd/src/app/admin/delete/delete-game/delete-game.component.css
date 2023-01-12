@@ -1,0 +1,9 @@
+.bgColor {
+    background-color: red;
+    color: aliceblue;
+}
+
+.centerImg {
+    display: block;
+    margin: auto;
+  }
