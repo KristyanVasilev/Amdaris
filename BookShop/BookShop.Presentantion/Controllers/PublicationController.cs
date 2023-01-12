@@ -106,9 +106,7 @@
             return Ok(result);
         }
 
-        [HttpPut]
-        [Route("update")]
-        [ValidateModel]
+        [HttpPost("update/{id}")]
         public async Task<IActionResult> UpdatePublication([FromBody] PublicationPutDto publication, int id)
         {
             publication.Id = id;
