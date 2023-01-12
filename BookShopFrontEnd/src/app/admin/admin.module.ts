@@ -9,6 +9,8 @@ import { DeletePublicationComponent } from './delete/delete-publication/delete-p
 import { MatCardModule } from '@angular/material/card';
 import { UndeletePublicationComponent } from './unDelete/undelete-publication/undelete-publication.component';
 import { UndeleteGameComponent } from './unDelete/undelete-game/undelete-game.component';
+import { UpdateGameComponent } from './update/update-game/update-game.component';
+import { UpdatePublicationComponent } from './update/update-publication/update-publication.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { UndeleteGameComponent } from './unDelete/undelete-game/undelete-game.co
     DeletePublicationComponent,
     UndeletePublicationComponent,
     UndeleteGameComponent,
+    UpdateGameComponent,
+    UpdatePublicationComponent,
   ],
   imports: [
     CommonModule,

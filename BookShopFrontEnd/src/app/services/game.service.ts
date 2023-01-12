@@ -10,7 +10,8 @@ const STORE_BASE_URL = 'https://localhost:7201/api/Game';
 })
 export class GameService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient) { }
 
   getAllGames(): Observable<Array<Game>> {
     return this.httpClient.get<Array<Game>>(`${STORE_BASE_URL}/all`);
@@ -31,4 +32,16 @@ export class GameService {
   UndeleteGame(gameName: string): Observable<Game>{
     return this.httpClient.post<Game>(`${STORE_BASE_URL}/unDelete?gameName=${gameName}`, gameName)
   }
+
+  UpdateGame(game: Game, id: number): Observable<number>{
+    const gamePostDto = {
+      Name: game.name,
+      Manufacturer: game.manufacturer,
+      Price: game.price,
+      Description: game.description,
+      Genre: game.genre,
+      Images: game.images
+  }
+    return this.httpClient.post<number>(`${STORE_BASE_URL}/update/${id}`, gamePostDto);
+}
 }

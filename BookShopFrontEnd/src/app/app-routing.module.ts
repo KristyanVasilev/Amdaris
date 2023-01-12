@@ -6,6 +6,8 @@ import { DeleteGameComponent } from './admin/delete/delete-game/delete-game.comp
 import { DeletePublicationComponent } from './admin/delete/delete-publication/delete-publication.component';
 import { UndeleteGameComponent } from './admin/unDelete/undelete-game/undelete-game.component';
 import { UndeletePublicationComponent } from './admin/unDelete/undelete-publication/undelete-publication.component';
+import { UpdateGameComponent } from './admin/update/update-game/update-game.component';
+import { UpdatePublicationComponent } from './admin/update/update-publication/update-publication.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { HomeComponent } from './pages/home/home.component';
 
@@ -40,6 +42,14 @@ const routes: Routes = [{
 {
   path: 'undelete/publication',
   component: UndeletePublicationComponent,
+},
+{
+  path: 'update/game',
+  component: UpdateGameComponent,
+},
+{
+  path: 'update/publication',
+  component: UpdatePublicationComponent,
 },
 {
   path: '', redirectTo: 'home', pathMatch: 'full'

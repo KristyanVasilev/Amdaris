@@ -1,0 +1,93 @@
+<div>
+    <h2 class="text-center py-4">Find the game that you want to update and then complete form bellow!</h2>
+</div>
+<form (ngSubmit)="findGame();submitted=true" class="bg-white p-6 rounded-lg shadow-md" #gameFindForm="ngForm">
+    <div class="mb-4 text-center">
+        <label class="block text-gray-700 font-medium mb-2 text-center" for="name">Game Name</label>
+        <input
+            class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto"
+            type="text" id="name" required [(ngModel)]="gameName.name" name="name">
+    </div>
+    <div class="text-center">
+        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
+            [disabled]="!gameFindForm.form.valid">Find</button>
+    </div>
+</form>
+<ng-container *ngIf="submitted && game.id === 0">
+    <h3 class="text-center"><b>Game not found!</b></h3>
+</ng-container>
+<ng-container *ngIf="game.id != 0">
+    <mat-card class="w-64 m-auto">
+        <div class="bg-gray-200 p-4">
+            <img class="mx-auto my-4 h-64" [src]="game.images" />
+            <div class="text-center" class="px-8 flex flex-col justify-between">
+                <div>
+                    <h5>Genre: <b>{{ game.genre }}</b></h5>
+                    <h3 class="truncate hover:whitespace-normal">
+                        <b>{{ game.name }}</b>
+                    </h3>
+                    <p>
+                        <b>Description: </b>
+                        {{ game.description }}
+                    </p>
+                    <p>
+                        <b>Manufacturer: </b>
+                        {{ game.manufacturer }}
+                    </p>
+                    <h3 class="text-center"><b class="bgColor">ID -{{ game.id }}</b></h3>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+</ng-container>
+<ng-container *ngIf="game.id != 0">
+    <div>
+        <h2 class="text-center py-10">Its important to upload the image first!</h2>
+    </div>
+    <div class="text-center py-10">
+        <input type="file" (change)="onChange($event)">
+        <button (click)="onUpload()" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">
+            Upload
+        </button>
+    </div>
+    <div class="container text-center py-10" *ngIf="loading">
+        <h3>Loading ...</h3>
+    </div>
+    <form (ngSubmit)="updateGame()" class="bg-white p-6 rounded-lg shadow-md" #UpdateGameForm="ngForm">
+        <h2 class="text-center py-10">Complete the form!</h2>
+        <div class="mb-4 text-center">
+            <label class="block text-gray-700 font-medium mb-2 text-center" for="name">Game Name</label>
+            <input
+                class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto"
+                type="text" id="name" required [(ngModel)]="gameToUpdate.name" name="name">
+        </div>
+        <div class="mb-4 text-center">
+            <label class="block text-gray-700 font-medium mb-2 text-center" for="manufacturer">Manufacturer</label>
+            <input
+                class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto"
+                type="text" id="manufacturer" required [(ngModel)]="gameToUpdate.manufacturer" name="manufacturer">
+        </div>
+        <div class="mb-4 text-center">
+            <label class="block text-gray-700 font-medium mb-2 text-center" for="description">Description</label>
+            <textarea
+                class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto"
+                id="description" required [(ngModel)]="gameToUpdate.description" name="description"></textarea>
+        </div>
+        <div class="mb-4 text-center">
+            <label class="block text-gray-700 font-medium mb-2 text-center" for="genre">Genre</label>
+            <input
+                class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto"
+                id="genre" required [(ngModel)]="gameToUpdate.genre" name="genre">
+        </div>
+        <div class="mb-4 text-center">
+            <label class="block text-gray-700 font-medium mb-2 text-center" for="price">Price</label>
+            <input
+                class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto"
+                type="number" id="price" required [(ngModel)]="gameToUpdate.price" name="price">
+        </div>
+        <div class="text-center">
+            <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
+                [disabled]="!UpdateGameForm.form.valid">Update</button>
+        </div>
+    </form>
+</ng-container>
