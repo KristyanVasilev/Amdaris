@@ -31,4 +31,18 @@ export class PublicationService {
   UndeletePublication(publicationName: string): Observable<Publication>{
     return this.httpClient.post<Publication>(`${STORE_BASE_URL}/unDelete?publicationName=${publicationName}`, publicationName)
   }
+
+  UpdatePublication(publication: Publication, id: number): Observable<number> {
+    const PublicationPutDto = {
+      Id: id,
+      Name: publication.name,
+      Author: publication.author,
+      Price: publication.price,
+      PageCount: publication.pageCount,
+      Description: publication.description,
+      Genre: publication.genre,
+      Images: publication.images
+    }
+    return this.httpClient.post<number>(`${STORE_BASE_URL}/update/${id}`, PublicationPutDto);
+  }
 }

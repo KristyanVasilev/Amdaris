@@ -17,23 +17,23 @@ export class GameService {
     return this.httpClient.get<Array<Game>>(`${STORE_BASE_URL}/all`);
   }
 
-  createGame(game: Game){
+  createGame(game: Game) {
     return this.httpClient.post<number>(`${STORE_BASE_URL}/create`, game)
   }
 
-  deleteGame(id: number){
+  deleteGame(id: number) {
     return this.httpClient.delete<number>(`${STORE_BASE_URL}/delete?id=` + id)
   }
 
-  findGame(name: string): Observable<Game>{
+  findGame(name: string): Observable<Game> {
     return this.httpClient.get<Game>(`${STORE_BASE_URL}/getByName?name=` + name)
   }
 
-  UndeleteGame(gameName: string): Observable<Game>{
+  UndeleteGame(gameName: string): Observable<Game> {
     return this.httpClient.post<Game>(`${STORE_BASE_URL}/unDelete?gameName=${gameName}`, gameName)
   }
 
-  UpdateGame(game: Game, id: number): Observable<number>{
+  UpdateGame(game: Game, id: number): Observable<number> {
     const gamePostDto = {
       Name: game.name,
       Manufacturer: game.manufacturer,
@@ -41,7 +41,7 @@ export class GameService {
       Description: game.description,
       Genre: game.genre,
       Images: game.images
-  }
+    }
     return this.httpClient.post<number>(`${STORE_BASE_URL}/update/${id}`, gamePostDto);
-}
+  }
 }
