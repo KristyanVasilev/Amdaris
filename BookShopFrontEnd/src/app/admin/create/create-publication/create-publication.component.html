@@ -14,32 +14,32 @@
 <form (ngSubmit)="createPublication()" class="bg-white p-6 rounded-lg shadow-md" #bookForm="ngForm">
     <div class="mb-4 text-center">
         <label class="block text-gray-700 font-medium mb-2 text-center" for="name">Book Name</label>
-        <input class="bg-gray-200 border border-black p-2 rounded-lg w-1/2 py-2 px-3 text-gray-700 leading-tight mx-auto" type="text" id="name" required
+        <input class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto" type="text" id="name" required
             [(ngModel)]="publication.name" name="name">
     </div>
     <div class="mb-4 text-center">
         <label class="block text-gray-700 font-medium mb-2 text-center" for="author">Author</label>
-        <input class="bg-gray-200 border border-black p-2 rounded-lg w-1/2 py-2 px-3 text-gray-700 leading-tight mx-auto" type="text" id="author" required
+        <input class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto" type="text" id="author" required
             [(ngModel)]="publication.author" name="author">
     </div>
     <div class="mb-4 text-center">
         <label class="block text-gray-700 font-medium mb-2 text-center" for="description">Description</label>
-        <textarea class="bg-gray-200 border border-black p-2 rounded-lg w-1/2 py-2 px-3 text-gray-700 leading-tight mx-auto" id="description" required
+        <textarea class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto" id="description" required
             [(ngModel)]="publication.description" name="description"></textarea>
     </div>
     <div class="mb-4 text-center">
         <label class="block text-gray-700 font-medium mb-2 text-center" for="genre">Genre</label>
-        <textarea class="bg-gray-200 border border-black p-2 rounded-lg w-1/2 py-2 px-3 text-gray-700 leading-tight mx-auto" id="genre" required
+        <textarea class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto" id="genre" required
             [(ngModel)]="publication.genre" name="genre"></textarea>
     </div>
     <div class="mb-4 text-center">
         <label class="block text-gray-700 font-medium mb-2 text-center" for="pageCount">PageCount</label>
-        <input class="bg-gray-200 border border-black p-2 rounded-lg w-1/2 py-2 px-3 text-gray-700 leading-tight mx-auto" type="number" id="pageCount"
+        <input class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto" type="number" id="pageCount"
             required [(ngModel)]="publication.pageCount" name="pageCount">
     </div>
     <div class="mb-4 text-center">
         <label class="block text-gray-700 font-medium mb-2 text-center" for="price">Price</label>
-        <input class="bg-gray-200 border border-black p-2 rounded-lg w-1/2 py-2 px-3 text-gray-700 leading-tight mx-auto" type="number" id="price" required
+        <input class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto" type="number" id="price" required
             [(ngModel)]="publication.price" name="price">
     </div>
     <div class="text-center">
