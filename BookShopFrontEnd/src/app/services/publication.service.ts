@@ -19,4 +19,12 @@ export class PublicationService {
   createPublication(publication: Publication){
     return this.httpClient.post(`${STORE_BASE_URL}/create`, publication)
   }
+
+  deletePublication(id: number){
+    return this.httpClient.delete(`${STORE_BASE_URL}/delete?id=` + id)
+  }
+
+  findPublication(name: string): Observable<any>{
+    return this.httpClient.get(`${STORE_BASE_URL}/getByName?name=` + name)
+  }
 }

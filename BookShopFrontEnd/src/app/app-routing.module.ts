@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateGameComponent } from './admin/create/create-game/create-game.component';
 import { CreatePublicationComponent } from './admin/create/create-publication/create-publication.component';
 import { DeleteGameComponent } from './admin/delete/delete-game/delete-game.component';
+import { DeletePublicationComponent } from './admin/delete/delete-publication/delete-publication.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { HomeComponent } from './pages/home/home.component';
 
@@ -28,7 +29,7 @@ const routes: Routes = [{
 },
 {
   path: 'delete/publication',
-  component: DeleteGameComponent,
+  component: DeletePublicationComponent,
 },
 {
   path: '', redirectTo: 'home', pathMatch: 'full'
