@@ -8,8 +8,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class FiltersComponent {
   @Output() showCategory = new EventEmitter<string>();
 
-  categories = ['all', 'publications', 'games', 'writing utensils']
-  items = ['publication', 'game', 'writing utensil']
+  categories = ['all', 'publications', 'games', 'for school']
+  items = ['publication', 'game', 'for school']
 
   onShowCategory(category: string): void {
     this.showCategory.emit(category);

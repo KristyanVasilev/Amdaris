@@ -4,7 +4,7 @@
   </mat-expansion-panel-header>
   <mat-selection-list [multiple]="false">
     <mat-list-option *ngFor="let category of categories" [value]="category">
-      <button (click)="onShowCategory(category)">{{ category }}</button>
+      <button (click)="onShowCategory(category)"><b>{{ category }}</b></button>
     </mat-list-option>
   </mat-selection-list>
 </mat-expansion-panel>
@@ -14,7 +14,7 @@
   </mat-expansion-panel-header>
   <mat-selection-list [multiple]="false">
     <mat-list-option *ngFor="let item of items">
-      <button [routerLink]="['/create', item]">{{ item }}</button>
+      <button [routerLink]="['/create', item]"><b>{{ item }}</b></button>
     </mat-list-option>
   </mat-selection-list>
 </mat-expansion-panel>
@@ -24,7 +24,7 @@
   </mat-expansion-panel-header>
   <mat-selection-list [multiple]="false">
     <mat-list-option *ngFor="let item of items" [value]="item">
-      <button [routerLink]="['/update', item]">{{ item }}</button>
+      <button [routerLink]="['/update', item]"><b>{{ item }}</b></button>
     </mat-list-option>
   </mat-selection-list>
 </mat-expansion-panel>
@@ -34,7 +34,17 @@
   </mat-expansion-panel-header>
   <mat-selection-list [multiple]="false">
     <mat-list-option *ngFor="let item of items" [value]="item">
-      <button [routerLink]="['/delete', item]">{{ item }}</button>
+      <button [routerLink]="['/delete', item]"><b>{{ item }}</b></button>
+    </mat-list-option>
+  </mat-selection-list>
+</mat-expansion-panel>
+<mat-expansion-panel class="py-4" *ngIf="categories">
+  <mat-expansion-panel-header>
+    <mat-panel-title> UNDELETE</mat-panel-title> <mat-icon class="small-icon">sync</mat-icon>
+  </mat-expansion-panel-header>
+  <mat-selection-list [multiple]="false">
+    <mat-list-option *ngFor="let item of items" [value]="item">
+      <button [routerLink]="['/undelete', item]"><b>{{ item }}</b></button>
     </mat-list-option>
   </mat-selection-list>
 </mat-expansion-panel>
