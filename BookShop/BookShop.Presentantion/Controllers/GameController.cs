@@ -87,7 +87,7 @@
 
         [HttpDelete]
         [Route("delete")]
-        public async Task<IActionResult> DeleteGame(int id)
+        public async Task<IActionResult> DeleteGame([FromQuery] int id)
         {
             var command = new DeleteGameCommand(id);
 

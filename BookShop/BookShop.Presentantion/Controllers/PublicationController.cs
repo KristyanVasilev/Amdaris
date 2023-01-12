@@ -95,9 +95,9 @@
             return Ok(mappedResult);
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("delete")]
-        public async Task<IActionResult> DeletePublication(int id)
+        public async Task<IActionResult> DeletePublication([FromQuery] int id)
         {
             var command = new DeletePublicationCommand(id);
 
