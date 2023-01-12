@@ -18,7 +18,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeaderComponent } from './shared/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductsHeaderComponent } from './pages/home/components/products-header/products-header.component';
@@ -28,6 +28,7 @@ import { PublicationBoxComponent } from './pages/home/components/publication-box
 import { GameBoxComponent } from './pages/home/components/game-box/game-box.component';
 import { FormsModule } from '@angular/forms';
 import { AdminModule } from './admin/admin.module';
+import { HttpErrorInterceptor } from './error-handling/HttpErrorInterceptor';
 
 @NgModule({
     declarations: [
@@ -40,7 +41,12 @@ import { AdminModule } from './admin/admin.module';
         PublicationBoxComponent,
         GameBoxComponent,
     ],
-    providers: [],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HttpErrorInterceptor,
+            multi: true
+        }],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
