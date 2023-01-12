@@ -15,6 +15,7 @@ export class UpdatePublicationComponent {
   shortLink: string = "";
   loading: boolean = false; // Flag variable
   submitted: boolean = false;
+  isUploaded = false;
   publicationSubsription: Subscription | undefined;
   publication: Publication = { id: 0, name: '', price: 0, pageCount: 0, description: '', genre: '', author: '', images: [] };
   publicationToUpdate: Publication = { id: 0, name: '', price: 0, pageCount: 0, description: '', genre: '', author: '', images: [] as string[] };
@@ -58,6 +59,7 @@ export class UpdatePublicationComponent {
   upload(file: any): Observable<any> {
     const formData = new FormData();
     formData.append("file", file, file.name);
+    this.isUploaded = true;
     return this.http.post('https://localhost:7201/api/Files/Images', formData)
   }
 

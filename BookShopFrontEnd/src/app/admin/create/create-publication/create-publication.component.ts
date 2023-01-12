@@ -21,6 +21,7 @@ export class CreatePublicationComponent {
     genre: '',
     images: [] as string[]
   };
+  isUploaded = false;
 
   constructor(
     private http: HttpClient,
@@ -35,6 +36,7 @@ export class CreatePublicationComponent {
   upload(file: any): Observable<any> {
     const formData = new FormData();
     formData.append("file", file, file.name);
+    this.isUploaded = true;
     return this.http.post('https://localhost:7201/api/Files/Images', formData)
   }
 

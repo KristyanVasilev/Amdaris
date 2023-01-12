@@ -56,37 +56,61 @@
         <h2 class="text-center py-10">Complete the form!</h2>
         <div class="mb-4 text-center">
             <label class="block text-gray-700 font-medium mb-2 text-center" for="name">Book Name</label>
-            <input class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto" type="text" id="name" required
-                [(ngModel)]="publicationToUpdate.name" name="name">
+            <input
+                class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto"
+                type="text" id="name" required minlength="2" [(ngModel)]="publicationToUpdate.name" name="name" #name="ngModel">
+            <div *ngIf="name.touched && name.invalid" class="text-red-500 text-xs">
+                <div *ngIf="name.errors?.['required']">Name is required</div>
+                <div *ngIf="name.errors?.['minlength']">Name must be at least 2 characters</div>
+            </div>
         </div>
         <div class="mb-4 text-center">
             <label class="block text-gray-700 font-medium mb-2 text-center" for="author">Author</label>
-            <input class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto" type="text" id="author" required
-                [(ngModel)]="publicationToUpdate.author" name="author">
+            <input class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto" type="text" id="author" required minlength="2"
+                [(ngModel)]="publicationToUpdate.author" name="author" #author="ngModel">
+            <div *ngIf="author.touched && author.invalid" class="text-red-500">
+                <div *ngIf="author.errors?.['required']">Author is required</div>
+                <div *ngIf="author.errors?.['minlength']">Author must have at least 2 characters</div>
+            </div>
         </div>
         <div class="mb-4 text-center">
             <label class="block text-gray-700 font-medium mb-2 text-center" for="description">Description</label>
-            <textarea class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto" id="description" required
-                [(ngModel)]="publicationToUpdate.description" name="description"></textarea>
+            <textarea
+                class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto"
+                id="description" required minlength="10" [(ngModel)]="publicationToUpdate.description" name="description"
+                #description="ngModel"></textarea>
+            <div *ngIf="description.touched && description.invalid" class="text-red-500">
+                <div *ngIf="description.errors?.['required']" class="text-red-500">Description is required</div>
+                <div *ngIf="description.errors?.['minlength']" class="text-red-500">Description must be at least 10
+                    characters</div>
+            </div>
+            <div class="mb-4 text-center">
+                <label class="block text-gray-700 font-medium mb-2 text-center" for="genre">Genre</label>
+                <input
+                    class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto"
+                    id="genre" required [(ngModel)]="publicationToUpdate.genre" name="genre" #genre="ngModel">
+                <div *ngIf="genre.touched && genre.invalid" class="text-red-500">Genre is required</div>
+            </div>
+            <div class="mb-4 text-center">
+                <label class="block text-gray-700 font-medium mb-2 text-center" for="pageCount">Page Count</label>
+                <input
+                    class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto"
+                    type="number" min="0.5" id="pageCount" required [(ngModel)]="publicationToUpdate.pageCount" name="pageCount" #pageCount="ngModel">
+                <div *ngIf="pageCount.touched && pageCount.invalid" class="text-red-500">PageCount is required</div>
+            </div>
+            <div class="mb-4 text-center">
+                <label class="block text-gray-700 font-medium mb-2 text-center" for="price">Price</label>
+                <input
+                    class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto"
+                    type="number" min="0.5" id="price" required [(ngModel)]="publicationToUpdate.price" name="price" #price="ngModel">
+                <div *ngIf="price.touched && price.invalid" class="text-red-500">Price is required</div>
+            </div>
         </div>
-        <div class="mb-4 text-center">
-            <label class="block text-gray-700 font-medium mb-2 text-center" for="genre">Genre</label>
-            <textarea class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto" id="genre" required
-                [(ngModel)]="publicationToUpdate.genre" name="genre"></textarea>
-        </div>
-        <div class="mb-4 text-center">
-            <label class="block text-gray-700 font-medium mb-2 text-center" for="pageCount">PageCount</label>
-            <input class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto" type="number" id="pageCount"
-                required [(ngModel)]="publicationToUpdate.pageCount" name="pageCount">
-        </div>
-        <div class="mb-4 text-center">
-            <label class="block text-gray-700 font-medium mb-2 text-center" for="price">Price</label>
-            <input class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto" type="number" id="price" required
-                [(ngModel)]="publicationToUpdate.price" name="price">
-        </div>
-        <div class="text-center">
-            <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
-                [disabled]="!UpdateGameForm.form.valid">Create</button>
-        </div>
+        <ng-container *ngIf="isUploaded">
+            <div class="text-center">
+                <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
+                    [disabled]="!UpdateGameForm.form.valid">Create</button>
+            </div>
+        </ng-container>
     </form>
 </ng-container>
