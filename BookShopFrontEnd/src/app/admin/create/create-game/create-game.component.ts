@@ -20,6 +20,7 @@ export class CreateGameComponent {
     manufacturer: '',
     images: [] as string[]
   };
+  isUploaded = false;
 
   constructor(
     private http: HttpClient,
@@ -34,6 +35,7 @@ export class CreateGameComponent {
   upload(file: any): Observable<any> {
     const formData = new FormData();
     formData.append("file", file, file.name);
+    this.isUploaded = true;
     return this.http.post('https://localhost:7201/api/Files/Images', formData)
   }
 
@@ -62,6 +64,6 @@ export class CreateGameComponent {
 
   createGame() {
     this.gameService.createGame(this.game).subscribe(res => console.log(res));
-    this.router.navigate(['home'])
+console.log('opa');
   }
 }

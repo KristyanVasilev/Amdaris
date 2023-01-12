@@ -18,6 +18,7 @@ export class UpdateGameComponent {
   gameToUpdate: Game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '', images: [] as string[] };
   shortLink: string = "";
   loading: boolean = false; // Flag variable
+  isUploaded = false;
   gameId = {
     id: 0,
   };
@@ -58,6 +59,7 @@ export class UpdateGameComponent {
   upload(file: any): Observable<any> {
     const formData = new FormData();
     formData.append("file", file, file.name);
+    this.isUploaded = true;
     return this.http.post('https://localhost:7201/api/Files/Images', formData)
   }
 
