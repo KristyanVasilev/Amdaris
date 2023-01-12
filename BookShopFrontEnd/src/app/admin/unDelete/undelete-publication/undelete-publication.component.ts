@@ -1,16 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Publication } from 'src/app/models/publication';
 import { PublicationService } from 'src/app/services/publication.service';
 
 @Component({
-  selector: 'app-delete-publication',
-  templateUrl: './delete-publication.component.html',
-  styleUrls: ['./delete-publication.component.css']
+  selector: 'app-undelete-publication',
+  templateUrl: './undelete-publication.component.html',
+  styleUrls: ['./undelete-publication.component.css']
 })
-export class DeletePublicationComponent {
-  @ViewChild('publicationFindForm') publicationFindForm: any;
+export class UndeletePublicationComponent {
+  @ViewChild('UndeletePublicationForm') UndeletePublicationForm: any;
   submitted: boolean = false;
   publicationSubsription: Subscription | undefined;
   publication: Publication = { id: 0, name: '', price: 0, pageCount: 0, description: '', genre: '', author: '', images: [] };
@@ -27,18 +27,9 @@ export class DeletePublicationComponent {
 
   }
 
-  deletePublication() {
+  UndeletePublication() {
     this.publicationSubsription = this.publicationService
-      .deletePublication(this.publicationId.id)
-      .subscribe((res) => {
-        console.log(res)
-      });
-    this.router.navigate(['home']);
-  }
-
-  FindPublication() {
-    this.publicationSubsription = this.publicationService
-      .findPublication(this.publicationName.name)
+      .UndeletePublication(this.publicationName.name)
       .subscribe((_publication) => {
         this.publication = _publication;
         console.log(_publication)
@@ -49,7 +40,7 @@ export class DeletePublicationComponent {
   resetForm() {
     this.publicationName = { name: "" };
     this.publication = { id: 0, name: '', price: 0, pageCount: 0, description: '', genre: '', author: '', images: [] };
-    this.publicationFindForm.resetForm();
+    this.UndeletePublicationForm.resetForm();
     this.submitted = false;
   }
 

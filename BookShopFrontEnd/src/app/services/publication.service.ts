@@ -17,14 +17,18 @@ export class PublicationService {
   }
 
   createPublication(publication: Publication){
-    return this.httpClient.post(`${STORE_BASE_URL}/create`, publication)
+    return this.httpClient.post<number>(`${STORE_BASE_URL}/create`, publication)
   }
 
   deletePublication(id: number){
-    return this.httpClient.delete(`${STORE_BASE_URL}/delete?id=` + id)
+    return this.httpClient.delete<number>(`${STORE_BASE_URL}/delete?id=` + id)
   }
 
-  findPublication(name: string): Observable<any>{
-    return this.httpClient.get(`${STORE_BASE_URL}/getByName?name=` + name)
+  findPublication(name: string): Observable<Publication>{
+    return this.httpClient.get<Publication>(`${STORE_BASE_URL}/getByName?name=` + name)
+  }
+
+  UndeletePublication(publicationName: string): Observable<Publication>{
+    return this.httpClient.post<Publication>(`${STORE_BASE_URL}/unDelete?publicationName=${publicationName}`, publicationName)
   }
 }
