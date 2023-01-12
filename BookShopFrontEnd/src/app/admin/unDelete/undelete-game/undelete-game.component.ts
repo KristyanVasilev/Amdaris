@@ -5,12 +5,12 @@ import { Game } from 'src/app/models/game';
 import { GameService } from 'src/app/services/game.service';
 
 @Component({
-  selector: 'app-delete-game',
-  templateUrl: './delete-game.component.html',
-  styleUrls: ['./delete-game.component.css']
+  selector: 'app-undelete-game',
+  templateUrl: './undelete-game.component.html',
+  styleUrls: ['./undelete-game.component.css']
 })
-export class DeleteGameComponent {
-  @ViewChild('gameFindForm') gameFindForm: any;
+export class UndeleteGameComponent {
+  @ViewChild('UndeleteGameForm') UndeleteGameForm: any;
   submitted: boolean = false;
   gamesSubsription: Subscription | undefined;
   game: Game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '', images: [] };
@@ -26,18 +26,9 @@ export class DeleteGameComponent {
     private router: Router) {
 
   }
-  deleteGame() {
+  UndeleteGame() {
     this.gamesSubsription = this.gameService
-      .deleteGame(this.gameId.id)
-      .subscribe((res) => {
-        console.log(res)
-      });
-    this.router.navigate(['home']);
-  }
-
-  findGame() {
-    this.gamesSubsription = this.gameService
-      .findGame(this.gameName.name)
+      .UndeleteGame(this.gameName.name)
       .subscribe((_game) => {
         this.game = _game;
         console.log(_game)
@@ -48,7 +39,7 @@ export class DeleteGameComponent {
   resetForm() {
     this.gameName = { name: "" };
     this.game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '', images: [] };
-    this.gameFindForm.resetForm();
+    this.UndeleteGameForm.resetForm();
     this.submitted = false;
   }
 

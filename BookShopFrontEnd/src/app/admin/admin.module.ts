@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteGameComponent } from './delete/delete-game/delete-game.component';
 import { DeletePublicationComponent } from './delete/delete-publication/delete-publication.component';
 import { MatCardModule } from '@angular/material/card';
+import { UndeletePublicationComponent } from './unDelete/undelete-publication/undelete-publication.component';
+import { UndeleteGameComponent } from './unDelete/undelete-game/undelete-game.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import { MatCardModule } from '@angular/material/card';
     CreatePublicationComponent,
     DeleteGameComponent,
     DeletePublicationComponent,
+    UndeletePublicationComponent,
+    UndeleteGameComponent,
   ],
   imports: [
     CommonModule,
