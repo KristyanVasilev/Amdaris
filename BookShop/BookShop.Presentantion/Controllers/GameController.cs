@@ -96,20 +96,19 @@
             return Ok(result);
         }
 
-        [HttpPut]
-        [Route("update")]
+        [HttpPost("update/{id}")]
         [ValidateModel]
-        public async Task<IActionResult> UpdateGame([FromBody] GamePostDto game, int id)
+        public async Task<IActionResult> UpdateGame([FromBody] GamePostDto gamePostDto, int id)
         {
             var command = new UpdateGameCommand
             {
                 Id = id,
-                Name = game.Name,
-                Price = game.Price,
-                Manufacturer = game.Manufacturer,
-                Description = game.Description,
-                Genre = game.Genre,
-                Images = game.Images,
+                Name = gamePostDto.Name,
+                Price = gamePostDto.Price,
+                Manufacturer = gamePostDto.Manufacturer,
+                Description = gamePostDto.Description,
+                Genre = gamePostDto.Genre,
+                Images = gamePostDto.Images,
             };
 
             var result = await Mediator.Send(command);
