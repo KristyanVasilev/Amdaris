@@ -31,9 +31,9 @@
 
         [HttpPost]
         [Route("unDelete")]
-        public async Task<IActionResult> UnDeletePublication(string gameName)
+        public async Task<IActionResult> UnDeletePublication(string publicationName)
         {
-            var command = new UnDeletePublicationCommand(gameName);
+            var command = new UnDeletePublicationCommand(publicationName);
 
             var result = await Mediator.Send(command);
             var mappedResult = Mapper.Map<PublicationGetDto>(result);
