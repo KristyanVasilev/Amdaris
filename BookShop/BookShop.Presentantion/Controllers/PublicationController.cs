@@ -107,6 +107,7 @@
         }
 
         [HttpPost("update/{id}")]
+        [ValidateModel]
         public async Task<IActionResult> UpdatePublication([FromBody] PublicationPutDto publication, int id)
         {
             publication.Id = id;
