@@ -20,6 +20,10 @@ export class UtensilService {
     return this.httpClient.post<number>(`${STORE_BASE_URL}/create`, utensil)
   }
 
+  deleteUtensil(id: number) {
+    return this.httpClient.delete<number>(`${STORE_BASE_URL}/delete?id=` + id)
+  }
+
   findUtensil(name: string): Observable<Utensil>{
     return this.httpClient.get<Utensil>(`${STORE_BASE_URL}/getByName?name=` + name)
   }

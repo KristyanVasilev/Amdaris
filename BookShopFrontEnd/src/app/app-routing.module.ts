@@ -5,6 +5,7 @@ import { CreatePublicationComponent } from './admin/create/create-publication/cr
 import { CreateUtensilComponent } from './admin/create/create-utensil/create-utensil.component';
 import { DeleteGameComponent } from './admin/delete/delete-game/delete-game.component';
 import { DeletePublicationComponent } from './admin/delete/delete-publication/delete-publication.component';
+import { DeleteUtensilComponent } from './admin/delete/delete-utensil/delete-utensil.component';
 import { UndeleteGameComponent } from './admin/unDelete/undelete-game/undelete-game.component';
 import { UndeletePublicationComponent } from './admin/unDelete/undelete-publication/undelete-publication.component';
 import { UpdateGameComponent } from './admin/update/update-game/update-game.component';
@@ -40,6 +41,10 @@ const routes: Routes = [{
 {
   path: 'delete/publication',
   component: DeletePublicationComponent,
+},
+{
+  path: 'delete/utensil',
+  component: DeleteUtensilComponent,
 },
 {
   path: 'undelete/game',
