@@ -14,7 +14,7 @@ import { UpdatePublicationComponent } from './update/update-publication/update-p
 import { UpdateUtensilComponent } from './update/update-utensil/update-utensil.component';
 import { CreateUtensilComponent } from './create/create-utensil/create-utensil.component';
 import { DeleteUtensilComponent } from './delete/delete-utensil/delete-utensil.component';
-import { UndeleteUtensilComponent } from './undelete/undelete-utensil/undelete-utensil.component';
+import { UndeleteUtensilComponent } from './unDelete/undelete-utensil/undelete-utensil.component';
 
 @NgModule({
   declarations: [
