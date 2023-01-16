@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Game } from 'src/app/models/game';
 import { Publication } from 'src/app/models/publication';
+import { Utensil } from 'src/app/models/utensil';
 import { CartService } from 'src/app/services/cart.service';
 import { GameService } from 'src/app/services/game.service';
 import { PublicationService } from 'src/app/services/publication.service';
+import { UtensilService } from 'src/app/services/utensil.service';
 
 const ROWS_HEIGHT: { [id: number]: number } = { 1: 400, 3: 335, 4: 350 };
 
@@ -19,13 +21,16 @@ export class HomeComponent {
   rowHeight: number = ROWS_HEIGHT[this.cols];
   games: Array<Game> | undefined;
   publications: Array<Publication> | undefined;
+  utensils: Array<Utensil> | undefined;
   gamesSubsription: Subscription | undefined;
   publicationsSubsription: Subscription | undefined;
+  utensilSubsription: Subscription | undefined;
 
   constructor(
     private cartService: CartService,
     private gameService: GameService,
-    private publicationService: PublicationService) {
+    private publicationService: PublicationService,
+    private utensilService: UtensilService,) {
 
     this.onShowCategory('all');
   }
@@ -46,6 +51,14 @@ export class HomeComponent {
       });
   }
 
+  getUtensils(): void {
+    this.utensilSubsription = this.utensilService
+      .getAllUtensils()
+      .subscribe((_utensils) => {
+        this.utensils = _utensils;
+      });
+  }
+
   onColumnsCountChange(colsNum: number): void {
     this.cols = colsNum;
     this.rowHeight = ROWS_HEIGHT[colsNum];
@@ -57,12 +70,16 @@ export class HomeComponent {
     if (this.category === 'all') {
       this.getGames();
       this.getPublications();
+      this.getUtensils();
     }
     if (this.category === 'games') {
       this.getGames();
     }
     if (this.category === 'publications') {     
       this.getPublications();
+    } 
+    if (this.category === 'for school') {     
+      this.getUtensils();
     } 
   }
 
@@ -83,6 +100,10 @@ export class HomeComponent {
 
     if (this.publicationsSubsription) {
       this.publicationsSubsription.unsubscribe();
+    }
+
+    if (this.utensilSubsription) {
+      this.utensilSubsription.unsubscribe();
     }
   }
 }

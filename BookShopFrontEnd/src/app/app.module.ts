@@ -29,6 +29,7 @@ import { GameBoxComponent } from './pages/home/components/game-box/game-box.comp
 import { FormsModule } from '@angular/forms';
 import { AdminModule } from './admin/admin.module';
 import { HttpErrorInterceptor } from './error-handling/HttpErrorInterceptor';
+import { UtensilBoxComponent } from './pages/home/components/utensil-box/utensil-box.component';
 
 @NgModule({
     declarations: [
@@ -40,6 +41,7 @@ import { HttpErrorInterceptor } from './error-handling/HttpErrorInterceptor';
         CartComponent,
         PublicationBoxComponent,
         GameBoxComponent,
+        UtensilBoxComponent,
     ],
     providers: [
         {
