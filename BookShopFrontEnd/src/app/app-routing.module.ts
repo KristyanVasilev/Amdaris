@@ -8,6 +8,7 @@ import { DeletePublicationComponent } from './admin/delete/delete-publication/de
 import { DeleteUtensilComponent } from './admin/delete/delete-utensil/delete-utensil.component';
 import { UndeleteGameComponent } from './admin/unDelete/undelete-game/undelete-game.component';
 import { UndeletePublicationComponent } from './admin/unDelete/undelete-publication/undelete-publication.component';
+import { UndeleteUtensilComponent } from './admin/unDelete/undelete-utensil/undelete-utensil.component';
 import { UpdateGameComponent } from './admin/update/update-game/update-game.component';
 import { UpdatePublicationComponent } from './admin/update/update-publication/update-publication.component';
 import { UpdateUtensilComponent } from './admin/update/update-utensil/update-utensil.component';
@@ -53,6 +54,10 @@ const routes: Routes = [{
 {
   path: 'undelete/publication',
   component: UndeletePublicationComponent,
+},
+{
+  path: 'undelete/utensil',
+  component: UndeleteUtensilComponent,
 },
 {
   path: 'update/game',

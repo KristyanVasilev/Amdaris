@@ -24,6 +24,10 @@ export class UtensilService {
     return this.httpClient.delete<number>(`${STORE_BASE_URL}/delete?id=` + id)
   }
 
+  UndeleteUtensil(publicationName: string): Observable<Utensil>{
+    return this.httpClient.post<Utensil>(`${STORE_BASE_URL}/unDelete?utensilName=${publicationName}`, publicationName)
+  }
+
   findUtensil(name: string): Observable<Utensil>{
     return this.httpClient.get<Utensil>(`${STORE_BASE_URL}/getByName?name=` + name)
   }
