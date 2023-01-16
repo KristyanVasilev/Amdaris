@@ -15,4 +15,21 @@ export class UtensilService {
   getAllUtensils(): Observable<Array<Utensil>> {
     return this.httpClient.get<Array<Utensil>>(`${STORE_BASE_URL}/all`);
   }
+
+  findUtensil(name: string): Observable<Utensil>{
+    return this.httpClient.get<Utensil>(`${STORE_BASE_URL}/getByName?name=` + name)
+  }
+  
+  UpdateUtensil(utensil: Utensil, id: number): Observable<number> {
+    const UtensilPostDto = {
+      Id: id,
+      Name: utensil.name,
+      Price: utensil.price,
+      Manufacturer: utensil.manufacturer,
+      WritingUtensilsType: utensil.writingUtensilsType,
+      Color: utensil.color,
+      Images: utensil.images
+    }
+    return this.httpClient.post<number>(`${STORE_BASE_URL}/update/${id}`, UtensilPostDto);
+  }
 }

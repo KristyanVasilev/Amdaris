@@ -11,6 +11,7 @@ import { UndeletePublicationComponent } from './unDelete/undelete-publication/un
 import { UndeleteGameComponent } from './unDelete/undelete-game/undelete-game.component';
 import { UpdateGameComponent } from './update/update-game/update-game.component';
 import { UpdatePublicationComponent } from './update/update-publication/update-publication.component';
+import { UpdateUtensilComponent } from './update/update-utensil/update-utensil.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { UpdatePublicationComponent } from './update/update-publication/update-p
     UndeleteGameComponent,
     UpdateGameComponent,
     UpdatePublicationComponent,
+    UpdateUtensilComponent,
   ],
   imports: [
     CommonModule,

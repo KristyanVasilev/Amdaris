@@ -5,18 +5,18 @@
     <mat-drawer-content class="p-6">
         <app-products-header (columnsCountChange)="onColumnsCountChange($event)">
         </app-products-header>
-        <mat-grid-list *ngIf="category==='games' || category==='all'" gutterSize="16" [cols]="cols"
-            [rowHeight]="rowHeight">
-            <mat-grid-tile *ngFor="let game of games">
-                <app-game-box [product]="game" (addToCart)="onAddToCart($event)" class="w-full"
-                    [fullWidthMode]="cols === 1"></app-game-box>
-            </mat-grid-tile>
-        </mat-grid-list>
         <mat-grid-list *ngIf="category==='publications' || category==='all'" gutterSize="16" [cols]="cols"
             [rowHeight]="rowHeight">
             <mat-grid-tile *ngFor="let publication of publications">
                 <app-publication-box [product]="publication" (addToCart)="onAddToCart($event)" class="w-full"
                     [fullWidthMode]="cols === 1"></app-publication-box>
+            </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list *ngIf="category==='games' || category==='all'" gutterSize="16" [cols]="cols"
+            [rowHeight]="rowHeight">
+            <mat-grid-tile *ngFor="let game of games">
+                <app-game-box [product]="game" (addToCart)="onAddToCart($event)" class="w-full"
+                    [fullWidthMode]="cols === 1"></app-game-box>
             </mat-grid-tile>
         </mat-grid-list>
         <mat-grid-list *ngIf="category==='for school' || category==='all'" gutterSize="16" [cols]="cols"

@@ -7,7 +7,7 @@
     using BookShop.Application.WritingUtensils.Queries.GetUtensilById;
     using BookShop.Application.WritingUtensils.Queries.GetUtensils;
     using BookShop.Application.WritingUtensils.Queries.GetUtensilsByColor;
-    using BookShop.Application.WritingUtensils.Queries.GetUtensilsByType;
+    using BookShop.Application.WritingUtensils.Queries.GetUtensilsByName;
     using BookShop.Presentantion.DTOs;
     using BookShop.Presentantion.Filters;
     using Microsoft.AspNetCore.Mvc;
@@ -73,13 +73,13 @@
         }
 
         [HttpGet]
-        [Route("getByType")]
-        public async Task<IActionResult> GetUtensilsByType(string typeName)
+        [Route("getByName")]
+        public async Task<IActionResult> GetUtensilsByName(string name)
         {
-            var command = new GetUtensilsByTypeQuery(typeName);
+            var command = new GetUtensilsByNameQuery(name);
 
             var result = await Mediator.Send(command);
-            var mappedResult = Mapper.Map<IEnumerable<UtensilGetDto>>(result);
+            var mappedResult = Mapper.Map<UtensilGetDto>(result);
             return Ok(mappedResult);
         }
 

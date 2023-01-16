@@ -8,6 +8,7 @@ import { UndeleteGameComponent } from './admin/unDelete/undelete-game/undelete-g
 import { UndeletePublicationComponent } from './admin/unDelete/undelete-publication/undelete-publication.component';
 import { UpdateGameComponent } from './admin/update/update-game/update-game.component';
 import { UpdatePublicationComponent } from './admin/update/update-publication/update-publication.component';
+import { UpdateUtensilComponent } from './admin/update/update-utensil/update-utensil.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { HomeComponent } from './pages/home/home.component';
 
@@ -50,6 +51,10 @@ const routes: Routes = [{
 {
   path: 'update/publication',
   component: UpdatePublicationComponent,
+},
+{
+  path: 'update/utensil',
+  component: UpdateUtensilComponent,
 },
 {
   path: '', redirectTo: 'home', pathMatch: 'full'
