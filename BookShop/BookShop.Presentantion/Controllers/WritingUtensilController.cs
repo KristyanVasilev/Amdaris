@@ -85,17 +85,16 @@
 
         [HttpDelete]
         [Route("delete")]
-        public async Task<IActionResult> DeleteUtensil(int id)
+        public async Task<IActionResult> DeleteUtensil([FromQuery] int id)
         {
             var command = new DeleteUtensilCommand(id);
 
             var result = await Mediator.Send(command);
-            Logger.LogInformation($"Game deleted Successfully!");
+            Logger.LogInformation($"Utensil deleted Successfully!");
             return Ok(result);
         }
 
-        [HttpPut]
-        [Route("update")]
+        [HttpPost("update/{id}")]
         [ValidateModel]
         public async Task<IActionResult> UpdateUtensil([FromBody] UtensilPostDto utensil, int id)
         {
