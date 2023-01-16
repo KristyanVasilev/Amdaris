@@ -16,6 +16,10 @@ export class UtensilService {
     return this.httpClient.get<Array<Utensil>>(`${STORE_BASE_URL}/all`);
   }
 
+  createUtensil(utensil: Utensil) {
+    return this.httpClient.post<number>(`${STORE_BASE_URL}/create`, utensil)
+  }
+
   findUtensil(name: string): Observable<Utensil>{
     return this.httpClient.get<Utensil>(`${STORE_BASE_URL}/getByName?name=` + name)
   }

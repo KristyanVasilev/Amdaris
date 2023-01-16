@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateGameComponent } from './admin/create/create-game/create-game.component';
 import { CreatePublicationComponent } from './admin/create/create-publication/create-publication.component';
+import { CreateUtensilComponent } from './admin/create/create-utensil/create-utensil.component';
 import { DeleteGameComponent } from './admin/delete/delete-game/delete-game.component';
 import { DeletePublicationComponent } from './admin/delete/delete-publication/delete-publication.component';
 import { UndeleteGameComponent } from './admin/unDelete/undelete-game/undelete-game.component';
@@ -27,6 +28,10 @@ const routes: Routes = [{
 {
   path: 'create/publication',
   component: CreatePublicationComponent,
+},
+{
+  path: 'create/utensil',
+  component: CreateUtensilComponent,
 },
 {
   path: 'delete/game',

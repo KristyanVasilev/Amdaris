@@ -1,0 +1,74 @@
+<div>
+    <h2 class="text-center py-10">To create a utensil you need first to upload the image and then complete the form
+        bellow!</h2>
+</div>
+<div class="text-center py-10">
+    <input type="file" (change)="onChange($event)">
+    <button (click)="onUpload()" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">
+        Upload
+    </button>
+</div>
+<div class="container text-center py-10" *ngIf="loading">
+    <h3>Loading ...</h3>
+</div>
+<form (ngSubmit)="createGame()" class="bg-white p-6 rounded-lg shadow-md" #utensilForm="ngForm">
+    <h2 class="text-center py-10">Complete the form!</h2>
+    <div class="mb-4 text-center">
+        <label class="block text-gray-700 font-medium mb-2 text-center" for="name">Utensil Name</label>
+        <input
+            class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto"
+            type="text" id="name" required minlength="2" [(ngModel)]="utensil.name" name="name"
+            #name="ngModel">
+        <div *ngIf="name.touched && name.invalid" class="text-red-500 text-xs">
+            <div *ngIf="name.errors?.['required']">Name is required</div>
+            <div *ngIf="name.errors?.['minlength']">Name must be at least 2 characters</div>
+        </div>
+    </div>
+    <div class="mb-4 text-center">
+        <label class="block text-gray-700 font-medium mb-2 text-center" for="manufacturer">Manufacturer</label>
+        <input
+            class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto"
+            type="text" id="manufacturer" required minlength="2" [(ngModel)]="utensil.manufacturer"
+            name="manufacturer" #manufacturer="ngModel">
+        <div *ngIf="manufacturer.touched && manufacturer.invalid" class="text-
+        red-500 text-xs">
+            <div *ngIf="manufacturer.errors?.['required']" class="text-red-500">Manufacturer is required</div>
+            <div *ngIf="manufacturer.errors?.['minlength']" class="text-red-500">Manufacturer must be at least 2
+                characters long</div>
+        </div>
+        <div class="mb-4 text-center">
+            <label class="block text-gray-700 font-medium mb-2 text-center" for="color">Color</label>
+            <input
+                class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto"
+                type="text" id="color" required minlength="2" [(ngModel)]="utensil.color"
+                name="color" #color="ngModel">
+            <div *ngIf="color.touched && color.invalid" class="text-
+        red-500 text-xs">
+                <div *ngIf="color.errors?.['required']" class="text-red-500">Color is required</div>
+                <div *ngIf="color.errors?.['minlength']" class="text-red-500">Color must be at least 2
+                    characters long</div>
+            </div>
+        </div>
+        <div class="mb-4 text-center">
+            <label class="block text-gray-700 font-medium mb-2 text-center" for="type">Type</label>
+            <input
+                class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto"
+                id="type" required [(ngModel)]="utensil.writingUtensilsType" name="type" #type="ngModel">
+            <div *ngIf="type.touched && type.invalid" class="text-red-500">Type is required</div>
+        </div>
+        <div class="mb-4 text-center">
+            <label class="block text-gray-700 font-medium mb-2 text-center" for="price">Price</label>
+            <input
+                class="bg-gray-200 border border-black p-2 rounded-lg w-1/3 text-center py-2 px-3 text-gray-700 leading-tight mx-auto"
+                type="number" min="0.5" id="price" required [(ngModel)]="utensil.price" name="price"
+                #price="ngModel">
+            <div *ngIf="price.touched && price.invalid" class="text-red-500">Price is required</div>
+        </div>
+    </div>
+    <ng-container *ngIf="isUploaded">
+        <div class="text-center">
+            <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
+                [disabled]="!utensilForm.form.valid">Create</button>
+        </div>
+    </ng-container>
+</form>
