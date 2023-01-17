@@ -14,6 +14,10 @@
 
         public string[] Images { get; set; } = null!;
 
+        public string KeyWords { get; set; } = null!;
+
+        public int Quantity { get; set; }
+
         public int GenreId { get; set; }
 
         public Genre Genre { get; set; } = null!;

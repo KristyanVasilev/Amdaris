@@ -24,7 +24,6 @@ builder.Services.AddControllers( cfg =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<IEmailSender>(x => new SendGridEmailSender(builder.Configuration.GetConnectionString("ApiKey")));
 
 builder.Services.AddCors(options => options.AddPolicy(name: "BookShop",
     policy =>
@@ -38,6 +37,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 //Add ThirdPartyServices
 builder.Services.AddThirdPartyServices(builder.Configuration);
+builder.Services.AddTransient<IEmailSender>(x => new SendGridEmailSender(builder.Configuration.GetConnectionString("ApiKey")));
 
 //AddUserIdentity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>

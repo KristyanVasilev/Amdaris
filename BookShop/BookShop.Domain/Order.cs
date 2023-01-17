@@ -4,13 +4,12 @@
 
     public class Order : BaseDeletableModel<int>
     {
+        public string UserName { get; set; } = null!;
 
-        public string UserId { get; set; }
+        public string Email { get; set; } = null!;
 
-        public ApplicationUser User { get; set; }
+        public ICollection<Product> Products { get; set; } = null!;
 
-        public decimal Price { get; set; }
-
-        public bool IsCompleted { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 }

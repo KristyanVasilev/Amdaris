@@ -23,6 +23,9 @@
 
         public DbSet<WritingUtensilsType> WritingUtensilsTypes { get; set; }
 
+        public DbSet<Order> Oredrs { get; set; }
+
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,6 +34,8 @@
             modelBuilder.ApplyConfiguration(new GameEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new PublicationEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new WritingUtensilsEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderEntityTypeConfiguration());
 
             var entityTypes = modelBuilder.Model.GetEntityTypes().ToList();
 
