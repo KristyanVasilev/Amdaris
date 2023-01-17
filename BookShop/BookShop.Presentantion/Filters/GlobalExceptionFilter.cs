@@ -16,6 +16,11 @@
                 statusCode = 404;
             }
 
+            if (context.Exception is ProductDontHaveEnoughQuantity)
+            {
+                statusCode = 401;
+            }
+
             var error = new Error
             {
                 StatusCode = statusCode,
