@@ -33,6 +33,8 @@
             game.Price = request.Price;
             game.Name = request.Name;
             game.Description = request.Description;
+            game.KeyWords = request.KeyWords;
+            game.Quantity = request.Quantity;
             game.Images = request.Images;
             game.ModifiedOn = DateTime.UtcNow;
 

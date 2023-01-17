@@ -25,12 +25,14 @@
                 Manufacturer = game.Manufacturer,
                 Genre = game.Genre.Name,
                 Images = game.Images,
+                Quantity = game.Quantity,
+                KeyWords = game.KeyWords,
 
             }).OrderBy(x => x.Price);
 
             if (!result.Any())
             {
-               throw new GameNotFoundException("No games found!");
+                throw new GameNotFoundException("No games found!");
             }
 
             return await Task.FromResult(result);

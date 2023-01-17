@@ -34,6 +34,8 @@
                 Description = request.Description,
                 Manufacturer = request.Manufacturer,
                 Images = request.Images,
+                KeyWords = request.KeyWords,
+                Quantity = request.Quantity,
                 CreatedOn = DateTime.UtcNow,
             };
 

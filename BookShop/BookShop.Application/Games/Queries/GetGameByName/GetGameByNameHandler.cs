@@ -35,6 +35,8 @@
                 Description = game.Description,
                 Manufacturer = game.Manufacturer,
                 Images = game.Images,
+                KeyWords = game.KeyWords,
+                Quantity = game.Quantity,
                 Genre = genre?.Name ?? "No genre",
             };
 
