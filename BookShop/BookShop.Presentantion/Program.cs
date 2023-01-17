@@ -1,9 +1,11 @@
+using BookShop.Application.Email;
 using BookShop.Application.Publications.Commands.CreatePublication;
 using BookShop.Application.Repositories;
 using BookShop.Domain;
 using BookShop.Infrastructure;
 using BookShop.Infrastructure.Repositories;
 using BookShop.Infrastructure.ThirdPartyServices.AzureServices;
+using BookShop.Infrastructure.ThirdPartyServices.SendGrid;
 using BookShop.Presentantion;
 using BookShop.Presentantion.Filters;
 using MediatR;
@@ -22,6 +24,8 @@ builder.Services.AddControllers( cfg =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<IEmailSender>(x => new SendGridEmailSender(builder.Configuration.GetConnectionString("ApiKey")));
+
 builder.Services.AddCors(options => options.AddPolicy(name: "BookShop",
     policy =>
     {
