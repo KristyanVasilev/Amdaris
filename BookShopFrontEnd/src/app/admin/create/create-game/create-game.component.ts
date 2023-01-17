@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Game } from 'src/app/models/game';
 import { GameService } from 'src/app/services/game.service';
 
@@ -11,27 +11,17 @@ import { GameService } from 'src/app/services/game.service';
   styleUrls: ['./create-game.component.css']
 })
 export class CreateGameComponent {
-  game: Game = {
-    id: 0,
-    name: '',
-    price: 0,
-    description: '',
-    genre: '',
-    manufacturer: '',
-    images: [] as string[]
-  };
+  game: Game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '',images: [] as string[], keyWords: '', quantity: 0,};
   isUploaded = false;
+  shortLink: string = "";
+  loading: boolean = false;
+  file?: File;
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private gameService: GameService) { }
 
-  shortLink: string = "";
-
-  loading: boolean = false; // Flag variable
-
-  file?: File; // Variable to store file
   upload(file: any): Observable<any> {
     const formData = new FormData();
     formData.append("file", file, file.name);
@@ -64,6 +54,6 @@ export class CreateGameComponent {
 
   createGame() {
     this.gameService.createGame(this.game).subscribe(res => console.log(res));
-console.log('opa');
+    this.router.navigate(['home'])
   }
 }

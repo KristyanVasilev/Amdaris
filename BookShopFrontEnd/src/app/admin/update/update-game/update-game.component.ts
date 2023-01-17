@@ -14,8 +14,8 @@ export class UpdateGameComponent {
   @ViewChild('gameFindForm') gameFindForm: any;
   submitted: boolean = false;
   gamesSubsription: Subscription | undefined;
-  game: Game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '', images: [] };
-  gameToUpdate: Game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '', images: [] as string[] };
+  game: Game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '',images: [] as string[], keyWords: '', quantity: 0,};
+  gameToUpdate: Game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '',images: [] as string[], keyWords: '', quantity: 0,};
   shortLink: string = "";
   loading: boolean = false; // Flag variable
   isUploaded = false;
@@ -44,7 +44,7 @@ export class UpdateGameComponent {
 
   resetForm() {
     this.gameName = { name: "" };
-    this.game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '', images: [] };
+    this.game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '',images: [] as string[], keyWords: '', quantity: 0,};
     this.gameFindForm.resetForm();
     this.submitted = false;
   }

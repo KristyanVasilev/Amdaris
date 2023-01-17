@@ -6,4 +6,6 @@ export interface Game {
     genre: string;
     manufacturer: string;
     images: string[];
+    keyWords: string;
+    quantity: number;
 }

@@ -15,5 +15,9 @@
         public string Color { get; set; } = null!;
 
         public string[] Images { get; set; } = null!;
+
+        public string KeyWords { get; set; } = null!;
+
+        public int Quantity { get; set; }
     }
 }

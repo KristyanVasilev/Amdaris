@@ -13,7 +13,7 @@ export class UndeleteGameComponent {
   @ViewChild('UndeleteGameForm') UndeleteGameForm: any;
   submitted: boolean = false;
   gamesSubsription: Subscription | undefined;
-  game: Game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '', images: [] };
+  game: Game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '',images: [] as string[], keyWords: '', quantity: 0,};
   gameId = {
     id: 0,
   };
@@ -38,7 +38,7 @@ export class UndeleteGameComponent {
 
   resetForm() {
     this.gameName = { name: "" };
-    this.game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '', images: [] };
+    this.game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '',images: [] as string[], keyWords: '', quantity: 0,};
     this.UndeleteGameForm.resetForm();
     this.submitted = false;
   }

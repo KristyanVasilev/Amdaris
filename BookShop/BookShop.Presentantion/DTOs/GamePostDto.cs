@@ -27,5 +27,11 @@
         [Required]
         [ValidateUrlsInArray(ErrorMessage = "Invalid url")]
         public string[] Images { get; set; } = null!;
+
+        [Required]
+        public string KeyWords { get; set; } = null!;
+
+        [Range(1, int.MaxValue)]
+        public int Quantity { get; set; }
     }
 }
