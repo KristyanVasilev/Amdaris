@@ -20,7 +20,7 @@
         </div>
         <mat-grid-list *ngIf="category==='publications' || category==='all'" gutterSize="16" [cols]="cols"
             [rowHeight]="rowHeight">
-            <mat-grid-tile **ngFor="let publication of publications">
+            <mat-grid-tile *ngFor="let publication of publications">
                 <app-publication-box [product]="publication" (addToCart)="onAddToCart($event)" class="w-full"
                     [fullWidthMode]="cols === 1"></app-publication-box>
             </mat-grid-tile>
