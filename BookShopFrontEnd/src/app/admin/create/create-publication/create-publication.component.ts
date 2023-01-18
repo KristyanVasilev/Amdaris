@@ -11,28 +11,17 @@ import { PublicationService } from 'src/app/services/publication.service';
   styleUrls: ['./create-publication.component.css']
 })
 export class CreatePublicationComponent {
-  publication: Publication = {
-    id: 0,
-    name: '',
-    author: '',
-    price: 0,
-    pageCount: 0,
-    description: '',
-    genre: '',
-    images: [] as string[]
-  };
+  publication: Publication = { id: 0, name: '', price: 0, description: '', genre: '', author: '', pageCount:0, images: [] as string[], keyWords: '', quantity: 0};
   isUploaded = false;
+  shortLink: string = "";
+  loading: boolean = false;
+  file?: File;
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private publicationService: PublicationService) { }
 
-  shortLink: string = "";
-
-  loading: boolean = false; // Flag variable
-
-  file?: File; // Variable to store file
   upload(file: any): Observable<any> {
     const formData = new FormData();
     formData.append("file", file, file.name);

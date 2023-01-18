@@ -35,6 +35,8 @@
                 PageCount = request.PageCount,
                 Rating = request.Rating,
                 Description = request.Description,
+                KeyWords = request.KeyWords,
+                Quantity = request.Quantity,
                 Images = request.Images,
                 CreatedOn = DateTime.UtcNow,
             };

@@ -17,8 +17,8 @@ export class UpdatePublicationComponent {
   submitted: boolean = false;
   isUploaded = false;
   publicationSubsription: Subscription | undefined;
-  publication: Publication = { id: 0, name: '', price: 0, pageCount: 0, description: '', genre: '', author: '', images: [] };
-  publicationToUpdate: Publication = { id: 0, name: '', price: 0, pageCount: 0, description: '', genre: '', author: '', images: [] as string[] };
+  publication: Publication = {id: 0,  name: '', author: '', price: 0, pageCount: 0, description: '', genre: '', images: [] as string[], keyWords: '', quantity: 0 };
+  publicationToUpdate: Publication = {id: 0,  name: '', author: '', price: 0, pageCount: 0, description: '', genre: '', images: [] as string[], keyWords: '', quantity: 0 };
   publicationId = {
     id: 0,
   };
@@ -44,7 +44,7 @@ export class UpdatePublicationComponent {
 
   resetForm() {
     this.publicationName = { name: "" };
-    this.publication = { id: 0, name: '', price: 0, pageCount: 0, description: '', genre: '', author: '', images: [] };
+    this.publication = {id: 0,  name: '', author: '', price: 0, pageCount: 0, description: '', genre: '', images: [] as string[], keyWords: '', quantity: 0 };
     this.publicationFindForm.resetForm();
     this.submitted = false;
   }

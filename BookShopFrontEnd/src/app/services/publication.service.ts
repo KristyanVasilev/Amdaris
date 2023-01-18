@@ -41,7 +41,9 @@ export class PublicationService {
       PageCount: publication.pageCount,
       Description: publication.description,
       Genre: publication.genre,
-      Images: publication.images
+      Images: publication.images,
+      Quantity: publication.quantity,
+      KeyWords: publication.keyWords
     }
     return this.httpClient.post<number>(`${STORE_BASE_URL}/update/${id}`, PublicationPutDto);
   }

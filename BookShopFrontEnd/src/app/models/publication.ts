@@ -7,4 +7,6 @@ export interface Publication {
     genre: string;
     author: string;
     images: string[];
+    keyWords: string;
+    quantity: number;
 }

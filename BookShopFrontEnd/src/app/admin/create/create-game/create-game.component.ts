@@ -11,7 +11,7 @@ import { GameService } from 'src/app/services/game.service';
   styleUrls: ['./create-game.component.css']
 })
 export class CreateGameComponent {
-  game: Game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '',images: [] as string[], keyWords: '', quantity: 0,};
+  game: Game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '',images: [] as string[], keyWords: '', quantity: 0};
   isUploaded = false;
   shortLink: string = "";
   loading: boolean = false;

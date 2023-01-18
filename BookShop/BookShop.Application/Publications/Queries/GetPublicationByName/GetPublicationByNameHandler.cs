@@ -36,7 +36,9 @@
                 PageCount = publication.PageCount,
                 Rating = publication.Rating,
                 Description = publication.Description,
-                Images = publication.Images,
+                KeyWords = publication.KeyWords,
+                Quantity = publication.Quantity,
+                Images = publication.Images,               
                 Genre = genre?.Name ?? "No genre",
             };
 

@@ -25,6 +25,8 @@
                 PageCount = publication.PageCount,
                 Rating = publication.Rating,
                 Description = publication.Description,
+                KeyWords = publication.KeyWords,
+                Quantity = publication.Quantity,
                 Images = publication.Images,
                 Genre = publication.Genre.Name,
 

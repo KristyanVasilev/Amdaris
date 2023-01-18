@@ -36,6 +36,8 @@
             publication.PageCount = request.PageCount;
             publication.Rating = request.Rating;
             publication.Description = request.Description;
+            publication.KeyWords = request.KeyWords;
+            publication.Quantity = request.Quantity;
             publication.Images = request.Images;
             publication.ModifiedOn = DateTime.UtcNow;
 

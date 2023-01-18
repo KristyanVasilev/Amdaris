@@ -40,7 +40,9 @@ export class GameService {
       Price: game.price,
       Description: game.description,
       Genre: game.genre,
-      Images: game.images
+      Images: game.images,
+      Quantity: game.quantity,
+      KeyWords: game.keyWords
     }
     return this.httpClient.post<number>(`${STORE_BASE_URL}/update/${id}`, gamePostDto);
   }
