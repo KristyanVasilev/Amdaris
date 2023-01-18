@@ -30,7 +30,7 @@
         {
             var isSucceed = true;
             var productName = "";
-            var sb = new StringBuilder();
+            var emailBody = CreateEmailBody();
 
             foreach (var product in request.Products)
             {
@@ -43,7 +43,7 @@
                 if (game != null && game.Quantity - product.Quantity >= 0)
                 {
                     game.Quantity -= product.Quantity;
-                    sb.AppendLine($"{product.Name}, Quantity: {product.Quantity}, Price: {product.Price}");
+                    AppendProductToEmailBody(product, emailBody);
                     this.gameRepository.Update(game);
                     continue;
                 }
@@ -55,7 +55,7 @@
                 if (publication != null && publication.Quantity - product.Quantity >= 0)
                 {
                     publication.Quantity -= publication.Quantity;
-                    sb.AppendLine($"{product.Name}, Quantity: {product.Quantity}, Price: {product.Price}");
+                    AppendProductToEmailBody(product, emailBody);
                     this.publicationRepository.Update(publication);
                     continue;
                 }
@@ -67,7 +67,7 @@
                 if (utensil != null && utensil.Quantity - product.Quantity >= 0)
                 {
                     utensil.Quantity -= product.Quantity;
-                    sb.AppendLine($"{product.Name}, Quantity: {product.Quantity}, Price: {product.Price}");
+                    AppendProductToEmailBody(product, emailBody);
                     this.writingUtensilRepository.Update(utensil);
                     continue;
                 }
@@ -75,8 +75,8 @@
                 {
                     isSucceed = false;
                     var error = $"{productName} not found or don't have enough quantity!";
-                    sb.Clear();
-                    sb.Append(error);
+                    emailBody.Clear();
+                    emailBody.Append(error);
                     throw new ProductDontHaveEnoughQuantity(error);
                 }
             }
@@ -99,8 +99,56 @@
                 await this.orderRepository.SaveChangesAsync();
             }
 
-            sb.AppendLine($"Total amount: {request.Products.Sum(x => x.Price)}$");
-            return await Task.FromResult(sb.ToString());
+            AppendTotalPriceAndOtherElementsToEmailBody(request.Products.Sum(x => x.Price), emailBody);
+            return await Task.FromResult(emailBody.ToString());
+        }
+
+        private StringBuilder CreateEmailBody()
+        {
+            var emailBody = new StringBuilder();
+            emailBody.AppendLine("<html>");
+            emailBody.AppendLine("<head>");
+            emailBody.AppendLine("<style>");
+            emailBody.AppendLine("table {");
+            emailBody.AppendLine("    border-collapse: collapse;");
+            emailBody.AppendLine("}");
+            emailBody.AppendLine("td {");
+            emailBody.AppendLine("    border: 1px solid black;");
+            emailBody.AppendLine("    padding: 5px;");
+            emailBody.AppendLine("}");
+            emailBody.AppendLine("</style>");
+            emailBody.AppendLine("</head>");
+            emailBody.AppendLine("<body>");
+            emailBody.AppendLine("Thank you for your recent order with our store. Below is a summary of your purchase:</p>");
+            emailBody.AppendLine("<table>");
+            emailBody.AppendLine("<tr>");
+            emailBody.AppendLine("<th>Name</th>");
+            emailBody.AppendLine("<th>Quantity</th>");
+            emailBody.AppendLine("<th>Price</th>");
+            emailBody.AppendLine("</tr>");
+            return emailBody;
+        }
+
+        private void AppendProductToEmailBody(Product product, StringBuilder emailBody)
+        {
+            emailBody.AppendLine("<tr>");
+            emailBody.AppendLine("<td>" + product.Name + "</td>");
+            emailBody.AppendLine("<td>" + product.Quantity + "</td>");
+            emailBody.AppendLine("<td>" + product.Price + "</td>");
+            emailBody.AppendLine("</tr>");
+        }
+
+        private void AppendTotalPriceAndOtherElementsToEmailBody(decimal totalPrice, StringBuilder emailBody)
+        {
+            emailBody.AppendLine("<tr>");
+            emailBody.AppendLine("<td colspan='3'>Total Price : " + totalPrice + '$' +"</td>");
+            emailBody.AppendLine("</tr>");
+            emailBody.AppendLine("</table>");
+            emailBody.AppendLine("<p>We hope you enjoy your purchase and thank you for choosing our store.</p>");
+            emailBody.AppendLine("<p>Best regards,</p>");
+            emailBody.AppendLine("<p>Your Store Team</p>");
+            emailBody.AppendLine("</body>");
+            emailBody.AppendLine("</html>");
         }
     }
 }

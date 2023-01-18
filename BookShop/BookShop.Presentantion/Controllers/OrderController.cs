@@ -18,15 +18,15 @@
         }
 
         [HttpPost]
-        [Route("order")]
-        public async Task<IActionResult> CreateOrder([FromBody] OrderPostDto order)
+        [Route("create")]
+        public async Task<IActionResult> CreateOrder([FromBody] OrderPostDto orderPostDto)
         {
-            var command = Mapper.Map<CreateOrderCommand>(order);
+            var command = Mapper.Map<CreateOrderCommand>(orderPostDto);
 
             var result = await Mediator.Send(command);
             if (!result.Contains("don't have enough quantity!"))
             {
-                this.emailSender.SendEmailAsync("Kristiyanvasilev02@gmail.com", "BookShop", $"{order.Email}", "Successfuly create a order!", result);
+                this.emailSender.SendEmailAsync("Kristiyanvasilev02@gmail.com", "BookShop", $"{orderPostDto.Email}", "Successfuly create a order!", orderPostDto.UserName + result);
             }
             
             return Ok(JsonConvert.SerializeObject(result));
