@@ -1,7 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Cart, CartItem } from '../models/cart';
+
+const STORE_BASE_URL = 'https://localhost:7201/api/Order';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +12,10 @@ import { Cart, CartItem } from '../models/cart';
 export class CartService {
   cart = new BehaviorSubject<Cart>({ items: [] });
 
-  constructor(private _snackBar: MatSnackBar) { }
-
+  constructor(
+    private _snackBar: MatSnackBar,
+    private httpClient: HttpClient) { }
+    
   addToCart(item: CartItem): void {
     const items = [...this.cart.value.items];
 
@@ -76,5 +81,12 @@ export class CartService {
     this._snackBar.open('1 item removed from cart.', 'Ok', {
       duration: 3000,
     });
+  }
+
+  Order(items: CartItem[], username: string, email: string): Observable<any> {
+    const OrderPostDto = {
+    
+    }
+    return this.httpClient.post<any>(`${STORE_BASE_URL}/order`, OrderPostDto);
   }
 }

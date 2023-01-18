@@ -91,6 +91,7 @@
                 {
                     UserName = request.UserName,
                     Email = request.Email,
+                    Address = request.Address,
                     TotalPrice = request.Products.Sum(x => x.Price),
                     Products = request.Products,                    
                     CreatedOn = DateTime.UtcNow,

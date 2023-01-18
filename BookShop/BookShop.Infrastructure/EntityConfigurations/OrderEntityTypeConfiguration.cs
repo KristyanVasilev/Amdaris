@@ -15,6 +15,9 @@
             builder.Property(e => e.Email)
                    .IsRequired();
 
+            builder.Property(a => a.Address)
+                   .IsRequired();
+
             builder.Property(t => t.TotalPrice)
                    .IsRequired()
                    .HasColumnType("decimal(18,4)");
