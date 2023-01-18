@@ -36,6 +36,8 @@
                 Price = utensil.Price,
                 Color = utensil.Color,
                 Manufacturer = utensil.Manufacturer,
+                KeyWords = utensil.KeyWords,
+                Quantity = utensil.Quantity,
                 Images = utensil.Images,
                 WritingUtensilsType = type?.Name ?? "No type",
             };

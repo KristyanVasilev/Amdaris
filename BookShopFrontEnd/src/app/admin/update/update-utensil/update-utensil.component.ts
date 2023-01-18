@@ -14,8 +14,8 @@ export class UpdateUtensilComponent {
   @ViewChild('utensilFindForm') utensilFindForm: any;
   submitted: boolean = false;
   utensilSubsription: Subscription | undefined;
-  utensil: Utensil = { id: 0, name: '', price: 0, color: '', writingUtensilsType: '', manufacturer: '', images: [] };
-  utensilToUpdate: Utensil = { id: 0, name: '', price: 0, color: '', writingUtensilsType: '', manufacturer: '', images: [] as string[] };
+  utensil: Utensil = { id: 0, name: '', price: 0, color: '', writingUtensilsType: '', manufacturer: '', images: [], quantity: 0, keyWords: '' };
+  utensilToUpdate: Utensil = { id: 0, name: '', price: 0, color: '', writingUtensilsType: '', manufacturer: '', images: [], quantity: 0, keyWords: '' };
   shortLink: string = "";
   loading: boolean = false; // Flag variable
   isUploaded = false;
@@ -44,7 +44,7 @@ export class UpdateUtensilComponent {
 
   resetForm() {
     this.utensilName = { name: "" };
-    this.utensil = { id: 0, name: '', price: 0, color: '', writingUtensilsType: '', manufacturer: '', images: [] };
+    this.utensil = { id: 0, name: '', price: 0, color: '', writingUtensilsType: '', manufacturer: '', images: [], quantity: 0, keyWords: '' };
     this.utensilFindForm.resetForm();
     this.submitted = false;
   }

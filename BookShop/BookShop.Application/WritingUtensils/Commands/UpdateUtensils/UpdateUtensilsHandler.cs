@@ -34,6 +34,8 @@
             utensil.Name = request.Name;
             utensil.Manufacturer = request.Manufacturer;
             utensil.Color = request.Color;
+            utensil.KeyWords = request.KeyWords;
+            utensil.Quantity = request.Quantity;
             utensil.Images = request.Images;
             utensil.ModifiedOn = DateTime.UtcNow;
 

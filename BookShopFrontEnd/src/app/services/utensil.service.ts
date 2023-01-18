@@ -40,7 +40,9 @@ export class UtensilService {
       Manufacturer: utensil.manufacturer,
       WritingUtensilsType: utensil.writingUtensilsType,
       Color: utensil.color,
-      Images: utensil.images
+      Images: utensil.images,
+      KeyWords: utensil.keyWords,
+      Quantity: utensil.quantity
     }
     return this.httpClient.post<number>(`${STORE_BASE_URL}/update/${id}`, UtensilPostDto);
   }

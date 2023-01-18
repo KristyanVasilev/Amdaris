@@ -106,6 +106,8 @@
                 Color = utensil.Color,
                 Manufacturer = utensil.Manufacturer,
                 Images = utensil.Images,
+                KeyWords = utensil.KeyWords,
+                Quantity = utensil.Quantity,
                 WritingUtensilsType = utensil.WritingUtensilsType,
             };
 

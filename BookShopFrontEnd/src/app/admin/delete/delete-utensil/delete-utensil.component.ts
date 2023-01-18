@@ -13,7 +13,7 @@ export class DeleteUtensilComponent {
   @ViewChild('utensilFindForm') utensilFindForm: any;
   submitted: boolean = false;
   utensilSubsription: Subscription | undefined;
-  utensil: Utensil = { id: 0, name: '', price: 0, color: '', writingUtensilsType: '', manufacturer: '', images: [] };
+  utensil: Utensil = { id: 0, name: '', price: 0, color: '', writingUtensilsType: '', manufacturer: '', images: [], quantity: 0, keyWords: '' };
   utensilId = {
     id: 0,
   };
@@ -47,7 +47,7 @@ export class DeleteUtensilComponent {
 
   resetForm() {
     this.utensilName = { name: "" };
-    this.utensil = { id: 0, name: '', price: 0, color: '', writingUtensilsType: '', manufacturer: '', images: [] };
+    this.utensil = { id: 0, name: '', price: 0, color: '', writingUtensilsType: '', manufacturer: '', images: [], quantity: 0, keyWords: '' };
     this.utensilFindForm.resetForm();
     this.submitted = false;
   }

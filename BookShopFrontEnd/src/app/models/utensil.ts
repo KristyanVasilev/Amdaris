@@ -6,4 +6,6 @@ export interface Utensil {
     writingUtensilsType: string;
     color: string;
     images: string[];
+    keyWords: string;
+    quantity: number;
 }

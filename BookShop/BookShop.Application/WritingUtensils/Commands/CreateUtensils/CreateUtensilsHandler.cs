@@ -33,6 +33,8 @@
                 Name = request.Name,
                 Color = request.Color,
                 Manufacturer = request.Manufacturer,
+                KeyWords = request.KeyWords,
+                Quantity = request.Quantity,
                 Images = request.Images,
                 CreatedOn = DateTime.UtcNow,
             };

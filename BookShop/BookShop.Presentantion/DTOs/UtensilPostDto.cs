@@ -28,7 +28,6 @@
         [ValidateUrlsInArray(ErrorMessage = "Invalid url")]
         public string[] Images { get; set; } = null!;
 
-
         [Required]
         public string KeyWords { get; set; } = null!;
 

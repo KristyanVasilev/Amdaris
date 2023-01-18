@@ -11,7 +11,7 @@ import { UtensilService } from 'src/app/services/utensil.service';
   styleUrls: ['./create-utensil.component.css']
 })
 export class CreateUtensilComponent {
-  utensil: Utensil = { id: 0, name: '', price: 0, color: '', writingUtensilsType: '', manufacturer: '', images: [] };
+  utensil: Utensil = { id: 0, name: '', price: 0, color: '', writingUtensilsType: '', manufacturer: '', images: [] as string[], keyWords: '', quantity: 0 };
   isUploaded = false;
 
   constructor(
