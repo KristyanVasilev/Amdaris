@@ -12,6 +12,7 @@
     using BookShop.Presentantion.DTOs;
     using BookShop.Presentantion.Filters;
     using Microsoft.AspNetCore.Mvc;
+    using BookShop.Application.Publications.Queries.GetPublicationsByKeyWord;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -92,6 +93,17 @@
 
             var result = await Mediator.Send(command);
             var mappedResult = Mapper.Map<PublicationGetDto>(result);
+            return Ok(mappedResult);
+        }
+
+        [HttpGet]
+        [Route("getByKeyWord")]
+        public async Task<IActionResult> GetPublicationsByKeyWord(string word)
+        {
+            var command = new GetPublicationsByKeyWordQuery(word);
+
+            var result = await Mediator.Send(command);
+            var mappedResult = Mapper.Map<IEnumerable<PublicationGetDto>>(result);
             return Ok(mappedResult);
         }
 

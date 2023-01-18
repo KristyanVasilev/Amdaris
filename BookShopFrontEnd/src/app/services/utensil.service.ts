@@ -16,6 +16,10 @@ export class UtensilService {
     return this.httpClient.get<Array<Utensil>>(`${STORE_BASE_URL}/all`);
   }
 
+  getUtensilsByKeyWord(keyWord: string): Observable<Array<Utensil>> {
+    return this.httpClient.get<Array<Utensil>>(`${STORE_BASE_URL}/getByKeyWord?word=` + keyWord);
+  }
+
   createUtensil(utensil: Utensil) {
     return this.httpClient.post<number>(`${STORE_BASE_URL}/create`, utensil)
   }
@@ -24,14 +28,14 @@ export class UtensilService {
     return this.httpClient.delete<number>(`${STORE_BASE_URL}/delete?id=` + id)
   }
 
-  UndeleteUtensil(publicationName: string): Observable<Utensil>{
+  UndeleteUtensil(publicationName: string): Observable<Utensil> {
     return this.httpClient.post<Utensil>(`${STORE_BASE_URL}/unDelete?utensilName=${publicationName}`, publicationName)
   }
 
-  findUtensil(name: string): Observable<Utensil>{
+  findUtensil(name: string): Observable<Utensil> {
     return this.httpClient.get<Utensil>(`${STORE_BASE_URL}/getByName?name=` + name)
   }
-  
+
   UpdateUtensil(utensil: Utensil, id: number): Observable<number> {
     const UtensilPostDto = {
       Id: id,

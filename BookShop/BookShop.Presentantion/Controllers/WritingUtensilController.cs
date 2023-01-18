@@ -1,10 +1,12 @@
 ﻿namespace BookShop.Presentantion.Controllers
 {
+    using BookShop.Application.Games.Queries.GetGameByKeyWord;
     using BookShop.Application.WritingUtensils.Commands.CreateUtensils;
     using BookShop.Application.WritingUtensils.Commands.DeleteUtensils;
     using BookShop.Application.WritingUtensils.Commands.UnDeleteUtensils;
     using BookShop.Application.WritingUtensils.Commands.UpdateUtensils;
     using BookShop.Application.WritingUtensils.Queries.GetUtensilById;
+    using BookShop.Application.WritingUtensils.Queries.GetUtensilByKeyWord;
     using BookShop.Application.WritingUtensils.Queries.GetUtensils;
     using BookShop.Application.WritingUtensils.Queries.GetUtensilsByColor;
     using BookShop.Application.WritingUtensils.Queries.GetUtensilsByName;
@@ -66,6 +68,17 @@
         public async Task<IActionResult> GetUtensilsByColor(string color)
         {
             var command = new GetUtensilsByColorQuery(color);
+
+            var result = await Mediator.Send(command);
+            var mappedResult = Mapper.Map<IEnumerable<UtensilGetDto>>(result);
+            return Ok(mappedResult);
+        }
+
+        [HttpGet]
+        [Route("getByKeyWord")]
+        public async Task<IActionResult> GetUtensilByKeyWord(string word)
+        {
+            var command = new GetUtensilByKeyWordQuery(word);
 
             var result = await Mediator.Send(command);
             var mappedResult = Mapper.Map<IEnumerable<UtensilGetDto>>(result);

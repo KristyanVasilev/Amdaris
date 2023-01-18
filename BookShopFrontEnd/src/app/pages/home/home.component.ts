@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Game } from 'src/app/models/game';
 import { Publication } from 'src/app/models/publication';
@@ -16,6 +16,8 @@ const ROWS_HEIGHT: { [id: number]: number } = { 1: 400, 3: 335, 4: 350 };
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  @ViewChild('searchFrom') searchFrom: any;
+  keyWord!: string;
   cols = 3;
   category: string | undefined;
   rowHeight: number = ROWS_HEIGHT[this.cols];
@@ -51,6 +53,56 @@ export class HomeComponent {
       });
   }
 
+  KeyWord(): void {
+    this.ngOnDestroy();
+    this.getPublicationsByKeyWord(this.keyWord);
+    this.getGamesByKeyWord(this.keyWord);
+    this.getUtensilsByKeyWord(this.keyWord);
+    this.resetForm();
+  }
+
+  getPublicationsByKeyWord(keyWord: string): void {
+    if (keyWord != null) {
+      this.publicationsSubsription = this.publicationService
+        .getPublicationsByKeWord(keyWord)
+        .subscribe((_publications) => {
+          this.publications = _publications;
+        });
+    }
+    else {
+      this.onShowCategory('all');
+    }
+  }
+
+  getGamesByKeyWord(keyWord: string): void {
+    if (keyWord != null) {
+      this.gamesSubsription = this.gameService
+        .getGamesByKeWord(keyWord)
+        .subscribe((_games) => {
+          this.games = _games;
+        });
+    }
+    else {
+      this.onShowCategory('all');
+    }
+  }
+
+  getUtensilsByKeyWord(keyWord: string): void {
+    if (keyWord != null) {
+      this.utensilSubsription = this.utensilService
+        .getUtensilsByKeyWord(keyWord)
+        .subscribe((_utensils) => {
+          this.utensils = _utensils;
+        });
+    }
+    else {
+      this.onShowCategory('all');
+    }
+  }
+  resetForm() {
+    this.searchFrom.resetForm();
+  }
+
   getUtensils(): void {
     this.utensilSubsription = this.utensilService
       .getAllUtensils()
@@ -75,12 +127,12 @@ export class HomeComponent {
     if (this.category === 'games') {
       this.getGames();
     }
-    if (this.category === 'publications') {     
+    if (this.category === 'publications') {
       this.getPublications();
-    } 
-    if (this.category === 'for school') {     
+    }
+    if (this.category === 'for school') {
       this.getUtensils();
-    } 
+    }
   }
 
   onAddToCart(product: any): void {
@@ -96,14 +148,17 @@ export class HomeComponent {
   ngOnDestroy(): void {
     if (this.gamesSubsription) {
       this.gamesSubsription.unsubscribe();
+      this.games = new Array<Game>;
     }
 
     if (this.publicationsSubsription) {
       this.publicationsSubsription.unsubscribe();
+      this.publications = new Array<Publication>;
     }
 
     if (this.utensilSubsription) {
       this.utensilSubsription.unsubscribe();
+      this.utensils = new Array<Utensil>;
     }
   }
 }

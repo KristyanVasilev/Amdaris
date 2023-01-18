@@ -4,10 +4,11 @@
     using BookShop.Application.Games.Commands.DeleteGame;
     using BookShop.Application.Games.Commands.UnDeleteGame;
     using BookShop.Application.Games.Commands.UpdateGame;
+    using BookShop.Application.Games.Queries.GetGameById;
+    using BookShop.Application.Games.Queries.GetGameByKeyWord;
     using BookShop.Application.Games.Queries.GetGameByName;
     using BookShop.Application.Games.Queries.GetGames;
     using BookShop.Application.Games.Queries.GetGamesByGenre;
-    using BookShop.Application.Games.Queries.GetGameById;
     using BookShop.Presentantion.DTOs;
     using BookShop.Presentantion.Filters;
     using Microsoft.AspNetCore.Mvc;
@@ -82,6 +83,17 @@
 
             var result = await Mediator.Send(command);
             var mappedResult = Mapper.Map<GameGetDto>(result);
+            return Ok(mappedResult);
+        }
+
+        [HttpGet]
+        [Route("getByKeyWord")]
+        public async Task<IActionResult> GetGamesByKeyWord(string word)
+        {
+            var command = new GetGameByKeyWordQuery(word);
+
+            var result = await Mediator.Send(command);
+            var mappedResult = Mapper.Map<IEnumerable<GameGetDto>>(result);
             return Ok(mappedResult);
         }
 
