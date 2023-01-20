@@ -8,36 +8,42 @@
         <div>
             <form class="mx-auto my-3 max-w-7xl" #searchFrom="ngForm">
                 <div>
-                  <label class="block text-gray-700 font-medium mb-2" for="keyWord">Search:</label>
-                  <input
-                    class="bg-gray-200 border border-black p-2 rounded-lg  text-center py-2 px-3 text-gray-700 leading-tight mx-auto"
-                    type="text" id="keyWord" name="keyWord" [(ngModel)]="keyWord" required>
+                    <label class="block text-gray-700 font-medium mb-2" for="keyWord">Search:</label>
+                    <input
+                        class="bg-gray-200 border border-black p-2 rounded-lg  text-center py-2 px-3 text-gray-700 leading-tight mx-auto"
+                        type="text" id="keyWord" name="keyWord" [(ngModel)]="keyWord" required>
                 </div>
                 <button (click)="KeyWord()" mat-raised-button color="primary" class="text-center">
                     Search
-                  </button>
-              </form>
+                </button>
+            </form>
         </div>
-        <mat-grid-list *ngIf="category==='publications' || category==='all'" gutterSize="16" [cols]="cols"
-            [rowHeight]="rowHeight">
-            <mat-grid-tile *ngFor="let publication of publications">
-                <app-publication-box [product]="publication" (addToCart)="onAddToCart($event)" class="w-full"
-                    [fullWidthMode]="cols === 1"></app-publication-box>
-            </mat-grid-tile>
-        </mat-grid-list>
-        <mat-grid-list *ngIf="category==='games' || category==='all'" gutterSize="16" [cols]="cols"
-            [rowHeight]="rowHeight">
-            <mat-grid-tile *ngFor="let game of games">
-                <app-game-box [product]="game" (addToCart)="onAddToCart($event)" class="w-full"
-                    [fullWidthMode]="cols === 1"></app-game-box>
-            </mat-grid-tile>
-        </mat-grid-list>
-        <mat-grid-list *ngIf="category==='for school' || category==='all'" gutterSize="16" [cols]="cols"
-            [rowHeight]="rowHeight">
-            <mat-grid-tile *ngFor="let utensil of utensils">
-                <app-utensil-box [product]="utensil" (addToCart)="onAddToCart($event)" class="w-full"
-                    [fullWidthMode]="cols === 1"></app-utensil-box>
-            </mat-grid-tile>
-        </mat-grid-list>
+        <ng-container *ngIf="arePublications">
+            <mat-grid-list *ngIf="category==='publications' || category==='all'" gutterSize="16" [cols]="cols"
+                [rowHeight]="rowHeight">
+                <mat-grid-tile *ngFor="let publication of publications">
+                    <app-publication-box [product]="publication" (addToCart)="onAddToCart($event)" class="w-full"
+                        [fullWidthMode]="cols === 1"></app-publication-box>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </ng-container>
+        <ng-container *ngIf="areGames">
+            <mat-grid-list *ngIf="category==='games' || category==='all'" gutterSize="16" [cols]="cols"
+                [rowHeight]="rowHeight">
+                <mat-grid-tile *ngFor="let game of games">
+                    <app-game-box [product]="game" (addToCart)="onAddToCart($event)" class="w-full"
+                        [fullWidthMode]="cols === 1"></app-game-box>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </ng-container>
+        <ng-container *ngIf="areUtensils">
+            <mat-grid-list *ngIf="category==='for school' || category==='all'" gutterSize="16" [cols]="cols"
+                [rowHeight]="rowHeight">
+                <mat-grid-tile *ngFor="let utensil of utensils">
+                    <app-utensil-box [product]="utensil" (addToCart)="onAddToCart($event)" class="w-full"
+                        [fullWidthMode]="cols === 1"></app-utensil-box>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </ng-container>
     </mat-drawer-content>
 </mat-drawer-container>

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { catchError, Subscription, throwError } from 'rxjs';
 import { Game } from 'src/app/models/game';
 import { Publication } from 'src/app/models/publication';
 import { Utensil } from 'src/app/models/utensil';
@@ -20,7 +20,6 @@ export class HomeComponent {
   keyWord!: string;
   cols = 3;
   category: string | undefined;
-  areGames: boolean = false;
   rowHeight: number = ROWS_HEIGHT[this.cols];
   games: Array<Game> | undefined;
   publications: Array<Publication> | undefined;
@@ -28,6 +27,10 @@ export class HomeComponent {
   gamesSubsription: Subscription | undefined;
   publicationsSubsription: Subscription | undefined;
   utensilSubsription: Subscription | undefined;
+  areGames: boolean = false
+  arePublications: boolean = false
+  areUtensils: boolean = false
+
 
   constructor(
     private cartService: CartService,
@@ -44,6 +47,7 @@ export class HomeComponent {
       .getAllGames()
       .subscribe((_games) => {
         this.games = _games;
+        this.areGames = true;
       });
   }
 
@@ -52,6 +56,16 @@ export class HomeComponent {
       .getAllPublications()
       .subscribe((_publications) => {
         this.publications = _publications;
+        this.arePublications = true;
+      });
+  }
+
+  getUtensils(): void {
+    this.utensilSubsription = this.utensilService
+      .getAllUtensils()
+      .subscribe((_utensils) => {
+        this.utensils = _utensils;
+        this.areUtensils = true;
       });
   }
 
@@ -66,10 +80,16 @@ export class HomeComponent {
   getPublicationsByKeyWord(keyWord: string): void {
     if (keyWord != null) {
       this.publicationsSubsription = this.publicationService
-        .getPublicationsByKeWord(keyWord)
+        .getPublicationsByKeWord(keyWord).pipe(
+          catchError(error => {
+            console.error(error);
+            this.arePublications = false;
+            return throwError(error);
+          }))
         .subscribe((_publications) => {
           if (_publications.length > 0) {
             this.publications = _publications;
+            this.arePublications = true;
           }
         });
     }
@@ -77,14 +97,20 @@ export class HomeComponent {
       this.onShowCategory('all');
     }
   }
-
+ 
   getGamesByKeyWord(keyWord: string): void {
     if (keyWord != null) {
       this.gamesSubsription = this.gameService
-        .getGamesByKeWord(keyWord)
+        .getGamesByKeyWord(keyWord).pipe(
+          catchError(error => {
+            console.error(error);
+            this.areGames = false;
+            return throwError(error);
+          }))
         .subscribe((_games) => {
           if (_games.length > 0) {
             this.games = _games;
+            this.areGames = true;
           }
         });
     }
@@ -96,9 +122,15 @@ export class HomeComponent {
   getUtensilsByKeyWord(keyWord: string): void {
     if (keyWord != null) {
       this.utensilSubsription = this.utensilService
-        .getUtensilsByKeyWord(keyWord)
+        .getUtensilsByKeyWord(keyWord).pipe(
+          catchError(error => {
+            console.error(error);
+            this.areUtensils = false;
+            return throwError(error);
+          }))
         .subscribe((_utensils) => {
           this.utensils = _utensils;
+          this.areUtensils = true;
         });
     }
     else {
@@ -107,14 +139,6 @@ export class HomeComponent {
   }
   resetForm() {
     this.searchFrom.resetForm();
-  }
-
-  getUtensils(): void {
-    this.utensilSubsription = this.utensilService
-      .getAllUtensils()
-      .subscribe((_utensils) => {
-        this.utensils = _utensils;
-      });
   }
 
   onColumnsCountChange(colsNum: number): void {

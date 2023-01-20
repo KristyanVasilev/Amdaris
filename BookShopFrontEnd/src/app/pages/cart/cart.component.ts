@@ -78,8 +78,7 @@ export class CartComponent {
         console.error(error);
         this.isError = true;
         return throwError(error);
-      })
-    )
+      }))
     .subscribe(res => {
       console.log(res);
       this.router.navigate(['order-completed']);
