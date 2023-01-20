@@ -54,7 +54,7 @@
 
                 if (publication != null && publication.Quantity - product.Quantity >= 0)
                 {
-                    publication.Quantity -= publication.Quantity;
+                    publication.Quantity -= product.Quantity;
                     AppendProductToEmailBody(product, emailBody);
                     this.publicationRepository.Update(publication);
                     continue;

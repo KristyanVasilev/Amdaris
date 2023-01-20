@@ -57,9 +57,9 @@
         </button>
       </td>
       <td mat-footer-cell *matFooterCellDef>
-        <button mat-raised-button color="primary" class="float-right">
+        <!-- <button mat-raised-button color="primary" class="float-right">
           Pay with card
-        </button>
+        </button> -->
       </td>
     </ng-container>
 
@@ -94,7 +94,7 @@
         class="bg-gray-200 border border-black p-2 rounded-lg  text-center py-2 px-3 text-gray-700 leading-tight mx-auto"
         type="address" id="address" name="address" [(ngModel)]="address" required>
     </div>
-    <button (click)="payOnDelivery()" mat-raised-button color="primary" class="text-center">
+    <button (click)="payOnDelivery()" mat-raised-button color="primary" class="text-center py-2 block">
       Pay on delivery
     </button>
   </form>

@@ -13,6 +13,7 @@ import { UpdateGameComponent } from './admin/update/update-game/update-game.comp
 import { UpdatePublicationComponent } from './admin/update/update-publication/update-publication.component';
 import { UpdateUtensilComponent } from './admin/update/update-utensil/update-utensil.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { OrderCompletedComponent } from './pages/home/components/order-completed/order-completed.component';
 import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [{
@@ -70,6 +71,10 @@ const routes: Routes = [{
 {
   path: 'update/utensil',
   component: UpdateUtensilComponent,
+},
+{
+  path: 'order-completed',
+  component: OrderCompletedComponent,
 },
 {
   path: '', redirectTo: 'home', pathMatch: 'full'

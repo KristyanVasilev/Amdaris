@@ -30,6 +30,7 @@ import { FormsModule } from '@angular/forms';
 import { AdminModule } from './admin/admin.module';
 import { HttpErrorInterceptor } from './error-handling/HttpErrorInterceptor';
 import { UtensilBoxComponent } from './pages/home/components/utensil-box/utensil-box.component';
+import { OrderCompletedComponent } from './pages/home/components/order-completed/order-completed.component';
 
 @NgModule({
     declarations: [
@@ -42,6 +43,7 @@ import { UtensilBoxComponent } from './pages/home/components/utensil-box/utensil
         PublicationBoxComponent,
         GameBoxComponent,
         UtensilBoxComponent,
+        OrderCompletedComponent,
     ],
     providers: [
         {

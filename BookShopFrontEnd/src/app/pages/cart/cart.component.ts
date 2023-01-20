@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
 import { Cart, CartItem } from 'src/app/models/cart';
 import { CartService } from 'src/app/services/cart.service';
 
@@ -11,6 +13,7 @@ const STORE_BASE_URL = 'https://localhost:7201/api/Order';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent {
+  isError: boolean = false
   cart: Cart = { items: [] };
   username!: string;
   email!: string;
@@ -25,8 +28,11 @@ export class CartComponent {
     'action',
   ];
 
-  constructor(private cartService: CartService,
-    private httpClient: HttpClient) { }
+  constructor(
+    private cartService: CartService,
+    private httpClient: HttpClient,
+    private router: Router
+    ) { }
 
   ngOnInit() {
     this.cartService.cart.subscribe((_cart: Cart) => {
@@ -67,7 +73,17 @@ export class CartComponent {
     }
 
     console.log(OrderPostDto)
-     this.httpClient.post<any>('https://localhost:7201/api/Order/create', OrderPostDto).subscribe(res => console.log(res));
+     this.httpClient.post<any>('https://localhost:7201/api/Order/create', OrderPostDto).pipe(
+      catchError(error => {
+        console.error(error);
+        this.isError = true;
+        return throwError(error);
+      })
+    )
+    .subscribe(res => {
+      console.log(res);
+      this.router.navigate(['order-completed']);
+    });
   }
 
   onRemoveFromCart(item: CartItem): void {

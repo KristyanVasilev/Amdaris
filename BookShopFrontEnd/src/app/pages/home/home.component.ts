@@ -20,6 +20,7 @@ export class HomeComponent {
   keyWord!: string;
   cols = 3;
   category: string | undefined;
+  areGames: boolean = false;
   rowHeight: number = ROWS_HEIGHT[this.cols];
   games: Array<Game> | undefined;
   publications: Array<Publication> | undefined;
@@ -38,6 +39,7 @@ export class HomeComponent {
   }
 
   getGames(): void {
+    this.areGames = true;
     this.gamesSubsription = this.gameService
       .getAllGames()
       .subscribe((_games) => {
@@ -66,7 +68,9 @@ export class HomeComponent {
       this.publicationsSubsription = this.publicationService
         .getPublicationsByKeWord(keyWord)
         .subscribe((_publications) => {
-          this.publications = _publications;
+          if (_publications.length > 0) {
+            this.publications = _publications;
+          }
         });
     }
     else {
@@ -79,7 +83,9 @@ export class HomeComponent {
       this.gamesSubsription = this.gameService
         .getGamesByKeWord(keyWord)
         .subscribe((_games) => {
-          this.games = _games;
+          if (_games.length > 0) {
+            this.games = _games;
+          }
         });
     }
     else {
@@ -149,6 +155,7 @@ export class HomeComponent {
     if (this.gamesSubsription) {
       this.gamesSubsription.unsubscribe();
       this.games = new Array<Game>;
+      this.areGames = false;
     }
 
     if (this.publicationsSubsription) {
