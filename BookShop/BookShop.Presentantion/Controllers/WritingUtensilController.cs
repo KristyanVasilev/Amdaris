@@ -12,8 +12,12 @@
     using BookShop.Application.WritingUtensils.Queries.GetUtensilsByName;
     using BookShop.Presentantion.DTOs;
     using BookShop.Presentantion.Filters;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Identity.Web.Resource;
 
+    [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [Route("api/[controller]")]
     [ApiController]
     public class WritingUtensilController : BaseController<WritingUtensilController>
@@ -21,6 +25,7 @@
         [HttpPost]
         [Route("create")]
         [ValidateModel]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Manager")]
         public async Task<IActionResult> CreateUtensil([FromBody] UtensilPostDto utensil)
         {
             Logger.LogInformation(message: $"Request recieved by Controller: {nameof(WritingUtensilController)}, Action: {nameof(CreateUtensil)}, DateTime: {DateTime.Now}");
@@ -32,6 +37,7 @@
 
         [HttpPost]
         [Route("unDelete")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Manager")]
         public async Task<IActionResult> UnDeleteGame(string utensilName)
         {
             var command = new UnDeleteUtensilCommand(utensilName);
@@ -39,10 +45,33 @@
             var result = await Mediator.Send(command);
             var mappedResult = Mapper.Map<UtensilGetDto>(result);
             return Ok(mappedResult);
-        }   
+        }
+
+        [HttpPost("update/{id}")]
+        [ValidateModel]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Manager")]
+        public async Task<IActionResult> UpdateUtensil([FromBody] UtensilPostDto utensil, int id)
+        {
+            var command = new UpdateUtensilsCommand
+            {
+                Id = id,
+                Name = utensil.Name,
+                Price = utensil.Price,
+                Color = utensil.Color,
+                Manufacturer = utensil.Manufacturer,
+                Images = utensil.Images,
+                KeyWords = utensil.KeyWords,
+                Quantity = utensil.Quantity,
+                WritingUtensilsType = utensil.WritingUtensilsType,
+            };
+
+            var result = await Mediator.Send(command);
+            return Ok(result);
+        }
 
         [HttpGet]
         [Route("all")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetUtensils()
         {
             var command = new GetUtensilsQuery();
@@ -65,6 +94,7 @@
 
         [HttpGet]
         [Route("getByColor")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetUtensilsByColor(string color)
         {
             var command = new GetUtensilsByColorQuery(color);
@@ -76,6 +106,7 @@
 
         [HttpGet]
         [Route("getByKeyWord")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetUtensilByKeyWord(string word)
         {
             var command = new GetUtensilByKeyWordQuery(word);
@@ -87,6 +118,7 @@
 
         [HttpGet]
         [Route("getByName")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetUtensilsByName(string name)
         {
             var command = new GetUtensilsByNameQuery(name);
@@ -98,33 +130,13 @@
 
         [HttpDelete]
         [Route("delete")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Manager")]
         public async Task<IActionResult> DeleteUtensil([FromQuery] int id)
         {
             var command = new DeleteUtensilCommand(id);
 
             var result = await Mediator.Send(command);
             Logger.LogInformation($"Utensil deleted Successfully!");
-            return Ok(result);
-        }
-
-        [HttpPost("update/{id}")]
-        [ValidateModel]
-        public async Task<IActionResult> UpdateUtensil([FromBody] UtensilPostDto utensil, int id)
-        {
-            var command = new UpdateUtensilsCommand
-            {
-                Id = id,
-                Name = utensil.Name,
-                Price = utensil.Price,
-                Color = utensil.Color,
-                Manufacturer = utensil.Manufacturer,
-                Images = utensil.Images,
-                KeyWords = utensil.KeyWords,
-                Quantity = utensil.Quantity,
-                WritingUtensilsType = utensil.WritingUtensilsType,
-            };
-
-            var result = await Mediator.Send(command);
             return Ok(result);
         }
     }

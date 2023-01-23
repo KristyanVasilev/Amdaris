@@ -11,7 +11,7 @@
         {
             var statusCode = 500;
 
-            if (context.Exception is GameNotFoundException || context.Exception is PublicationNotFoundException || context.Exception is PublicationNotFoundException)
+            if (context.Exception is GameNotFoundException || context.Exception is PublicationNotFoundException || context.Exception is WritingUtensilNotFoundException)
             {
                 statusCode = 404;
             }

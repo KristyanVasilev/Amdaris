@@ -3,9 +3,13 @@
     using BookShop.Application.Email;
     using BookShop.Application.Orders.Commands.CreateOrder;
     using BookShop.Presentantion.DTOs;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Identity.Web.Resource;
     using Newtonsoft.Json;
 
+    [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [ApiController]
     [Route("api/[controller]")]
     public class OrderController : BaseController<FilesController>
