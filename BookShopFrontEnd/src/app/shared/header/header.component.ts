@@ -90,7 +90,7 @@ export class HeaderComponent {
     }
 
     this.isAuthenticated = !!activAccount;
-    this.activeUser = activAccount?.username;
+    this.activeUser = activAccount?.username; 
     console.log(activAccount)
   }
 }

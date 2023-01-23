@@ -16,7 +16,6 @@ using Microsoft.Identity.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 // Add GlobalExceptionFilter
 builder.Services.AddControllers( cfg =>
 {

@@ -21,7 +21,6 @@
 
             var uploadImagesCommand = new UploadImagesCommand();
 
-
             var file1 = new FileDto
             {
                 Content = file.OpenReadStream(),
