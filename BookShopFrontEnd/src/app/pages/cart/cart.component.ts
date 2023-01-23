@@ -77,6 +77,7 @@ export class CartComponent {
       catchError(error => {
         console.error(error);
         this.isError = true;
+        window.alert('One or more of the selected items do not possess the required quantity in stock!')
         return throwError(error);
       }))
     .subscribe(res => {
