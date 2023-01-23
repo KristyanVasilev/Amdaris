@@ -51,7 +51,7 @@
         <h2 class="text-center py-4">Are you sure that you want to delete <b class="bgColor"> {{utensil.name}} with ID =
                 {{utensil.id}}</b>?</h2>
     </div>
-    <form (ngSubmit)="deleteGame()" class="bg-white p-6 rounded-lg shadow-md" #gameDeleteForm="ngForm">
+    <form (ngSubmit)="deleteUtensil()" class="bg-white p-6 rounded-lg shadow-md" #gameDeleteForm="ngForm">
         <div class="mb-4 text-center">
             <label class="block text-gray-700 font-medium mb-2 text-center" for="id">Utensil Id</label>
             <input

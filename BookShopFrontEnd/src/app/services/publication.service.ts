@@ -25,7 +25,7 @@ export class PublicationService {
   }
 
   deletePublication(id: number){
-    return this.httpClient.delete<number>(`${STORE_BASE_URL}/delete?id=` + id)
+    return this.httpClient.post<any>(`${STORE_BASE_URL}/delete?id=`, id)
   }
 
   findPublication(name: string): Observable<Publication>{

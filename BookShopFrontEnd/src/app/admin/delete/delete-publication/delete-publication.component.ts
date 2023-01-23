@@ -30,10 +30,8 @@ export class DeletePublicationComponent {
   deletePublication() {
     this.publicationSubsription = this.publicationService
       .deletePublication(this.publicationId.id)
-      .subscribe((res) => {
-        console.log(res)
-      });
-    this.router.navigate(['home']);
+      .subscribe((res) => console.log(res));
+      window.alert('Publication deleted successfully!')
   }
 
   FindPublication() {

@@ -13,7 +13,7 @@ export class UndeletePublicationComponent {
   @ViewChild('UndeletePublicationForm') UndeletePublicationForm: any;
   submitted: boolean = false;
   publicationSubsription: Subscription | undefined;
-  publication: Publication = {id: 0,  name: '', author: '', price: 0, pageCount: 0, description: '', genre: '', images: [] as string[], keyWords: '', quantity: 0 };
+  publication: Publication = { id: 0, name: '', author: '', price: 0, pageCount: 0, description: '', genre: '', images: [] as string[], keyWords: '', quantity: 0 };
   publicationId = {
     id: 0,
   };
@@ -34,12 +34,12 @@ export class UndeletePublicationComponent {
         this.publication = _publication;
         console.log(_publication)
       });
-    this.resetForm();
+      this.resetForm();
   }
 
   resetForm() {
     this.publicationName = { name: "" };
-    this.publication = {id: 0,  name: '', author: '', price: 0, pageCount: 0, description: '', genre: '', images: [] as string[], keyWords: '', quantity: 0 };
+    this.publication = { id: 0, name: '', author: '', price: 0, pageCount: 0, description: '', genre: '', images: [] as string[], keyWords: '', quantity: 0 };
     this.UndeletePublicationForm.resetForm();
     this.submitted = false;
   }

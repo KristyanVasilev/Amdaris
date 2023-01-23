@@ -15,6 +15,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Identity.Web.Resource;
+    using Newtonsoft.Json;
 
     [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
     [Authorize(AuthenticationSchemes = "Bearer")]
@@ -33,6 +34,19 @@
 
             var result = await Mediator.Send(command);
             return Created("/publication", result);
+        }
+
+        [HttpPost]
+        [Route("delete")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Manager")]
+
+        public async Task<IActionResult> DeletePublication([FromBody] int id)
+        {
+            var command = new DeletePublicationCommand(id);
+
+            var result = await Mediator.Send(command);
+            Logger.LogInformation($"Game deleted Successfully!");
+            return Ok(JsonConvert.SerializeObject(result));
         }
 
         [HttpPost]
@@ -128,18 +142,6 @@
             var result = await Mediator.Send(command);
             var mappedResult = Mapper.Map<IEnumerable<PublicationGetDto>>(result);
             return Ok(mappedResult);
-        }
-
-        [HttpDelete]
-        [Route("delete")]
-        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Manager")]
-        public async Task<IActionResult> DeletePublication([FromQuery] int id)
-        {
-            var command = new DeletePublicationCommand(id);
-
-            var result = await Mediator.Send(command);
-            Logger.LogInformation($"Game deleted Successfully!");
-            return Ok(result);
         }
     }
 }

@@ -13,7 +13,7 @@ export class DeleteGameComponent {
   @ViewChild('gameFindForm') gameFindForm: any;
   submitted: boolean = false;
   gamesSubsription: Subscription | undefined;
-  game: Game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '',images: [] as string[], keyWords: '', quantity: 0,};
+  game: Game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '', images: [] as string[], keyWords: '', quantity: 0, };
   gameId = {
     id: 0,
   };
@@ -29,10 +29,9 @@ export class DeleteGameComponent {
   deleteGame() {
     this.gamesSubsription = this.gameService
       .deleteGame(this.gameId.id)
-      .subscribe((res) => {
-        console.log(res)
-      });
-    this.router.navigate(['home']);
+      .subscribe((res) =>
+        console.log(res));
+        window.alert('Game deleted successfully!')
   }
 
   findGame() {
@@ -47,7 +46,7 @@ export class DeleteGameComponent {
 
   resetForm() {
     this.gameName = { name: "" };
-    this.game= { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '',images: [] as string[], keyWords: '', quantity: 0,};
+    this.game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '', images: [] as string[], keyWords: '', quantity: 0, };
     this.gameFindForm.resetForm();
     this.submitted = false;
   }

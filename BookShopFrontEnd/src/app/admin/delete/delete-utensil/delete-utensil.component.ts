@@ -26,13 +26,12 @@ export class DeleteUtensilComponent {
     private router: Router) {
 
   }
-  deleteGame() {
+  deleteUtensil() {
     this.utensilSubsription = this.utensilService
       .deleteUtensil(this.utensilId.id)
-      .subscribe((res) => {
-        console.log(res)
-      });
-    this.router.navigate(['home']);
+      .subscribe((res) => 
+        console.log(res));
+        window.alert('Utensil deleted successfully!')
   }
 
   findUtensil() {

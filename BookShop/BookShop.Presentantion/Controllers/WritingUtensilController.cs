@@ -36,6 +36,18 @@
         }
 
         [HttpPost]
+        [Route("delete")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Manager")]
+        public async Task<IActionResult> DeleteUtensil([FromBody] int id)
+        {
+            var command = new DeleteUtensilCommand(id);
+
+            var result = await Mediator.Send(command);
+            Logger.LogInformation($"Utensil deleted Successfully!");
+            return Ok(result);
+        }
+
+        [HttpPost]
         [Route("unDelete")]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = "Manager")]
         public async Task<IActionResult> UnDeleteGame(string utensilName)
@@ -126,18 +138,6 @@
             var result = await Mediator.Send(command);
             var mappedResult = Mapper.Map<UtensilGetDto>(result);
             return Ok(mappedResult);
-        }
-
-        [HttpDelete]
-        [Route("delete")]
-        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Manager")]
-        public async Task<IActionResult> DeleteUtensil([FromQuery] int id)
-        {
-            var command = new DeleteUtensilCommand(id);
-
-            var result = await Mediator.Send(command);
-            Logger.LogInformation($"Utensil deleted Successfully!");
-            return Ok(result);
         }
     }
 }
