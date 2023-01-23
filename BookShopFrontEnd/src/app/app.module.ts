@@ -31,6 +31,10 @@ import { AdminModule } from './admin/admin.module';
 import { HttpErrorInterceptor } from './error-handling/HttpErrorInterceptor';
 import { UtensilBoxComponent } from './pages/home/components/utensil-box/utensil-box.component';
 import { OrderCompletedComponent } from './pages/home/components/order-completed/order-completed.component';
+import { MsalGuard, MsalInterceptor, MsalModule } from '@azure/msal-angular';
+import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
+
+const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
 @NgModule({
     declarations: [
@@ -43,14 +47,8 @@ import { OrderCompletedComponent } from './pages/home/components/order-completed
         PublicationBoxComponent,
         GameBoxComponent,
         UtensilBoxComponent,
-        OrderCompletedComponent,
-    ],
-    providers: [
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: HttpErrorInterceptor,
-            multi: true
-        }],
+        OrderCompletedComponent
+    ],   
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
@@ -71,7 +69,47 @@ import { OrderCompletedComponent } from './pages/home/components/order-completed
         MatSnackBarModule,
         HttpClientModule,
         FormsModule,
-        AdminModule
-    ]
+        AdminModule,
+        MsalModule.forRoot(new PublicClientApplication(
+          {
+            auth: {
+              clientId: '1b7cd469-6fbe-4ebb-8ecb-160079a2d9f4',
+              redirectUri: 'http://localhost:4200',
+              authority: 'https://login.microsoftonline.com/4a06d40c-e447-42be-baef-dd0421ed10bd'
+            },
+            cache: {
+              cacheLocation: 'localStorage',
+              storeAuthStateInCookie: isIE,
+            }
+          }
+        ),
+          {
+            interactionType: InteractionType.Redirect,
+            authRequest: {
+              scopes: ['user.read']
+            }
+          },
+          {
+            interactionType: InteractionType.Redirect,
+            protectedResourceMap: new Map(
+              [
+                ['https://graph.microsoft.com/v1.0/me', ['user.read']],
+                ['localhost',['api://3f614ec4-af01-40fb-a9b3-d6878cef83d0/api.scope']]
+              ]
+            )
+          }
+        )
+    ],
+    providers: [
+      {
+          provide: HTTP_INTERCEPTORS,
+          useClass: HttpErrorInterceptor,
+          multi: true
+      },
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: MsalInterceptor,
+        multi: true
+      }, MsalGuard],
 })
 export class AppModule { }

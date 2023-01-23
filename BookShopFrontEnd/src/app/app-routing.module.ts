@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MsalGuard } from '@azure/msal-angular';
 import { CreateGameComponent } from './admin/create/create-game/create-game.component';
 import { CreatePublicationComponent } from './admin/create/create-publication/create-publication.component';
 import { CreateUtensilComponent } from './admin/create/create-utensil/create-utensil.component';
@@ -18,70 +19,72 @@ import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [{
   path: 'home',
-  component: HomeComponent,
+  component: HomeComponent, canActivate: [MsalGuard]
 },
 {
   path: 'cart',
-  component: CartComponent,
+  component: CartComponent, canActivate: [MsalGuard]
 },
 {
   path: 'create/game',
-  component: CreateGameComponent,
+  component: CreateGameComponent, canActivate: [MsalGuard]
 },
 {
   path: 'create/publication',
-  component: CreatePublicationComponent,
+  component: CreatePublicationComponent, canActivate: [MsalGuard]
 },
 {
   path: 'create/utensil',
-  component: CreateUtensilComponent,
+  component: CreateUtensilComponent, canActivate: [MsalGuard]
 },
 {
   path: 'delete/game',
-  component: DeleteGameComponent,
+  component: DeleteGameComponent, canActivate: [MsalGuard]
 },
 {
   path: 'delete/publication',
-  component: DeletePublicationComponent,
+  component: DeletePublicationComponent, canActivate: [MsalGuard]
 },
 {
   path: 'delete/utensil',
-  component: DeleteUtensilComponent,
+  component: DeleteUtensilComponent, canActivate: [MsalGuard]
 },
 {
   path: 'undelete/game',
-  component: UndeleteGameComponent,
+  component: UndeleteGameComponent, canActivate: [MsalGuard]
 },
 {
   path: 'undelete/publication',
-  component: UndeletePublicationComponent,
+  component: UndeletePublicationComponent, canActivate: [MsalGuard]
 },
 {
   path: 'undelete/utensil',
-  component: UndeleteUtensilComponent,
+  component: UndeleteUtensilComponent, canActivate: [MsalGuard]
 },
 {
   path: 'update/game',
-  component: UpdateGameComponent,
+  component: UpdateGameComponent, canActivate: [MsalGuard]
 },
 {
   path: 'update/publication',
-  component: UpdatePublicationComponent,
+  component: UpdatePublicationComponent, canActivate: [MsalGuard]
 },
 {
   path: 'update/utensil',
-  component: UpdateUtensilComponent,
+  component: UpdateUtensilComponent, canActivate: [MsalGuard]
 },
 {
   path: 'order-completed',
-  component: OrderCompletedComponent,
+  component: OrderCompletedComponent, canActivate: [MsalGuard]
 },
 {
   path: '', redirectTo: 'home', pathMatch: 'full'
 }];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+   initialNavigation: 'enabledNonBlocking'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
