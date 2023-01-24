@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MsalGuard } from '@azure/msal-angular';
 import { AddGameQuantityComponent } from './admin/addQuantity/add-game-quantity/add-game-quantity.component';
 import { AddPublicationQuantityComponent } from './admin/addQuantity/add-publication-quantity/add-publication-quantity.component';
+import { AddUtensilQuantityComponent } from './admin/addQuantity/add-utensil-quantity/add-utensil-quantity.component';
 import { CreateGameComponent } from './admin/create/create-game/create-game.component';
 import { CreatePublicationComponent } from './admin/create/create-publication/create-publication.component';
 import { CreateUtensilComponent } from './admin/create/create-utensil/create-utensil.component';
@@ -46,6 +47,10 @@ const routes: Routes = [{
 {
   path: 'add/publication',
   component: AddPublicationQuantityComponent, canActivate: [MsalGuard]
+},
+{
+  path: 'add/utensil',
+  component: AddUtensilQuantityComponent, canActivate: [MsalGuard]
 },
 {
   path: 'delete/game',

@@ -16,6 +16,10 @@ export class UtensilService {
     return this.httpClient.get<Array<Utensil>>(`${STORE_BASE_URL}/all`);
   }
 
+  addUtensilQuantity(id: number, quantity: number): Observable<any> {
+    return this.httpClient.post<any>(`${STORE_BASE_URL}/Add?quantity=${quantity}`, id);
+  }
+
   getUtensilsByKeyWord(keyWord: string): Observable<Array<Utensil>> {
     return this.httpClient.get<Array<Utensil>>(`${STORE_BASE_URL}/getByKeyWord?word=` + keyWord);
   }

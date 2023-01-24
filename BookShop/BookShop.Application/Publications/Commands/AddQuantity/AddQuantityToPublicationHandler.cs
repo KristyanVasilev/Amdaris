@@ -26,7 +26,7 @@
             this.repository.Update(publication);
             await this.repository.SaveChangesAsync();
 
-            return await Task.FromResult($"Game {publication.Name} with id - {publication.Id} added {request.Quantity} quantity successfully!");
+            return await Task.FromResult($"Publication {publication.Name} with id - {publication.Id} added {request.Quantity} quantity successfully!");
         }
     }
 }

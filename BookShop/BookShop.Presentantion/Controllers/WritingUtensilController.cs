@@ -1,6 +1,6 @@
 ﻿namespace BookShop.Presentantion.Controllers
 {
-    using BookShop.Application.Games.Queries.GetGameByKeyWord;
+    using BookShop.Application.WritingUtensils.Commands.AddQuantity;
     using BookShop.Application.WritingUtensils.Commands.CreateUtensils;
     using BookShop.Application.WritingUtensils.Commands.DeleteUtensils;
     using BookShop.Application.WritingUtensils.Commands.UnDeleteUtensils;
@@ -34,6 +34,17 @@
 
             var result = await Mediator.Send(command);
             return Created("/writingUtensil", result);
+        }
+
+        [HttpPost]
+        [Route("Add")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Manager")]
+        public async Task<IActionResult> AddUtensilQuantity([FromBody] int id, int quantity)
+        {
+            var command = new AddQuantityToUtensilCommand(id, quantity);
+
+            var result = await Mediator.Send(command);
+            return Ok(JsonConvert.SerializeObject(result));
         }
 
         [HttpPost]
