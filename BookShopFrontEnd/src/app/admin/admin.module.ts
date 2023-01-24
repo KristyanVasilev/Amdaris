@@ -16,6 +16,7 @@ import { CreateUtensilComponent } from './create/create-utensil/create-utensil.c
 import { DeleteUtensilComponent } from './delete/delete-utensil/delete-utensil.component';
 import { UndeleteUtensilComponent } from './unDelete/undelete-utensil/undelete-utensil.component';
 import { AddGameQuantityComponent } from './addQuantity/add-game-quantity/add-game-quantity.component';
+import { AddPublicationQuantityComponent } from './addQuantity/add-publication-quantity/add-publication-quantity.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AddGameQuantityComponent } from './addQuantity/add-game-quantity/add-ga
     DeleteUtensilComponent,
     UndeleteUtensilComponent,
     AddGameQuantityComponent,
+    AddPublicationQuantityComponent,
   ],
   imports: [
     CommonModule,

@@ -16,6 +16,10 @@ export class PublicationService {
     return this.httpClient.get<Array<Publication>>(`${STORE_BASE_URL}/all`);
   }
 
+  addPublicationQuantity(id: number, quantity: number): Observable<any> {
+    return this.httpClient.post<any>(`${STORE_BASE_URL}/Add?quantity=${quantity}`, id);
+  }
+
   getPublicationsByKeWord(keyWord: string): Observable<Array<Publication>> {
     return this.httpClient.get<Array<Publication>>(`${STORE_BASE_URL}/getByKeyWord?word=` + keyWord);
   }

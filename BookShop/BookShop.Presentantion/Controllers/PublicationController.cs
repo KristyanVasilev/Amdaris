@@ -1,5 +1,7 @@
 ﻿namespace BookShop.Presentantion.Controllers
 {
+    using BookShop.Application.Games.Commands.AddQuantity;
+    using BookShop.Application.Publications.Commands.AddQuantity;
     using BookShop.Application.Publications.Commands.CreatePublication;
     using BookShop.Application.Publications.Commands.DeletePublication;
     using BookShop.Application.Publications.Commands.UnDeletePublication;
@@ -34,6 +36,17 @@
 
             var result = await Mediator.Send(command);
             return Created("/publication", result);
+        }
+
+        [HttpPost]
+        [Route("Add")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Manager")]
+        public async Task<IActionResult> AddPublicationQuantity([FromBody] int id, int quantity)
+        {
+            var command = new AddQuantityToPublicationCommand(id, quantity);
+
+            var result = await Mediator.Send(command);
+            return Ok(JsonConvert.SerializeObject(result));
         }
 
         [HttpPost]
