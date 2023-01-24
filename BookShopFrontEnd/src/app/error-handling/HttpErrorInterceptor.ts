@@ -17,11 +17,21 @@ export class HttpErrorInterceptor {
             console.log("Bad Request!", error.message)
           }
           else if (error.status === 404) {
-            console.log("Not Found!" , error.message)
+            console.log("Not Found!", error.message)
           }
           else if (error.status === 500) {
-            console.log("Iternal error!" , error.message)
+            console.log("Iternal error!", error.message)
             //redirect to smth went wrong
+          }
+          else if (error.status === 401) {
+            console.log("Iternal error!", error.message)
+            window.alert('You are unauthorize!')
+            this.router.navigate(['home'])
+          }
+          else if (error.status === 403) {
+            console.log("Iternal error!", error.message)
+            window.alert('You are unauthorize!')
+            this.router.navigate(['home'])
           }
           return throwError(error);
         })

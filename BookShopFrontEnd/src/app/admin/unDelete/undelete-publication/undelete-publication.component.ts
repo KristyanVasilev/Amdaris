@@ -29,15 +29,7 @@ export class UndeletePublicationComponent {
 
   UndeletePublication() {
     this.publicationSubsription = this.publicationService
-      .UndeletePublication(this.publicationName.name).pipe(
-        catchError(error => {
-          console.error(error);
-          if (error.status == 401 || error.status == 403) {
-            this.router.navigate(['home'])
-            window.alert('You are unauthorize!')
-          }
-          return throwError(error);
-        }))
+      .UndeletePublication(this.publicationName.name)
       .subscribe((_publication) => {
         this.publication = _publication;
         console.log(_publication)

@@ -28,18 +28,10 @@ export class DeleteUtensilComponent {
   }
   deleteUtensil() {
     this.utensilSubsription = this.utensilService
-      .deleteUtensil(this.utensilId.id).pipe(
-        catchError(error => {
-          console.error(error);
-          if (error.status == 401 || error.status == 403) {
-            this.router.navigate(['home'])
-            window.alert('You are unauthorize!')
-          }
-          return throwError(error);
-        }))
+      .deleteUtensil(this.utensilId.id)
       .subscribe((res) => {
         console.log(res),
-        window.alert('Utensil deleted successfully!')
+          window.alert('Utensil deleted successfully!')
       });
   }
 

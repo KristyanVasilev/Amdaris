@@ -28,18 +28,10 @@ export class DeleteGameComponent {
   }
   deleteGame() {
     this.gamesSubsription = this.gameService
-      .deleteGame(this.gameId.id).pipe(
-        catchError(error => {
-          console.error(error);
-          if (error.status == 401 || error.status == 403) {
-            this.router.navigate(['home'])
-            window.alert('You are unauthorize!')
-          }
-          return throwError(error);
-        }))
+      .deleteGame(this.gameId.id)
       .subscribe((res) => {
-        console.log(res), 
-        window.alert('Game deleted successfully!')
+        console.log(res),
+          window.alert('Game deleted successfully!')
       });
   }
 

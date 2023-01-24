@@ -29,15 +29,7 @@ export class UndeleteUtensilComponent {
 
   UndeleteUtensil() {
     this.utensilSubsription = this.utensilService
-      .UndeleteUtensil(this.utensilName.name).pipe(
-        catchError(error => {
-          console.error(error);
-          if (error.status == 401 || error.status == 403) {
-            this.router.navigate(['home'])
-            window.alert('You are unauthorize!')
-          }
-          return throwError(error);
-        }))
+      .UndeleteUtensil(this.utensilName.name)
       .subscribe((_utensil) => {
         this.utensil = _utensil;
         console.log(_utensil)
@@ -45,7 +37,7 @@ export class UndeleteUtensilComponent {
       });
     this.resetForm();
   }
-  
+
   resetForm() {
     this.utensilName = { name: "" };
     this.utensil = { id: 0, name: '', price: 0, color: '', writingUtensilsType: '', manufacturer: '', images: [], quantity: 0, keyWords: '' };

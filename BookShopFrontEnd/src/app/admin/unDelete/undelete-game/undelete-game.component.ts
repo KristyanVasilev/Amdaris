@@ -28,15 +28,7 @@ export class UndeleteGameComponent {
   }
   UndeleteGame() {
     this.gamesSubsription = this.gameService
-      .UndeleteGame(this.gameName.name).pipe(
-        catchError(error => {
-          console.error(error);
-          if (error.status == 401 || error.status == 403) {
-            this.router.navigate(['home'])
-            window.alert('You are unauthorize!')
-          }
-          return throwError(error);
-        }))
+      .UndeleteGame(this.gameName.name)
       .subscribe((_game) => {
         this.game = _game;
         console.log(_game),
