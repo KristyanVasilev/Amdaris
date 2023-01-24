@@ -15,6 +15,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Identity.Web.Resource;
+    using Newtonsoft.Json;
 
     [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
     [Authorize(AuthenticationSchemes = "Bearer")]
@@ -44,7 +45,7 @@
 
             var result = await Mediator.Send(command);
             Logger.LogInformation($"Utensil deleted Successfully!");
-            return Ok(result);
+            return Ok(JsonConvert.SerializeObject(result));
         }
 
         [HttpPost]
