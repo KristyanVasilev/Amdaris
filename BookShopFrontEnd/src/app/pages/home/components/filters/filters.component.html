@@ -48,3 +48,13 @@
     </mat-list-option>
   </mat-selection-list>
 </mat-expansion-panel>
+<mat-expansion-panel class="py-4" *ngIf="categories">
+  <mat-expansion-panel-header>
+    <mat-panel-title> ADD</mat-panel-title> <mat-icon class="small-icon">add</mat-icon>
+  </mat-expansion-panel-header>
+  <mat-selection-list [multiple]="false">
+    <mat-list-option *ngFor="let item of items" [value]="item">
+      <button [routerLink]="['/add', item]"><b>{{ item }}</b></button>
+    </mat-list-option>
+  </mat-selection-list>
+</mat-expansion-panel>

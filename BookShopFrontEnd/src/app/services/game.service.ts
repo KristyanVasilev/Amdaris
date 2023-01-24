@@ -17,6 +17,10 @@ export class GameService {
     return this.httpClient.get<Array<Game>>(`${STORE_BASE_URL}/all`);
   }
 
+  addGameQuantity(id: number, quantity: number): Observable<any> {
+    return this.httpClient.post<any>(`${STORE_BASE_URL}/Add?quantity=${quantity}`, id);
+  }
+
   getGamesByKeyWord(keyWord: string): Observable<Array<Game>> {
     return this.httpClient.get<Array<Game>>(`${STORE_BASE_URL}/getByKeyWord?word=` + keyWord);
   }

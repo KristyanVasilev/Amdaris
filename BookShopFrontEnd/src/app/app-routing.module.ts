@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MsalGuard } from '@azure/msal-angular';
+import { AddGameQuantityComponent } from './admin/addQuantity/add-game-quantity/add-game-quantity.component';
 import { CreateGameComponent } from './admin/create/create-game/create-game.component';
 import { CreatePublicationComponent } from './admin/create/create-publication/create-publication.component';
 import { CreateUtensilComponent } from './admin/create/create-utensil/create-utensil.component';
@@ -36,6 +37,10 @@ const routes: Routes = [{
 {
   path: 'create/utensil',
   component: CreateUtensilComponent, canActivate: [MsalGuard]
+},
+{
+  path: 'add/game',
+  component: AddGameQuantityComponent, canActivate: [MsalGuard]
 },
 {
   path: 'delete/game',
