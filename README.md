@@ -2,9 +2,7 @@
 
 ## 🧐 Introduction:
 
-Welcome to the BookShop App, a backend .NET web API and frontend Angular application for managing a bookstore inventory and customer orders. This application was developed as part of a 3-month internship at Amdaris, where I had the opportunity to learn and improve my skills in various technologies.
-
-BookShop is a web application that follows clean architecture principles and utilizes CQRS (Command Query Responsibility Segregation). It allows users to browse and purchase books, video games, and school supplies. The application has a .NET Web API backend and an Angular frontend. It utilizes Azure Blob Storage for storing images, SendGrid for sending emails, and Azure for login/logout and role management. Only managers have the ability to manage products within the application.
+BookShop is a web application that follows clean architecture principles and utilizes CQRS (Command Query Responsibility Segregation). It allows users to browse and purchase books, video games, and school supplies. The application has a .NET Web API backend and an Angular frontend. It utilizes Azure Blob Storage for storing images, SendGrid for sending emails, and Azure for login/logout and role management. Only managers have the ability to manage products within the application. This application was developed as part of a 3-month internship at Amdaris, where I had the opportunity to learn and improve my skills in various technologies.
 ____________________________________________________________________________________________________
 ## 🔥 Installation:
 
