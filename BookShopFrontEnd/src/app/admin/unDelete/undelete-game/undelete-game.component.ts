@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { catchError, Subscription, throwError } from 'rxjs';
 import { Game } from 'src/app/models/game';
 import { GameService } from 'src/app/services/game.service';
 
@@ -28,10 +28,19 @@ export class UndeleteGameComponent {
   }
   UndeleteGame() {
     this.gamesSubsription = this.gameService
-      .UndeleteGame(this.gameName.name)
+      .UndeleteGame(this.gameName.name).pipe(
+        catchError(error => {
+          console.error(error);
+          if (error.status == 401 || error.status == 403) {
+            this.router.navigate(['home'])
+            window.alert('You are unauthorize!')
+          }
+          return throwError(error);
+        }))
       .subscribe((_game) => {
         this.game = _game;
-        console.log(_game)
+        console.log(_game),
+        window.alert('Game unDeleted successfully!')
       });
     this.resetForm();
   }

@@ -78,7 +78,6 @@ export class HeaderComponent {
 
   logout(): void {
     this.msalService.instance.logoutRedirect();
-
   }
 
   setAuthenticationStatus(): void {

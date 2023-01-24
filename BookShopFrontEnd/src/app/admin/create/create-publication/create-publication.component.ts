@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { Publication } from 'src/app/models/publication';
 import { PublicationService } from 'src/app/services/publication.service';
 
@@ -26,7 +26,15 @@ export class CreatePublicationComponent {
     const formData = new FormData();
     formData.append("file", file, file.name);
     this.isUploaded = true;
-    return this.http.post('https://localhost:7201/api/Files/Images', formData)
+    return this.http.post('https://localhost:7201/api/Files/Images', formData).pipe(
+      catchError(error => {
+        console.error(error);
+        if (error.status == 401 || error.status == 403) {
+          this.router.navigate(['home'])
+          window.alert('You are unauthorize!')
+        }
+        return throwError(error);
+      }))
   }
 
   onChange(event: any) {
@@ -53,7 +61,16 @@ export class CreatePublicationComponent {
   }
 
   createPublication() {
-    this.publicationService.createPublication(this.publication).subscribe(res => console.log(res));
+    this.publicationService.createPublication(this.publication).pipe(
+      catchError(error => {
+        console.error(error);
+        if (error.status == 401 || error.status == 403) {
+          this.router.navigate(['home'])
+          window.alert('You are unauthorize!')
+        }
+        return throwError(error);
+      }))
+    .subscribe(res => console.log(res));
     this.router.navigate(['home'])
   }
 }

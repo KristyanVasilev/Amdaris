@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { catchError, Subscription, throwError } from 'rxjs';
 import { Utensil } from 'src/app/models/utensil';
 import { UtensilService } from 'src/app/services/utensil.service';
 
@@ -29,24 +29,23 @@ export class UndeleteUtensilComponent {
 
   UndeleteUtensil() {
     this.utensilSubsription = this.utensilService
-      .UndeleteUtensil(this.utensilName.name)
+      .UndeleteUtensil(this.utensilName.name).pipe(
+        catchError(error => {
+          console.error(error);
+          if (error.status == 401 || error.status == 403) {
+            this.router.navigate(['home'])
+            window.alert('You are unauthorize!')
+          }
+          return throwError(error);
+        }))
       .subscribe((_utensil) => {
         this.utensil = _utensil;
         console.log(_utensil)
+        window.alert('Utensil unDeleted successfully!')
       });
     this.resetForm();
   }
   
-  findUtensil() {
-    this.utensilSubsription = this.utensilService
-      .findUtensil(this.utensilName.name)
-      .subscribe((_utensil) => {
-        this.utensil = _utensil;
-        console.log(this.utensil)
-      });
-    this.resetForm();
-  }
-
   resetForm() {
     this.utensilName = { name: "" };
     this.utensil = { id: 0, name: '', price: 0, color: '', writingUtensilsType: '', manufacturer: '', images: [], quantity: 0, keyWords: '' };

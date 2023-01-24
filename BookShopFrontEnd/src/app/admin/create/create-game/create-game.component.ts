@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { Game } from 'src/app/models/game';
 import { GameService } from 'src/app/services/game.service';
 
@@ -11,7 +11,7 @@ import { GameService } from 'src/app/services/game.service';
   styleUrls: ['./create-game.component.css']
 })
 export class CreateGameComponent {
-  game: Game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '',images: [] as string[], keyWords: '', quantity: 0};
+  game: Game = { id: 0, name: '', price: 0, description: '', genre: '', manufacturer: '', images: [] as string[], keyWords: '', quantity: 0 };
   isUploaded = false;
   shortLink: string = "";
   loading: boolean = false;
@@ -26,7 +26,15 @@ export class CreateGameComponent {
     const formData = new FormData();
     formData.append("file", file, file.name);
     this.isUploaded = true;
-    return this.http.post('https://localhost:7201/api/Files/Images', formData)
+    return this.http.post('https://localhost:7201/api/Files/Images', formData).pipe(
+        catchError(error => {
+          console.error(error);
+          if (error.status == 401 || error.status == 403) {
+            this.router.navigate(['home'])
+            window.alert('You are unauthorize!')
+          }
+          return throwError(error);
+        }))
   }
 
   onChange(event: any) {
@@ -53,7 +61,15 @@ export class CreateGameComponent {
   }
 
   createGame() {
-    this.gameService.createGame(this.game).subscribe(res => console.log(res));
+    this.gameService.createGame(this.game).pipe(
+      catchError(error => {
+        console.error(error);
+        if (error.status == 401 || error.status == 403) {
+          window.alert('You are unauthorize!')
+          this.router.navigate(['home'])
+        }
+        return throwError(error);
+      })).subscribe(res => console.log(res));
     this.router.navigate(['home'])
   }
 }

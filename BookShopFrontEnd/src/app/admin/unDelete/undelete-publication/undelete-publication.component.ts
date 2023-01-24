@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { catchError, Subscription, throwError } from 'rxjs';
 import { Publication } from 'src/app/models/publication';
 import { PublicationService } from 'src/app/services/publication.service';
 
@@ -29,10 +29,19 @@ export class UndeletePublicationComponent {
 
   UndeletePublication() {
     this.publicationSubsription = this.publicationService
-      .UndeletePublication(this.publicationName.name)
+      .UndeletePublication(this.publicationName.name).pipe(
+        catchError(error => {
+          console.error(error);
+          if (error.status == 401 || error.status == 403) {
+            this.router.navigate(['home'])
+            window.alert('You are unauthorize!')
+          }
+          return throwError(error);
+        }))
       .subscribe((_publication) => {
         this.publication = _publication;
         console.log(_publication)
+        window.alert('Publication unDeleted successfully!')
       });
       this.resetForm();
   }

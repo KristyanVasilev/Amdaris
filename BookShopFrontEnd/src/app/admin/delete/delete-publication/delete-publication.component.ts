@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { catchError, Subscription, throwError } from 'rxjs';
 import { Publication } from 'src/app/models/publication';
 import { PublicationService } from 'src/app/services/publication.service';
 
@@ -29,9 +29,19 @@ export class DeletePublicationComponent {
 
   deletePublication() {
     this.publicationSubsription = this.publicationService
-      .deletePublication(this.publicationId.id)
-      .subscribe((res) => console.log(res));
-      window.alert('Publication deleted successfully!')
+      .deletePublication(this.publicationId.id).pipe(
+        catchError(error => {
+          console.error(error);
+          if (error.status == 401 || error.status == 403) {
+            this.router.navigate(['home'])
+            window.alert('You are unauthorize!')
+          }
+          return throwError(error);
+        }))
+      .subscribe((res) => {
+        console.log(res),
+        window.alert('Publication deleted successfully!')
+      });    
   }
 
   FindPublication() {

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { catchError, Observable, Subscription, throwError } from 'rxjs';
 import { Game } from 'src/app/models/game';
 import { GameService } from 'src/app/services/game.service';
 
@@ -60,7 +60,15 @@ export class UpdateGameComponent {
     const formData = new FormData();
     formData.append("file", file, file.name);
     this.isUploaded = true;
-    return this.http.post('https://localhost:7201/api/Files/Images', formData)
+    return this.http.post('https://localhost:7201/api/Files/Images', formData).pipe(
+      catchError(error => {
+        console.error(error);
+        if (error.status == 401 || error.status == 403) {
+          window.alert('You are unauthorize!')
+          this.router.navigate(['home'])
+        }
+        return throwError(error);
+      }))
   }
 
   onChange(event: any) {
@@ -86,7 +94,16 @@ export class UpdateGameComponent {
   }
 
   updateGame() {
-    this.gameService.UpdateGame(this.gameToUpdate, this.game.id).subscribe(res => console.log(res));
+    this.gameService.UpdateGame(this.gameToUpdate, this.game.id).pipe(
+      catchError(error => {
+        console.error(error);
+        if (error.status == 401 || error.status == 403) {
+          window.alert('You are unauthorize!')
+          this.router.navigate(['home'])
+        }
+        return throwError(error);
+      }))
+    .subscribe(res => console.log(res));
     this.router.navigate(['/home']);
   }
 }

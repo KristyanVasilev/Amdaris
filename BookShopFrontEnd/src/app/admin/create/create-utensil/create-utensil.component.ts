@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { Utensil } from 'src/app/models/utensil';
 import { UtensilService } from 'src/app/services/utensil.service';
 
@@ -28,7 +28,15 @@ export class CreateUtensilComponent {
     const formData = new FormData();
     formData.append("file", file, file.name);
     this.isUploaded = true;
-    return this.http.post('https://localhost:7201/api/Files/Images', formData)
+    return this.http.post('https://localhost:7201/api/Files/Images', formData).pipe(
+      catchError(error => {
+        console.error(error);
+        if (error.status == 401 || error.status == 403) {
+          this.router.navigate(['home'])
+          window.alert('You are unauthorize!')
+        }
+        return throwError(error);
+      }))
   }
 
   onChange(event: any) {
@@ -55,7 +63,16 @@ export class CreateUtensilComponent {
   }
 
   createGame() {
-    this.utensilService.createUtensil(this.utensil).subscribe(res => console.log(res));
+    this.utensilService.createUtensil(this.utensil)
+    .pipe(
+      catchError(error => {
+        console.error(error);
+        if (error.status == 401 || error.status == 403) {
+          this.router.navigate(['home'])
+          window.alert('You are unauthorize!')
+        }
+        return throwError(error);
+      })).subscribe(res => console.log(res));
     this.router.navigate(['home'])
   }
 }

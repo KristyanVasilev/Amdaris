@@ -36,7 +36,7 @@ export class HomeComponent {
     private cartService: CartService,
     private gameService: GameService,
     private publicationService: PublicationService,
-    private utensilService: UtensilService,) {
+    private utensilService: UtensilService) {
 
     this.onShowCategory('all');
   }
@@ -97,7 +97,7 @@ export class HomeComponent {
       this.onShowCategory('all');
     }
   }
- 
+
   getGamesByKeyWord(keyWord: string): void {
     if (keyWord != null) {
       this.gamesSubsription = this.gameService
