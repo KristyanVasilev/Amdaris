@@ -23,7 +23,7 @@
 
             utensil.Quantity += request.Quantity;
 
-            this.repository.Delete(utensil);
+            this.repository.Update(utensil);
             await this.repository.SaveChangesAsync();
 
             return await Task.FromResult($"Utensil {utensil.Name} with id - {utensil.Id} added {request.Quantity} quantity successfully!");
