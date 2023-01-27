@@ -25,7 +25,6 @@ export class HttpErrorInterceptor {
           }
           else if (error.status === 401) {
             console.log("Iternal error!", error.message)
-            window.alert('You are unauthorize!')
             this.router.navigate(['home'])
           }
           else if (error.status === 403) {
